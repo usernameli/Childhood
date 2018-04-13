@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "cec3b2cd-1240-4147-a091-93cd16ff75ad",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Jackal-Stage1-part1": {
+      "ver": "1.0.3",
+      "uuid": "2f21a642-a056-441f-a745-bd425206e681",
+      "rawTextureUuid": "cec3b2cd-1240-4147-a091-93cd16ff75ad",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 512,
+      "height": 1440,
+      "rawWidth": 512,
+      "rawHeight": 1440,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
