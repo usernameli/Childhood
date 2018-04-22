@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gxh-Pa-rTH">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Hall View Controller-->
+        <scene sceneID="H0h-of-jb8">
+            <objects>
+                <viewController id="gxh-Pa-rTH" customClass="HallViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vN4-NJ-psu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gK-EN-ZVS" customClass="GADBannerView">
+                                <rect key="frame" x="27.5" y="617" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Hpb-dy-kW8"/>
+                                    <constraint firstAttribute="width" constant="320" id="PYm-Nt-l8T"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWP-aX-We7">
+                                <rect key="frame" x="310" y="34" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="充值"/>
+                                <connections>
+                                    <action selector="Recharge:" destination="gxh-Pa-rTH" eventType="touchUpInside" id="tNG-db-YtC"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q2T-No-axH" customClass="Recharge">
+                                <rect key="frame" x="67" y="195" width="240" height="203"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_tankuang.png" translatesAutoresizingMaskIntoConstraints="NO" id="iAN-le-aNl">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="203"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIP-Ua-LSJ">
+                                        <rect key="frame" x="218" y="0.0" width="22" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="icon_guanbi.png"/>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_sel_qiandao.png" translatesAutoresizingMaskIntoConstraints="NO" id="mIg-q8-ZDY">
+                                        <rect key="frame" x="140" y="52" width="80" height="99"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_sel_qiandao.png" translatesAutoresizingMaskIntoConstraints="NO" id="WqO-Or-Bfg">
+                                        <rect key="frame" x="21" y="47" width="81" height="107"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i4d-cN-0vv">
+                                        <rect key="frame" x="153" y="76" width="55" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="img_on_baoxaing5.png"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7z-OK-fPP">
+                                        <rect key="frame" x="33" y="76" width="55" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="img_on_baoxaing6.png"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GD9-fN-vdj">
+                                        <rect key="frame" x="218" y="0.0" width="22" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="icon_guanbi.png"/>
+                                        <connections>
+                                            <action selector="closeRecharge:" destination="gxh-Pa-rTH" eventType="touchUpInside" id="Aup-er-ljF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <viewLayoutGuide key="safeArea" id="ts2-V0-2Q7"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kwU-bY-OXb" firstAttribute="bottom" secondItem="0gK-EN-ZVS" secondAttribute="bottom" id="FFE-JD-Qj7"/>
+                            <constraint firstItem="0gK-EN-ZVS" firstAttribute="centerX" secondItem="vN4-NJ-psu" secondAttribute="centerX" id="kXY-9U-dgK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kwU-bY-OXb"/>
+                    </view>
+                    <connections>
+                        <outlet property="bannerView" destination="0gK-EN-ZVS" id="6ro-MW-BDa"/>
+                        <outlet property="rechargeView" destination="Q2T-No-axH" id="C6V-s3-qBV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YaO-Kn-Rkv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-684" y="369.26536731634184"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bg_sel_qiandao.png" width="70" height="93"/>
+        <image name="bg_tankuang.png" width="315" height="350"/>
+        <image name="icon_guanbi.png" width="22" height="22"/>
+        <image name="img_on_baoxaing5.png" width="55" height="50"/>
+        <image name="img_on_baoxaing6.png" width="55" height="50"/>
+    </resources>
+</document>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>834541812231-t7sgu1346siv1g14e05p9jjogvqf8ae6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.834541812231-t7sgu1346siv1g14e05p9jjogvqf8ae6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCM_R8FCiKf0mOdZtLXkTg_CMUbnhOyt8A</string>
+	<key>GCM_SENDER_ID</key>
+	<string>834541812231</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fcgame.more.ml</string>
+	<key>PROJECT_ID</key>
+	<string>fcgamemore</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fcgamemore.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:834541812231:ios:8c064219730ee4c0</string>
+	<key>DATABASE_URL</key>
+	<string>https://fcgamemore.firebaseio.com</string>
+</dict>
+</plist>
