@@ -9,5 +9,7 @@
 #import "QKBasicViewController.h"
 
 @interface NextViewController : QKBasicViewController
+@property (weak, nonatomic) IBOutlet UIView *NesViewContainer;
+- (IBAction)goBack:(id)sender;
 
 @end

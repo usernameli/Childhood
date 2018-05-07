@@ -86,7 +86,7 @@
 // 支持设备自动旋转
 - (BOOL)shouldAutorotate
 {
-    return NO;
+    return YES;
 }
 
 + (void)initialize

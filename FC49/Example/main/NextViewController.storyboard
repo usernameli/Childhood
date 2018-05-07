@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Qa-P9-ahq">
+    <device id="retina4_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Next View Controller-->
+        <scene sceneID="DZ6-vR-6BK">
+            <objects>
+                <viewController storyboardIdentifier="nextViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Qa-P9-ahq" customClass="NextViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ucN-OJ-Ejb">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="49in1MainBg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="euA-mH-c6K">
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aR7-vA-9fC" userLabel="LeftView">
+                                <rect key="frame" x="0.0" y="0.0" width="165.5" height="375"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" restorationIdentifier="ResetView" translatesAutoresizingMaskIntoConstraints="NO" id="Yh6-IW-YWz" userLabel="ResetView">
+                                        <rect key="frame" x="20" y="20" width="50" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wtr-QB-OaM">
+                                                <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                <state key="normal" image="49in1Reset.png" backgroundImage="49in1TopBtn.png"/>
+                                                <connections>
+                                                    <action selector="goBack:" destination="3Qa-P9-ahq" eventType="touchUpInside" id="Uvw-O0-mr0"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RESET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYk-7i-qez">
+                                                <rect key="frame" x="7" y="43" width="38" height="15"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="A7H-Zw-ZRv"/>
+                                            <constraint firstAttribute="width" constant="50" id="xHf-nW-5CG"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fn-hI-cA9" userLabel="OpView">
+                                        <rect key="frame" x="7" y="195" width="150" height="150"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xY-Rn-g1T" userLabel="UpBtn">
+                                                <rect key="frame" x="50" y="6" width="50" height="60"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="49in1UpBtn.png"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhe-jh-IbL" userLabel="LeftBtn">
+                                                <rect key="frame" x="2" y="47" width="60" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="49in1LeftBtn.png"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0u-Mb-buR" userLabel="DownBtn">
+                                                <rect key="frame" x="49" y="76" width="50" height="60"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="49in1BottomBtn.png"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjt-WY-R55" userLabel="RightBtn">
+                                                <rect key="frame" x="86" y="47" width="60" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="49in1RightBtn.png"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="PGg-CG-Lgg"/>
+                                            <constraint firstAttribute="width" constant="150" id="wEy-Qo-53d"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" restorationIdentifier="SELECTView" translatesAutoresizingMaskIntoConstraints="NO" id="UWe-tD-Jn5" userLabel="SelectView">
+                                        <rect key="frame" x="90" y="100" width="66" height="25"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqH-Dv-9cr">
+                                                <rect key="frame" x="0.0" y="0.0" width="66" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                <state key="normal" image="49in1SelectBtn.png" backgroundImage="49in1SelectBtn.png"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SELECT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96O-jG-Csa">
+                                                <rect key="frame" x="0.0" y="22" width="66" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="1jX-gt-fda"/>
+                                            <constraint firstAttribute="width" constant="66" id="HEz-DE-c7P"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="UWe-tD-Jn5" secondAttribute="trailing" constant="10" id="5Fa-CI-otH"/>
+                                    <constraint firstAttribute="bottom" secondItem="7fn-hI-cA9" secondAttribute="bottom" constant="30" id="ByE-1t-j45"/>
+                                    <constraint firstItem="Yh6-IW-YWz" firstAttribute="top" secondItem="aR7-vA-9fC" secondAttribute="top" constant="20" id="HuL-yl-Fmq"/>
+                                    <constraint firstItem="UWe-tD-Jn5" firstAttribute="top" secondItem="aR7-vA-9fC" secondAttribute="top" constant="100" id="Ogy-TY-DzY"/>
+                                    <constraint firstItem="7fn-hI-cA9" firstAttribute="centerX" secondItem="aR7-vA-9fC" secondAttribute="centerX" id="czs-8y-XFF"/>
+                                    <constraint firstItem="Yh6-IW-YWz" firstAttribute="leading" secondItem="aR7-vA-9fC" secondAttribute="leading" constant="20" id="dqo-cG-76i"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYD-zW-lZ5" userLabel="CenterView">
+                                <rect key="frame" x="165.5" y="0.0" width="336" height="375"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uqb-Wm-BX6" userLabel="gameMain">
+                                        <rect key="frame" x="0.0" y="22.5" width="336" height="330"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="49in1bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="v1U-P0-5Gq">
+                                                <rect key="frame" x="0.0" y="0.0" width="336" height="330"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="336" id="F2C-XJ-EDd"/>
+                                                    <constraint firstAttribute="height" constant="330" id="yZ1-M9-7tP"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="49in1gameContainer.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ilf-S2-w42">
+                                                <rect key="frame" x="8" y="10" width="320" height="300"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="300" id="lgl-La-xvY"/>
+                                                    <constraint firstAttribute="width" constant="320" id="tOj-Yl-fzg"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="v1U-P0-5Gq" firstAttribute="centerX" secondItem="uqb-Wm-BX6" secondAttribute="centerX" id="NPx-MT-Pn7"/>
+                                            <constraint firstAttribute="height" constant="330" id="YVm-Aw-dZZ"/>
+                                            <constraint firstItem="Ilf-S2-w42" firstAttribute="centerX" secondItem="uqb-Wm-BX6" secondAttribute="centerX" id="hUw-Yw-zbN"/>
+                                            <constraint firstItem="v1U-P0-5Gq" firstAttribute="centerY" secondItem="uqb-Wm-BX6" secondAttribute="centerY" id="hif-lX-bdx"/>
+                                            <constraint firstItem="Ilf-S2-w42" firstAttribute="centerY" secondItem="uqb-Wm-BX6" secondAttribute="centerY" constant="-5" id="nnA-VL-cmR"/>
+                                            <constraint firstAttribute="width" constant="336" id="vfd-GQ-pHZ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="uqb-Wm-BX6" firstAttribute="centerX" secondItem="kYD-zW-lZ5" secondAttribute="centerX" id="2WS-Qa-fLW"/>
+                                    <constraint firstItem="uqb-Wm-BX6" firstAttribute="centerY" secondItem="kYD-zW-lZ5" secondAttribute="centerY" id="Fmr-0U-Zgf"/>
+                                    <constraint firstAttribute="width" constant="336" id="h1Q-e3-YXC"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xgt-2a-he2" userLabel="RightView">
+                                <rect key="frame" x="501.5" y="0.0" width="165.5" height="375"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" restorationIdentifier="STARTVIEW" translatesAutoresizingMaskIntoConstraints="NO" id="xmp-Oj-ntX" userLabel="StartView">
+                                        <rect key="frame" x="10" y="100" width="100" height="25"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSo-q4-aLd">
+                                                <rect key="frame" x="0.0" y="0.0" width="66" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="66" id="YCf-rV-kje"/>
+                                                    <constraint firstAttribute="height" constant="21" id="r6D-93-5xY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                <state key="normal" image="49in1SelectBtn.png" backgroundImage="49in1SelectBtn.png"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="START/PAUSE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyB-YX-Hib">
+                                                <rect key="frame" x="-15" y="22" width="100" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Qvy-nf-ZIY"/>
+                                            <constraint firstAttribute="width" constant="100" id="XHS-c8-RWB"/>
+                                            <constraint firstItem="OSo-q4-aLd" firstAttribute="top" secondItem="xmp-Oj-ntX" secondAttribute="top" id="tQ2-O7-lYz"/>
+                                            <constraint firstItem="OSo-q4-aLd" firstAttribute="leading" secondItem="xmp-Oj-ntX" secondAttribute="leading" id="vfb-ZM-obU"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" restorationIdentifier="ShopView" translatesAutoresizingMaskIntoConstraints="NO" id="GDZ-Ml-rzu" userLabel="ShopView">
+                                        <rect key="frame" x="20" y="20" width="50" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9QQ-tB-hoW">
+                                                <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                <state key="normal" image="49in1Shop.png" backgroundImage="49in1TopBtn.png"/>
+                                                <connections>
+                                                    <action selector="goBack:" destination="3Qa-P9-ahq" eventType="touchUpInside" id="rw6-ol-tET"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="81J-60-gm6"/>
+                                            <constraint firstAttribute="height" constant="60" id="Dvc-kv-pLc"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" restorationIdentifier="SoundView" translatesAutoresizingMaskIntoConstraints="NO" id="xn8-K7-npR" userLabel="SoundView">
+                                        <rect key="frame" x="95.5" y="20" width="50" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDF-ad-snt">
+                                                <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                <state key="normal" image="49in1SoundOn.png" backgroundImage="49in1TopBtn.png"/>
+                                                <connections>
+                                                    <action selector="goBack:" destination="3Qa-P9-ahq" eventType="touchUpInside" id="z6V-5j-C5R"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="oRg-8Y-P0P"/>
+                                            <constraint firstAttribute="width" constant="50" id="rpr-eS-MMn"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uxv-WY-XMa" userLabel="ABOpView">
+                                        <rect key="frame" x="8" y="195" width="150" height="150"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3w-rD-uyW" userLabel="ABtn">
+                                                <rect key="frame" x="91" y="2" width="57" height="57"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="57" id="5Jx-fH-CL5"/>
+                                                    <constraint firstAttribute="height" constant="57" id="cjX-L5-AfJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                <state key="normal" image="49in1ABtn.png" backgroundImage="49in1RightSmallBtn.png"/>
+                                                <connections>
+                                                    <action selector="goBack:" destination="3Qa-P9-ahq" eventType="touchUpInside" id="lyL-Re-zec"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGv-cN-C3s" userLabel="ABBtn">
+                                                <rect key="frame" x="72" y="72" width="70" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="bAn-CX-9fi"/>
+                                                    <constraint firstAttribute="height" constant="70" id="yDr-hH-6Fc"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                <state key="normal" image="49in1ABBtn.png" backgroundImage="49in1RightBigBtn.png"/>
+                                                <connections>
+                                                    <action selector="goBack:" destination="3Qa-P9-ahq" eventType="touchUpInside" id="e8C-jk-OUW"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K58-JF-Iw8" userLabel="BBtn">
+                                                <rect key="frame" x="2" y="43" width="57" height="57"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="57" id="AsC-IF-h5W"/>
+                                                    <constraint firstAttribute="height" constant="57" id="hTK-EU-VFQ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                <state key="normal" image="49in1BBtn.png" backgroundImage="49in1RightSmallBtn.png"/>
+                                                <connections>
+                                                    <action selector="goBack:" destination="3Qa-P9-ahq" eventType="touchUpInside" id="TRU-lb-e8f"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="K58-JF-Iw8" firstAttribute="leading" secondItem="uxv-WY-XMa" secondAttribute="leading" constant="2" id="3Iz-dN-fSy"/>
+                                            <constraint firstAttribute="bottom" secondItem="bGv-cN-C3s" secondAttribute="bottom" constant="8" id="JTa-w1-j1y"/>
+                                            <constraint firstAttribute="height" constant="150" id="QlI-Vl-EGd"/>
+                                            <constraint firstAttribute="width" constant="150" id="eNf-Gt-yy9"/>
+                                            <constraint firstItem="H3w-rD-uyW" firstAttribute="top" secondItem="uxv-WY-XMa" secondAttribute="top" constant="2" id="fZ3-XG-qRc"/>
+                                            <constraint firstAttribute="trailing" secondItem="bGv-cN-C3s" secondAttribute="trailing" constant="8" id="fwP-tZ-umg"/>
+                                            <constraint firstAttribute="trailing" secondItem="H3w-rD-uyW" secondAttribute="trailing" constant="2" id="k23-0g-T9I"/>
+                                            <constraint firstAttribute="bottom" secondItem="K58-JF-Iw8" secondAttribute="bottom" constant="50" id="r7w-AJ-aLk"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="xn8-K7-npR" firstAttribute="top" secondItem="Xgt-2a-he2" secondAttribute="top" constant="20" id="7WN-vU-fjH"/>
+                                    <constraint firstAttribute="trailing" secondItem="xn8-K7-npR" secondAttribute="trailing" constant="20" id="D2q-TM-XHG"/>
+                                    <constraint firstItem="uxv-WY-XMa" firstAttribute="centerX" secondItem="Xgt-2a-he2" secondAttribute="centerX" id="Ern-HH-NQr"/>
+                                    <constraint firstItem="xmp-Oj-ntX" firstAttribute="top" secondItem="Xgt-2a-he2" secondAttribute="top" constant="100" id="STs-cZ-bAO"/>
+                                    <constraint firstItem="xmp-Oj-ntX" firstAttribute="leading" secondItem="Xgt-2a-he2" secondAttribute="leading" constant="10" id="THJ-Hk-03J"/>
+                                    <constraint firstItem="GDZ-Ml-rzu" firstAttribute="leading" secondItem="Xgt-2a-he2" secondAttribute="leading" constant="20" id="chE-yp-sKa"/>
+                                    <constraint firstAttribute="bottom" secondItem="uxv-WY-XMa" secondAttribute="bottom" constant="30" id="cwk-r7-Rd5"/>
+                                    <constraint firstItem="GDZ-Ml-rzu" firstAttribute="top" secondItem="Xgt-2a-he2" secondAttribute="top" constant="20" id="kfp-Uq-oIx"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aR7-vA-9fC" firstAttribute="bottom" secondItem="ucN-OJ-Ejb" secondAttribute="bottom" id="3B6-dc-CqZ"/>
+                            <constraint firstItem="aR7-vA-9fC" firstAttribute="top" secondItem="ucN-OJ-Ejb" secondAttribute="top" id="5AE-TF-bzJ"/>
+                            <constraint firstItem="kYD-zW-lZ5" firstAttribute="centerX" secondItem="ucN-OJ-Ejb" secondAttribute="centerX" id="B6N-gh-dpM"/>
+                            <constraint firstItem="Xgt-2a-he2" firstAttribute="trailing" secondItem="ucN-OJ-Ejb" secondAttribute="trailing" id="DT2-TR-ZIK"/>
+                            <constraint firstItem="Xgt-2a-he2" firstAttribute="leading" secondItem="kYD-zW-lZ5" secondAttribute="trailing" id="P9Z-zz-MBj"/>
+                            <constraint firstItem="Xgt-2a-he2" firstAttribute="bottom" secondItem="ucN-OJ-Ejb" secondAttribute="bottom" id="S3x-hO-HCl"/>
+                            <constraint firstItem="kYD-zW-lZ5" firstAttribute="bottom" secondItem="ucN-OJ-Ejb" secondAttribute="bottom" id="W51-bV-aUd"/>
+                            <constraint firstItem="kYD-zW-lZ5" firstAttribute="leading" secondItem="aR7-vA-9fC" secondAttribute="trailing" id="dfV-X2-vI8"/>
+                            <constraint firstItem="Xgt-2a-he2" firstAttribute="top" secondItem="ucN-OJ-Ejb" secondAttribute="top" id="g3J-zn-vUI"/>
+                            <constraint firstItem="aR7-vA-9fC" firstAttribute="leading" secondItem="ucN-OJ-Ejb" secondAttribute="leading" id="lU3-QC-eZh"/>
+                            <constraint firstItem="kYD-zW-lZ5" firstAttribute="top" secondItem="ucN-OJ-Ejb" secondAttribute="top" id="pZm-1f-Jmh"/>
+                            <constraint firstItem="kYD-zW-lZ5" firstAttribute="centerY" secondItem="ucN-OJ-Ejb" secondAttribute="centerY" id="zRR-LV-ZaF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XO0-qD-jBI"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x8W-zF-R5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-339.58020989505252" y="133.59999999999999"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="49in1ABBtn.png" width="73" height="80"/>
+        <image name="49in1ABtn.png" width="55" height="59"/>
+        <image name="49in1BBtn.png" width="45" height="59"/>
+        <image name="49in1BottomBtn.png" width="100" height="119"/>
+        <image name="49in1LeftBtn.png" width="119" height="100"/>
+        <image name="49in1MainBg.jpg" width="1280" height="720"/>
+        <image name="49in1Reset.png" width="80" height="80"/>
+        <image name="49in1RightBigBtn.png" width="140" height="140"/>
+        <image name="49in1RightBtn.png" width="119" height="100"/>
+        <image name="49in1RightSmallBtn.png" width="114" height="114"/>
+        <image name="49in1SelectBtn.png" width="132" height="42"/>
+        <image name="49in1Shop.png" width="80" height="80"/>
+        <image name="49in1SoundOn.png" width="80" height="80"/>
+        <image name="49in1TopBtn.png" width="80" height="80"/>
+        <image name="49in1UpBtn.png" width="100" height="119"/>
+        <image name="49in1bg.png" width="672" height="660"/>
+        <image name="49in1gameContainer.png" width="640" height="600"/>
+    </resources>
+</document>

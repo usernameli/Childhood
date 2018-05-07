@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_9" orientation="landscape">
+    <device id="ipad12_9" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,31 +15,31 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FlashPage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VpA-Sr-PtI">
-                                <rect key="frame" x="331" y="113" width="150" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Dwb-4y-lUT"/>
-                                    <constraint firstAttribute="width" constant="150" id="luM-vr-wKp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pflash.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Xfw-bJ-eXz">
+                                <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VpA-Sr-PtI" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ojF-mb-OHq"/>
-                            <constraint firstItem="VpA-Sr-PtI" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="sO6-jJ-DdU"/>
+                            <constraint firstItem="Xfw-bJ-eXz" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="CkZ-QH-jSy"/>
+                            <constraint firstItem="Xfw-bJ-eXz" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="Oi1-nn-2Wt"/>
+                            <constraint firstItem="Xfw-bJ-eXz" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="XCi-pk-VCs"/>
+                            <constraint firstItem="Xfw-bJ-eXz" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="wu8-V3-tee"/>
+                            <constraint firstItem="Xfw-bJ-eXz" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="wvo-xy-VDu"/>
+                            <constraint firstItem="Xfw-bJ-eXz" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="zXy-rY-NAi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+            <point key="canvasLocation" x="51.358695652173914" y="373.91304347826087"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pflash.jpg" width="1280" height="720"/>
+    </resources>
 </document>

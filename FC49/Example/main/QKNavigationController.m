@@ -35,6 +35,7 @@
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if (self.childViewControllers.count > 0) {
+//        [viewController.navigationController setNavigationBarHidden:YES animated:TRUE];
 //        [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:[UIColor whiteColor]}];
         [self.navigationBar setTintColor:[UIColor whiteColor]];
 //        [self.navigationBar setiti]
