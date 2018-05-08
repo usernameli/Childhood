@@ -50,10 +50,10 @@
     [self.GameScene addSubview:_nesView];
     
     
-    NSURL* romURL = [[NSBundle mainBundle] URLForResource:@"example" withExtension:@"nes"];
-    NSLog(@"rom: %@", romURL);
-    NSData* romData = [NSData dataWithContentsOfFile:romURL.path];
-    [_nesView loadRom:romData];
+//    NSURL* romURL = [[NSBundle mainBundle] URLForResource:@"example" withExtension:@"nes"];
+//    NSLog(@"rom: %@", romURL);
+//    NSData* romData = [NSData dataWithContentsOfFile:romURL.path];
+//    [_nesView loadRom:romData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -188,5 +188,9 @@
 }
 
 - (IBAction)Shop:(id)sender {
+    NSURL* romURL = [[NSBundle mainBundle] URLForResource:@"example" withExtension:@"nes"];
+    NSLog(@"rom: %@", romURL);
+    NSData* romData = [NSData dataWithContentsOfFile:romURL.path];
+    [_nesView loadRom:romData];
 }
 @end
