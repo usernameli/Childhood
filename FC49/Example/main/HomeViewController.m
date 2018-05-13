@@ -19,7 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    [self pushNextVC];
+    return;
     UIButton *centerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [centerBtn setTitle:@"下一页" forState:UIControlStateNormal];
     [centerBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -32,20 +33,20 @@
     [self.view addSubview:centerBtn];
     
     
-    NSFileManager * fileManger = [NSFileManager defaultManager];
-    NSString *appPath = [[NSBundle mainBundle] bundlePath];
-    NSString *CNXHPath = [NSString stringWithFormat:@"%@/roms/CNXH",appPath];
-    NSLog(@"CNXHPath %@",CNXHPath);
-//    BOOL isExist = [fileManger fileExistsAtPath:CNXHPath isDirectory:&isDir];
-    NSDirectoryEnumerator *myDirectoryEnumerator=[fileManger enumeratorAtPath:CNXHPath];
-    NSLog(@"用enumeratorAtPath:显示目录%@的内容：",CNXHPath);
-    NSString *filePath;
-    while((filePath=[myDirectoryEnumerator nextObject])!=nil)
-    {
-        
-        NSLog(@"%@",filePath);
-        
-    }
+//    NSFileManager * fileManger = [NSFileManager defaultManager];
+//    NSString *appPath = [[NSBundle mainBundle] bundlePath];
+//    NSString *CNXHPath = [NSString stringWithFormat:@"%@/roms/CNXH",appPath];
+//    NSLog(@"CNXHPath %@",CNXHPath);
+////    BOOL isExist = [fileManger fileExistsAtPath:CNXHPath isDirectory:&isDir];
+//    NSDirectoryEnumerator *myDirectoryEnumerator=[fileManger enumeratorAtPath:CNXHPath];
+//    NSLog(@"用enumeratorAtPath:显示目录%@的内容：",CNXHPath);
+//    NSString *filePath;
+//    while((filePath=[myDirectoryEnumerator nextObject])!=nil)
+//    {
+//
+//        NSLog(@"%@",filePath);
+//
+//    }
 //    NSURL* romURL = [[NSBundle mainBundle] URLForResource:@"roms/CNXH/CJHDL" withExtension:@"nes"];
 //    //当前项目的路径
 //    NSLog(@"rom: %@", [[NSBundle mainBundle] bundlePath] );

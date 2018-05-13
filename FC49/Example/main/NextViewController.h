@@ -7,8 +7,18 @@
 //
 
 #import "QKBasicViewController.h"
+#import <StoreKit/StoreKit.h>
+#import <GameKit/GameKit.h>
+
+//@import GoogleMobileAds;
 
 @interface NextViewController : QKBasicViewController
+
+//@property (weak, nonatomic) IBOutlet GADBannerView  *bannerView;
+
+@property (weak, nonatomic) IBOutlet UIView *CenterView;
+@property (weak, nonatomic) IBOutlet UIImageView *GameImgeShow;
+
 @property (weak, nonatomic) IBOutlet UIView *GameScene;
 @property (weak, nonatomic) IBOutlet UIView *GameChioceScene;
 @property (weak, nonatomic) IBOutlet UIImageView *GameChioceRow;

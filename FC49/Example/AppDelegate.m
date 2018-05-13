@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "HallViewController.h"
-#import "QKTabBarController.h"
+#import "ViewController.h"
+#import "NextViewController.h"
 
 @import Firebase;
 //@import GoogleMobileAds;
@@ -19,21 +19,50 @@
 
 @implementation AppDelegate
 
+-(bool)checkDevice:(NSString*)name
+{
+    NSString* deviceType = [UIDevice currentDevice].model;
+    NSLog(@"deviceType = %@", deviceType);
+    
+    NSRange range = [deviceType rangeOfString:name];
+    return range.location != NSNotFound;
+}
+
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
 //    self.window.rootViewController = navigationController
     // Override point for customization after application launch.
     [FIRApp configure];
     [GADMobileAds configureWithApplicationID:@"ca-app-pub-9756259708757876~9218350130"];
+  
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    QKTabBarController *tabBarVC = [[QKTabBarController alloc] init];
-    self.window.rootViewController = tabBarVC;
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    return YES;
     
-//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    self.window.rootViewController = [[HallViewController alloc] init];
-//    [self.window makeKeyAndVisible];
+    // 设置rootViewController
+//    NextViewController *controller = [[NextViewController alloc] init];
+//    self.window.rootViewController = controller;
+//
+    
+    NSString *  nsStrIpad=@"iPad";
+    bool  bIsiPad=false;
+    bIsiPad=[self checkDevice:nsStrIpad];
+    if(bIsiPad)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"NextViewControllerIpad" bundle:nil];
+        NSLog(@"hahahah %@", storyboard);
+        
+        NextViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"NextViewController"];
+        self.window.rootViewController = vc;
+    }
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"NextViewController" bundle:nil];
+        NSLog(@"hahahah %@", storyboard);
+        
+        NextViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"NextViewController"];
+        self.window.rootViewController = vc;
+    }
     
     return YES;
 }

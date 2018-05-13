@@ -10,8 +10,4 @@
 
 @interface ViewController : UIViewController
 
-@property(nonatomic, strong) UIButton *AButton;
-@property(nonatomic, strong) UIButton *BButton;
-@property(nonatomic, strong) UIButton *SelectButton;
-@property(nonatomic, strong) UIButton *StartButton;
 @end

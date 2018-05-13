@@ -8,14 +8,10 @@
 
 #import "NextViewController.h"
 #import <NESView/NESView.h>
-#import <MediaPlayer/MediaPlayer.h>
-#import <AVFoundation/AVFoundation.h>
-#import <MediaPlayer/MediaPlayer.h>
+
 
 @interface NextViewController () <NESViewDelegate>
 @property (nonatomic) NESView* nesView;
-@property (nonatomic) MPVolumeView* volumeView;
-@property (nonatomic, strong) UISlider *volumeViewSlider;
 @property (nonatomic) NSArray<NESKey*>* nesKeys;
 @property (atomic) NSInteger playSpeed;
 @property (nonatomic) NSData* state;
@@ -28,7 +24,7 @@
 @property (nonatomic) BOOL  rightTouchFlg;
 
 @property (nonatomic) BOOL  nesViewIsDestoryFlg;
-
+@property (nonatomic) BOOL bIsiPad;
 @property (nonatomic) NSString  *GameNesPath;
 @end
 
@@ -36,6 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self GameCenterLogin];
+    _bIsiPad = FALSE;
     _upTouchFlg = FALSE;
     
     _downTouchFlg = FALSE;
@@ -49,14 +47,9 @@
     
     self.GameChioceScene.hidden = NO;
     self.GameScene.hidden = YES;
-    MPVolumeView *volumeView =  [[MPVolumeView alloc] init];
-   
-    volumeView.showsRouteButton = NO;
+    NSString *  nsStrIpad=@"iPad";
     
-    volumeView.showsVolumeSlider = NO;
-    
-    [self.view addSubview:volumeView];
-    _volumeView = volumeView;
+    _bIsiPad=[self checkDevice:nsStrIpad];
     
     NSError *err;
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"choiceGame" withExtension:@"mp3"];
@@ -89,6 +82,15 @@
     self.OperRightBtn.userInteractionEnabled = TRUE;
     self.OperUpBtn.userInteractionEnabled = TRUE;
 }
+-(bool)checkDevice:(NSString*)name
+{
+    NSString* deviceType = [UIDevice currentDevice].model;
+    NSLog(@"deviceType = %@", deviceType);
+    
+    NSRange range = [deviceType rangeOfString:name];
+    return range.location != NSNotFound;
+}
+
 //一根或者多根手指开始触摸View：
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
 {
@@ -266,7 +268,15 @@
     }
     self.nesKeys = keys;
     _playSpeed = 1;
-   _nesView = [[NESView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+    if(_bIsiPad)
+    {
+        _nesView = [[NESView alloc] initWithFrame:CGRectMake(0, 0, 640, 600)];
+    }
+    else
+    {
+        _nesView = [[NESView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+    }
+
     _nesView.delegate = self;
     [self.GameScene addSubview:_nesView];
 
@@ -294,12 +304,6 @@
     }
 }
 
-//- (IBAction)goBack:(id)sender {
-//    [_nesView destroy];
-//    [self.navigationController popViewControllerAnimated:NO];
-//}
-
-
 - (IBAction)OperADown:(id)sender {
     NSLog(@"A Down");
     _nesKeys[0].player1.a = YES;
@@ -324,27 +328,66 @@
     self.OperDownBtn.userInteractionEnabled = TRUE;
     self.OperRightBtn.userInteractionEnabled = TRUE;
     self.OperUpBtn.userInteractionEnabled = TRUE;
-//    [_nesView destroy];
-    
-//    NSURL* romURL = [[NSBundle mainBundle] URLForResource:@"example" withExtension:@"nes"];
-//    NSLog(@"rom: %@", romURL);
-//    NSData* romData = [NSData dataWithContentsOfFile:romURL.path];
-//    [_nesView loadRom:romData];
-    
-//    [_nesView reset];
+}
+- (NSString *)getGameName:(int)gamePos {
+    NSString *gameName = @"KDXF";
+    NSLog(@"gamePos = %d\n",gamePos);
+    if( gamePos == 1)
+    {
+        gameName = @"CSYSWDB";
+    }
+    else if( gamePos == 2)
+    {
+        gameName = @"HDLSWDB";
+    }
+    else if( gamePos == 3)
+    {
+        gameName = @"JNZJ";
+    }
+    else if( gamePos == 4)
+    {
+        gameName = @"LSBT";
+    }
+    else if( gamePos == 5)
+    {
+        gameName = @"MXD";
+    }
+    else if( gamePos == 6)
+    {
+        gameName = @"QBK";
+    }
+    else if( gamePos == 7)
+    {
+        gameName = @"SMTZ";
+    }
+    else if( gamePos == 8)
+    {
+        gameName = @"SJL2";
+    }
+    else if( gamePos == 9)
+    {
+        gameName = @"XYJ";
+    }
+    return gameName;
 }
 
-
 - (void) setGameChioceList:(BOOL) up{
+    int sub = 26;
+    int maxSub = 242;
+    if(_bIsiPad)
+    {
+        sub = sub + 14;
+        maxSub = 368;
+    }
     if(up)
     {
         CGRect origionRect = self.GameChioceRow.frame;
         CGPoint origin = origionRect.origin;
-        if(origin.y - 30 < 8)
+        if(origin.y - sub < 8)
         {
-            origin.y = 278 + 30;
+            origin.y = maxSub + sub;
         }
-        CGRect newRect = CGRectMake(origin.x, origin.y - 30, origionRect.size.width, origionRect.size.height);
+        CGRect newRect = CGRectMake(origin.x, origin.y - sub, origionRect.size.width, origionRect.size.height);
         
         
         self.GameChioceRow.frame = newRect;
@@ -354,18 +397,18 @@
     {
         CGRect origionRect = self.GameChioceRow.frame;
         CGPoint origin = origionRect.origin;
-        if(origin.y + 30 > 278)
+        if(origin.y + sub > maxSub)
         {
-            origin.y = 8 - 30;
+            origin.y = 8 - sub;
         }
-        CGRect newRect = CGRectMake(origin.x, origin.y + 30, origionRect.size.width, origionRect.size.height);
-        
-        
+        CGRect newRect = CGRectMake(origin.x, origin.y + sub, origionRect.size.width, origionRect.size.height);
         self.GameChioceRow.frame = newRect;
-        
-        
-        
     }
+    CGRect origionRect = self.GameChioceRow.frame;
+    CGPoint origin = origionRect.origin;
+    NSLog(@"origin y= %f",origin.y);
+    int gamePos = (origin.y - 8) / sub;
+    self.GameImgeShow.image = [UIImage imageNamed:[self getGameName:gamePos]];
     [_player play];
 }
 - (IBAction)GameSelectDown:(id)sender {
@@ -395,44 +438,8 @@
         CGRect origionRect = self.GameChioceRow.frame;
         CGPoint origin = origionRect.origin;
         int gamePos = (origin.y - 8 ) / 30;
-        NSString *gameName = @"KDXF";
-        if( gamePos == 1)
-        {
-            gameName = @"CSYSWDB";
-        }
-        else if( gamePos == 2)
-        {
-            gameName = @"HDLSWDB";
-        }
-        else if( gamePos == 3)
-        {
-            gameName = @"JNZJ";
-        }
-        else if( gamePos == 4)
-        {
-            gameName = @"LSBT";
-        }
-        else if( gamePos == 5)
-        {
-            gameName = @"MXD";
-        }
-        else if( gamePos == 6)
-        {
-            gameName = @"QBK";
-        }
-        else if( gamePos == 7)
-        {
-            gameName = @"SMTZ";
-        }
-        else if( gamePos == 8)
-        {
-            gameName = @"SJL2";
-        }
-        else if( gamePos == 9)
-        {
-            gameName = @"XYJ";
-        }
         
+        NSString *gameName = [self getGameName:gamePos];
         
         NSLog(@"gameName: %@", gameName);
         _nesViewIsDestoryFlg = FALSE;
@@ -503,13 +510,7 @@
 }
 
 - (IBAction)SoundOnOff:(id)sender {
-    for (UIView *view in [_volumeView subviews]){
-        if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
-            _volumeViewSlider = (UISlider*)view;
-            break;
-        }
-    }
-    [_volumeViewSlider setValue:0.0f animated:NO];
+   
 }
 
 - (IBAction)Shop:(id)sender {
@@ -519,4 +520,62 @@
 //    NSData* romData = [NSData dataWithContentsOfFile:romURL.path];
 //    [_nesView loadRom:romData];
 }
+
+-(BOOL)isSupport
+{
+    Class gcClass = (NSClassFromString(@"GKLocalPlayer"));
+    NSString *reqSysVer = @"4.1";
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    BOOL osVersionSupported = ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending);
+    return (gcClass && osVersionSupported);
+}
+
+- (BOOL)IsLogin
+{
+    return [GKLocalPlayer localPlayer].authenticated;
+}
+
+- (void)GameCenterLogin
+{
+    if (![self isSupport])
+    {
+        return;
+    }
+    if ([self IsLogin])
+    {
+        return;
+    }
+    
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error)
+    {
+        if (viewController != nil)
+        {
+            
+            [self presentViewController:viewController animated:YES completion:nil];
+            NSLog(@"game center show suceess view");
+            
+        }
+        else
+        {
+            if ([GKLocalPlayer localPlayer].authenticated)
+            {
+                // Get the default leaderboard identifier.
+                [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error)
+                 {
+                     if (error != nil)
+                     {
+                         NSLog(@"game center load default leaderboard fail :%@", [error localizedDescription]);
+                     }
+                 }];
+                NSLog(@"game center authenticat success");
+            }
+            else
+            {
+                NSLog(@"game center authenticat failed");
+            }
+        }
+    };
+}
+
 @end
