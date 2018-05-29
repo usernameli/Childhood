@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0000000004F0"
-               BlueprintName = "NESView"
+               BlueprintIdentifier = "000000000A20"
+               BlueprintName = "Pods-MyNesGame"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libNESView.a">
+               BuildableName = "libPods-MyNesGame.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -7,268 +7,187 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0000000007F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0000000007E0 /* Foundation.framework */; };
-		000000000810 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000170 /* GTMDefines.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000820 /* GTMNSData+zlib.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000000001A0 /* GTMNSData+zlib.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		000000000830 /* GTMNSData+zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000190 /* GTMNSData+zlib.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000880 /* GoogleToolboxForMac-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000870 /* GoogleToolboxForMac-dummy.m */; };
-		000000000900 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0000000007E0 /* Foundation.framework */; };
-		000000000910 /* ALAudioFairy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000001B0 /* ALAudioFairy.cpp */; };
-		000000000920 /* CGVideoFairy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000001D0 /* CGVideoFairy.cpp */; };
-		000000000930 /* Audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000220 /* Audio.cpp */; };
-		000000000940 /* Cartridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000240 /* Cartridge.cpp */; };
-		000000000950 /* EmulatorException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000260 /* EmulatorException.cpp */; };
-		000000000960 /* FairyConstantValues.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000002A0 /* FairyConstantValues.cpp */; };
-		000000000970 /* NesFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000002E0 /* NesFile.cpp */; };
-		000000000980 /* VRC4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000320 /* VRC4.cpp */; };
-		000000000990 /* Mapper0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000340 /* Mapper0.cpp */; };
-		0000000009A0 /* Mapper1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000360 /* Mapper1.cpp */; };
-		0000000009B0 /* Mapper2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000380 /* Mapper2.cpp */; };
-		0000000009C0 /* Mapper21.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000003A0 /* Mapper21.cpp */; };
-		0000000009D0 /* Mapper23.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000003C0 /* Mapper23.cpp */; };
-		0000000009E0 /* Mapper25.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000003E0 /* Mapper25.cpp */; };
-		0000000009F0 /* Mapper3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000400 /* Mapper3.cpp */; };
-		000000000A00 /* Mapper4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000420 /* Mapper4.cpp */; };
-		000000000A10 /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000440 /* Processor.cpp */; };
-		000000000A20 /* Video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000450 /* Video.cpp */; };
-		000000000A30 /* VirtualMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000460 /* VirtualMachine.cpp */; };
-		000000000A40 /* NESEmulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000490 /* NESEmulator.cpp */; };
-		000000000A50 /* NESKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000000004C0 /* NESKey.m */; };
-		000000000A60 /* NESLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000000004E0 /* NESLayer.m */; };
-		000000000A70 /* NESPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000500 /* NESPlayer.m */; };
-		000000000A80 /* NESView.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000520 /* NESView.m */; };
-		000000000AA0 /* ALAudioFairy.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0000000001C0 /* ALAudioFairy.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000AB0 /* CGVideoFairy.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0000000001E0 /* CGVideoFairy.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000AC0 /* AudioChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000230 /* AudioChannel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000AD0 /* EmulatorException.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000270 /* EmulatorException.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000AE0 /* AudioFairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000290 /* AudioFairy.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000AF0 /* GamepadFairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000002B0 /* GamepadFairy.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B00 /* VideoFairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000002C0 /* VideoFairy.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B10 /* NesFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000002F0 /* NesFile.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B20 /* VRC4.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000330 /* VRC4.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B30 /* Mapper0.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000350 /* Mapper0.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B40 /* Mapper1.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000370 /* Mapper1.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B50 /* Mapper2.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000390 /* Mapper2.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B60 /* Mapper21.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000003B0 /* Mapper21.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B70 /* Mapper23.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000003D0 /* Mapper23.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B80 /* Mapper25.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000003F0 /* Mapper25.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000B90 /* Mapper3.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000410 /* Mapper3.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000BA0 /* Mapper4.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000430 /* Mapper4.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000BB0 /* VirtualMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000470 /* VirtualMachine.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000BC0 /* miniz.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000480 /* miniz.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000BD0 /* NESEmulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000004A0 /* NESEmulator.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000BE0 /* NESKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000004B0 /* NESKey.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000BF0 /* NESLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000004D0 /* NESLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000C00 /* NESPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000004F0 /* NESPlayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000C10 /* NESView.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000510 /* NESView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000C20 /* VGamepadFairy.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 000000000530 /* VGamepadFairy.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000C70 /* NESView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000C60 /* NESView-dummy.m */; };
-		000000000CF0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0000000007E0 /* Foundation.framework */; };
-		000000000D00 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000550 /* SVIndefiniteAnimatedView.m */; };
-		000000000D10 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000570 /* SVProgressAnimatedView.m */; };
-		000000000D20 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000590 /* SVProgressHUD.m */; };
-		000000000D30 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000000005B0 /* SVRadialGradientLayer.m */; };
-		000000000D50 /* SVIndefiniteAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000540 /* SVIndefiniteAnimatedView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000D60 /* SVProgressAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000560 /* SVProgressAnimatedView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000D70 /* SVProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000580 /* SVProgressHUD.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000D80 /* SVRadialGradientLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000005A0 /* SVRadialGradientLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000DD0 /* SVProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000DC0 /* SVProgressHUD-dummy.m */; };
-		000000000E50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0000000007E0 /* Foundation.framework */; };
-		000000000E60 /* pb_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 0000000005D0 /* pb_common.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -fno-objc-arc -fno-objc-arc"; }; };
-		000000000E70 /* pb_decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 0000000005F0 /* pb_decode.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -fno-objc-arc"; }; };
-		000000000E80 /* pb_encode.c in Sources */ = {isa = PBXBuildFile; fileRef = 000000000610 /* pb_encode.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -fno-objc-arc"; }; };
-		000000000EA0 /* pb.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000005C0 /* pb.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000EB0 /* pb_common.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000005E0 /* pb_common.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000EC0 /* pb_decode.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000600 /* pb_decode.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000ED0 /* pb_encode.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000620 /* pb_encode.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		000000000F20 /* nanopb-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000F10 /* nanopb-dummy.m */; };
-		000000000FA0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0000000007E0 /* Foundation.framework */; };
-		000000001030 /* Pods-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000001020 /* Pods-Example-dummy.m */; };
-		000000001050 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000001040 /* OpenAL.framework */; };
-		000000001070 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000001060 /* QuartzCore.framework */; };
+		000000000580 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000570 /* Foundation.framework */; };
+		000000000590 /* ALAudioFairy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000D0 /* ALAudioFairy.cpp */; };
+		0000000005A0 /* CGVideoFairy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000000F0 /* CGVideoFairy.cpp */; };
+		0000000005B0 /* Audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000140 /* Audio.cpp */; };
+		0000000005C0 /* Cartridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000160 /* Cartridge.cpp */; };
+		0000000005D0 /* EmulatorException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000180 /* EmulatorException.cpp */; };
+		0000000005E0 /* FairyConstantValues.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000001C0 /* FairyConstantValues.cpp */; };
+		0000000005F0 /* NesFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000200 /* NesFile.cpp */; };
+		000000000600 /* VRC4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000240 /* VRC4.cpp */; };
+		000000000610 /* Mapper0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000260 /* Mapper0.cpp */; };
+		000000000620 /* Mapper1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000280 /* Mapper1.cpp */; };
+		000000000630 /* Mapper2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000002A0 /* Mapper2.cpp */; };
+		000000000640 /* Mapper21.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000002C0 /* Mapper21.cpp */; };
+		000000000650 /* Mapper23.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000002E0 /* Mapper23.cpp */; };
+		000000000660 /* Mapper25.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000300 /* Mapper25.cpp */; };
+		000000000670 /* Mapper3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000320 /* Mapper3.cpp */; };
+		000000000680 /* Mapper4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000340 /* Mapper4.cpp */; };
+		000000000690 /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000360 /* Processor.cpp */; };
+		0000000006A0 /* Video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000370 /* Video.cpp */; };
+		0000000006B0 /* VirtualMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000000000380 /* VirtualMachine.cpp */; };
+		0000000006C0 /* NESEmulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0000000003B0 /* NESEmulator.cpp */; };
+		0000000006D0 /* NESKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000000003E0 /* NESKey.m */; };
+		0000000006E0 /* NESLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000400 /* NESLayer.m */; };
+		0000000006F0 /* NESPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000420 /* NESPlayer.m */; };
+		000000000700 /* NESView.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000440 /* NESView.m */; };
+		000000000720 /* ALAudioFairy.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0000000000E0 /* ALAudioFairy.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000730 /* CGVideoFairy.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 000000000100 /* CGVideoFairy.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000740 /* AudioChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000150 /* AudioChannel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000750 /* EmulatorException.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000190 /* EmulatorException.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000760 /* AudioFairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000001B0 /* AudioFairy.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000770 /* GamepadFairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000001D0 /* GamepadFairy.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000780 /* VideoFairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000001E0 /* VideoFairy.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000790 /* NesFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000210 /* NesFile.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0000000007A0 /* VRC4.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000250 /* VRC4.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0000000007B0 /* Mapper0.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000270 /* Mapper0.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0000000007C0 /* Mapper1.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000290 /* Mapper1.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0000000007D0 /* Mapper2.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000002B0 /* Mapper2.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0000000007E0 /* Mapper21.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000002D0 /* Mapper21.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0000000007F0 /* Mapper23.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000002F0 /* Mapper23.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000800 /* Mapper25.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000310 /* Mapper25.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000810 /* Mapper3.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000330 /* Mapper3.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000820 /* Mapper4.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000350 /* Mapper4.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000830 /* VirtualMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000390 /* VirtualMachine.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000840 /* miniz.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000003A0 /* miniz.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000850 /* NESEmulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000003C0 /* NESEmulator.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000860 /* NESKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000003D0 /* NESKey.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000870 /* NESLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000003F0 /* NESLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000880 /* NESPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000410 /* NESPlayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000890 /* NESView.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000430 /* NESView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0000000008A0 /* VGamepadFairy.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 000000000450 /* VGamepadFairy.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
+		0000000008F0 /* NESView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000000008E0 /* NESView-dummy.m */; };
+		000000000970 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000570 /* Foundation.framework */; };
+		000000000980 /* OBShapedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000470 /* OBShapedButton.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		000000000990 /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000490 /* UIImage+ColorAtPixel.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0000000009B0 /* OBShapedButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000460 /* OBShapedButton.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0000000009C0 /* UIImage+ColorAtPixel.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000000480 /* UIImage+ColorAtPixel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		000000000A10 /* OBShapedButton-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000A00 /* OBShapedButton-dummy.m */; };
+		000000000A90 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000570 /* Foundation.framework */; };
+		000000000B20 /* Pods-MyNesGame-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000000B10 /* Pods-MyNesGame-dummy.m */; };
+		000000000B40 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000B30 /* OpenAL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		000000001080 /* PBXContainerItemProxy */ = {
+		000000000B50 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 000000000000 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 000000000760;
-			remoteInfo = GoogleToolboxForMac;
-		};
-		0000000010A0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 000000000000 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 000000000890;
+			remoteGlobalIDString = 0000000004F0;
 			remoteInfo = NESView;
 		};
-		0000000010C0 /* PBXContainerItemProxy */ = {
+		000000000B70 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 000000000000 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 000000000C80;
-			remoteInfo = SVProgressHUD;
-		};
-		0000000010E0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 000000000000 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 000000000DE0;
-			remoteInfo = nanopb;
+			remoteGlobalIDString = 000000000900;
+			remoteInfo = OBShapedButton;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		000000000130 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		000000000150 /* Firebase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Core/Sources/Firebase.h; sourceTree = "<group>"; };
-		000000000170 /* GTMDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		000000000190 /* GTMNSData+zlib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GTMNSData+zlib.h"; path = "Foundation/GTMNSData+zlib.h"; sourceTree = "<group>"; };
-		0000000001A0 /* GTMNSData+zlib.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "GTMNSData+zlib.m"; path = "Foundation/GTMNSData+zlib.m"; sourceTree = "<group>"; };
-		0000000001B0 /* ALAudioFairy.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = ALAudioFairy.cpp; path = NESView/ALAudioFairy.cpp; sourceTree = "<group>"; };
-		0000000001C0 /* ALAudioFairy.hpp */ = {isa = PBXFileReference; includeInIndex = 1; name = ALAudioFairy.hpp; path = NESView/ALAudioFairy.hpp; sourceTree = "<group>"; };
-		0000000001D0 /* CGVideoFairy.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = CGVideoFairy.cpp; path = NESView/CGVideoFairy.cpp; sourceTree = "<group>"; };
-		0000000001E0 /* CGVideoFairy.hpp */ = {isa = PBXFileReference; includeInIndex = 1; name = CGVideoFairy.hpp; path = NESView/CGVideoFairy.hpp; sourceTree = "<group>"; };
-		000000000220 /* Audio.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Audio.cpp; sourceTree = "<group>"; };
-		000000000230 /* AudioChannel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AudioChannel.h; sourceTree = "<group>"; };
-		000000000240 /* Cartridge.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Cartridge.cpp; sourceTree = "<group>"; };
-		000000000260 /* EmulatorException.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = EmulatorException.cpp; sourceTree = "<group>"; };
-		000000000270 /* EmulatorException.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = EmulatorException.h; sourceTree = "<group>"; };
-		000000000290 /* AudioFairy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AudioFairy.h; sourceTree = "<group>"; };
-		0000000002A0 /* FairyConstantValues.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = FairyConstantValues.cpp; sourceTree = "<group>"; };
-		0000000002B0 /* GamepadFairy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GamepadFairy.h; sourceTree = "<group>"; };
-		0000000002C0 /* VideoFairy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoFairy.h; sourceTree = "<group>"; };
-		0000000002E0 /* NesFile.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = NesFile.cpp; sourceTree = "<group>"; };
-		0000000002F0 /* NesFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NesFile.h; sourceTree = "<group>"; };
-		000000000320 /* VRC4.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = VRC4.cpp; sourceTree = "<group>"; };
-		000000000330 /* VRC4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VRC4.h; sourceTree = "<group>"; };
-		000000000340 /* Mapper0.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper0.cpp; sourceTree = "<group>"; };
-		000000000350 /* Mapper0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper0.h; sourceTree = "<group>"; };
-		000000000360 /* Mapper1.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper1.cpp; sourceTree = "<group>"; };
-		000000000370 /* Mapper1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper1.h; sourceTree = "<group>"; };
-		000000000380 /* Mapper2.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper2.cpp; sourceTree = "<group>"; };
-		000000000390 /* Mapper2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper2.h; sourceTree = "<group>"; };
-		0000000003A0 /* Mapper21.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper21.cpp; sourceTree = "<group>"; };
-		0000000003B0 /* Mapper21.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper21.h; sourceTree = "<group>"; };
-		0000000003C0 /* Mapper23.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper23.cpp; sourceTree = "<group>"; };
-		0000000003D0 /* Mapper23.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper23.h; sourceTree = "<group>"; };
-		0000000003E0 /* Mapper25.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper25.cpp; sourceTree = "<group>"; };
-		0000000003F0 /* Mapper25.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper25.h; sourceTree = "<group>"; };
-		000000000400 /* Mapper3.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper3.cpp; sourceTree = "<group>"; };
-		000000000410 /* Mapper3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper3.h; sourceTree = "<group>"; };
-		000000000420 /* Mapper4.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper4.cpp; sourceTree = "<group>"; };
-		000000000430 /* Mapper4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper4.h; sourceTree = "<group>"; };
-		000000000440 /* Processor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Processor.cpp; sourceTree = "<group>"; };
-		000000000450 /* Video.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Video.cpp; sourceTree = "<group>"; };
-		000000000460 /* VirtualMachine.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = VirtualMachine.cpp; sourceTree = "<group>"; };
-		000000000470 /* VirtualMachine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VirtualMachine.h; sourceTree = "<group>"; };
-		000000000480 /* miniz.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = miniz.h; path = NESView/miniz.h; sourceTree = "<group>"; };
-		000000000490 /* NESEmulator.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = NESEmulator.cpp; path = NESView/NESEmulator.cpp; sourceTree = "<group>"; };
-		0000000004A0 /* NESEmulator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESEmulator.h; path = NESView/NESEmulator.h; sourceTree = "<group>"; };
-		0000000004B0 /* NESKey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESKey.h; path = NESView/NESKey.h; sourceTree = "<group>"; };
-		0000000004C0 /* NESKey.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NESKey.m; path = NESView/NESKey.m; sourceTree = "<group>"; };
-		0000000004D0 /* NESLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESLayer.h; path = NESView/NESLayer.h; sourceTree = "<group>"; };
-		0000000004E0 /* NESLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NESLayer.m; path = NESView/NESLayer.m; sourceTree = "<group>"; };
-		0000000004F0 /* NESPlayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESPlayer.h; path = NESView/NESPlayer.h; sourceTree = "<group>"; };
-		000000000500 /* NESPlayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NESPlayer.m; path = NESView/NESPlayer.m; sourceTree = "<group>"; };
-		000000000510 /* NESView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESView.h; path = NESView/NESView.h; sourceTree = "<group>"; };
-		000000000520 /* NESView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NESView.m; path = NESView/NESView.m; sourceTree = "<group>"; };
-		000000000530 /* VGamepadFairy.hpp */ = {isa = PBXFileReference; includeInIndex = 1; name = VGamepadFairy.hpp; path = NESView/VGamepadFairy.hpp; sourceTree = "<group>"; };
-		000000000540 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVIndefiniteAnimatedView.h; path = SVProgressHUD/SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
-		000000000550 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVIndefiniteAnimatedView.m; path = SVProgressHUD/SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
-		000000000560 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressAnimatedView.h; path = SVProgressHUD/SVProgressAnimatedView.h; sourceTree = "<group>"; };
-		000000000570 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressAnimatedView.m; path = SVProgressHUD/SVProgressAnimatedView.m; sourceTree = "<group>"; };
-		000000000580 /* SVProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
-		000000000590 /* SVProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
-		0000000005A0 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVRadialGradientLayer.h; path = SVProgressHUD/SVRadialGradientLayer.h; sourceTree = "<group>"; };
-		0000000005B0 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVRadialGradientLayer.m; path = SVProgressHUD/SVRadialGradientLayer.m; sourceTree = "<group>"; };
-		0000000005C0 /* pb.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb.h; sourceTree = "<group>"; };
-		0000000005D0 /* pb_common.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_common.c; sourceTree = "<group>"; };
-		0000000005E0 /* pb_common.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb_common.h; sourceTree = "<group>"; };
-		0000000005F0 /* pb_decode.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_decode.c; sourceTree = "<group>"; };
-		000000000600 /* pb_decode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb_decode.h; sourceTree = "<group>"; };
-		000000000610 /* pb_encode.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_encode.c; sourceTree = "<group>"; };
-		000000000620 /* pb_encode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb_encode.h; sourceTree = "<group>"; };
-		000000000660 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
-		000000000670 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Frameworks/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
-		000000000680 /* FirebaseNanoPB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseNanoPB.framework; path = Frameworks/FirebaseNanoPB.framework; sourceTree = "<group>"; };
-		0000000006A0 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
-		0000000006C0 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
-		0000000006E0 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Frameworks/frameworks/GoogleMobileAds.framework; sourceTree = "<group>"; };
-		000000000700 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
-		000000000720 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
-		000000000730 /* NESView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NESView.modulemap; sourceTree = "<group>"; };
-		000000000740 /* NESView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = NESView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		000000000750 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		0000000007A0 /* libGoogleToolboxForMac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libGoogleToolboxForMac.a; path = libGoogleToolboxForMac.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		0000000007E0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		000000000850 /* GoogleToolboxForMac.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleToolboxForMac.xcconfig; sourceTree = "<group>"; };
-		000000000860 /* GoogleToolboxForMac-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GoogleToolboxForMac-prefix.pch"; sourceTree = "<group>"; };
-		000000000870 /* GoogleToolboxForMac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GoogleToolboxForMac-dummy.m"; sourceTree = "<group>"; };
-		0000000008D0 /* libNESView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libNESView.a; path = libNESView.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		000000000C40 /* NESView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NESView.xcconfig; sourceTree = "<group>"; };
-		000000000C50 /* NESView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NESView-prefix.pch"; sourceTree = "<group>"; };
-		000000000C60 /* NESView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NESView-dummy.m"; sourceTree = "<group>"; };
-		000000000CC0 /* libSVProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSVProgressHUD.a; path = libSVProgressHUD.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		000000000DA0 /* SVProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SVProgressHUD.xcconfig; sourceTree = "<group>"; };
-		000000000DB0 /* SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
-		000000000DC0 /* SVProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD-dummy.m"; sourceTree = "<group>"; };
-		000000000E20 /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libnanopb.a; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		000000000EF0 /* nanopb.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = nanopb.xcconfig; sourceTree = "<group>"; };
-		000000000F00 /* nanopb-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "nanopb-prefix.pch"; sourceTree = "<group>"; };
-		000000000F10 /* nanopb-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "nanopb-dummy.m"; sourceTree = "<group>"; };
-		000000000F70 /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Example.a"; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		000000000FC0 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
-		000000000FD0 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
-		000000000FE0 /* Pods-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-frameworks.sh"; sourceTree = "<group>"; };
-		000000000FF0 /* Pods-Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-resources.sh"; sourceTree = "<group>"; };
-		000000001000 /* Pods-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		000000001010 /* Pods-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		000000001020 /* Pods-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-dummy.m"; sourceTree = "<group>"; };
-		000000001040 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
-		000000001060 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		0000000000C0 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0000000000D0 /* ALAudioFairy.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = ALAudioFairy.cpp; path = NESView/ALAudioFairy.cpp; sourceTree = "<group>"; };
+		0000000000E0 /* ALAudioFairy.hpp */ = {isa = PBXFileReference; includeInIndex = 1; name = ALAudioFairy.hpp; path = NESView/ALAudioFairy.hpp; sourceTree = "<group>"; };
+		0000000000F0 /* CGVideoFairy.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = CGVideoFairy.cpp; path = NESView/CGVideoFairy.cpp; sourceTree = "<group>"; };
+		000000000100 /* CGVideoFairy.hpp */ = {isa = PBXFileReference; includeInIndex = 1; name = CGVideoFairy.hpp; path = NESView/CGVideoFairy.hpp; sourceTree = "<group>"; };
+		000000000140 /* Audio.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Audio.cpp; sourceTree = "<group>"; };
+		000000000150 /* AudioChannel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AudioChannel.h; sourceTree = "<group>"; };
+		000000000160 /* Cartridge.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Cartridge.cpp; sourceTree = "<group>"; };
+		000000000180 /* EmulatorException.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = EmulatorException.cpp; sourceTree = "<group>"; };
+		000000000190 /* EmulatorException.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = EmulatorException.h; sourceTree = "<group>"; };
+		0000000001B0 /* AudioFairy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AudioFairy.h; sourceTree = "<group>"; };
+		0000000001C0 /* FairyConstantValues.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = FairyConstantValues.cpp; sourceTree = "<group>"; };
+		0000000001D0 /* GamepadFairy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GamepadFairy.h; sourceTree = "<group>"; };
+		0000000001E0 /* VideoFairy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoFairy.h; sourceTree = "<group>"; };
+		000000000200 /* NesFile.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = NesFile.cpp; sourceTree = "<group>"; };
+		000000000210 /* NesFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NesFile.h; sourceTree = "<group>"; };
+		000000000240 /* VRC4.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = VRC4.cpp; sourceTree = "<group>"; };
+		000000000250 /* VRC4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VRC4.h; sourceTree = "<group>"; };
+		000000000260 /* Mapper0.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper0.cpp; sourceTree = "<group>"; };
+		000000000270 /* Mapper0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper0.h; sourceTree = "<group>"; };
+		000000000280 /* Mapper1.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper1.cpp; sourceTree = "<group>"; };
+		000000000290 /* Mapper1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper1.h; sourceTree = "<group>"; };
+		0000000002A0 /* Mapper2.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper2.cpp; sourceTree = "<group>"; };
+		0000000002B0 /* Mapper2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper2.h; sourceTree = "<group>"; };
+		0000000002C0 /* Mapper21.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper21.cpp; sourceTree = "<group>"; };
+		0000000002D0 /* Mapper21.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper21.h; sourceTree = "<group>"; };
+		0000000002E0 /* Mapper23.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper23.cpp; sourceTree = "<group>"; };
+		0000000002F0 /* Mapper23.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper23.h; sourceTree = "<group>"; };
+		000000000300 /* Mapper25.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper25.cpp; sourceTree = "<group>"; };
+		000000000310 /* Mapper25.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper25.h; sourceTree = "<group>"; };
+		000000000320 /* Mapper3.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper3.cpp; sourceTree = "<group>"; };
+		000000000330 /* Mapper3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper3.h; sourceTree = "<group>"; };
+		000000000340 /* Mapper4.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Mapper4.cpp; sourceTree = "<group>"; };
+		000000000350 /* Mapper4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Mapper4.h; sourceTree = "<group>"; };
+		000000000360 /* Processor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Processor.cpp; sourceTree = "<group>"; };
+		000000000370 /* Video.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = Video.cpp; sourceTree = "<group>"; };
+		000000000380 /* VirtualMachine.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = VirtualMachine.cpp; sourceTree = "<group>"; };
+		000000000390 /* VirtualMachine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VirtualMachine.h; sourceTree = "<group>"; };
+		0000000003A0 /* miniz.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = miniz.h; path = NESView/miniz.h; sourceTree = "<group>"; };
+		0000000003B0 /* NESEmulator.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = NESEmulator.cpp; path = NESView/NESEmulator.cpp; sourceTree = "<group>"; };
+		0000000003C0 /* NESEmulator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESEmulator.h; path = NESView/NESEmulator.h; sourceTree = "<group>"; };
+		0000000003D0 /* NESKey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESKey.h; path = NESView/NESKey.h; sourceTree = "<group>"; };
+		0000000003E0 /* NESKey.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NESKey.m; path = NESView/NESKey.m; sourceTree = "<group>"; };
+		0000000003F0 /* NESLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESLayer.h; path = NESView/NESLayer.h; sourceTree = "<group>"; };
+		000000000400 /* NESLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NESLayer.m; path = NESView/NESLayer.m; sourceTree = "<group>"; };
+		000000000410 /* NESPlayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESPlayer.h; path = NESView/NESPlayer.h; sourceTree = "<group>"; };
+		000000000420 /* NESPlayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NESPlayer.m; path = NESView/NESPlayer.m; sourceTree = "<group>"; };
+		000000000430 /* NESView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NESView.h; path = NESView/NESView.h; sourceTree = "<group>"; };
+		000000000440 /* NESView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NESView.m; path = NESView/NESView.m; sourceTree = "<group>"; };
+		000000000450 /* VGamepadFairy.hpp */ = {isa = PBXFileReference; includeInIndex = 1; name = VGamepadFairy.hpp; path = NESView/VGamepadFairy.hpp; sourceTree = "<group>"; };
+		000000000460 /* OBShapedButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OBShapedButton.h; path = OBShapedButton/OBShapedButton.h; sourceTree = "<group>"; };
+		000000000470 /* OBShapedButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OBShapedButton.m; path = OBShapedButton/OBShapedButton.m; sourceTree = "<group>"; };
+		000000000480 /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+ColorAtPixel.h"; path = "UIImage+ColorAtPixel/UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
+		000000000490 /* UIImage+ColorAtPixel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ColorAtPixel.m"; path = "UIImage+ColorAtPixel/UIImage+ColorAtPixel.m"; sourceTree = "<group>"; };
+		0000000004B0 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		0000000004C0 /* NESView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NESView.modulemap; sourceTree = "<group>"; };
+		0000000004D0 /* NESView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = NESView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0000000004E0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		000000000530 /* libNESView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libNESView.a; path = libNESView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000000570 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		0000000008C0 /* NESView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NESView.xcconfig; sourceTree = "<group>"; };
+		0000000008D0 /* NESView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NESView-prefix.pch"; sourceTree = "<group>"; };
+		0000000008E0 /* NESView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NESView-dummy.m"; sourceTree = "<group>"; };
+		000000000940 /* libOBShapedButton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libOBShapedButton.a; path = libOBShapedButton.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0000000009E0 /* OBShapedButton.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OBShapedButton.xcconfig; sourceTree = "<group>"; };
+		0000000009F0 /* OBShapedButton-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OBShapedButton-prefix.pch"; sourceTree = "<group>"; };
+		000000000A00 /* OBShapedButton-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OBShapedButton-dummy.m"; sourceTree = "<group>"; };
+		000000000A60 /* libPods-MyNesGame.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-MyNesGame.a"; path = "libPods-MyNesGame.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000000AB0 /* Pods-MyNesGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MyNesGame.release.xcconfig"; sourceTree = "<group>"; };
+		000000000AC0 /* Pods-MyNesGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MyNesGame.debug.xcconfig"; sourceTree = "<group>"; };
+		000000000AD0 /* Pods-MyNesGame-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MyNesGame-frameworks.sh"; sourceTree = "<group>"; };
+		000000000AE0 /* Pods-MyNesGame-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MyNesGame-resources.sh"; sourceTree = "<group>"; };
+		000000000AF0 /* Pods-MyNesGame-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MyNesGame-acknowledgements.plist"; sourceTree = "<group>"; };
+		000000000B00 /* Pods-MyNesGame-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MyNesGame-acknowledgements.markdown"; sourceTree = "<group>"; };
+		000000000B10 /* Pods-MyNesGame-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MyNesGame-dummy.m"; sourceTree = "<group>"; };
+		000000000B30 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0000000007C0 /* Frameworks */ = {
+		000000000550 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0000000007F0 /* Foundation.framework in Frameworks */,
+				000000000580 /* Foundation.framework in Frameworks */,
+				000000000B40 /* OpenAL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0000000008F0 /* Frameworks */ = {
+		000000000960 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000000900 /* Foundation.framework in Frameworks */,
-				000000001050 /* OpenAL.framework in Frameworks */,
+				000000000970 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000000CE0 /* Frameworks */ = {
+		000000000A80 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000000CF0 /* Foundation.framework in Frameworks */,
-				000000001070 /* QuartzCore.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		000000000E40 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				000000000E50 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		000000000F90 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				000000000FA0 /* Foundation.framework in Frameworks */,
+				000000000A90 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +197,7 @@
 		000000000010 = {
 			isa = PBXGroup;
 			children = (
-				000000000130 /* Podfile */,
+				0000000000C0 /* Podfile */,
 				000000000090 /* Development Pods */,
 				000000000060 /* Frameworks */,
 				000000000080 /* Pods */,
@@ -290,11 +209,9 @@
 		000000000020 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0000000007A0 /* libGoogleToolboxForMac.a */,
-				000000000E20 /* libnanopb.a */,
-				0000000008D0 /* libNESView.a */,
-				000000000F70 /* libPods-Example.a */,
-				000000000CC0 /* libSVProgressHUD.a */,
+				000000000530 /* libNESView.a */,
+				000000000940 /* libOBShapedButton.a */,
+				000000000A60 /* libPods-MyNesGame.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -302,7 +219,7 @@
 		000000000060 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0000000007D0 /* iOS */,
+				000000000560 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -310,7 +227,7 @@
 		000000000070 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				000000000FB0 /* Pods-Example */,
+				000000000AA0 /* Pods-MyNesGame */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
@@ -318,14 +235,7 @@
 		000000000080 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0000000000A0 /* Firebase */,
-				0000000000B0 /* FirebaseAnalytics */,
-				0000000000C0 /* FirebaseCore */,
-				0000000000D0 /* FirebaseInstanceID */,
-				0000000000E0 /* Google-Mobile-Ads-SDK */,
-				0000000000F0 /* GoogleToolboxForMac */,
-				000000000120 /* nanopb */,
-				000000000110 /* SVProgressHUD */,
+				0000000000B0 /* OBShapedButton */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -333,488 +243,266 @@
 		000000000090 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				000000000100 /* NESView */,
+				0000000000A0 /* NESView */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		0000000000A0 /* Firebase */ = {
+		0000000000A0 /* NESView */ = {
 			isa = PBXGroup;
 			children = (
-				000000000140 /* Core */,
-			);
-			name = Firebase;
-			path = Firebase;
-			sourceTree = "<group>";
-		};
-		0000000000B0 /* FirebaseAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				000000000650 /* Frameworks */,
-			);
-			name = FirebaseAnalytics;
-			path = FirebaseAnalytics;
-			sourceTree = "<group>";
-		};
-		0000000000C0 /* FirebaseCore */ = {
-			isa = PBXGroup;
-			children = (
-				000000000690 /* Frameworks */,
-			);
-			name = FirebaseCore;
-			path = FirebaseCore;
-			sourceTree = "<group>";
-		};
-		0000000000D0 /* FirebaseInstanceID */ = {
-			isa = PBXGroup;
-			children = (
-				0000000006B0 /* Frameworks */,
-			);
-			name = FirebaseInstanceID;
-			path = FirebaseInstanceID;
-			sourceTree = "<group>";
-		};
-		0000000000E0 /* Google-Mobile-Ads-SDK */ = {
-			isa = PBXGroup;
-			children = (
-				0000000006D0 /* Frameworks */,
-			);
-			name = "Google-Mobile-Ads-SDK";
-			path = "Google-Mobile-Ads-SDK";
-			sourceTree = "<group>";
-		};
-		0000000000F0 /* GoogleToolboxForMac */ = {
-			isa = PBXGroup;
-			children = (
-				000000000160 /* Defines */,
-				000000000180 /* NSData+zlib */,
-				000000000840 /* Support Files */,
-			);
-			name = GoogleToolboxForMac;
-			path = GoogleToolboxForMac;
-			sourceTree = "<group>";
-		};
-		000000000100 /* NESView */ = {
-			isa = PBXGroup;
-			children = (
-				0000000001B0 /* ALAudioFairy.cpp */,
-				0000000001C0 /* ALAudioFairy.hpp */,
-				0000000001D0 /* CGVideoFairy.cpp */,
-				0000000001E0 /* CGVideoFairy.hpp */,
-				000000000480 /* miniz.h */,
-				000000000490 /* NESEmulator.cpp */,
-				0000000004A0 /* NESEmulator.h */,
-				0000000004B0 /* NESKey.h */,
-				0000000004C0 /* NESKey.m */,
-				0000000004D0 /* NESLayer.h */,
-				0000000004E0 /* NESLayer.m */,
-				0000000004F0 /* NESPlayer.h */,
-				000000000500 /* NESPlayer.m */,
-				000000000510 /* NESView.h */,
-				000000000520 /* NESView.m */,
-				000000000530 /* VGamepadFairy.hpp */,
-				0000000001F0 /* Cycloa */,
-				000000000710 /* Pod */,
-				000000000C30 /* Support Files */,
+				0000000000D0 /* ALAudioFairy.cpp */,
+				0000000000E0 /* ALAudioFairy.hpp */,
+				0000000000F0 /* CGVideoFairy.cpp */,
+				000000000100 /* CGVideoFairy.hpp */,
+				0000000003A0 /* miniz.h */,
+				0000000003B0 /* NESEmulator.cpp */,
+				0000000003C0 /* NESEmulator.h */,
+				0000000003D0 /* NESKey.h */,
+				0000000003E0 /* NESKey.m */,
+				0000000003F0 /* NESLayer.h */,
+				000000000400 /* NESLayer.m */,
+				000000000410 /* NESPlayer.h */,
+				000000000420 /* NESPlayer.m */,
+				000000000430 /* NESView.h */,
+				000000000440 /* NESView.m */,
+				000000000450 /* VGamepadFairy.hpp */,
+				000000000110 /* Cycloa */,
+				0000000004A0 /* Pod */,
+				0000000008B0 /* Support Files */,
 			);
 			name = NESView;
 			path = ../..;
 			sourceTree = "<group>";
 		};
-		000000000110 /* SVProgressHUD */ = {
+		0000000000B0 /* OBShapedButton */ = {
 			isa = PBXGroup;
 			children = (
-				000000000540 /* SVIndefiniteAnimatedView.h */,
-				000000000550 /* SVIndefiniteAnimatedView.m */,
-				000000000560 /* SVProgressAnimatedView.h */,
-				000000000570 /* SVProgressAnimatedView.m */,
-				000000000580 /* SVProgressHUD.h */,
-				000000000590 /* SVProgressHUD.m */,
-				0000000005A0 /* SVRadialGradientLayer.h */,
-				0000000005B0 /* SVRadialGradientLayer.m */,
-				0000000006F0 /* Resources */,
-				000000000D90 /* Support Files */,
+				000000000460 /* OBShapedButton.h */,
+				000000000470 /* OBShapedButton.m */,
+				000000000480 /* UIImage+ColorAtPixel.h */,
+				000000000490 /* UIImage+ColorAtPixel.m */,
+				0000000009D0 /* Support Files */,
 			);
-			name = SVProgressHUD;
-			path = SVProgressHUD;
+			name = OBShapedButton;
+			path = OBShapedButton;
 			sourceTree = "<group>";
 		};
-		000000000120 /* nanopb */ = {
+		000000000110 /* Cycloa */ = {
 			isa = PBXGroup;
 			children = (
-				0000000005C0 /* pb.h */,
-				0000000005D0 /* pb_common.c */,
-				0000000005E0 /* pb_common.h */,
-				0000000005F0 /* pb_decode.c */,
-				000000000600 /* pb_decode.h */,
-				000000000610 /* pb_encode.c */,
-				000000000620 /* pb_encode.h */,
-				000000000630 /* decode */,
-				000000000640 /* encode */,
-				000000000EE0 /* Support Files */,
-			);
-			name = nanopb;
-			path = nanopb;
-			sourceTree = "<group>";
-		};
-		000000000140 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				000000000150 /* Firebase.h */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		000000000160 /* Defines */ = {
-			isa = PBXGroup;
-			children = (
-				000000000170 /* GTMDefines.h */,
-			);
-			name = Defines;
-			sourceTree = "<group>";
-		};
-		000000000180 /* NSData+zlib */ = {
-			isa = PBXGroup;
-			children = (
-				000000000190 /* GTMNSData+zlib.h */,
-				0000000001A0 /* GTMNSData+zlib.m */,
-			);
-			name = "NSData+zlib";
-			sourceTree = "<group>";
-		};
-		0000000001F0 /* Cycloa */ = {
-			isa = PBXGroup;
-			children = (
-				000000000200 /* src */,
+				000000000120 /* src */,
 			);
 			name = Cycloa;
 			path = NESView/Cycloa;
 			sourceTree = "<group>";
 		};
-		000000000200 /* src */ = {
+		000000000120 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				000000000210 /* emulator */,
+				000000000130 /* emulator */,
 			);
 			name = src;
 			path = src;
 			sourceTree = "<group>";
 		};
-		000000000210 /* emulator */ = {
+		000000000130 /* emulator */ = {
 			isa = PBXGroup;
 			children = (
-				000000000220 /* Audio.cpp */,
-				000000000230 /* AudioChannel.h */,
-				000000000240 /* Cartridge.cpp */,
-				000000000440 /* Processor.cpp */,
-				000000000450 /* Video.cpp */,
-				000000000460 /* VirtualMachine.cpp */,
-				000000000470 /* VirtualMachine.h */,
-				000000000250 /* exception */,
-				000000000280 /* fairy */,
-				0000000002D0 /* file */,
-				000000000300 /* mapper */,
+				000000000140 /* Audio.cpp */,
+				000000000150 /* AudioChannel.h */,
+				000000000160 /* Cartridge.cpp */,
+				000000000360 /* Processor.cpp */,
+				000000000370 /* Video.cpp */,
+				000000000380 /* VirtualMachine.cpp */,
+				000000000390 /* VirtualMachine.h */,
+				000000000170 /* exception */,
+				0000000001A0 /* fairy */,
+				0000000001F0 /* file */,
+				000000000220 /* mapper */,
 			);
 			name = emulator;
 			path = emulator;
 			sourceTree = "<group>";
 		};
-		000000000250 /* exception */ = {
+		000000000170 /* exception */ = {
 			isa = PBXGroup;
 			children = (
-				000000000260 /* EmulatorException.cpp */,
-				000000000270 /* EmulatorException.h */,
+				000000000180 /* EmulatorException.cpp */,
+				000000000190 /* EmulatorException.h */,
 			);
 			name = exception;
 			path = exception;
 			sourceTree = "<group>";
 		};
-		000000000280 /* fairy */ = {
+		0000000001A0 /* fairy */ = {
 			isa = PBXGroup;
 			children = (
-				000000000290 /* AudioFairy.h */,
-				0000000002A0 /* FairyConstantValues.cpp */,
-				0000000002B0 /* GamepadFairy.h */,
-				0000000002C0 /* VideoFairy.h */,
+				0000000001B0 /* AudioFairy.h */,
+				0000000001C0 /* FairyConstantValues.cpp */,
+				0000000001D0 /* GamepadFairy.h */,
+				0000000001E0 /* VideoFairy.h */,
 			);
 			name = fairy;
 			path = fairy;
 			sourceTree = "<group>";
 		};
-		0000000002D0 /* file */ = {
+		0000000001F0 /* file */ = {
 			isa = PBXGroup;
 			children = (
-				0000000002E0 /* NesFile.cpp */,
-				0000000002F0 /* NesFile.h */,
+				000000000200 /* NesFile.cpp */,
+				000000000210 /* NesFile.h */,
 			);
 			name = file;
 			path = file;
 			sourceTree = "<group>";
 		};
-		000000000300 /* mapper */ = {
+		000000000220 /* mapper */ = {
 			isa = PBXGroup;
 			children = (
-				000000000340 /* Mapper0.cpp */,
-				000000000350 /* Mapper0.h */,
-				000000000360 /* Mapper1.cpp */,
-				000000000370 /* Mapper1.h */,
-				000000000380 /* Mapper2.cpp */,
-				000000000390 /* Mapper2.h */,
-				0000000003A0 /* Mapper21.cpp */,
-				0000000003B0 /* Mapper21.h */,
-				0000000003C0 /* Mapper23.cpp */,
-				0000000003D0 /* Mapper23.h */,
-				0000000003E0 /* Mapper25.cpp */,
-				0000000003F0 /* Mapper25.h */,
-				000000000400 /* Mapper3.cpp */,
-				000000000410 /* Mapper3.h */,
-				000000000420 /* Mapper4.cpp */,
-				000000000430 /* Mapper4.h */,
-				000000000310 /* board */,
+				000000000260 /* Mapper0.cpp */,
+				000000000270 /* Mapper0.h */,
+				000000000280 /* Mapper1.cpp */,
+				000000000290 /* Mapper1.h */,
+				0000000002A0 /* Mapper2.cpp */,
+				0000000002B0 /* Mapper2.h */,
+				0000000002C0 /* Mapper21.cpp */,
+				0000000002D0 /* Mapper21.h */,
+				0000000002E0 /* Mapper23.cpp */,
+				0000000002F0 /* Mapper23.h */,
+				000000000300 /* Mapper25.cpp */,
+				000000000310 /* Mapper25.h */,
+				000000000320 /* Mapper3.cpp */,
+				000000000330 /* Mapper3.h */,
+				000000000340 /* Mapper4.cpp */,
+				000000000350 /* Mapper4.h */,
+				000000000230 /* board */,
 			);
 			name = mapper;
 			path = mapper;
 			sourceTree = "<group>";
 		};
-		000000000310 /* board */ = {
+		000000000230 /* board */ = {
 			isa = PBXGroup;
 			children = (
-				000000000320 /* VRC4.cpp */,
-				000000000330 /* VRC4.h */,
+				000000000240 /* VRC4.cpp */,
+				000000000250 /* VRC4.h */,
 			);
 			name = board;
 			path = board;
 			sourceTree = "<group>";
 		};
-		000000000630 /* decode */ = {
+		0000000004A0 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			name = decode;
-			sourceTree = "<group>";
-		};
-		000000000640 /* encode */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = encode;
-			sourceTree = "<group>";
-		};
-		000000000650 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				000000000660 /* FirebaseAnalytics.framework */,
-				000000000670 /* FirebaseCoreDiagnostics.framework */,
-				000000000680 /* FirebaseNanoPB.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		000000000690 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0000000006A0 /* FirebaseCore.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0000000006B0 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0000000006C0 /* FirebaseInstanceID.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0000000006D0 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0000000006E0 /* GoogleMobileAds.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0000000006F0 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				000000000700 /* SVProgressHUD.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		000000000710 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				000000000720 /* LICENSE.txt */,
-				000000000730 /* NESView.modulemap */,
-				000000000740 /* NESView.podspec */,
-				000000000750 /* README.md */,
+				0000000004B0 /* LICENSE.txt */,
+				0000000004C0 /* NESView.modulemap */,
+				0000000004D0 /* NESView.podspec */,
+				0000000004E0 /* README.md */,
 			);
 			name = Pod;
 			sourceTree = "<group>";
 		};
-		0000000007D0 /* iOS */ = {
+		000000000560 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				0000000007E0 /* Foundation.framework */,
-				000000001040 /* OpenAL.framework */,
-				000000001060 /* QuartzCore.framework */,
+				000000000570 /* Foundation.framework */,
+				000000000B30 /* OpenAL.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		000000000840 /* Support Files */ = {
+		0000000008B0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				000000000850 /* GoogleToolboxForMac.xcconfig */,
-				000000000870 /* GoogleToolboxForMac-dummy.m */,
-				000000000860 /* GoogleToolboxForMac-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/GoogleToolboxForMac";
-			sourceTree = "<group>";
-		};
-		000000000C30 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				000000000C40 /* NESView.xcconfig */,
-				000000000C60 /* NESView-dummy.m */,
-				000000000C50 /* NESView-prefix.pch */,
+				0000000008C0 /* NESView.xcconfig */,
+				0000000008E0 /* NESView-dummy.m */,
+				0000000008D0 /* NESView-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/NESView";
 			sourceTree = "<group>";
 		};
-		000000000D90 /* Support Files */ = {
+		0000000009D0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				000000000DA0 /* SVProgressHUD.xcconfig */,
-				000000000DC0 /* SVProgressHUD-dummy.m */,
-				000000000DB0 /* SVProgressHUD-prefix.pch */,
+				0000000009E0 /* OBShapedButton.xcconfig */,
+				000000000A00 /* OBShapedButton-dummy.m */,
+				0000000009F0 /* OBShapedButton-prefix.pch */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/SVProgressHUD";
+			path = "../Target Support Files/OBShapedButton";
 			sourceTree = "<group>";
 		};
-		000000000EE0 /* Support Files */ = {
+		000000000AA0 /* Pods-MyNesGame */ = {
 			isa = PBXGroup;
 			children = (
-				000000000EF0 /* nanopb.xcconfig */,
-				000000000F10 /* nanopb-dummy.m */,
-				000000000F00 /* nanopb-prefix.pch */,
+				000000000B00 /* Pods-MyNesGame-acknowledgements.markdown */,
+				000000000AF0 /* Pods-MyNesGame-acknowledgements.plist */,
+				000000000B10 /* Pods-MyNesGame-dummy.m */,
+				000000000AD0 /* Pods-MyNesGame-frameworks.sh */,
+				000000000AE0 /* Pods-MyNesGame-resources.sh */,
+				000000000AC0 /* Pods-MyNesGame.debug.xcconfig */,
+				000000000AB0 /* Pods-MyNesGame.release.xcconfig */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/nanopb";
-			sourceTree = "<group>";
-		};
-		000000000FB0 /* Pods-Example */ = {
-			isa = PBXGroup;
-			children = (
-				000000001010 /* Pods-Example-acknowledgements.markdown */,
-				000000001000 /* Pods-Example-acknowledgements.plist */,
-				000000001020 /* Pods-Example-dummy.m */,
-				000000000FE0 /* Pods-Example-frameworks.sh */,
-				000000000FF0 /* Pods-Example-resources.sh */,
-				000000000FD0 /* Pods-Example.debug.xcconfig */,
-				000000000FC0 /* Pods-Example.release.xcconfig */,
-			);
-			name = "Pods-Example";
-			path = "Target Support Files/Pods-Example";
+			name = "Pods-MyNesGame";
+			path = "Target Support Files/Pods-MyNesGame";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		000000000800 /* Headers */ = {
+		000000000710 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000000810 /* GTMDefines.h in Headers */,
-				000000000830 /* GTMNSData+zlib.h in Headers */,
+				000000000720 /* ALAudioFairy.hpp in Headers */,
+				000000000740 /* AudioChannel.h in Headers */,
+				000000000760 /* AudioFairy.h in Headers */,
+				000000000730 /* CGVideoFairy.hpp in Headers */,
+				000000000750 /* EmulatorException.h in Headers */,
+				000000000770 /* GamepadFairy.h in Headers */,
+				0000000007B0 /* Mapper0.h in Headers */,
+				0000000007C0 /* Mapper1.h in Headers */,
+				0000000007D0 /* Mapper2.h in Headers */,
+				0000000007E0 /* Mapper21.h in Headers */,
+				0000000007F0 /* Mapper23.h in Headers */,
+				000000000800 /* Mapper25.h in Headers */,
+				000000000810 /* Mapper3.h in Headers */,
+				000000000820 /* Mapper4.h in Headers */,
+				000000000840 /* miniz.h in Headers */,
+				000000000850 /* NESEmulator.h in Headers */,
+				000000000790 /* NesFile.h in Headers */,
+				000000000860 /* NESKey.h in Headers */,
+				000000000870 /* NESLayer.h in Headers */,
+				000000000880 /* NESPlayer.h in Headers */,
+				000000000890 /* NESView.h in Headers */,
+				0000000008A0 /* VGamepadFairy.hpp in Headers */,
+				000000000780 /* VideoFairy.h in Headers */,
+				000000000830 /* VirtualMachine.h in Headers */,
+				0000000007A0 /* VRC4.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000000A90 /* Headers */ = {
+		0000000009A0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000000AA0 /* ALAudioFairy.hpp in Headers */,
-				000000000AC0 /* AudioChannel.h in Headers */,
-				000000000AE0 /* AudioFairy.h in Headers */,
-				000000000AB0 /* CGVideoFairy.hpp in Headers */,
-				000000000AD0 /* EmulatorException.h in Headers */,
-				000000000AF0 /* GamepadFairy.h in Headers */,
-				000000000B30 /* Mapper0.h in Headers */,
-				000000000B40 /* Mapper1.h in Headers */,
-				000000000B50 /* Mapper2.h in Headers */,
-				000000000B60 /* Mapper21.h in Headers */,
-				000000000B70 /* Mapper23.h in Headers */,
-				000000000B80 /* Mapper25.h in Headers */,
-				000000000B90 /* Mapper3.h in Headers */,
-				000000000BA0 /* Mapper4.h in Headers */,
-				000000000BC0 /* miniz.h in Headers */,
-				000000000BD0 /* NESEmulator.h in Headers */,
-				000000000B10 /* NesFile.h in Headers */,
-				000000000BE0 /* NESKey.h in Headers */,
-				000000000BF0 /* NESLayer.h in Headers */,
-				000000000C00 /* NESPlayer.h in Headers */,
-				000000000C10 /* NESView.h in Headers */,
-				000000000C20 /* VGamepadFairy.hpp in Headers */,
-				000000000B00 /* VideoFairy.h in Headers */,
-				000000000BB0 /* VirtualMachine.h in Headers */,
-				000000000B20 /* VRC4.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		000000000D40 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				000000000D50 /* SVIndefiniteAnimatedView.h in Headers */,
-				000000000D60 /* SVProgressAnimatedView.h in Headers */,
-				000000000D70 /* SVProgressHUD.h in Headers */,
-				000000000D80 /* SVRadialGradientLayer.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		000000000E90 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				000000000EA0 /* pb.h in Headers */,
-				000000000EB0 /* pb_common.h in Headers */,
-				000000000EC0 /* pb_decode.h in Headers */,
-				000000000ED0 /* pb_encode.h in Headers */,
+				0000000009B0 /* OBShapedButton.h in Headers */,
+				0000000009C0 /* UIImage+ColorAtPixel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		000000000760 /* GoogleToolboxForMac */ = {
+		0000000004F0 /* NESView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 000000000770 /* Build configuration list for PBXNativeTarget "GoogleToolboxForMac" */;
+			buildConfigurationList = 000000000500 /* Build configuration list for PBXNativeTarget "NESView" */;
 			buildPhases = (
-				0000000007B0 /* Sources */,
-				0000000007C0 /* Frameworks */,
-				000000000800 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = GoogleToolboxForMac;
-			productName = GoogleToolboxForMac;
-			productReference = 0000000007A0 /* libGoogleToolboxForMac.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		000000000890 /* NESView */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0000000008A0 /* Build configuration list for PBXNativeTarget "NESView" */;
-			buildPhases = (
-				0000000008E0 /* Sources */,
-				0000000008F0 /* Frameworks */,
-				000000000A90 /* Headers */,
+				000000000540 /* Sources */,
+				000000000550 /* Frameworks */,
+				000000000710 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -822,61 +510,42 @@
 			);
 			name = NESView;
 			productName = NESView;
-			productReference = 0000000008D0 /* libNESView.a */;
+			productReference = 000000000530 /* libNESView.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		000000000C80 /* SVProgressHUD */ = {
+		000000000900 /* OBShapedButton */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 000000000C90 /* Build configuration list for PBXNativeTarget "SVProgressHUD" */;
+			buildConfigurationList = 000000000910 /* Build configuration list for PBXNativeTarget "OBShapedButton" */;
 			buildPhases = (
-				000000000CD0 /* Sources */,
-				000000000CE0 /* Frameworks */,
-				000000000D40 /* Headers */,
+				000000000950 /* Sources */,
+				000000000960 /* Frameworks */,
+				0000000009A0 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = SVProgressHUD;
-			productName = SVProgressHUD;
-			productReference = 000000000CC0 /* libSVProgressHUD.a */;
+			name = OBShapedButton;
+			productName = OBShapedButton;
+			productReference = 000000000940 /* libOBShapedButton.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		000000000DE0 /* nanopb */ = {
+		000000000A20 /* Pods-MyNesGame */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 000000000DF0 /* Build configuration list for PBXNativeTarget "nanopb" */;
+			buildConfigurationList = 000000000A30 /* Build configuration list for PBXNativeTarget "Pods-MyNesGame" */;
 			buildPhases = (
-				000000000E30 /* Sources */,
-				000000000E40 /* Frameworks */,
-				000000000E90 /* Headers */,
+				000000000A70 /* Sources */,
+				000000000A80 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				000000000B60 /* PBXTargetDependency */,
+				000000000B80 /* PBXTargetDependency */,
 			);
-			name = nanopb;
-			productName = nanopb;
-			productReference = 000000000E20 /* libnanopb.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		000000000F30 /* Pods-Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 000000000F40 /* Build configuration list for PBXNativeTarget "Pods-Example" */;
-			buildPhases = (
-				000000000F80 /* Sources */,
-				000000000F90 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				000000001090 /* PBXTargetDependency */,
-				0000000010B0 /* PBXTargetDependency */,
-				0000000010D0 /* PBXTargetDependency */,
-				0000000010F0 /* PBXTargetDependency */,
-			);
-			name = "Pods-Example";
-			productName = "Pods-Example";
-			productReference = 000000000F70 /* libPods-Example.a */;
+			name = "Pods-MyNesGame";
+			productName = "Pods-MyNesGame";
+			productReference = 000000000A60 /* libPods-MyNesGame.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -900,114 +569,78 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				000000000760 /* GoogleToolboxForMac */,
-				000000000DE0 /* nanopb */,
-				000000000890 /* NESView */,
-				000000000F30 /* Pods-Example */,
-				000000000C80 /* SVProgressHUD */,
+				0000000004F0 /* NESView */,
+				000000000900 /* OBShapedButton */,
+				000000000A20 /* Pods-MyNesGame */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0000000007B0 /* Sources */ = {
+		000000000540 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000000880 /* GoogleToolboxForMac-dummy.m in Sources */,
-				000000000820 /* GTMNSData+zlib.m in Sources */,
+				000000000590 /* ALAudioFairy.cpp in Sources */,
+				0000000005B0 /* Audio.cpp in Sources */,
+				0000000005C0 /* Cartridge.cpp in Sources */,
+				0000000005A0 /* CGVideoFairy.cpp in Sources */,
+				0000000005D0 /* EmulatorException.cpp in Sources */,
+				0000000005E0 /* FairyConstantValues.cpp in Sources */,
+				000000000610 /* Mapper0.cpp in Sources */,
+				000000000620 /* Mapper1.cpp in Sources */,
+				000000000630 /* Mapper2.cpp in Sources */,
+				000000000640 /* Mapper21.cpp in Sources */,
+				000000000650 /* Mapper23.cpp in Sources */,
+				000000000660 /* Mapper25.cpp in Sources */,
+				000000000670 /* Mapper3.cpp in Sources */,
+				000000000680 /* Mapper4.cpp in Sources */,
+				0000000006C0 /* NESEmulator.cpp in Sources */,
+				0000000005F0 /* NesFile.cpp in Sources */,
+				0000000006D0 /* NESKey.m in Sources */,
+				0000000006E0 /* NESLayer.m in Sources */,
+				0000000006F0 /* NESPlayer.m in Sources */,
+				0000000008F0 /* NESView-dummy.m in Sources */,
+				000000000700 /* NESView.m in Sources */,
+				000000000690 /* Processor.cpp in Sources */,
+				0000000006A0 /* Video.cpp in Sources */,
+				0000000006B0 /* VirtualMachine.cpp in Sources */,
+				000000000600 /* VRC4.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0000000008E0 /* Sources */ = {
+		000000000950 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000000910 /* ALAudioFairy.cpp in Sources */,
-				000000000930 /* Audio.cpp in Sources */,
-				000000000940 /* Cartridge.cpp in Sources */,
-				000000000920 /* CGVideoFairy.cpp in Sources */,
-				000000000950 /* EmulatorException.cpp in Sources */,
-				000000000960 /* FairyConstantValues.cpp in Sources */,
-				000000000990 /* Mapper0.cpp in Sources */,
-				0000000009A0 /* Mapper1.cpp in Sources */,
-				0000000009B0 /* Mapper2.cpp in Sources */,
-				0000000009C0 /* Mapper21.cpp in Sources */,
-				0000000009D0 /* Mapper23.cpp in Sources */,
-				0000000009E0 /* Mapper25.cpp in Sources */,
-				0000000009F0 /* Mapper3.cpp in Sources */,
-				000000000A00 /* Mapper4.cpp in Sources */,
-				000000000A40 /* NESEmulator.cpp in Sources */,
-				000000000970 /* NesFile.cpp in Sources */,
-				000000000A50 /* NESKey.m in Sources */,
-				000000000A60 /* NESLayer.m in Sources */,
-				000000000A70 /* NESPlayer.m in Sources */,
-				000000000C70 /* NESView-dummy.m in Sources */,
-				000000000A80 /* NESView.m in Sources */,
-				000000000A10 /* Processor.cpp in Sources */,
-				000000000A20 /* Video.cpp in Sources */,
-				000000000A30 /* VirtualMachine.cpp in Sources */,
-				000000000980 /* VRC4.cpp in Sources */,
+				000000000A10 /* OBShapedButton-dummy.m in Sources */,
+				000000000980 /* OBShapedButton.m in Sources */,
+				000000000990 /* UIImage+ColorAtPixel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000000CD0 /* Sources */ = {
+		000000000A70 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000000D00 /* SVIndefiniteAnimatedView.m in Sources */,
-				000000000D10 /* SVProgressAnimatedView.m in Sources */,
-				000000000DD0 /* SVProgressHUD-dummy.m in Sources */,
-				000000000D20 /* SVProgressHUD.m in Sources */,
-				000000000D30 /* SVRadialGradientLayer.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		000000000E30 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				000000000F20 /* nanopb-dummy.m in Sources */,
-				000000000E60 /* pb_common.c in Sources */,
-				000000000E70 /* pb_decode.c in Sources */,
-				000000000E80 /* pb_encode.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		000000000F80 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				000000001030 /* Pods-Example-dummy.m in Sources */,
+				000000000B20 /* Pods-MyNesGame-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		000000001090 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GoogleToolboxForMac;
-			target = 000000000760 /* GoogleToolboxForMac */;
-			targetProxy = 000000001080 /* PBXContainerItemProxy */;
-		};
-		0000000010B0 /* PBXTargetDependency */ = {
+		000000000B60 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = NESView;
-			target = 000000000890 /* NESView */;
-			targetProxy = 0000000010A0 /* PBXContainerItemProxy */;
+			target = 0000000004F0 /* NESView */;
+			targetProxy = 000000000B50 /* PBXContainerItemProxy */;
 		};
-		0000000010D0 /* PBXTargetDependency */ = {
+		000000000B80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SVProgressHUD;
-			target = 000000000C80 /* SVProgressHUD */;
-			targetProxy = 0000000010C0 /* PBXContainerItemProxy */;
-		};
-		0000000010F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = nanopb;
-			target = 000000000DE0 /* nanopb */;
-			targetProxy = 0000000010E0 /* PBXContainerItemProxy */;
+			name = OBShapedButton;
+			target = 000000000900 /* OBShapedButton */;
+			targetProxy = 000000000B70 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1133,56 +766,9 @@
 			};
 			name = Release;
 		};
-		000000000780 /* Release */ = {
+		000000000510 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000850 /* GoogleToolboxForMac.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = GoogleToolboxForMac;
-				PRODUCT_NAME = GoogleToolboxForMac;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		000000000790 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000850 /* GoogleToolboxForMac.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = GoogleToolboxForMac;
-				PRODUCT_NAME = GoogleToolboxForMac;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		0000000008B0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000C40 /* NESView.xcconfig */;
+			baseConfigurationReference = 0000000008C0 /* NESView.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1205,9 +791,9 @@
 			};
 			name = Release;
 		};
-		0000000008C0 /* Debug */ = {
+		000000000520 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000C40 /* NESView.xcconfig */;
+			baseConfigurationReference = 0000000008C0 /* NESView.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1229,21 +815,22 @@
 			};
 			name = Debug;
 		};
-		000000000CA0 /* Release */ = {
+		000000000920 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000DA0 /* SVProgressHUD.xcconfig */;
+			baseConfigurationReference = 0000000009E0 /* OBShapedButton.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/SVProgressHUD/SVProgressHUD-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				GCC_PREFIX_HEADER = "Target Support Files/OBShapedButton/OBShapedButton-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = SVProgressHUD;
-				PRODUCT_NAME = SVProgressHUD;
+				PRODUCT_MODULE_NAME = OBShapedButton;
+				PRODUCT_NAME = OBShapedButton;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1253,21 +840,22 @@
 			};
 			name = Release;
 		};
-		000000000CB0 /* Debug */ = {
+		000000000930 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000DA0 /* SVProgressHUD.xcconfig */;
+			baseConfigurationReference = 0000000009E0 /* OBShapedButton.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/SVProgressHUD/SVProgressHUD-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				GCC_PREFIX_HEADER = "Target Support Files/OBShapedButton/OBShapedButton-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = SVProgressHUD;
-				PRODUCT_NAME = SVProgressHUD;
+				PRODUCT_MODULE_NAME = OBShapedButton;
+				PRODUCT_NAME = OBShapedButton;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1276,58 +864,9 @@
 			};
 			name = Debug;
 		};
-		000000000E00 /* Release */ = {
+		000000000A40 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000EF0 /* nanopb.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/nanopb/nanopb-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = nanopb;
-				PRODUCT_NAME = nanopb;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		000000000E10 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000EF0 /* nanopb.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/nanopb/nanopb-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = nanopb;
-				PRODUCT_NAME = nanopb;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		000000000F50 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000FC0 /* Pods-Example.release.xcconfig */;
+			baseConfigurationReference = 000000000AB0 /* Pods-MyNesGame.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1348,9 +887,9 @@
 			};
 			name = Release;
 		};
-		000000000F60 /* Debug */ = {
+		000000000A50 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000000FD0 /* Pods-Example.debug.xcconfig */;
+			baseConfigurationReference = 000000000AC0 /* Pods-MyNesGame.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1382,47 +921,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		000000000770 /* Build configuration list for PBXNativeTarget "GoogleToolboxForMac" */ = {
+		000000000500 /* Build configuration list for PBXNativeTarget "NESView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				000000000790 /* Debug */,
-				000000000780 /* Release */,
+				000000000520 /* Debug */,
+				000000000510 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0000000008A0 /* Build configuration list for PBXNativeTarget "NESView" */ = {
+		000000000910 /* Build configuration list for PBXNativeTarget "OBShapedButton" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0000000008C0 /* Debug */,
-				0000000008B0 /* Release */,
+				000000000930 /* Debug */,
+				000000000920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		000000000C90 /* Build configuration list for PBXNativeTarget "SVProgressHUD" */ = {
+		000000000A30 /* Build configuration list for PBXNativeTarget "Pods-MyNesGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				000000000CB0 /* Debug */,
-				000000000CA0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		000000000DF0 /* Build configuration list for PBXNativeTarget "nanopb" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				000000000E10 /* Debug */,
-				000000000E00 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		000000000F40 /* Build configuration list for PBXNativeTarget "Pods-Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				000000000F60 /* Debug */,
-				000000000F50 /* Release */,
+				000000000A50 /* Debug */,
+				000000000A40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0000000004F0"
-               BlueprintName = "NESView"
+               BlueprintIdentifier = "000000000900"
+               BlueprintName = "OBShapedButton"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libNESView.a">
+               BuildableName = "libOBShapedButton.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

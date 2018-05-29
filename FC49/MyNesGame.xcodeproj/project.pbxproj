@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BE1B0DD3690AD20487E6DD7 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267745808609369F739754F7 /* libPods-Example.a */; };
 		74A429F0204A8E3C00B06B4B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A429EF204A8E3C00B06B4B /* AppDelegate.m */; };
 		74A429F3204A8E3C00B06B4B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A429F2204A8E3C00B06B4B /* ViewController.m */; };
 		74A429F6204A8E3C00B06B4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74A429F4204A8E3C00B06B4B /* Main.storyboard */; };
@@ -23,12 +22,18 @@
 		BF07F174208AF797005A2D7D /* bg_sel_qiandao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF07F173208AF797005A2D7D /* bg_sel_qiandao@3x.png */; };
 		BF07F176208AF905005A2D7D /* icon_guanbi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF07F175208AF905005A2D7D /* icon_guanbi@3x.png */; };
 		BF07F185208B348E005A2D7D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF07F184208B348E005A2D7D /* GameKit.framework */; };
-		BF1FEBA720A2050F00BFBF77 /* example.nes in Resources */ = {isa = PBXBuildFile; fileRef = BF1FEBA620A2050F00BFBF77 /* example.nes */; };
-		BF42B5CF209226BB0072EF18 /* NextViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF42B5CE209226BB0072EF18 /* NextViewController.storyboard */; };
+		BF27854720ADDA4F0040B924 /* libNESView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF27854620ADDA4F0040B924 /* libNESView.a */; };
+		BF27854920ADDA4F0040B924 /* libOBShapedButton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF27854820ADDA4F0040B924 /* libOBShapedButton.a */; };
+		BF3AF70A20A8944600D69FC5 /* NextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3AF70720A8944500D69FC5 /* NextViewController.m */; };
+		BF3AF70B20A8944600D69FC5 /* NextViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF3AF70920A8944500D69FC5 /* NextViewController.storyboard */; };
 		BF4C3E362087824C00EF27DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF4C3E352087824C00EF27DF /* GoogleService-Info.plist */; };
-		BF5DEB552084F9B500983EDA /* roms in Resources */ = {isa = PBXBuildFile; fileRef = BF5DEB542084F9B500983EDA /* roms */; };
-		BF74F2E52087951E000CCBA7 /* Hall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF74F2E42087951E000CCBA7 /* Hall.storyboard */; };
+		BF928E0D20A4319A00D3E87D /* gameChoiceRow.png in Resources */ = {isa = PBXBuildFile; fileRef = BF928E0C20A4319A00D3E87D /* gameChoiceRow.png */; };
+		BF928E0F20A4374100D3E87D /* gameImageBg.png in Resources */ = {isa = PBXBuildFile; fileRef = BF928E0E20A4374100D3E87D /* gameImageBg.png */; };
+		BFA7B9B120A4A89700A03B7D /* choiceGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFA7B9B020A4A89700A03B7D /* choiceGame.mp3 */; };
 		BFA8ACD0208836A5009DD695 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA8ACCF208836A5009DD695 /* StoreKit.framework */; };
+		BFA8F87E20A9DD0200DB945D /* 49in1ABtnIpad.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA8F87B20A9DD0100DB945D /* 49in1ABtnIpad.png */; };
+		BFA8F87F20A9DD0200DB945D /* 49in1BBtnIpad.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA8F87C20A9DD0100DB945D /* 49in1BBtnIpad.png */; };
+		BFA8F88020A9DD0200DB945D /* 49in1ABBtnIpad.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA8F87D20A9DD0200DB945D /* 49in1ABBtnIpad.png */; };
 		BFAC46A6209F47F1005F5644 /* 49in1SoundOff.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC4693209F47EF005F5644 /* 49in1SoundOff.png */; };
 		BFAC46A7209F47F1005F5644 /* 49in1SoundOn.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC4694209F47EF005F5644 /* 49in1SoundOn.png */; };
 		BFAC46A8209F47F1005F5644 /* 49in1bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC4695209F47F0005F5644 /* 49in1bg.png */; };
@@ -48,22 +53,57 @@
 		BFAC46B6209F47F1005F5644 /* 49in1SelectBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC46A3209F47F0005F5644 /* 49in1SelectBtn.png */; };
 		BFAC46B7209F47F1005F5644 /* 49in1BBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC46A4209F47F0005F5644 /* 49in1BBtn.png */; };
 		BFAC46B8209F47F1005F5644 /* 49in1ABBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC46A5209F47F0005F5644 /* 49in1ABBtn.png */; };
-		BFAC46BA209F4822005F5644 /* pflash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAC46B9209F4822005F5644 /* pflash.jpg */; };
+		BFBD69AF20A72AFF00FDF62A /* QBK.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69A120A72AFE00FDF62A /* QBK.nes */; };
+		BFBD69B020A72AFF00FDF62A /* MXD.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69A220A72AFE00FDF62A /* MXD.nes */; };
+		BFBD69B120A72AFF00FDF62A /* XYJ.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69A320A72AFE00FDF62A /* XYJ.nes */; };
+		BFBD69B220A72AFF00FDF62A /* CSYSWDB.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69A420A72AFE00FDF62A /* CSYSWDB.nes */; };
+		BFBD69B320A72AFF00FDF62A /* HDLSWDB.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69A520A72AFE00FDF62A /* HDLSWDB.nes */; };
+		BFBD69B420A72AFF00FDF62A /* LSBT.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69A620A72AFE00FDF62A /* LSBT.nes */; };
+		BFBD69B520A72AFF00FDF62A /* RZSG2.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69A720A72AFE00FDF62A /* RZSG2.nes */; };
+		BFBD69B620A72AFF00FDF62A /* SJL2.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69A820A72AFF00FDF62A /* SJL2.nes */; };
+		BFBD69B720A72AFF00FDF62A /* YZCS.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69A920A72AFF00FDF62A /* YZCS.nes */; };
+		BFBD69B820A72AFF00FDF62A /* SMTZ.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69AA20A72AFF00FDF62A /* SMTZ.nes */; };
+		BFBD69B920A72AFF00FDF62A /* JNZJ.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69AB20A72AFF00FDF62A /* JNZJ.nes */; };
+		BFBD69BA20A72AFF00FDF62A /* RZW.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69AC20A72AFF00FDF62A /* RZW.nes */; };
+		BFBD69BB20A72AFF00FDF62A /* CJHDL.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69AD20A72AFF00FDF62A /* CJHDL.nes */; };
+		BFBD69BC20A72AFF00FDF62A /* HDLLL.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69AE20A72AFF00FDF62A /* HDLLL.nes */; };
+		BFBD69CB20A72B8F00FDF62A /* HDLLL.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69BD20A72B8D00FDF62A /* HDLLL.png */; };
+		BFBD69CC20A72B8F00FDF62A /* MXD.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69BE20A72B8D00FDF62A /* MXD.png */; };
+		BFBD69CD20A72B8F00FDF62A /* RZSG2.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69BF20A72B8D00FDF62A /* RZSG2.png */; };
+		BFBD69CE20A72B8F00FDF62A /* RZW.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C020A72B8E00FDF62A /* RZW.png */; };
+		BFBD69CF20A72B8F00FDF62A /* SMTZ.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C120A72B8E00FDF62A /* SMTZ.png */; };
+		BFBD69D020A72B8F00FDF62A /* XYJ.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C220A72B8E00FDF62A /* XYJ.png */; };
+		BFBD69D120A72B8F00FDF62A /* SJL2.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C320A72B8E00FDF62A /* SJL2.png */; };
+		BFBD69D220A72B8F00FDF62A /* CSYSWDB.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C420A72B8E00FDF62A /* CSYSWDB.png */; };
+		BFBD69D320A72B8F00FDF62A /* YZCS.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C520A72B8E00FDF62A /* YZCS.png */; };
+		BFBD69D420A72B8F00FDF62A /* HDLSWDB.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C620A72B8F00FDF62A /* HDLSWDB.png */; };
+		BFBD69D520A72B8F00FDF62A /* LSBT.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C720A72B8F00FDF62A /* LSBT.png */; };
+		BFBD69D620A72B8F00FDF62A /* CJHDL.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C820A72B8F00FDF62A /* CJHDL.png */; };
+		BFBD69D720A72B8F00FDF62A /* QBK.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69C920A72B8F00FDF62A /* QBK.png */; };
+		BFBD69D820A72B8F00FDF62A /* JNZJ.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69CA20A72B8F00FDF62A /* JNZJ.png */; };
+		BFBD69DC20A7358500FDF62A /* KDXF.nes in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69DA20A7358500FDF62A /* KDXF.nes */; };
+		BFBD69DE20A735A400FDF62A /* KDXF.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69DD20A735A400FDF62A /* KDXF.png */; };
+		BFBD69E020A738CC00FDF62A /* NESGAMELOADING.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD69DF20A738CC00FDF62A /* NESGAMELOADING.png */; };
+		BFD6A60E20AFCBF0006B4108 /* NextViewControllerIpadMax.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD6A60C20AFCBF0006B4108 /* NextViewControllerIpadMax.storyboard */; };
+		BFD6A61220AFCCDC006B4108 /* NextViewControllerIpadMid.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD6A61020AFCCDC006B4108 /* NextViewControllerIpadMid.storyboard */; };
+		BFD6A61320AFCCDC006B4108 /* NextViewControllerIpadSmall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD6A61120AFCCDC006B4108 /* NextViewControllerIpadSmall.storyboard */; };
 		BFED48A5208C407800B91992 /* QKTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48A2208C407800B91992 /* QKTabBar.m */; };
 		BFED48A6208C407800B91992 /* UIView+QKExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48A4208C407800B91992 /* UIView+QKExtension.m */; };
 		BFED48B7208C408300B91992 /* QKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48A7208C408200B91992 /* QKTabBarController.m */; };
 		BFED48B8208C408300B91992 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48A8208C408200B91992 /* HomeViewController.m */; };
 		BFED48B9208C408300B91992 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48AC208C408200B91992 /* MeViewController.m */; };
 		BFED48BA208C408300B91992 /* QKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48AF208C408200B91992 /* QKNavigationController.m */; };
-		BFED48BB208C408300B91992 /* NextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48B2208C408300B91992 /* NextViewController.m */; };
 		BFED48BC208C408300B91992 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48B3208C408300B91992 /* OrderViewController.m */; };
 		BFED48BD208C408300B91992 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48B4208C408300B91992 /* NewsViewController.m */; };
 		BFED48BE208C408300B91992 /* QKBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFED48B5208C408300B91992 /* QKBasicViewController.m */; };
 		BFED48C0208C413300B91992 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFED48BF208C413300B91992 /* Assets.xcassets */; };
-		BFFF05B2208652DF007DEAF2 /* HallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFFF05B1208652DF007DEAF2 /* HallViewController.m */; };
+		BFFCAF7E20B07D7C00565329 /* NextViewControllerSmall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFFCAF7D20B07D7B00565329 /* NextViewControllerSmall.storyboard */; };
+		CC54756445458796EE0E1A11 /* libPods-MyNesGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 978837FB03F3273469BD895F /* libPods-MyNesGame.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04F13027B4EFCB3CBF6F27EA /* Pods-MyNesGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNesGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyNesGame/Pods-MyNesGame.release.xcconfig"; sourceTree = "<group>"; };
+		0FA6D7AB6ACF62D00A8CAFD5 /* Pods-MyNesGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNesGame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyNesGame/Pods-MyNesGame.debug.xcconfig"; sourceTree = "<group>"; };
 		1DDC0326C7F05924EBE63433 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		267745808609369F739754F7 /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74A429EB204A8E3C00B06B4B /* MyNesGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNesGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +119,7 @@
 		74A42A07204A956500B06B4B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		74A42A0B204C2B5300B06B4B /* CaptureImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaptureImageViewController.h; sourceTree = "<group>"; };
 		74A42A0C204C2B5300B06B4B /* CaptureImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CaptureImageViewController.m; sourceTree = "<group>"; };
+		978837FB03F3273469BD895F /* libPods-MyNesGame.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyNesGame.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF07F16B208AF682005A2D7D /* img_on_baoxaing5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_on_baoxaing5@3x.png"; sourceTree = "<group>"; };
 		BF07F16D208AF68B005A2D7D /* img_on_baoxaing6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_on_baoxaing6@3x.png"; sourceTree = "<group>"; };
 		BF07F16F208AF695005A2D7D /* img_on_baoxaing2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_on_baoxaing2@3x.png"; sourceTree = "<group>"; };
@@ -86,12 +127,19 @@
 		BF07F173208AF797005A2D7D /* bg_sel_qiandao@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_sel_qiandao@3x.png"; sourceTree = "<group>"; };
 		BF07F175208AF905005A2D7D /* icon_guanbi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_guanbi@3x.png"; sourceTree = "<group>"; };
 		BF07F184208B348E005A2D7D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		BF1FEBA620A2050F00BFBF77 /* example.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = example.nes; sourceTree = "<group>"; };
-		BF42B5CE209226BB0072EF18 /* NextViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NextViewController.storyboard; sourceTree = "<group>"; };
+		BF27854620ADDA4F0040B924 /* libNESView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libNESView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF27854820ADDA4F0040B924 /* libOBShapedButton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libOBShapedButton.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3AF70720A8944500D69FC5 /* NextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextViewController.m; sourceTree = "<group>"; };
+		BF3AF70820A8944500D69FC5 /* NextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextViewController.h; sourceTree = "<group>"; };
+		BF3AF70920A8944500D69FC5 /* NextViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NextViewController.storyboard; sourceTree = "<group>"; };
 		BF4C3E352087824C00EF27DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BF5DEB542084F9B500983EDA /* roms */ = {isa = PBXFileReference; lastKnownFileType = folder; path = roms; sourceTree = "<group>"; };
-		BF74F2E42087951E000CCBA7 /* Hall.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Hall.storyboard; sourceTree = "<group>"; };
+		BF928E0C20A4319A00D3E87D /* gameChoiceRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameChoiceRow.png; sourceTree = "<group>"; };
+		BF928E0E20A4374100D3E87D /* gameImageBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameImageBg.png; sourceTree = "<group>"; };
+		BFA7B9B020A4A89700A03B7D /* choiceGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = choiceGame.mp3; sourceTree = "<group>"; };
 		BFA8ACCF208836A5009DD695 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		BFA8F87B20A9DD0100DB945D /* 49in1ABtnIpad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 49in1ABtnIpad.png; sourceTree = "<group>"; };
+		BFA8F87C20A9DD0100DB945D /* 49in1BBtnIpad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 49in1BBtnIpad.png; sourceTree = "<group>"; };
+		BFA8F87D20A9DD0200DB945D /* 49in1ABBtnIpad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 49in1ABBtnIpad.png; sourceTree = "<group>"; };
 		BFAC4693209F47EF005F5644 /* 49in1SoundOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 49in1SoundOff.png; sourceTree = "<group>"; };
 		BFAC4694209F47EF005F5644 /* 49in1SoundOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 49in1SoundOn.png; sourceTree = "<group>"; };
 		BFAC4695209F47F0005F5644 /* 49in1bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 49in1bg.png; sourceTree = "<group>"; };
@@ -111,14 +159,46 @@
 		BFAC46A3209F47F0005F5644 /* 49in1SelectBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 49in1SelectBtn.png; sourceTree = "<group>"; };
 		BFAC46A4209F47F0005F5644 /* 49in1BBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 49in1BBtn.png; sourceTree = "<group>"; };
 		BFAC46A5209F47F0005F5644 /* 49in1ABBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 49in1ABBtn.png; sourceTree = "<group>"; };
-		BFAC46B9209F4822005F5644 /* pflash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pflash.jpg; sourceTree = "<group>"; };
+		BFBD69A120A72AFE00FDF62A /* QBK.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = QBK.nes; sourceTree = "<group>"; };
+		BFBD69A220A72AFE00FDF62A /* MXD.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = MXD.nes; sourceTree = "<group>"; };
+		BFBD69A320A72AFE00FDF62A /* XYJ.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = XYJ.nes; sourceTree = "<group>"; };
+		BFBD69A420A72AFE00FDF62A /* CSYSWDB.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = CSYSWDB.nes; sourceTree = "<group>"; };
+		BFBD69A520A72AFE00FDF62A /* HDLSWDB.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = HDLSWDB.nes; sourceTree = "<group>"; };
+		BFBD69A620A72AFE00FDF62A /* LSBT.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = LSBT.nes; sourceTree = "<group>"; };
+		BFBD69A720A72AFE00FDF62A /* RZSG2.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = RZSG2.nes; sourceTree = "<group>"; };
+		BFBD69A820A72AFF00FDF62A /* SJL2.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = SJL2.nes; sourceTree = "<group>"; };
+		BFBD69A920A72AFF00FDF62A /* YZCS.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = YZCS.nes; sourceTree = "<group>"; };
+		BFBD69AA20A72AFF00FDF62A /* SMTZ.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = SMTZ.nes; sourceTree = "<group>"; };
+		BFBD69AB20A72AFF00FDF62A /* JNZJ.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = JNZJ.nes; sourceTree = "<group>"; };
+		BFBD69AC20A72AFF00FDF62A /* RZW.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = RZW.nes; sourceTree = "<group>"; };
+		BFBD69AD20A72AFF00FDF62A /* CJHDL.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = CJHDL.nes; sourceTree = "<group>"; };
+		BFBD69AE20A72AFF00FDF62A /* HDLLL.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = HDLLL.nes; sourceTree = "<group>"; };
+		BFBD69BD20A72B8D00FDF62A /* HDLLL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HDLLL.png; sourceTree = "<group>"; };
+		BFBD69BE20A72B8D00FDF62A /* MXD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MXD.png; sourceTree = "<group>"; };
+		BFBD69BF20A72B8D00FDF62A /* RZSG2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RZSG2.png; sourceTree = "<group>"; };
+		BFBD69C020A72B8E00FDF62A /* RZW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RZW.png; sourceTree = "<group>"; };
+		BFBD69C120A72B8E00FDF62A /* SMTZ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SMTZ.png; sourceTree = "<group>"; };
+		BFBD69C220A72B8E00FDF62A /* XYJ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XYJ.png; sourceTree = "<group>"; };
+		BFBD69C320A72B8E00FDF62A /* SJL2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SJL2.png; sourceTree = "<group>"; };
+		BFBD69C420A72B8E00FDF62A /* CSYSWDB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSYSWDB.png; sourceTree = "<group>"; };
+		BFBD69C520A72B8E00FDF62A /* YZCS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YZCS.png; sourceTree = "<group>"; };
+		BFBD69C620A72B8F00FDF62A /* HDLSWDB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HDLSWDB.png; sourceTree = "<group>"; };
+		BFBD69C720A72B8F00FDF62A /* LSBT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LSBT.png; sourceTree = "<group>"; };
+		BFBD69C820A72B8F00FDF62A /* CJHDL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CJHDL.png; sourceTree = "<group>"; };
+		BFBD69C920A72B8F00FDF62A /* QBK.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QBK.png; sourceTree = "<group>"; };
+		BFBD69CA20A72B8F00FDF62A /* JNZJ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JNZJ.png; sourceTree = "<group>"; };
+		BFBD69DA20A7358500FDF62A /* KDXF.nes */ = {isa = PBXFileReference; lastKnownFileType = file; path = KDXF.nes; sourceTree = "<group>"; };
+		BFBD69DD20A735A400FDF62A /* KDXF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KDXF.png; sourceTree = "<group>"; };
+		BFBD69DF20A738CC00FDF62A /* NESGAMELOADING.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NESGAMELOADING.png; sourceTree = "<group>"; };
+		BFD6A60C20AFCBF0006B4108 /* NextViewControllerIpadMax.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NextViewControllerIpadMax.storyboard; sourceTree = "<group>"; };
+		BFD6A61020AFCCDC006B4108 /* NextViewControllerIpadMid.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NextViewControllerIpadMid.storyboard; sourceTree = "<group>"; };
+		BFD6A61120AFCCDC006B4108 /* NextViewControllerIpadSmall.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NextViewControllerIpadSmall.storyboard; sourceTree = "<group>"; };
 		BFED48A1208C407800B91992 /* QKTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QKTabBar.h; sourceTree = "<group>"; };
 		BFED48A2208C407800B91992 /* QKTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKTabBar.m; sourceTree = "<group>"; };
 		BFED48A3208C407800B91992 /* UIView+QKExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+QKExtension.h"; sourceTree = "<group>"; };
 		BFED48A4208C407800B91992 /* UIView+QKExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+QKExtension.m"; sourceTree = "<group>"; };
 		BFED48A7208C408200B91992 /* QKTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKTabBarController.m; sourceTree = "<group>"; };
 		BFED48A8208C408200B91992 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		BFED48A9208C408200B91992 /* NextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextViewController.h; sourceTree = "<group>"; };
 		BFED48AA208C408200B91992 /* QKBasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QKBasicViewController.h; sourceTree = "<group>"; };
 		BFED48AB208C408200B91992 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		BFED48AC208C408200B91992 /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
@@ -127,14 +207,12 @@
 		BFED48AF208C408200B91992 /* QKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKNavigationController.m; sourceTree = "<group>"; };
 		BFED48B0208C408200B91992 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		BFED48B1208C408200B91992 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
-		BFED48B2208C408300B91992 /* NextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextViewController.m; sourceTree = "<group>"; };
 		BFED48B3208C408300B91992 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		BFED48B4208C408300B91992 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		BFED48B5208C408300B91992 /* QKBasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKBasicViewController.m; sourceTree = "<group>"; };
 		BFED48B6208C408300B91992 /* QKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QKNavigationController.h; sourceTree = "<group>"; };
 		BFED48BF208C413300B91992 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BFFF05B0208652DF007DEAF2 /* HallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HallViewController.h; sourceTree = "<group>"; };
-		BFFF05B1208652DF007DEAF2 /* HallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HallViewController.m; sourceTree = "<group>"; };
+		BFFCAF7D20B07D7B00565329 /* NextViewControllerSmall.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NextViewControllerSmall.storyboard; sourceTree = "<group>"; };
 		F5BF3CBFD38791253E054E94 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,10 +221,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF27854720ADDA4F0040B924 /* libNESView.a in Frameworks */,
+				BF27854920ADDA4F0040B924 /* libOBShapedButton.a in Frameworks */,
 				BFA8ACD0208836A5009DD695 /* StoreKit.framework in Frameworks */,
 				74A42A08204A956500B06B4B /* libc++.tbd in Frameworks */,
-				0BE1B0DD3690AD20487E6DD7 /* libPods-Example.a in Frameworks */,
 				BF07F185208B348E005A2D7D /* GameKit.framework in Frameworks */,
+				CC54756445458796EE0E1A11 /* libPods-MyNesGame.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +236,7 @@
 		74A429E2204A8E3C00B06B4B = {
 			isa = PBXGroup;
 			children = (
-				74A429ED204A8E3C00B06B4B /* Example */,
+				74A429ED204A8E3C00B06B4B /* NesGame */,
 				74A429EC204A8E3C00B06B4B /* Products */,
 				99D38BBF27683965E734E6B7 /* Pods */,
 				831EC229FA18A0045625064F /* Frameworks */,
@@ -171,10 +251,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		74A429ED204A8E3C00B06B4B /* Example */ = {
+		74A429ED204A8E3C00B06B4B /* NesGame */ = {
 			isa = PBXGroup;
 			children = (
-				BF1FEBA620A2050F00BFBF77 /* example.nes */,
+				BFA7B9B020A4A89700A03B7D /* choiceGame.mp3 */,
 				BFED48A0208C406A00B91992 /* main */,
 				BF07F177208B16B6005A2D7D /* resources */,
 				BF4C3E352087824C00EF27DF /* GoogleService-Info.plist */,
@@ -190,20 +270,20 @@
 				74A42A00204A8E3C00B06B4B /* main.m */,
 				BFED48BF208C413300B91992 /* Assets.xcassets */,
 				74A429F7204A8E3C00B06B4B /* Example.xcdatamodeld */,
-				BFFF05B0208652DF007DEAF2 /* HallViewController.h */,
-				BFFF05B1208652DF007DEAF2 /* HallViewController.m */,
-				BF74F2E42087951E000CCBA7 /* Hall.storyboard */,
 			);
-			path = Example;
+			path = NesGame;
 			sourceTree = "<group>";
 		};
 		831EC229FA18A0045625064F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF27854620ADDA4F0040B924 /* libNESView.a */,
+				BF27854820ADDA4F0040B924 /* libOBShapedButton.a */,
 				BF07F184208B348E005A2D7D /* GameKit.framework */,
 				BFA8ACCF208836A5009DD695 /* StoreKit.framework */,
 				74A42A07204A956500B06B4B /* libc++.tbd */,
 				267745808609369F739754F7 /* libPods-Example.a */,
+				978837FB03F3273469BD895F /* libPods-MyNesGame.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -213,6 +293,8 @@
 			children = (
 				F5BF3CBFD38791253E054E94 /* Pods-Example.debug.xcconfig */,
 				1DDC0326C7F05924EBE63433 /* Pods-Example.release.xcconfig */,
+				0FA6D7AB6ACF62D00A8CAFD5 /* Pods-MyNesGame.debug.xcconfig */,
+				04F13027B4EFCB3CBF6F27EA /* Pods-MyNesGame.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -220,7 +302,42 @@
 		BF07F177208B16B6005A2D7D /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				BFAC46B9209F4822005F5644 /* pflash.jpg */,
+				BFA8F87D20A9DD0200DB945D /* 49in1ABBtnIpad.png */,
+				BFA8F87B20A9DD0100DB945D /* 49in1ABtnIpad.png */,
+				BFA8F87C20A9DD0100DB945D /* 49in1BBtnIpad.png */,
+				BFBD69DF20A738CC00FDF62A /* NESGAMELOADING.png */,
+				BFBD69DD20A735A400FDF62A /* KDXF.png */,
+				BFBD69DA20A7358500FDF62A /* KDXF.nes */,
+				BFBD69C820A72B8F00FDF62A /* CJHDL.png */,
+				BFBD69C420A72B8E00FDF62A /* CSYSWDB.png */,
+				BFBD69BD20A72B8D00FDF62A /* HDLLL.png */,
+				BFBD69C620A72B8F00FDF62A /* HDLSWDB.png */,
+				BFBD69CA20A72B8F00FDF62A /* JNZJ.png */,
+				BFBD69C720A72B8F00FDF62A /* LSBT.png */,
+				BFBD69BE20A72B8D00FDF62A /* MXD.png */,
+				BFBD69C920A72B8F00FDF62A /* QBK.png */,
+				BFBD69BF20A72B8D00FDF62A /* RZSG2.png */,
+				BFBD69C020A72B8E00FDF62A /* RZW.png */,
+				BFBD69C320A72B8E00FDF62A /* SJL2.png */,
+				BFBD69C120A72B8E00FDF62A /* SMTZ.png */,
+				BFBD69C220A72B8E00FDF62A /* XYJ.png */,
+				BFBD69C520A72B8E00FDF62A /* YZCS.png */,
+				BFBD69AD20A72AFF00FDF62A /* CJHDL.nes */,
+				BFBD69A420A72AFE00FDF62A /* CSYSWDB.nes */,
+				BFBD69AE20A72AFF00FDF62A /* HDLLL.nes */,
+				BFBD69A520A72AFE00FDF62A /* HDLSWDB.nes */,
+				BFBD69AB20A72AFF00FDF62A /* JNZJ.nes */,
+				BFBD69A620A72AFE00FDF62A /* LSBT.nes */,
+				BFBD69A220A72AFE00FDF62A /* MXD.nes */,
+				BFBD69A120A72AFE00FDF62A /* QBK.nes */,
+				BFBD69A720A72AFE00FDF62A /* RZSG2.nes */,
+				BFBD69AC20A72AFF00FDF62A /* RZW.nes */,
+				BFBD69A820A72AFF00FDF62A /* SJL2.nes */,
+				BFBD69AA20A72AFF00FDF62A /* SMTZ.nes */,
+				BFBD69A320A72AFE00FDF62A /* XYJ.nes */,
+				BFBD69A920A72AFF00FDF62A /* YZCS.nes */,
+				BF928E0E20A4374100D3E87D /* gameImageBg.png */,
+				BF928E0C20A4319A00D3E87D /* gameChoiceRow.png */,
 				BFAC46A5209F47F0005F5644 /* 49in1ABBtn.png */,
 				BFAC469C209F47F0005F5644 /* 49in1ABtn.png */,
 				BFAC46A4209F47F0005F5644 /* 49in1BBtn.png */,
@@ -240,7 +357,6 @@
 				BFAC4698209F47F0005F5644 /* 49in1TopBtn.png */,
 				BFAC469E209F47F0005F5644 /* 49in1UpBtn.png */,
 				BFAC4697209F47F0005F5644 /* 49in145Btn.png */,
-				BF5DEB542084F9B500983EDA /* roms */,
 				BF07F175208AF905005A2D7D /* icon_guanbi@3x.png */,
 				BF07F173208AF797005A2D7D /* bg_sel_qiandao@3x.png */,
 				BF07F171208AF75E005A2D7D /* bg_tankuang@3x.png */,
@@ -254,6 +370,13 @@
 		BFED48A0208C406A00B91992 /* main */ = {
 			isa = PBXGroup;
 			children = (
+				BFD6A61020AFCCDC006B4108 /* NextViewControllerIpadMid.storyboard */,
+				BFD6A61120AFCCDC006B4108 /* NextViewControllerIpadSmall.storyboard */,
+				BFD6A60C20AFCBF0006B4108 /* NextViewControllerIpadMax.storyboard */,
+				BF3AF70820A8944500D69FC5 /* NextViewController.h */,
+				BF3AF70720A8944500D69FC5 /* NextViewController.m */,
+				BFFCAF7D20B07D7B00565329 /* NextViewControllerSmall.storyboard */,
+				BF3AF70920A8944500D69FC5 /* NextViewController.storyboard */,
 				BFED48A1208C407800B91992 /* QKTabBar.h */,
 				BFED48A2208C407800B91992 /* QKTabBar.m */,
 				BFED48A3208C407800B91992 /* UIView+QKExtension.h */,
@@ -264,8 +387,6 @@
 				BFED48AC208C408200B91992 /* MeViewController.m */,
 				BFED48B1208C408200B91992 /* NewsViewController.h */,
 				BFED48B4208C408300B91992 /* NewsViewController.m */,
-				BFED48A9208C408200B91992 /* NextViewController.h */,
-				BFED48B2208C408300B91992 /* NextViewController.m */,
 				BFED48AB208C408200B91992 /* OrderViewController.h */,
 				BFED48B3208C408300B91992 /* OrderViewController.m */,
 				BFED48AA208C408200B91992 /* QKBasicViewController.h */,
@@ -274,7 +395,6 @@
 				BFED48AF208C408200B91992 /* QKNavigationController.m */,
 				BFED48AD208C408200B91992 /* QKTabBarController.h */,
 				BFED48A7208C408200B91992 /* QKTabBarController.m */,
-				BF42B5CE209226BB0072EF18 /* NextViewController.storyboard */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -290,7 +410,6 @@
 				74A429E7204A8E3C00B06B4B /* Sources */,
 				74A429E8204A8E3C00B06B4B /* Frameworks */,
 				74A429E9204A8E3C00B06B4B /* Resources */,
-				F51A8C55BC6F07F665AB23AF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -344,40 +463,77 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF928E0F20A4374100D3E87D /* gameImageBg.png in Resources */,
 				74A429FE204A8E3C00B06B4B /* LaunchScreen.storyboard in Resources */,
+				BFBD69BB20A72AFF00FDF62A /* CJHDL.nes in Resources */,
 				BFAC46AE209F47F1005F5644 /* 49in1RightBtn.png in Resources */,
 				BF07F172208AF75F005A2D7D /* bg_tankuang@3x.png in Resources */,
 				BFAC46A7209F47F1005F5644 /* 49in1SoundOn.png in Resources */,
+				BFBD69CB20A72B8F00FDF62A /* HDLLL.png in Resources */,
+				BFBD69D020A72B8F00FDF62A /* XYJ.png in Resources */,
 				BFAC46B4209F47F1005F5644 /* 49in1RightBigBtn.png in Resources */,
-				BF42B5CF209226BB0072EF18 /* NextViewController.storyboard in Resources */,
+				BFA8F88020A9DD0200DB945D /* 49in1ABBtnIpad.png in Resources */,
+				BFA8F87F20A9DD0200DB945D /* 49in1BBtnIpad.png in Resources */,
+				BFBD69D320A72B8F00FDF62A /* YZCS.png in Resources */,
+				BFBD69B620A72AFF00FDF62A /* SJL2.nes in Resources */,
+				BFBD69D520A72B8F00FDF62A /* LSBT.png in Resources */,
 				BFAC46A6209F47F1005F5644 /* 49in1SoundOff.png in Resources */,
 				BFAC46AC209F47F1005F5644 /* 49in1RightSmallBtn.png in Resources */,
+				BF3AF70B20A8944600D69FC5 /* NextViewController.storyboard in Resources */,
+				BFBD69D420A72B8F00FDF62A /* HDLSWDB.png in Resources */,
+				BFBD69CD20A72B8F00FDF62A /* RZSG2.png in Resources */,
+				BFBD69AF20A72AFF00FDF62A /* QBK.nes in Resources */,
+				BFBD69D820A72B8F00FDF62A /* JNZJ.png in Resources */,
+				BFBD69BC20A72AFF00FDF62A /* HDLLL.nes in Resources */,
+				BFBD69B220A72AFF00FDF62A /* CSYSWDB.nes in Resources */,
+				BFBD69B520A72AFF00FDF62A /* RZSG2.nes in Resources */,
+				BFBD69B720A72AFF00FDF62A /* YZCS.nes in Resources */,
+				BFBD69B020A72AFF00FDF62A /* MXD.nes in Resources */,
 				BFAC46B5209F47F1005F5644 /* 49in1Reset.png in Resources */,
+				BF928E0D20A4319A00D3E87D /* gameChoiceRow.png in Resources */,
 				BFAC46B2209F47F1005F5644 /* 49in1gameContainer.png in Resources */,
+				BFBD69D720A72B8F00FDF62A /* QBK.png in Resources */,
 				BFAC46B3209F47F1005F5644 /* 49in1Shop.png in Resources */,
 				BF07F170208AF696005A2D7D /* img_on_baoxaing2@3x.png in Resources */,
 				BFAC46AD209F47F1005F5644 /* 49in1MainBg.jpg in Resources */,
+				BFBD69CE20A72B8F00FDF62A /* RZW.png in Resources */,
+				BFBD69CC20A72B8F00FDF62A /* MXD.png in Resources */,
+				BFBD69CF20A72B8F00FDF62A /* SMTZ.png in Resources */,
 				BFAC46B1209F47F1005F5644 /* 49in1UpBtn.png in Resources */,
+				BFFCAF7E20B07D7C00565329 /* NextViewControllerSmall.storyboard in Resources */,
 				BF4C3E362087824C00EF27DF /* GoogleService-Info.plist in Resources */,
 				BFAC46AA209F47F1005F5644 /* 49in145Btn.png in Resources */,
 				BFAC46B6209F47F1005F5644 /* 49in1SelectBtn.png in Resources */,
 				BFAC46B0209F47F1005F5644 /* 49in1BottomBtn.png in Resources */,
+				BFBD69B320A72AFF00FDF62A /* HDLSWDB.nes in Resources */,
 				BF07F16C208AF682005A2D7D /* img_on_baoxaing5@3x.png in Resources */,
-				BF1FEBA720A2050F00BFBF77 /* example.nes in Resources */,
-				BF74F2E52087951E000CCBA7 /* Hall.storyboard in Resources */,
+				BFBD69B920A72AFF00FDF62A /* JNZJ.nes in Resources */,
+				BFBD69D220A72B8F00FDF62A /* CSYSWDB.png in Resources */,
 				BFED48C0208C413300B91992 /* Assets.xcassets in Resources */,
 				BF07F16E208AF68B005A2D7D /* img_on_baoxaing6@3x.png in Resources */,
+				BFBD69DE20A735A400FDF62A /* KDXF.png in Resources */,
 				BFAC46AF209F47F1005F5644 /* 49in1ABtn.png in Resources */,
+				BFBD69E020A738CC00FDF62A /* NESGAMELOADING.png in Resources */,
+				BFD6A61320AFCCDC006B4108 /* NextViewControllerIpadSmall.storyboard in Resources */,
+				BFBD69DC20A7358500FDF62A /* KDXF.nes in Resources */,
 				BFAC46B7209F47F1005F5644 /* 49in1BBtn.png in Resources */,
 				BF07F174208AF797005A2D7D /* bg_sel_qiandao@3x.png in Resources */,
 				BFAC46A8209F47F1005F5644 /* 49in1bg.png in Resources */,
-				BFAC46BA209F4822005F5644 /* pflash.jpg in Resources */,
-				BF5DEB552084F9B500983EDA /* roms in Resources */,
+				BFA8F87E20A9DD0200DB945D /* 49in1ABtnIpad.png in Resources */,
+				BFA7B9B120A4A89700A03B7D /* choiceGame.mp3 in Resources */,
+				BFBD69D120A72B8F00FDF62A /* SJL2.png in Resources */,
+				BFBD69B120A72AFF00FDF62A /* XYJ.nes in Resources */,
+				BFD6A61220AFCCDC006B4108 /* NextViewControllerIpadMid.storyboard in Resources */,
 				74A429F6204A8E3C00B06B4B /* Main.storyboard in Resources */,
 				BF07F176208AF905005A2D7D /* icon_guanbi@3x.png in Resources */,
+				BFBD69BA20A72AFF00FDF62A /* RZW.nes in Resources */,
+				BFD6A60E20AFCBF0006B4108 /* NextViewControllerIpadMax.storyboard in Resources */,
 				BFAC46B8209F47F1005F5644 /* 49in1ABBtn.png in Resources */,
+				BFBD69D620A72B8F00FDF62A /* CJHDL.png in Resources */,
+				BFBD69B420A72AFF00FDF62A /* LSBT.nes in Resources */,
 				BFAC46AB209F47F1005F5644 /* 49in1TopBtn.png in Resources */,
 				BFAC46A9209F47F1005F5644 /* 49in1LeftBtn.png in Resources */,
+				BFBD69B820A72AFF00FDF62A /* SMTZ.nes in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,29 +551,11 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Example-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MyNesGame-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F51A8C55BC6F07F665AB23AF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh",
-				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -440,9 +578,8 @@
 				74A429F0204A8E3C00B06B4B /* AppDelegate.m in Sources */,
 				BFED48BD208C408300B91992 /* NewsViewController.m in Sources */,
 				BFED48A6208C407800B91992 /* UIView+QKExtension.m in Sources */,
-				BFED48BB208C408300B91992 /* NextViewController.m in Sources */,
+				BF3AF70A20A8944600D69FC5 /* NextViewController.m in Sources */,
 				BFED48BA208C408300B91992 /* QKNavigationController.m in Sources */,
-				BFFF05B2208652DF007DEAF2 /* HallViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,17 +711,18 @@
 		};
 		74A42A05204A8E3C00B06B4B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5BF3CBFD38791253E054E94 /* Pods-Example.debug.xcconfig */;
+			baseConfigurationReference = 0FA6D7AB6ACF62D00A8CAFD5 /* Pods-MyNesGame.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 72S8DD99XC;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = NesGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fcgame.more.ml;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb7d584b-bd98-48a1-986d-25d54e93d570";
+				PROVISIONING_PROFILE = "124e8fc1-26ff-4402-9e5c-067f46f353b9";
 				PROVISIONING_PROFILE_SPECIFIER = iOS_FCDEV;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -592,17 +730,18 @@
 		};
 		74A42A06204A8E3C00B06B4B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1DDC0326C7F05924EBE63433 /* Pods-Example.release.xcconfig */;
+			baseConfigurationReference = 04F13027B4EFCB3CBF6F27EA /* Pods-MyNesGame.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 72S8DD99XC;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = NesGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fcgame.more.ml;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb7d584b-bd98-48a1-986d-25d54e93d570";
+				PROVISIONING_PROFILE = "124e8fc1-26ff-4402-9e5c-067f46f353b9";
 				PROVISIONING_PROFILE_SPECIFIER = iOS_FCDEV;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
