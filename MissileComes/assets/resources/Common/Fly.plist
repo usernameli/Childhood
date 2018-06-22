@@ -98,15 +98,15 @@
             <key>Airplane_s1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{450,2},{59,70}}</string>
+                <string>{{450,2},{70,59}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{59,70}}</string>
+                <string>{{0,0},{70,59}}</string>
                 <key>sourceSize</key>
-                <string>{59,70}</string>
+                <string>{70,59}</string>
             </dict>
             <key>Airplane_s2.png</key>
             <dict>
@@ -131,7 +131,7 @@
             <key>size</key>
             <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:fa2c60379db41d44b4b5f5770ef73567:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:a5bab0c95d105e546958fc203c00bd9f:1/1$</string>
             <key>textureFileName</key>
             <string>Fly.png</string>
         </dict>
