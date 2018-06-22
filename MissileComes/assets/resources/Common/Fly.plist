@@ -7,24 +7,115 @@
             <key>Airplane_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,61},{70,59}}</string>
+                <string>{{2,167},{205,172}}</string>
+                <key>offset</key>
+                <string>{0,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{10,4},{205,172}}</string>
+                <key>sourceSize</key>
+                <string>{225,178}</string>
+            </dict>
+            <key>Airplane_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{226,2},{222,151}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{70,59}}</string>
+                <string>{{0,0},{222,151}}</string>
                 <key>sourceSize</key>
-                <string>{70,59}</string>
+                <string>{222,151}</string>
             </dict>
-            <key>Airplane_2.png</key>
+            <key>Airplane_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{83,57}}</string>
+                <string>{{2,341},{181,172}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{181,172}}</string>
+                <key>sourceSize</key>
+                <string>{181,172}</string>
+            </dict>
+            <key>Airplane_4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{226,155},{213,159}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{213,159}}</string>
+                <key>sourceSize</key>
+                <string>{213,159}</string>
+            </dict>
+            <key>Airplane_5.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{185,495},{148,170}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{148,170}}</string>
+                <key>sourceSize</key>
+                <string>{148,170}</string>
+            </dict>
+            <key>Airplane_6.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{209,316},{186,177}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{186,177}}</string>
+                <key>sourceSize</key>
+                <string>{186,177}</string>
+            </dict>
+            <key>Airplane_7.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{222,163}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{222,163}}</string>
+                <key>sourceSize</key>
+                <string>{222,163}</string>
+            </dict>
+            <key>Airplane_s1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{450,2},{59,70}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{59,70}}</string>
+                <key>sourceSize</key>
+                <string>{59,70}</string>
+            </dict>
+            <key>Airplane_s2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{450,74},{83,57}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{83,57}}</string>
                 <key>sourceSize</key>
@@ -38,9 +129,9 @@
             <key>realTextureFileName</key>
             <string>Fly.png</string>
             <key>size</key>
-            <string>{128,128}</string>
+            <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:eafb6b797e17e70308dd762ed3a37f93:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:fa2c60379db41d44b4b5f5770ef73567:1/1$</string>
             <key>textureFileName</key>
             <string>Fly.png</string>
         </dict>
