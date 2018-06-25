@@ -1,0 +1,25 @@
+module.exports = {
+    WeaponList:[
+        {
+            name:"武器",
+            weaponUrl:"weaponIcon1.png",
+            price:[100,110,120,130,140],
+            weapon:[1,3,5,7,9],//秒
+            lockLv:[1,3,5,7,9]
+        },
+        {
+            name:"防护罩",
+            weaponUrl:"weaponIcon1.png",
+            price:[100,110,120,130,140],
+            weapon:[1,3,5,7,9],//秒
+            lockLv:[1,3,5,7,9]
+        },
+        {
+            name:"增压",
+            weaponUrl:"weaponIcon1.png",
+            price:[100,110,120,130,140],
+            weapon:[1,3,5,7,9],//秒
+            lockLv:[1,3,5,7,9]
+        }
+    ]
+};

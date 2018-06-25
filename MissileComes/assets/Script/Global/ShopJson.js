@@ -1,0 +1,29 @@
+module.exports = {
+    Goods:[
+        {
+            name:"商品1",
+            shopUrl:"product_1.png",
+            price:18,
+            item:500
+        },
+        {
+            name:"商品2",
+            shopUrl:"product_2.png",
+            price:25,
+            item:1500
+        },
+        {
+            name:"商品3",
+            shopUrl:"product_3.png",
+            price:50,
+            item:5000
+        },
+        {
+            name:"商品4",
+            shopUrl:"product_4.png",
+            price:108,
+            item:15000
+        }
+
+    ]
+};
