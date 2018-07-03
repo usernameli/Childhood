@@ -15,6 +15,7 @@ cc.Class({
         }
     },
     onLoad () {
+        this.noUp = false;
         cc.director.GlobalEvent.on("set_pos_fly", this.setPosFly, this);
 
         this.leftBtn.on(cc.Node.EventType.TOUCH_START, this._touchStartEventLeft, this);
@@ -67,6 +68,12 @@ cc.Class({
 
     },
     update (dt) {
+
+
+        let flyPos = this.body.getWorldPosition();
+        console.log("node x: " +flyPos.x);
+        console.log("node y: " +flyPos.y);
+
         let ratation = this.body.getWorldRotation;
 
         let newPos = this.vpNode.convertToWorldSpaceAR(this.vpNode.getPosition());
@@ -82,8 +89,7 @@ cc.Class({
         // console.log("x: " +x);
         // console.log("y: " +y);
         //
-        // console.log("node x: " +this.node.x);
-        // console.log("node y: " +this.node.y);
+
         // console.log("ratation: " +ratation);
         // console.log("this.body.angularVelocity: " +this.body.angularVelocity);
         // //
