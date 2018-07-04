@@ -13,8 +13,6 @@ cc.Class({
 
 
     onLoad () {
-        console.log("MainScene onLoad " + this._tag);
-        console.log("shopJson: " +JSON.stringify(ShopJson));
         cc.fy = {};
         var AudioMgr = require("./Util/Audio");
         cc.fy.audioMgr = new AudioMgr();

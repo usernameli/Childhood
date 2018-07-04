@@ -76,7 +76,7 @@ cc.Class({
                 break;
             }
         }
-        console.log("findIndex: " +findIndex);
+        // console.log("findIndex: " +findIndex);
         return findIndex;
     },
 
@@ -98,11 +98,11 @@ cc.Class({
             {pos:cc.p(centerPos.x + this.node.width, centerPos.y - this.node.height),flg:false} //右下
             ];
         let noFindIndex = [];
-        for(let i = 0;i < this._couldsList.length;i++)
-        {
-            console.log("this._cloudList 1 : "+JSON.stringify(this._couldsList[i].getPosition()));
-
-        }
+        // for(let i = 0;i < this._couldsList.length;i++)
+        // {
+        //     console.log("this._cloudList 1 : "+JSON.stringify(this._couldsList[i].getPosition()));
+        //
+        // }
         for(let k = 0; k < this._couldsList.length;k++)
         {
             if(centerIndex !== k)
@@ -128,13 +128,13 @@ cc.Class({
                 }
             }
         }
-        console.log("noFindIndex: "+JSON.stringify(noFindIndex));
-        console.log("listPos: "+JSON.stringify(listPos));
-        for(let i = 0;i < this._couldsList.length;i++)
-        {
-            console.log("this._cloudList 2 : "+JSON.stringify(this._couldsList[i].getPosition()));
-
-        }
+        // console.log("noFindIndex: "+JSON.stringify(noFindIndex));
+        // console.log("listPos: "+JSON.stringify(listPos));
+        // for(let i = 0;i < this._couldsList.length;i++)
+        // {
+        //     console.log("this._cloudList 2 : "+JSON.stringify(this._couldsList[i].getPosition()));
+        //
+        // }
 
         if(noFindIndex.length > 0)
         {
@@ -152,11 +152,11 @@ cc.Class({
 
             }
         }
-        for(let i = 0;i < this._couldsList.length;i++)
-        {
-            console.log("this._cloudList 3 : "+JSON.stringify(this._couldsList[i].getPosition()));
-
-        }
+        // for(let i = 0;i < this._couldsList.length;i++)
+        // {
+        //     console.log("this._cloudList 3 : "+JSON.stringify(this._couldsList[i].getPosition()));
+        //
+        // }
 
     },
     start () {
