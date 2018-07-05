@@ -53,8 +53,6 @@ cc.Class({
         let size = parentNode.getContentSize();
         let widthnew = cc.random0To1() * size.width * -1;
         let heightnew  = cc.random0To1() * size.height * -1;
-        console.log("widthnew: " + widthnew);
-        console.log("heightnew: " + heightnew);
         let cloudsList = [this.clouds0Prefab,this.clouds1Prefab,this.clouds2Prefab,this.clouds3Prefab];
         let showIndex = Math.floor(Math.random() * 4+1);
         let newClouds = cc.instantiate(cloudsList[showIndex - 1]);

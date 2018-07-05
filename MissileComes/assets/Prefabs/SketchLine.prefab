@@ -19,10 +19,13 @@
     "_components": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 3
       }
     ],
     "_prefab": {
-      "__id__": 3
+      "__id__": 4
     },
     "_id": "",
     "_opacity": 255,
@@ -87,6 +90,15 @@
     "_atlas": {
       "__uuid__": "b13878b8-92d0-48a5-b92d-f52af56f7793"
     }
+  },
+  {
+    "__type__": "a2c5357mahBo5nUgIn9UNJh",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true
   },
   {
     "__type__": "cc.PrefabInfo",
