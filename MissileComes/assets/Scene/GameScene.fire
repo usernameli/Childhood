@@ -1087,13 +1087,13 @@
       "width": 70,
       "height": 59
     },
-    "_rotationX": 0,
-    "_rotationY": 0,
+    "_rotationX": 90,
+    "_rotationY": 90,
     "_scaleX": 1,
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 319.9999999999998,
+      "x": 400,
       "y": 568
     },
     "_skewX": 0,
@@ -1208,14 +1208,14 @@
       "width": 10,
       "height": 29
     },
-    "_rotationX": 45,
-    "_rotationY": 45,
+    "_rotationX": 0,
+    "_rotationY": 0,
     "_scaleX": 1,
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 142,
-      "y": 389
+      "x": 320,
+      "y": 297
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1350,7 +1350,9 @@
       "__id__": 29
     },
     "_loopMaxTime": 0.01,
-    "_loopTime": 0
+    "_loopTime": 0,
+    "_angleSum": false,
+    "_speed": 200
   },
   {
     "__type__": "cc.RigidBody",
@@ -1367,8 +1369,8 @@
     "_angularDamping": 0,
     "_linearVelocity": {
       "__type__": "cc.Vec2",
-      "x": 10,
-      "y": 10
+      "x": 0,
+      "y": 50
     },
     "_angularVelocity": 0,
     "_fixedRotation": false,
@@ -1974,7 +1976,7 @@
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,
-    "_horizontalCenter": 0,
+    "_horizontalCenter": 80.00000000000023,
     "_isAbsLeft": true,
     "_isAbsRight": true,
     "_isAbsTop": true,

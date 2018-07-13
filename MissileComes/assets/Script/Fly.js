@@ -247,10 +247,6 @@ cc.Class({
     },
     update (dt) {
 
-
-
-        let ratation = this.body.getWorldRotation;
-
         let newPos = this.vpNode.convertToWorldSpaceAR(this.vpNode.getPosition());
         let nowPos = this.body.getWorldPosition();
         let v2Vector = cc.v2(newPos.x - nowPos.x, newPos.y - nowPos.y);
