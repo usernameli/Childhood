@@ -1,14 +1,6 @@
 cc.Class({
     extends: cc.Component,
     properties: {
-        leftBtn:{
-            default:null,
-            type:cc.Node
-        },
-        rightBtn:{
-            default:null,
-            type:cc.Node
-        },
         vpNode:{
             default:null,
             type:cc.Node
@@ -23,43 +15,33 @@ cc.Class({
         this._funNow = false;
         this._nowRotation = 0;
         cc.director.GlobalEvent.on(-1,"set_pos_fly", this.setPosFly.bind(this));
-
-        this.leftBtn.on(cc.Node.EventType.TOUCH_START, this._touchStartEventLeft, this);
-
-        this.leftBtn.on(cc.Node.EventType.TOUCH_MOVE, this._touchMoveEventLeft, this);
-
-        // 触摸在圆圈内离开或在圆圈外离开后，摇杆归位，player速度为0
-        this.leftBtn.on(cc.Node.EventType.TOUCH_END, this._touchEndEventLeft, this);
-        this.leftBtn.on(cc.Node.EventType.TOUCH_CANCEL, this._touchEndEventLeft, this);
-
-
-        this.rightBtn.on(cc.Node.EventType.TOUCH_START, this._touchStartEventRight, this);
-
-        this.rightBtn.on(cc.Node.EventType.TOUCH_MOVE, this._touchMoveEventRight, this);
-
-        // 触摸在圆圈内离开或在圆圈外离开后，摇杆归位，player速度为0
-        this.rightBtn.on(cc.Node.EventType.TOUCH_END, this._touchEndEventRight, this);
-        this.rightBtn.on(cc.Node.EventType.TOUCH_CANCEL, this._touchEndEventRight, this);
+        cc.director.GlobalEvent.on(-1,"trun-left-controller", this.trunLeftCallBack.bind(this));
+        cc.director.GlobalEvent.on(-1,"trun-right-controller", this.trunRightCallBack.bind(this));
 
     },
-    _touchStartEventLeft:function () {
-        this.body.angularVelocity = 50;
-    },
-    _touchMoveEventLeft:function () {
-    },
-    _touchEndEventLeft:function () {
-        this.body.angularVelocity = 0;
-    },
 
-    _touchStartEventRight:function () {
-        this.body.angularVelocity = -50;
+    trunLeftCallBack:function(argument)
+    {
+        if(argument && argument["flg"])
+        {
+            this.body.angularVelocity = -150;
+        }
+        else
+        {
+            this.body.angularVelocity = 0;
+        }
     },
-    _touchMoveEventRight:function () {
+    trunRightCallBack:function(argument)
+    {
+        if(argument && argument["flg"])
+        {
+            this.body.angularVelocity = 150;
+        }
+        else
+        {
+            this.body.angularVelocity = 0;
+        }
     },
-    _touchEndEventRight:function () {
-        this.body.angularVelocity = 0;
-    },
-
     setPosFly(argument) {
         console.log("argument: " + JSON.stringify(argument));
         if(this._funNow || argument["angle"] === parseInt(this.node.rotation) || argument["angle"] === this._nowRotation)
@@ -251,7 +233,7 @@ cc.Class({
         let nowPos = this.body.getWorldPosition();
         let v2Vector = cc.v2(newPos.x - nowPos.x, newPos.y - nowPos.y);
         v2Vector.normalizeSelf();
-        v2Vector.mulSelf(200);
+        v2Vector.mulSelf(300);
         this.body.linearVelocity = v2Vector;
 
 

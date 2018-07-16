@@ -13,8 +13,14 @@ cc.Class({
 
     start () {
         setTimeout(function () {
-            this.node.destroy();
-        }.bind(this), 3000);
+
+            var that = this;
+            var walk = cc.sequence(cc.fadeOut(0.5), cc.callFunc(function () {
+                that.node.destroy();
+            }));
+            this.node.runAction(walk);
+
+        }.bind(this), 1000);
     },
 
     // update (dt) {},
