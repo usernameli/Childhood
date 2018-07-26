@@ -1,6 +1,6 @@
 
 
-function initMgr() {
+window.initMgr = function() {
     cc.wwx = {};
 
     console.log("初始化");
@@ -145,6 +145,17 @@ function initMgr() {
         GETUSERINFO_SUCCESS: "GETUSERINFO_SUCCESS", //获取个人数据成功
         GETGROUPRANK_SUCCESS: "GETGROUPRANK_SUCCESS", //获取群排行数据
 
+        MSG_TCP_OPEN: 'tcp_open',
+        MSG_TCP_CLOSE: 'tcp_close',
+        MSG_TCP_ERROR: 'tcp_error',             // tcp 失败
+        MSG_TCP_SEND_ERROR: 'tcp_send_error',   // tcp发消息，微信接口调用失败
+        MSG_TCP_ERROR_COUNT_MAX: 'tcp_error_count_max', //  tcp心跳失败次数达到上限
+        MSG_RECONNECT: 'reconnect',
+        MSG_SERVER_MESSAGE: 'server_message',
+
+        ACTION_BALL_START_LINEARVELOCITY:'ball_start_linearvelocity', //球球线性运动
+        ACTION_BALL_STOP_LINEARVELOCITY:'action_ball_stop_linearvelocity',//球球线性运动停止
+        ACTION_BALL_MOVE_DROP:'action_ball_move_drop',
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     };
     cc.wwx.clickStatEventType = {
@@ -170,55 +181,36 @@ function initMgr() {
         clickStatEventTypeTCP_Success : 10010,//TCP连接成功
         clickStatEventTypeTCP_Failed : 10011,//TCP连接失败
 
-        MSG_TCP_OPEN: 'tcp_open',
-        MSG_TCP_CLOSE: 'tcp_close',
-        MSG_TCP_ERROR: 'tcp_error',             // tcp 失败
-        MSG_TCP_SEND_ERROR: 'tcp_send_error',   // tcp发消息，微信接口调用失败
-        MSG_TCP_ERROR_COUNT_MAX: 'tcp_error_count_max', //  tcp心跳失败次数达到上限
-        MSG_RECONNECT: 'reconnect',
-        MSG_SERVER_MESSAGE: 'server_message',
-
 
     };
 
-    let OutPut = require("../Util/LogOutPut");
-    cc.wwx.OutPut = OutPut;
+    cc.wwx.OutPut = require("../Util/LogOutPut");
 
-    let HttpUtil= require("../SDK/HttpUtil");
-    cc.wwx.HttpUtil = new HttpUtil();
+    cc.wwx.HttpUtil= require("../SDK/HttpUtil");
 
-    let BiLog = require("../SDK/Bilog");
-    cc.wwx.BiLog = new BiLog();
+    cc.wwx.BiLog = require("../SDK/Bilog");
 
-    let TCPClient = require("../SDK/TCPClient");
-    cc.wwx.TCPClient = TCPClient;
+    cc.wwx.TCPClient = require("../SDK/TCPClient");
 
-    let SDKLogin = require("../SDK/SDKLogin");
-    cc.wwx.SDKLogin = new SDKLogin();
-    cc.wwx.SDKLogin.WechatInterfaceInit();
 
     let AudioHelper = require("../Util/AudioHelper");
     cc.wwx.AudioHelper = new AudioHelper();
     cc.wwx.AudioHelper.init();
+    cc.wwx.SDKLogin = require("../SDK/SDKLogin");
 
-    let EncodeDecode = require("../Util/EncodeDecode");
-    cc.wwx.EncodeDecode = new EncodeDecode();
 
-    let NotificationCenter = require("../Util/NotificationCenter");
-    cc.wwx.NotificationCenter = new NotificationCenter();
+    cc.wwx.EncodeDecode = require("../Util/EncodeDecode");
 
-    let PropagateInterface = require("../Util/PropagateInterface");
-    cc.wwx.PropagateInterface = new PropagateInterface();
-    cc.wwx.PropagateInterface.init();
+    cc.wwx.NotificationCenter = require("../Util/NotificationCenter");
 
-    let Timer = require("../Util/Timer");
-    cc.wwx.Timer = new Timer();
+    cc.wwx.PropagateInterface = require("../Util/PropagateInterface");
 
-    let Util = require("../Util/Util");
-    cc.wwx.Util = new Util();
+    cc.wwx.Timer = require("../Util/Timer");
 
-    let wxFileUtil = require("../Util/WxFileUtil");
-    cc.wwx.wxFileUtil = new wxFileUtil();
+
+    cc.wwx.WxFileUtil = require("../Util/WxFileUtil");
+
+    cc.wwx.Util = require("../Util/Util");
 
     cc.wwx.hex_md5 = cc.wwx.Util.whex_md5;
     cc.wwx.b64_md5 = cc.wwx.Util.wb64_md5;
@@ -227,7 +219,7 @@ function initMgr() {
     cc.wwx.b64_hmac_md5 =cc.wwx.Util.wb64_hmac_md5;
     cc.wwx.str_hmac_md5 =cc.wwx.Util.wstr_hmac_md5;
 
-
+    cc.wwx.MapCheckPoint = require("../Util/MapCheckPointManager");
 
 
 
@@ -253,6 +245,8 @@ cc.Class({
     initComponent()
     {
         initMgr();
+        cc.wwx.SDKLogin.WechatInterfaceInit();
+
     }
 
 });

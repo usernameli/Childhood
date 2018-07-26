@@ -53,11 +53,11 @@ if(CC_WECHATGAME)
                     wx.onSocketOpen(function(res) {
                         cc.wwx.OutPut.info('tcp opened');
                         //TCP连接成功打点
-                        cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeTCP_Success);
+                        cc.wwx.BiLog.clickStat(cc.wwx.EventType.clickStatEventTypeTCP_Success);
                         self.opened = true;
                         self.isConnecting = false;
                         self.hasOpened = true;
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_TCP_OPEN);
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TCP_OPEN);
                     });
 
                     wx.onSocketError(function(res) {
@@ -72,7 +72,7 @@ if(CC_WECHATGAME)
                         cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeTCP_Failed);
                         self.opened = false;
                         self.isConnecting = false;
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_TCP_ERROR);
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TCP_ERROR);
                     });
 
                     wx.onSocketMessage(function(res) {
@@ -82,7 +82,7 @@ if(CC_WECHATGAME)
 
                         if (content == null || content == '0000') {
                             // cc.wwx.OutPut.log('get heart beat!');
-                            cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_SERVER_MESSAGE, {});
+                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_SERVER_MESSAGE, {});
                             return;
                         }
                         var strJson = content.substr(0, content.length - 0);
@@ -99,7 +99,7 @@ if(CC_WECHATGAME)
 
                             _json.result = _json.result || {};
                             // cc.wwx.OutPut.info("[receive msg]: cmd = " + _json.cmd + ' action = ' + (_json.result.action || ''));
-                            cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_SERVER_MESSAGE, _json);
+                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_SERVER_MESSAGE, _json);
                         }
                     });
 
@@ -107,7 +107,7 @@ if(CC_WECHATGAME)
                         cc.wwx.OutPut.warn('TCP webSocket close...');
                         self.opened = false;
                         self.isConnecting = false;
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_TCP_CLOSE);
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TCP_CLOSE);
                     });
                 },
 
@@ -181,7 +181,7 @@ if(CC_WECHATGAME)
                             } else {
                                 // cc.wwx.OutPut.log('[send msg fail]:', msg, JSON.stringify(params));
                             }
-                            cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_TCP_SEND_ERROR);
+                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TCP_SEND_ERROR);
                         },
                         complete: function(params) {
                         }
@@ -213,7 +213,7 @@ if(CC_WECHATGAME)
                         if (this.errCount > this.MaxErrCount) {
                             this.forcedInterrupt();
                             this.stopTimerForHeartBeat();
-                            cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_TCP_ERROR_COUNT_MAX);
+                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TCP_ERROR_COUNT_MAX);
                         } else {
                             this.connect(cc.wwx.SystemInfo.webSocketUrl);
                         }
@@ -298,7 +298,7 @@ else
 
                     if (content == null || content == '0000') {
                         // cc.wwx.OutPut.log('get heart beat!');
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_SERVER_MESSAGE, {});
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_SERVER_MESSAGE, {});
                         return;
                     }
                     var strJson = content.substr(0, content.length - 0);
@@ -311,19 +311,19 @@ else
                             // var strLog = unescape(content.replace(/\\u/gi,'%u'));
                             // cc.wwx.OutPut.log("[receive msg]: " + strLog);
                         }
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_SERVER_MESSAGE, _json);
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_SERVER_MESSAGE, _json);
                     }
                 }
                 ws.onerror = function (event) {
                     cc.wwx.OutPut.warn("ws error:" + JSON.stringify(event));
                     self.opened = false;
-                    cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_TCP_ERROR);
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TCP_ERROR);
                 }
                 ws.onclose = function (event) {
                     cc.wwx.OutPut.warn("ws closed:" + JSON.stringify(event));
                     self.opened = false;
 
-                    cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_TCP_CLOSE);
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TCP_CLOSE);
                 }
 
                 self.ws = ws;
