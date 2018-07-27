@@ -18,7 +18,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.ballMaxNum = 10;
+        this.ballMaxNum = 1;
         this._ballList = [];
         this.isBallSporting = false;
         this.isFirstBallCome = false;
@@ -115,14 +115,9 @@ cc.Class({
                 break;
             }
 
-
         }
 
         if (result) {
-            cc.wwx.OutPut.log('_drawDottleLine:', 'result.point', JSON.stringify(result.point));
-            cc.wwx.OutPut.log('_drawDottleLine:', 'result.collider', JSON.stringify(result.collider.tag));
-            cc.wwx.OutPut.log('_drawDottleLine:', 'result.normal', JSON.stringify(result.collider.normal));
-
             p2 = result.point;
             this._ctx.circle(p2.x, p2.y, 10);
             this._ctx.fillColor = cc.Color.RED;

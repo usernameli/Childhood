@@ -1,20 +1,32 @@
+var ObjBlock = require("ObjBlock");
+
 cc.Class({
-    extends: cc.Component,
+    extends: ObjBlock,
 
     properties: {
 
-        labelNum:{
+        labelText:{
             default:null,
-            type:cc.Node
+            type:cc.Label
         },
         splashNode:{
             default:null,
             type:cc.Node
         },
-        triangleType:3
+        _labelNum:0,
+
+    },
+    initLabelNum:function (num) {
+        cc.wwx.OutPut.log("ObjBlockTriangle","initLabelNum",num);
+
+        this._labelNum = parseInt(num);
+        this.labelText.string = this._labelNum.toString();
+
     },
     onLoad()
     {
+        this._super();
+        this._tag ="ObjBlockTriangle";
 
     }
 });
