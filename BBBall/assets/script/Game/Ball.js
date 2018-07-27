@@ -41,6 +41,7 @@ cc.Class({
                 this.dottedLineManager.isBallSporting = true;
                 this.dottedLineManager.isFirstBallCome = false;
                 this.dottedLineManager.ballOnWallNum = 0;
+                this.dottedLineManager.ballNumText.active = false;
 
             }
 
@@ -68,6 +69,7 @@ cc.Class({
                 console.log("碰撞地面" + this._index);
 
                 this.body.linearVelocity = cc.v2(0,0);
+                this.body.enabledContactListener = true;
 
                 if(this.dottedLineManager.isFirstBallCome === false)
                 {
@@ -79,7 +81,8 @@ cc.Class({
                     let posY =  Math.ceil(points[0].y);
                     //
                     this.dottedLineManager.isFirstBallCome = true;
-                    this.dottedLineManager.center = cc.p(posX,posY);
+                    this.dottedLineManager.center = cc.p(posX,118);
+
                 }
                 this._isOnWall = true;
                 this.dottedLineManager.ballOnWallNum += 1;
@@ -87,9 +90,10 @@ cc.Class({
                 {
                     //最后一个球回到地面
                     this.dottedLineManager.isBallSporting = false;
-                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY);
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:this.dottedLineManager.center});
 
                 }
+                this.dottedLineManager.setBallNumTextPosition(this.dottedLineManager.ballOnWallNum);
 
                 break;
             case 3://左面

@@ -151,7 +151,9 @@
     "_enabled": true,
     "_speed": 0,
     "_isStop": true,
-    "_index": 0
+    "_index": 0,
+    "_recoverFg": false,
+    "_isOnWall": false
   },
   {
     "__type__": "cc.PrefabInfo",

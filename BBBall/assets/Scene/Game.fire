@@ -69,10 +69,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 40
+        "__id__": 42
       },
       {
-        "__id__": 41
+        "__id__": 43
       }
     ],
     "_prefab": null,
@@ -348,17 +348,17 @@
         "__id__": 24
       },
       {
-        "__id__": 28
+        "__id__": 30
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 38
+        "__id__": 40
       },
       {
-        "__id__": 39
+        "__id__": 41
       }
     ],
     "_prefab": null,
@@ -946,18 +946,22 @@
     "_parent": {
       "__id__": 9
     },
-    "_children": [],
+    "_children": [
+      {
+        "__id__": 25
+      }
+    ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 25
-      },
-      {
-        "__id__": 26
-      },
-      {
         "__id__": 27
+      },
+      {
+        "__id__": 28
+      },
+      {
+        "__id__": 29
       }
     ],
     "_prefab": null,
@@ -998,6 +1002,80 @@
     "groupIndex": 0
   },
   {
+    "__type__": "cc.Node",
+    "_name": "BallNumText",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 24
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 26
+      }
+    ],
+    "_prefab": null,
+    "_id": "3cOYiLHaRDDL9Ki/05fQ7b",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 29,
+      "height": 18
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 326,
+      "y": 18
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 25
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 18,
+    "_fontSize": 18,
+    "_lineHeight": 18,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$string": "x50",
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0
+  },
+  {
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
@@ -1033,6 +1111,9 @@
     "_enabled": true,
     "ballPrefab": {
       "__uuid__": "62f79210-73d7-4f01-b98e-35598966721c"
+    },
+    "ballNumText": {
+      "__id__": 25
     },
     "_ctx": null,
     "isBallSporting": false,
@@ -1082,17 +1163,17 @@
     },
     "_children": [
       {
-        "__id__": 29
+        "__id__": 31
       },
       {
-        "__id__": 32
+        "__id__": 34
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 37
+        "__id__": 39
       }
     ],
     "_prefab": null,
@@ -1137,17 +1218,17 @@
     "_name": "BG",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 28
+      "__id__": 30
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 30
+        "__id__": 32
       },
       {
-        "__id__": 31
+        "__id__": 33
       }
     ],
     "_prefab": null,
@@ -1192,7 +1273,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 29
+      "__id__": 31
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -1220,7 +1301,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 29
+      "__id__": 31
     },
     "_enabled": true,
     "isAlignOnce": true,
@@ -1246,21 +1327,21 @@
     "_name": "RecoveryBTN",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 28
+      "__id__": 30
     },
     "_children": [
       {
-        "__id__": 33
+        "__id__": 35
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 35
+        "__id__": 37
       },
       {
-        "__id__": 36
+        "__id__": 38
       }
     ],
     "_prefab": null,
@@ -1305,14 +1386,14 @@
     "_name": "DownSprite",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 32
+      "__id__": 34
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 34
+        "__id__": 36
       }
     ],
     "_prefab": null,
@@ -1357,7 +1438,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 33
+      "__id__": 35
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -1385,7 +1466,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 32
+      "__id__": 34
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -1413,7 +1494,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 32
+      "__id__": 34
     },
     "_enabled": true,
     "transition": 3,
@@ -1469,7 +1550,7 @@
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
     "_N$target": {
-      "__id__": 32
+      "__id__": 34
     }
   },
   {
@@ -1477,7 +1558,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 28
+      "__id__": 30
     },
     "_enabled": true,
     "isAlignOnce": true,

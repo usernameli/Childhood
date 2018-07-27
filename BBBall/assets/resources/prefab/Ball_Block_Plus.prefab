@@ -154,7 +154,17 @@
     "_height": 0,
     "_space": 4,
     "_tag": "ObjBlock",
-    "plusNum": 0
+    "plusOneSpriteFrame": {
+      "__uuid__": "f9c398a6-5c33-4b0e-9b3a-286ef26b3cd4"
+    },
+    "plusTwoSpriteFrame": {
+      "__uuid__": "a2855aae-4729-4694-9168-d5cd339eff05"
+    },
+    "plusThreeSpriteFrame": {
+      "__uuid__": "06e696ca-59dd-4305-8005-07ae539e7f7e"
+    },
+    "_plusNum": 0,
+    "_isOnWall": false
   },
   {
     "__type__": "cc.PrefabInfo",

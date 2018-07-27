@@ -221,7 +221,8 @@ window.initMgr = function() {
 
     cc.wwx.MapCheckPoint = require("../Util/MapCheckPointManager");
 
-
+    cc.wwx.NodePool = require("../Util/NodePool");
+    cc.wwx.NodePool.init();
 
 
 }

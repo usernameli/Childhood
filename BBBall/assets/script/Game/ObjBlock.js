@@ -29,7 +29,7 @@ cc.Class({
     },
     onDestroy()
     {
-        cc.wwx.OutPut.log(this._tag,'onDestory:');
+        cc.wwx.OutPut.log(this._tag,'onDestory');
 
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,this.ballMoveDrop,this);
 
@@ -55,7 +55,6 @@ cc.Class({
 
         if(this._moveDrop)
         {
-            cc.wwx.OutPut.log(this._tag,'update:',this._moveDrop);
 
             let posY = this.node.getPositionY();
             let posX = this.node.getPositionX();

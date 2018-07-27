@@ -7,6 +7,10 @@ cc.Class({
             default:null,
             type:cc.Prefab
         },
+        ballNumText:{
+            default:null,
+            type:cc.Node
+        },
         _ctx:null,//Graphics
         isBallSporting:false, //球开始射出
         isFirstBallCome:false,//第一个球回到地面
@@ -18,7 +22,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.ballMaxNum = 1;
+        this.ballMaxNum = 10;
         this._ballList = [];
         this.isBallSporting = false;
         this.isFirstBallCome = false;
@@ -26,7 +30,7 @@ cc.Class({
 
         cc.wwx.OutPut.log('onLoad:', 'width', this.node.width);
         cc.wwx.OutPut.log('onLoad:', 'height', this.node.height);
-        this.center = cc.v2(this.node.width/ 2, 117);
+        this.center = cc.v2(this.node.width/ 2, 118);
 
         this.node.on(cc.Node.EventType.TOUCH_START, this._touchStartCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this._touchMoveCallBack, this);
@@ -34,6 +38,15 @@ cc.Class({
         this.node.on(cc.Node.EventType.TOUCH_CANCEL, this._touchCancelCallBack, this);
 
         this._createBall();
+        this.setBallNumTextPosition(this.ballMaxNum);
+    },
+    setBallNumTextPosition(ballNum)
+    {
+        this.ballNumText.setPosition(cc.p(this.center.x ,this.center.y + 20));
+        this.ballNumText.active = true;
+        var ballNumlabel = this.ballNumText.getComponent("cc.Label");
+        ballNumlabel.string =  "x" + ballNum;
+
     },
     _createBall:function()
     {
@@ -43,7 +56,7 @@ cc.Class({
             this.node.addChild(ballPrefab);
             let component = ballPrefab.getComponent('Ball');
             component._index = i + 1;
-            ballPrefab.setPosition(cc.p(this.node.width /2 , 117));
+            ballPrefab.setPosition(cc.p(this.node.width /2 , 118));
             ballPrefab.getComponent('Ball').dottedLineManager = this;
             this._ballList.push(ballPrefab);
         }
@@ -75,7 +88,6 @@ cc.Class({
             return;
         }
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
-        cc.wwx.OutPut.log('touchMoveCallBack:', 'dottedline', JSON.stringify(touchPos));
         this._drawDottleLine(touchPos);
     },
     _touchStartCallBack:function(event)
@@ -95,8 +107,6 @@ cc.Class({
         let DottedLineV2 = touchPoint.subSelf(this.center);
         var p1 = this.center;
         var p2 = touchPoint.mulSelf(100).addSelf(this.center);
-        cc.wwx.OutPut.log('_drawDottleLine:', 'P1', JSON.stringify(p1));
-        cc.wwx.OutPut.log('_drawDottleLine:', 'P2', JSON.stringify(p2));
 
         this._ctx.clear();
 

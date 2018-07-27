@@ -1,11 +1,14 @@
+var ObjBlock = require("ObjBlock");
+
 cc.Class({
-    extends: cc.Component,
+    extends: ObjBlock,
 
     properties: {
 
     },
     onLoad()
     {
-
+        this._super();
     }
+
 });
