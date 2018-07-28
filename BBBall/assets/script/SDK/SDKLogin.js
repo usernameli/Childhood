@@ -18,17 +18,22 @@ cc.Class({
         testLogin() {
             let self = this;
             let local_uuid = cc.wwx.Util.getLocalUUID();
-            let code = cc.wwx.Util.createUUID();
             let dataObj = {
-                snsId: 'wxapp:' + code,
-                uuid: local_uuid
+                snsId: 'wxapp:' + local_uuid,
+                appId: cc.wwx.SystemInfo.appId,
+                wxAppId: cc.wwx.SystemInfo.wxAppId,
+                clientId: cc.wwx.SystemInfo.clientId,
+                gameId: cc.wwx.SystemInfo.gameId,
+                imei: null,
+                uuid: local_uuid,
+                invite_id: cc.wwx.UserInfo.invite_id || 0
             };
 
             let sdkPath = cc.wwx.SystemInfo.loginUrl;
-            let completeUrl = sdkPath + 'open/v4/user/loginBySnsIDNoVerify' + '?' + cc.wwx.Util.dataToUrlStr(dataObj);
+            let completeUrl = sdkPath + 'open/v6/user/loginBySnsIdNoVerify' + '?' + cc.wwx.Util.dataToUrlStr(dataObj);
             let token = cc.sys.localStorage.getItem(self.SESSION_KEY);
 
-            if (token && token != '') {
+            if (token && token !== '') {
                 dataObj = {
                     appId: cc.wwx.SystemInfo.appId,
                     wxAppId: cc.wwx.SystemInfo.wxAppId,
@@ -39,7 +44,7 @@ cc.Class({
                     token: token,
                     invite_id: cc.wwx.UserInfo.invite_id || 0
                 };
-                completeUrl = sdkPath + 'open/v4/user/loginByToken' + '?' + cc.wwx.Util.dataToUrlStr(dataObj);
+                completeUrl = sdkPath + 'open/v6/user/loginByToken' + '?' + cc.wwx.Util.dataToUrlStr(dataObj);
 
             }
             cc.wwx.OutPut.log('completeUrl: ' + completeUrl);
@@ -190,7 +195,7 @@ cc.Class({
             cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeLoginSDKStart, [code, local_uuid, userInfo.nickName]);
             let that = this;
             wx.request({
-                url: sdkPath + 'open/v4/user/loginBySnsIDNoVerify',
+                url: sdkPath + 'open/v6/user/loginBySnsIdNoVerify',
                 header: {
                     'content-type': 'application/x-www-form-urlencoded'
                 },
@@ -235,11 +240,21 @@ cc.Class({
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.SDK_LOGIN_SUCCESS);
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_LOGIN_SUCCESS);
             let token = result.token;
-            cc.wwx.OutPut.log(null, 'token:' + token);
-            wx.setStorage({
-                key: this.SESSION_KEY,
-                data: token
-            });
+            cc.wwx.OutPut.log("updateUserInfo", 'token:' + token);
+            if(cc.wwx.IsWechatPlatform())
+            {
+                wx.setStorage({
+                    key: this.SESSION_KEY,
+                    data: token
+                });
+            }
+            else
+            {
+
+                cc.sys.localStorage.setItem(this.SESSION_KEY, token);
+
+            }
+
             this.initWebSocketUrl(result);
 
 

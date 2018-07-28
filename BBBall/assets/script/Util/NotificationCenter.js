@@ -37,7 +37,7 @@ cc.Class({
                         if (fn.scope != scope) {
                             return true;
                         } else {
-                            cc.wwx.OutPut.log('cc.wwx.NotificationCenter', 'ty.NotificationCenter : remove listener by Scope: ' + msg);
+                            cc.wwx.OutPut.log('cc.wwx.NotificationCenter', 'NotificationCenter : remove listener by Scope: ' + msg);
                             return false;
                         }
                     })

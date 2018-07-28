@@ -11,6 +11,7 @@ cc.Class({
         _index:0,
         _recoverFg:false,
         _isOnWall:false,
+        _isSports:false,
 
     },
 
@@ -18,6 +19,7 @@ cc.Class({
         this._speed = 1500;
         this._recoverFg = false;
         this._isOnWall = false;
+        this._isSports = false;
         this.body = this.getComponent(cc.RigidBody);//初始化速度linearVelocity = cc.v2(800,800)
         cc.wwx.OutPut.log('onLoad:', 'ball');
 
@@ -26,15 +28,17 @@ cc.Class({
     },
     _ballStartLinearVelocity:function(argument)
     {
+        cc.wwx.OutPut.log('_ballStartLinearVelocity:', '_index: ' + this._index, JSON.stringify(argument));
+
         let linearVelocity = argument["linearVelocity"].clone();
         linearVelocity.mulSelf(this._speed);
-
         setTimeout(function () {
             this.body.linearVelocity = linearVelocity;
             this._recoverFg = false;
             this._isOnWall = false;
+            this.body.active = true;
+            this._isSports = true;
             this.body.enabledContactListener = true;
-
             if(this._index === 1)
             {
                 // SML.Notify.trigger(SML.Event.ACTION_BALL_SPORTS,{});
@@ -104,6 +108,24 @@ cc.Class({
     },
     update(dt)
     {
+        if(this._isOnWall)
+        {
+            this.body.active = false;
+
+        }
+        if(this._isSports)
+        {
+            let nowLinearLength = this.body.linearVelocity;
+            //速度补偿
+            if(this._speed !== parseInt(nowLinearLength.mag()))
+            {
+                nowLinearLength.normalizeSelf();
+                nowLinearLength.mulSelf(this._speed);
+                this.body.linearVelocity = nowLinearLength;
+            }
+        }
+
+
         if(this.dottedLineManager.isFirstBallCome && this._isOnWall)
         {
             this.body.enabledContactListener = false;
@@ -113,6 +135,7 @@ cc.Class({
                 var moveTo = cc.moveTo(0.4, this.dottedLineManager.center);
                 this.node.runAction(moveTo);
                 this._recoverFg = true;
+                this._isSports = false;
             }
 
         }

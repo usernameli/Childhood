@@ -83,37 +83,37 @@ window.initMgr = function() {
         return false;
     };
 
-    cc.wwx.UserInfo = {
-        userId: 10001,
-        userName: 'BBName',
-        deviceId: '',
-        userPic: '',
-        authorCode: '',
-        systemType: 0, //1:苹果非iPhone X  2:iPhone X 3、安卓
-        wechatType: "6.6.1",//微信版本号
-        model: "未知设备",
-        system: "iOS 10.0.1",
-        loc: '',
-        scene_id : "",
-        scene_param : "",
-        invite_id : 0,
-        wxgame_session_key: "",
-        SDKVersion:''
-    };
 
     cc.wwx.EventType = {
         // tcp状态的事件
-        TCP_ERROR: 'tcp_error',
-        TCP_CLOSE: 'tcp_close',
-        TCP_OPENED: 'tcp_opened', // 连接建立好之后的回调
-        TCP_RECONNECT: 'tcp_reconnect',
-        TCP_RECEIVE: 'tcp_receive',//长连接接收任何消息的事件
+        CMD_BIND_USER: 'bind_user',
+        CMD_USER_INFO: 'user_info',
+        CMD_BAG: 'bag',
+        CMD_UPDATE_NOTIFY: 'update_notify',
+
+        MSG_TCP_OPEN: 'tcp_open',
+        MSG_TCP_CLOSE: 'tcp_close',
+        MSG_TCP_ERROR: 'tcp_error',             // tcp 失败
+        MSG_TCP_SEND_ERROR: 'tcp_send_error',   // tcp发消息，微信接口调用失败
+        MSG_TCP_ERROR_COUNT_MAX: 'tcp_error_count_max', //  tcp心跳失败次数达到上限
+        MSG_RECONNECT: 'reconnect',
+        MSG_SERVER_MESSAGE: 'server_message',
+
+        CMD_INVITE_INFO: 'invite_info', // 邀请信息
+
+        CMD_PAYMENT_LIST: 'store_config', // 支付 - 商品列表
+        CMD_PAYMENT_EXCHANGE: 'store', // 支付 - 金币兑换
+        CMD_PRODUCT_DELIVERY: 'prod_delivery', // 支付 - 金币兑换 回调
+        ACTION_PAYMENT_LIST_UPDATE : 'update',
+
+        ACTION_PAYMENT_EXCHANGE_BUY : 'buy',
 
         SDK_LOGIN_SUCCESS: 'sdk_login_success',
         SDK_LOGIN_FAIL: 'sdk_login_fail',
         WEIXIN_LOGIN_SUCCESS: 'weixin_login_success',
         WEIXIN_LOGIN_FAIL: 'weixin_login_fail',
 
+        MSG_UPDATE_DIAMOND: 'msg_update_diamond',       // 钻石信息更新
 
         GET_USER_FEATURE_SUCCESS: 'GET_USER_FEATURE_SUCCESS',
         GET_USER_FEATURE_FAIL: 'GET_USER_FEATURE_FAIL',
@@ -145,18 +145,16 @@ window.initMgr = function() {
         GETUSERINFO_SUCCESS: "GETUSERINFO_SUCCESS", //获取个人数据成功
         GETGROUPRANK_SUCCESS: "GETGROUPRANK_SUCCESS", //获取群排行数据
 
-        MSG_TCP_OPEN: 'tcp_open',
-        MSG_TCP_CLOSE: 'tcp_close',
-        MSG_TCP_ERROR: 'tcp_error',             // tcp 失败
-        MSG_TCP_SEND_ERROR: 'tcp_send_error',   // tcp发消息，微信接口调用失败
-        MSG_TCP_ERROR_COUNT_MAX: 'tcp_error_count_max', //  tcp心跳失败次数达到上限
-        MSG_RECONNECT: 'reconnect',
-        MSG_SERVER_MESSAGE: 'server_message',
+
 
         ACTION_BALL_START_LINEARVELOCITY:'ball_start_linearvelocity', //球球线性运动
         ACTION_BALL_STOP_LINEARVELOCITY:'action_ball_stop_linearvelocity',//球球线性运动停止
         ACTION_BALL_MOVE_DROP:'action_ball_move_drop',
+        ACTION_BALL_ADD_BALLS:'action_ball_add_balls',
+
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
+
+
     };
     cc.wwx.clickStatEventType = {
         clickStatEventTypeUserFrom : 99990001,//用户来源
@@ -183,6 +181,8 @@ window.initMgr = function() {
 
 
     };
+
+    cc.wwx.UserInfo  = require("../Game/UserInfo");
 
     cc.wwx.OutPut = require("../Util/LogOutPut");
 
@@ -224,7 +224,15 @@ window.initMgr = function() {
     cc.wwx.NodePool = require("../Util/NodePool");
     cc.wwx.NodePool.init();
 
+    cc.wwx.TCPMSG = require("../SDK/TCP_Msg");
+    cc.wwx.TCPRECEIVER = require("../SDK/TCP_Receiver");
+    cc.wwx.TCPRECEIVER.init();
 
+    cc.wwx.Loader = require("../Util/Loader");
+    cc.wwx.PopWindowManager = require("../Util/PopWindonwManager");
+    cc.wwx.TipManager = require("../Util/TipWindowManager");
+
+    cc.wwx.PayModel = require("../Model/PayModel");
 }
 
 cc.Class({
@@ -235,6 +243,12 @@ cc.Class({
     onLoad()
     {
         this.initComponent();
+
+        // 预加载
+        cc.wwx.TipManager.proload();
+        cc.wwx.PopWindowManager.preload();
+
+
         cc.wwx.SDKLogin.login();
         // cc.wwx.BiLog.uploadLogTimely("slsss");
     },

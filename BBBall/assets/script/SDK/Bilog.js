@@ -49,10 +49,7 @@ cc.Class({
          参数1是事件id，参数2是[],内含扩展参数
          60001事件id
          在查询工具，cloud id+game id+事件id即可找到,GDSS有前端日志查询工具
-         ty.BiLog.clickStat(ddz.StatEventInfo.DdzButtonClickInPlugin,
-         [ddz.PluginHall.Model.statInfoType[scope.index],ddz.GameId]);
 
-         // ty.BiLog.clickStat(hall5.BILogEvents.BILOG_EVENT_PLUGIN_UPDATE_SUCCESS,[hall5.BilogStatEvent.Plugin_Update_Success,gameid]);
          */
         uploadClickStatLogTimely: function (logtxt) {
             var callbackObj = this;

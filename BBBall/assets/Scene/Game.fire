@@ -1115,6 +1115,7 @@
     "ballNumText": {
       "__id__": 25
     },
+    "_tag": "DattleLineManager",
     "_ctx": null,
     "isBallSporting": false,
     "isFirstBallCome": false,

@@ -110,6 +110,8 @@ cc.Class({
                 let spawn = cc.spawn(moveTo, cc.scaleTo(0.4,0.001));
                 let self = this;
                 let seq = cc.sequence(spawn,cc.callFunc(function () {
+                    //增加球球数量
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,{plusNum: self._plusNum});
                     self.destroy();
                 }));
                 this.node.runAction(seq);

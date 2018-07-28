@@ -1,6 +1,28 @@
 /**
  * 微信小程序下TCP长连接使用websocket实现
  */
+var isSendIgnored = function(_json) {
+    var ignore = false;
+    // ignoreProtocols.forEach(function(row) {
+    //     if (_json.cmd == row.cmd && (!row.action || row.action == _json.params.action)) {
+    //         ignore = true;
+    //     }
+    // })
+
+    return ignore;
+}
+
+var isReceiveIgnored = function(_json) {
+    var ignore = false;
+    // ignoreProtocols.forEach(function(row) {
+    //     if (_json.cmd == row.cmd && (!row.action || row.action == _json.result.action)) {
+    //         ignore = true;
+    //     }
+    // })
+
+    return ignore;
+}
+
 if(CC_WECHATGAME)
 {
     cc.Class({
@@ -228,8 +250,8 @@ if(CC_WECHATGAME)
                         'params': {
                             'deviceId': cc.wwx.SystemInfo.deviceId,
                             'userId': cc.wwx.UserInfo.userId,
-                            'gameId': cc.wwx.UserInfo.appId,
-                            'clientId': cc.wwx.UserInfo.clientId
+                            'gameId': cc.wwx.SystemInfo.appId,
+                            'clientId': cc.wwx.SystemInfo.clientId
                         }
                     };
                     this.send(cmd);
@@ -289,7 +311,7 @@ else
                     self.beatHandleId = setInterval(function(){
                         self.updateHeartBeat();
                     }, 2 * 1000);
-                    cc.wwx.NotificationCenter.trigger(cc.wwx.clickStatEventType.MSG_TCP_OPEN);
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TCP_OPEN);
                 }
                 ws.onmessage = function (event) {
                     // 处理长连接的消息
@@ -308,8 +330,8 @@ else
                             var strLog = unescape(content.replace(/\\u/gi,'%u'));
                             cc.wwx.OutPut.info("[receive msg]: " + strLog);
                         } else {
-                            // var strLog = unescape(content.replace(/\\u/gi,'%u'));
-                            // cc.wwx.OutPut.log("[receive msg]: " + strLog);
+                            var strLog = unescape(content.replace(/\\u/gi,'%u'));
+                            cc.wwx.OutPut.log("[receive msg]: " + strLog);
                         }
                         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_SERVER_MESSAGE, _json);
                     }
@@ -385,10 +407,10 @@ else
                 var cmd = {
                     'cmd': 'heart_beat',
                     'params': {
-                        'deviceId': cc.wwx.UserInfo.deviceId,
+                        'deviceId': cc.wwx.SystemInfo.deviceId,
                         'userId': cc.wwx.UserInfo.userId,
-                        'gameId': cc.wwx.UserInfo.appId,
-                        'clientId': cc.wwx.UserInfo.clientId
+                        'gameId': cc.wwx.SystemInfo.appId,
+                        'clientId': cc.wwx.SystemInfo.clientId
                     }
                 };
                 this.send(cmd);

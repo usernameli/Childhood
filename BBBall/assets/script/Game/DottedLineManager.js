@@ -11,6 +11,7 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        _tag:"DattleLineManager",
         _ctx:null,//Graphics
         isBallSporting:false, //球开始射出
         isFirstBallCome:false,//第一个球回到地面
@@ -22,7 +23,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.ballMaxNum = 10;
+        this.ballMaxNum = 2;
         this._ballList = [];
         this.isBallSporting = false;
         this.isFirstBallCome = false;
@@ -39,6 +40,10 @@ cc.Class({
 
         this._createBall();
         this.setBallNumTextPosition(this.ballMaxNum);
+
+
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
+
     },
     setBallNumTextPosition(ballNum)
     {
@@ -46,6 +51,26 @@ cc.Class({
         this.ballNumText.active = true;
         var ballNumlabel = this.ballNumText.getComponent("cc.Label");
         ballNumlabel.string =  "x" + ballNum;
+
+    },
+    plusBallsCallBack(argument)
+    {
+        cc.wwx.OutPut.log(this._tag, 'plusBallsCallBack argument: ', JSON.stringify(argument));
+        let plusNum = argument["plusNum"];
+        let oldMaxNum = this.ballMaxNum;
+        this.ballMaxNum += plusNum;
+        for(let b = 0; b < plusNum;b++)
+        {
+            let ballPrefab = cc.instantiate(this.ballPrefab);
+            this.node.addChild(ballPrefab);
+            let component = ballPrefab.getComponent('Ball');
+            component._index = oldMaxNum + 1;
+            ballPrefab.setPosition(this.center);
+            ballPrefab.getComponent('Ball').dottedLineManager = this;
+            this._ballList.push(ballPrefab);
+        }
+        this.setBallNumTextPosition(this.ballMaxNum);
+
 
     },
     _createBall:function()

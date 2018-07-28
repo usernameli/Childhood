@@ -51,15 +51,15 @@ cc.Class({
                             //正常连接{"/api/bilog5/clientlog": "ok"}
                             if (res.data && res.data.hasOwnProperty('/api/bilog5/clientlog')
                                 && res.data['/api/bilog5/clientlog'] == "ok") {
-                                cc.wwx.OutPut.log('ty.HttpUtil.httpPost', 'post success! ');
+                                cc.wwx.OutPut.log('HttpUtil.httpPost', 'post success! ');
                             }
                         }
                         else {
-                            cc.wwx.OutPut.log('ty.HttpUtil.httpPost', 'statusCode:' + res.statusCode);
+                            cc.wwx.OutPut.log('HttpUtil.httpPost', 'statusCode:' + res.statusCode);
                         }
                     },
                     fail: function (res) {
-                        cc.wwx.OutPut.log('ty.HttpUtil.httpPost', 'post error! ' + cfgObj.url);
+                        cc.wwx.OutPut.log('HttpUtil.httpPost', 'post error! ' + cfgObj.url);
                     }
                 });
             }
@@ -67,23 +67,23 @@ cc.Class({
         },
         httpGet: function (cfgObj, successcb, failcb) {
             if (cc.wwx.IsWechatPlatform()) {
-                cc.wwx.OutPut.log('ty.HttpUtil.httpGet', 'url:' + cfgObj.url);
+                cc.wwx.OutPut.log('HttpUtil.httpGet', 'url:' + cfgObj.url);
                 wx.request({
                     url: cfgObj.url,
                     method: 'GET',
                     success: function (res) {
                         if (res.statusCode == 200) {
-                            cc.wwx.OutPut.log('ty.HttpUtil.httpGet', 'res:' + JSON.stringify(res.data));
+                            cc.wwx.OutPut.log('HttpUtil.httpGet', 'res:' + JSON.stringify(res.data));
                             if (successcb) {
                                 successcb(res.data);
                             }
                         }
                         else {
-                            cc.wwx.OutPut.log('ty.HttpUtil.httpGet', 'statusCode:' + res.statusCode);
+                            cc.wwx.OutPut.log('HttpUtil.httpGet', 'statusCode:' + res.statusCode);
                         }
                     },
                     fail: function (res) {
-                        cc.wwx.OutPut.log('ty.HttpUtil.httpGet', 'post error! ' + cfgObj.url);
+                        cc.wwx.OutPut.log('HttpUtil.httpGet', 'post error! ' + cfgObj.url);
                         if (failcb) {
                             failcb(res);
                         }

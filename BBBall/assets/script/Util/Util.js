@@ -26,7 +26,11 @@ cc.Class({
             var uuid = s.join("");
             return uuid;
         },
-
+        isUrl:function(url) {
+            if (typeof url != 'string') return false;
+            if (url.startsWith('http://') || url.startsWith('https://')) return true;
+            return false;
+        },
         getLocalUUID: function () {
             var local_uuid = this.getItemFromLocalStorage("LOCAL_UUID_KEY", "");
             if (!local_uuid) {
