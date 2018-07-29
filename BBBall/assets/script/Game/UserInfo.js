@@ -25,7 +25,7 @@ cc.Class({
             'diamondCount': 0   // 真实的钻石个数
         },
         SDKVersion:'',
-        parse: function (userInfoResult) {
+        parseUdata: function (userInfoResult) {
             this.loc = userInfoResult['loc'];
             this.udata = userInfoResult['udata'];
         },

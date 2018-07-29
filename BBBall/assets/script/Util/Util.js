@@ -31,6 +31,27 @@ cc.Class({
             if (url.startsWith('http://') || url.startsWith('https://')) return true;
             return false;
         },
+        //  判断ip地址格式
+        isIP: function(ip) {
+            var reSpaceCheck = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/;
+            if (reSpaceCheck.test(ip))
+            {
+                ip.match(reSpaceCheck);
+                if (RegExp.$1<=255&&RegExp.$1>=0
+                    &&RegExp.$2<=255&&RegExp.$2>=0
+                    &&RegExp.$3<=255&&RegExp.$3>=0
+                    &&RegExp.$4<=255&&RegExp.$4>=0)
+                {
+                    return true;
+                }else
+                {
+                    return false;
+                }
+            }else
+            {
+                return false;
+            }
+        },
         getLocalUUID: function () {
             var local_uuid = this.getItemFromLocalStorage("LOCAL_UUID_KEY", "");
             if (!local_uuid) {

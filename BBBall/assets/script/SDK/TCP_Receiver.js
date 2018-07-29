@@ -23,7 +23,13 @@ cc.Class({
             this.register(cc.wwx.EventType.CMD_PAYMENT_LIST, this._onPayment);
             this.register(cc.wwx.EventType.CMD_PAYMENT_EXCHANGE, this._onPaymentExchange);
             this.register(cc.wwx.EventType.CMD_PRODUCT_DELIVERY, this._onPaymentNotify);
+            this.register(cc.wwx.EventType.CMD_BAG, this._onMsgBag);
 
+        },
+        _onMsgBag(params)
+        {
+            var result = params['result'];
+            cc.wwx.UserInfo.parseBag(result);
         },
         _onPayment (params) {
             var result = params['result'];
@@ -72,7 +78,7 @@ cc.Class({
         _onMsgUserInfo(params)
         {
             var result = params.result;
-            cc.wwx.UserInfo.parse(result);
+            cc.wwx.UserInfo.parseUdata(result);
             cc.wwx.TipManager.showMsg("获取用户信息成功");
 
             if (parseInt(result.gameId) === cc.wwx.SystemInfo.appId) {
@@ -105,13 +111,14 @@ cc.Class({
             // Output.err('TCPErrCountMax');
             // SDK.login();
             // ddz.ConnectManager.hideWifiView();
-            cc.wwx.PopWindowManager.showWifiView();
+            cc.wwx.PopWindowManager.showWifiView("connecting_wifi");
 
-            // ddz.TipManager.showMsg('网络中断，正在尝试重新登录！', 5);
         },
         _onMsgTCPErr() {
             // cc.wwx.PopWindowManager.showWifiView();
-            cc.wwx.PopWindowManager.showWifiView();
+            cc.wwx.PopWindowManager.showWifiView("connecting_wifi");
+            // cc.wwx.TipManager.showMsg('网络中断，正在尝试重新登录！', 5);
+
 
         },
         _onMsgServerMessage(params)
