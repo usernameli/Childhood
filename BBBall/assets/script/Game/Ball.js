@@ -117,8 +117,10 @@ cc.Class({
         {
             let nowLinearLength = this.body.linearVelocity;
             //速度补偿
-            if(this._speed !== parseInt(nowLinearLength.mag()))
+            if(nowLinearLength.mag() > 0 && this._speed !== parseInt(nowLinearLength.mag()))
             {
+                cc.wwx.OutPut.log('update:', 'nowLinearLength', JSON.stringify(nowLinearLength));
+
                 nowLinearLength.normalizeSelf();
                 nowLinearLength.mulSelf(this._speed);
                 this.body.linearVelocity = nowLinearLength;

@@ -1530,7 +1530,7 @@
       "__id__": 2
     },
     "component": "GameHall",
-    "handler": "checkpointMode",
+    "handler": "classicMode",
     "customEventData": ""
   },
   {
@@ -3136,6 +3136,7 @@
     },
     "invateRewardPrefab": {
       "__uuid__": "d851e7a9-b36e-4e99-b3f9-43b1f7a2ef2f"
-    }
+    },
+    "_tag": "GameHall"
   }
 ]

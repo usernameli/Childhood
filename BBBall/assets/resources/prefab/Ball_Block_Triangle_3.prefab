@@ -95,7 +95,7 @@
       "__id__": 4
     },
     "_id": "",
-    "_opacity": 100,
+    "_opacity": 150,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -304,7 +304,7 @@
     },
     "_angularVelocity": 0,
     "_fixedRotation": false,
-    "enabledContactListener": false,
+    "enabledContactListener": true,
     "bullet": false
   },
   {
@@ -362,6 +362,9 @@
     },
     "splashNode": {
       "__id__": 2
+    },
+    "particlePrefab": {
+      "__uuid__": "e96fbc76-1881-4ef0-be40-b69b30332f49"
     },
     "_labelNum": 0
   },

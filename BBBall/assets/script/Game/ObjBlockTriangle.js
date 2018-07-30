@@ -13,6 +13,10 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        particlePrefab:{
+            default:null,
+            type:cc.Prefab
+        },
         _labelNum:0,
 
     },
@@ -23,10 +27,39 @@ cc.Class({
         this.labelText.string = this._labelNum.toString();
 
     },
+    onBeginContact(contact, self, other)
+    {
+        this.splashNode.active = true;
+
+        if (this._labelNum > 1)
+        {
+            this._labelNum -= 1;
+            this.labelText.string = this._labelNum.toString();
+
+        }
+        else
+        {
+            this.body.enabledContactListener = false;
+            cc.wwx.OutPut.log('onBeginContact:', 'ObjBlockTriangle', JSON.stringify(this._labelNum));
+            //生成粒子系统
+            let particle = cc.instantiate(this.particlePrefab);
+            particle.parent = this.node.parent;
+            particle.setPosition(this.node.position);
+            this.node.active = false;
+            this.node.destroy();
+        }
+    },
     onLoad()
     {
         this._super();
         this._tag ="ObjBlockTriangle";
-
+    },
+    update()
+    {
+        this._super();
+        if(this.splashNode.active)
+        {
+            this.splashNode.active = false;
+        }
     }
 });

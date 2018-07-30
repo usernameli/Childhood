@@ -33,11 +33,12 @@ cc.Class({
 
     },
     onBeginContact(contact, self, other) {
+        this.splashNode.active = true;
+
         if(this._labelNum > 1)
         {
             this._labelNum -= 1;
             this.labelText.string = this._labelNum.toString();
-            this.splashNode.active = true;
 
         }
         else

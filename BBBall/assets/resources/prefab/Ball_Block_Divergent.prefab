@@ -117,7 +117,7 @@
     },
     "_angularVelocity": 0,
     "_fixedRotation": false,
-    "enabledContactListener": false,
+    "enabledContactListener": true,
     "bullet": false
   },
   {
@@ -130,7 +130,7 @@
     "_enabled": true,
     "tag": 0,
     "_density": 1,
-    "_sensor": false,
+    "_sensor": true,
     "_friction": 0,
     "_restitution": 0,
     "body": null,
@@ -148,7 +148,12 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "_moveDrop": false,
+    "_width": 0,
+    "_height": 0,
+    "_space": 4,
+    "_tag": "ObjBlock"
   },
   {
     "__type__": "cc.PrefabInfo",

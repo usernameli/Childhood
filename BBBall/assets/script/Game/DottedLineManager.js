@@ -194,6 +194,8 @@ cc.Class({
         {
             lineLength= 100
         }
+        cc.wwx.OutPut.log('drawLine:', 'line', JSON.stringify(line));
+
         //设置虚线中每条线段的长度
         var length=5
         //根据每条线段的长度获得一个增量向量

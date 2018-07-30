@@ -24,6 +24,7 @@ cc.Class({
             'diamondInfo': {},
             'diamondCount': 0   // 真实的钻石个数
         },
+        playMode:"checkPoint",  //默认关卡类型 checkPoint:关卡 classic:经典模式 ball100:百球模式
         SDKVersion:'',
         parseUdata: function (userInfoResult) {
             this.loc = userInfoResult['loc'];

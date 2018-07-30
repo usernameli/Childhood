@@ -13,23 +13,35 @@ cc.Class({
             default:null,
             type:cc.Prefab
         },
+        _tag:"GameHall"
 
     },
     onLoad()
     {
-
+        if(!cc.wwx)
+        {
+            initMgr();
+        }
     },
     checkpointMode()
     {
         //关卡模式
+        cc.wwx.UserInfo.playMode = "checkPoint";
+        cc.director.loadScene("GameScene")
+
     },
     classicMode()
     {
         //经典模式
+        cc.wwx.UserInfo.playMode = "classic";
+
+        cc.director.loadScene("GameScene");
     },
     ball100Mode()
     {
         //白球模式
+        cc.wwx.UserInfo.playMode = "ball100";
+        cc.director.loadScene("GameScene");
     },
     signInReward()
     {

@@ -340,6 +340,11 @@
       "__id__": 1
     },
     "_enabled": true,
+    "_moveDrop": false,
+    "_width": 0,
+    "_height": 0,
+    "_space": 4,
+    "_tag": "ObjBlock",
     "labelText": {
       "__id__": 6
     },
@@ -349,9 +354,7 @@
     "particlePrefab": {
       "__uuid__": "e96fbc76-1881-4ef0-be40-b69b30332f49"
     },
-    "_labelNum": 0,
-    "_moveDrop": false,
-    "_space": 4
+    "_labelNum": 0
   },
   {
     "__type__": "cc.PrefabInfo",

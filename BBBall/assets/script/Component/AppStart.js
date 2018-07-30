@@ -41,29 +41,7 @@ window.initMgr = function() {
     cc.wwx.ShareInfo = {
         queryId : -1              //分享id
     };
-    //应用系统信息
-    cc.wwx.SystemInfo = {
-        clientId: 'H5_1.21_weixin.weixin.0-hall101.weixin.test',
-        intClientId: 23832,
-        cloudId:28,
-        version:2.25,
-        webSocketUrl: 'ws://192.168.10.88/',
-        loginUrl : "https://xdev.ks.shpuchi.com/",      //线上
-        // loginUrl : "http://localhost:9000/",      //自己仿真
-        //  loginUrl : "https://ztfz.nalrer.cn/",      //征途仿真
-        // loginUrl : "http://localhost:1337/open.andla.cn/"          //线上
-        shareManagerUrl : 'https://market.touch4.me/',
-        deviceId: 'wechatGame',
-        wxAppId: 'wx281737f4e987120b',
-        appId: 9999,
-        gameId: 101,
-        cdnPath:"https://xiaoyouxi.qiniu.andla.cn/pkgame/bbball",
-        remotePackPath:"remote_res/res.zip",
-        biLogServer : "https://cbi.touch4.me/api/bilog5/text",
-        errorLogServer : "https://clienterr.touch4.me/api/bilog5/clientlog",
-        // serverUrl : "https://openxyxfz.nalrer.cn/api/wx/",
-        serverUrl : "https://open.andla.cn/api/wx/"
-    };
+
     /**
      * 日志相关方法,若不符合项目组标准,可自行进行扩展
      */
@@ -84,78 +62,7 @@ window.initMgr = function() {
     };
 
 
-    cc.wwx.EventType = {
-        // tcp状态的事件
-        CMD_BIND_USER: 'bind_user',
-        CMD_USER_INFO: 'user_info',
-        CMD_BAG: 'bag',
-        CMD_UPDATE_NOTIFY: 'update_notify',
 
-        MSG_TCP_OPEN: 'tcp_open',
-        MSG_TCP_CLOSE: 'tcp_close',
-        MSG_TCP_ERROR: 'tcp_error',             // tcp 失败
-        MSG_TCP_SEND_ERROR: 'tcp_send_error',   // tcp发消息，微信接口调用失败
-        MSG_TCP_ERROR_COUNT_MAX: 'tcp_error_count_max', //  tcp心跳失败次数达到上限
-        MSG_RECONNECT: 'reconnect',
-        MSG_SERVER_MESSAGE: 'server_message',
-
-        CMD_INVITE_INFO: 'invite_info', // 邀请信息
-
-        CMD_PAYMENT_LIST: 'store_config', // 支付 - 商品列表
-        CMD_PAYMENT_EXCHANGE: 'store', // 支付 - 金币兑换
-        CMD_PRODUCT_DELIVERY: 'prod_delivery', // 支付 - 金币兑换 回调
-        ACTION_PAYMENT_LIST_UPDATE : 'update',
-
-        ACTION_PAYMENT_EXCHANGE_BUY : 'buy',
-
-        SDK_LOGIN_SUCCESS: 'sdk_login_success',
-        SDK_LOGIN_FAIL: 'sdk_login_fail',
-        WEIXIN_LOGIN_SUCCESS: 'weixin_login_success',
-        WEIXIN_LOGIN_FAIL: 'weixin_login_fail',
-
-        MSG_UPDATE_DIAMOND: 'msg_update_diamond',       // 钻石信息更新
-
-        GET_USER_FEATURE_SUCCESS: 'GET_USER_FEATURE_SUCCESS',
-        GET_USER_FEATURE_FAIL: 'GET_USER_FEATURE_FAIL',
-        GET_SHARE_CONFIG_SUCCESS: 'GET_SHARE_CONFIG_SUCCESS',
-        GET_SHARE_CONFIG_FAIL: 'GET_SHARE_CONFIG_FAIL',
-
-        GET_OPEN_DATA_RESULT_SUCCESS: "GET_OPEN_DATA_RESULT_SUCCESS",
-        GET_OPEN_DATA_RESULT_FAIL: "GET_OPEN_DATA_RESULT_FAIL",
-        GET_OPEN_DATA_RESULT_TIMEOUT: "GET_OPEN_DATA_RESULT_TIMEOUT",
-
-        SEND_HEART_BEAT: 'SEND_HEART_BEAT',
-        GAME_SHOW: 'GAME_SHOW',
-        GAME_HIDE: 'GAME_HIDE',
-
-        START_AUTHORIZATION_SUCCESS : 'START_AUTHORIZATION_SUCCESS', //授权成功
-        START_AUTHORIZATION_FAILED : 'START_AUTHORIZATION_FAILED', //授权失败
-
-        SHARE_RESULT : 'SHARE_RESULT_RET', 				//分享返回
-        FORCESHARE_SUCCESS : 'FORCE_SHARE_SUCESS', 			//暴力分享成功,
-        GROUP_SHARE_SUCCESS : 'GROUP_SHARE_SUCCESS', 	//群分享成功,
-        GETRFRIENDRANK_SUSSESS:"GETRFRIENDRANK_SUSSESS" ,    //获取好友排行成功
-
-        MSG_LOGIN_SUCCESS : "MSG_LOGIN_SUCCESS",
-
-        PROPAGATE_SHARE_SUCESS : "propagate_share_sucess",  //智能分享成功
-        PROPAGATE_SHARE_FAIL : "propagate_share_fail",  //智能分享失败
-
-        GETRFRIENDRANK_SUCCESS: "GETRFRIENDRANK_SUCCESS", //获取好友排行成功
-        GETUSERINFO_SUCCESS: "GETUSERINFO_SUCCESS", //获取个人数据成功
-        GETGROUPRANK_SUCCESS: "GETGROUPRANK_SUCCESS", //获取群排行数据
-
-
-
-        ACTION_BALL_START_LINEARVELOCITY:'ball_start_linearvelocity', //球球线性运动
-        ACTION_BALL_STOP_LINEARVELOCITY:'action_ball_stop_linearvelocity',//球球线性运动停止
-        ACTION_BALL_MOVE_DROP:'action_ball_move_drop',
-        ACTION_BALL_ADD_BALLS:'action_ball_add_balls',
-
-        GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
-
-
-    };
     cc.wwx.clickStatEventType = {
         clickStatEventTypeUserFrom : 99990001,//用户来源
         clickStatEventTypeUserShare : 99990002,//用户分享
@@ -181,6 +88,10 @@ window.initMgr = function() {
 
 
     };
+    //应用系统信息
+    cc.wwx.SystemInfo = require("../SDK/SystemInfo");
+
+    cc.wwx.EventType = require("../SDK/EventType");
 
     cc.wwx.UserInfo  = require("../Game/UserInfo");
 
