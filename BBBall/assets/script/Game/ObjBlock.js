@@ -20,6 +20,7 @@ cc.Class({
         cc.wwx.OutPut.log(this._tag,'onLoad');
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,this.ballMoveDrop,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,this.haveBombObj,this);
 
 
     },
@@ -32,7 +33,20 @@ cc.Class({
         cc.wwx.OutPut.log(this._tag,'onDestory');
 
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,this.ballMoveDrop,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,this.haveBombObj,this);
 
+    },
+    objsBreak()
+    {
+
+    },
+    haveBombObj(argument)
+    {
+        if(parseInt(argument["bomPosY"]) === this.node.y)
+        {
+            this.objsBreak();
+
+        }
     },
     ballMoveDrop:function(argument)
     {

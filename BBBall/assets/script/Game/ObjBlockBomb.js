@@ -12,6 +12,12 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        bomb:{
+            default:null,
+            type:cc.Node
+        },
+
+        _anim:null,
         _labelNum:0,
     },
     initLabelNum:function (num) {
@@ -20,6 +26,10 @@ cc.Class({
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();
 
+    },
+    objBombEndCallBack()
+    {
+        this.node.destroy();
     },
     onBeginContact(contact, self, other)
     {
@@ -33,11 +43,15 @@ cc.Class({
         else
         {
 
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,{bomPosY:this.node.getPositionY()});
+            this.bomb.active = false;
+            this._anim.play();
         }
     },
     onLoad()
     {
         this._super();
+        this._anim = this.getComponent(cc.Animation);
         this._tag = "ObjBlockBomb";
 
     },
@@ -47,6 +61,11 @@ cc.Class({
         if(this.splashNode.active)
         {
             this.splashNode.active = false;
+        }
+        if(this.bomb.active === false)
+        {
+            this.body.active = false;
+
         }
     }
 });

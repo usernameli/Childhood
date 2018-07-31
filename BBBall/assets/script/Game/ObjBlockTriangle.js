@@ -27,6 +27,18 @@ cc.Class({
         this.labelText.string = this._labelNum.toString();
 
     },
+    objsBreak()
+    {
+        this.body.enabledContactListener = false;
+        cc.wwx.OutPut.log('onBeginContact:', 'ObjBlockTriangle', JSON.stringify(this._labelNum));
+        //生成粒子系统
+        let particle = cc.instantiate(this.particlePrefab);
+        particle.parent = this.node.parent;
+        particle.setPosition(this.node.position);
+        this.node.active = false;
+        this.node.destroy();
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_OBJ_BREAK,{objPosition:this.node.position})
+    },
     onBeginContact(contact, self, other)
     {
         this.splashNode.active = true;
@@ -39,14 +51,7 @@ cc.Class({
         }
         else
         {
-            this.body.enabledContactListener = false;
-            cc.wwx.OutPut.log('onBeginContact:', 'ObjBlockTriangle', JSON.stringify(this._labelNum));
-            //生成粒子系统
-            let particle = cc.instantiate(this.particlePrefab);
-            particle.parent = this.node.parent;
-            particle.setPosition(this.node.position);
-            this.node.active = false;
-            this.node.destroy();
+            this.objsBreak();
         }
     },
     onLoad()

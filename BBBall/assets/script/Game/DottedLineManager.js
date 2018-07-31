@@ -23,7 +23,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.ballMaxNum = 2;
+        this.ballMaxNum = 10;
         this._ballList = [];
         this.isBallSporting = false;
         this.isFirstBallCome = false;

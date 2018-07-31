@@ -41,7 +41,7 @@ cc.Class({
             this.body.enabledContactListener = true;
             if(this._index === 1)
             {
-                // SML.Notify.trigger(SML.Event.ACTION_BALL_SPORTS,{});
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_SPORTS);
                 this.dottedLineManager.isBallSporting = true;
                 this.dottedLineManager.isFirstBallCome = false;
                 this.dottedLineManager.ballOnWallNum = 0;
@@ -119,7 +119,6 @@ cc.Class({
             //速度补偿
             if(nowLinearLength.mag() > 0 && this._speed !== parseInt(nowLinearLength.mag()))
             {
-                cc.wwx.OutPut.log('update:', 'nowLinearLength', JSON.stringify(nowLinearLength));
 
                 nowLinearLength.normalizeSelf();
                 nowLinearLength.mulSelf(this._speed);
