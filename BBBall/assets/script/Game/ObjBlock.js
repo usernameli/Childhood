@@ -21,6 +21,7 @@ cc.Class({
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,this.ballMoveDrop,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,this.haveBombObj,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
 
 
     },
@@ -34,6 +35,29 @@ cc.Class({
 
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,this.ballMoveDrop,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,this.haveBombObj,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
+
+    },
+    haveEliminate(argument)
+    {
+        if(argument["direction"] === "horizontal")
+        {
+            //水平消除
+            if(parseInt(argument["objPosition"].y) === this.node.y)
+            {
+                this.eliminateRowColumn();
+            }
+        }
+        else
+        {
+            if(parseInt(argument["objPosition"].x) === this.node.x)
+            {
+                this.eliminateRowColumn();
+            }
+        }
+    },
+    eliminateRowColumn()
+    {
 
     },
     objsBreak()
@@ -50,7 +74,6 @@ cc.Class({
     },
     ballMoveDrop:function(argument)
     {
-        cc.wwx.OutPut.log(this._tag,'ballMoveDrop:',JSON.stringify(argument));
 
         this._space = argument['space'];
         this._moveDrop = true;
@@ -75,6 +98,15 @@ cc.Class({
             this.node.setPosition(cc.p(posX,posY + (this._height + this._space) * -1));
 
             this._moveDrop = false;
+
+            if(posY === -754)
+            {
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DROP_WARNING)
+            }
+            else if(posY === -818)
+            {
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_TOUCHBOTTOM)
+            }
         }
     }
 })

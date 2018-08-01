@@ -67,11 +67,16 @@ cc.Class({
         ACTION_BALL_MOVE_DROP:'action_ball_move_drop',
         ACTION_BALL_ADD_BALLS:'action_ball_add_balls',
         ACTION_BALL_DEMOLITION_BOMB:'action_ball_demolition_bomb', //道具爆炸效果
+        ACTION_BALL_ITEM_ADD_BALL:'action_ball_item_add_ball', //道具添加球球效果
         ACTION_BALL_OBJ_BOMB:'action_ball_obj_bomb', //方块爆炸效果
+        ACTION_BALL_ELIMINATE:'action_ball_eliminate', //消除行或者列
         ACTION_BALL_OBJ_BOMB_END:'action_ball_obj_bomb_end', //方块爆炸效果
         ACTION_BALL_DEMOLITION_BOMB_END:'action_ball_demolition_bomb_end', //道具爆炸效果
         ACTION_OBJ_BREAK:'action_obj_break', //方块碰碎了
         ACTION_BALL_SPORTS:'action_ball_sports', //球球开始运动了
+        ACTION_BALL_TOUCHBOTTOM:'action_ball_touchbottom', //球球到了最底层
+        ACTION_BALL_DROP_WARNING:'action_ball_drop_warning', //球球马上到了最底层
+
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     }
 })

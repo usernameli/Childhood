@@ -30,8 +30,6 @@ cc.Class({
     },
 
     initLabelNum:function (num) {
-        cc.wwx.OutPut.log(this._tag,"initLabelNum",num);
-
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();
 
@@ -39,7 +37,6 @@ cc.Class({
     objsBreak()
     {
         this.body.enabledContactListener = false;
-        cc.wwx.OutPut.log('onBeginContact:', 'ObjBlockSquare', JSON.stringify(this._labelNum));
         //生成粒子系统
         let particle = cc.instantiate(this.particlePrefab);
         // this.node.addChild(particle);
@@ -48,6 +45,10 @@ cc.Class({
         this.node.active = false;
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_OBJ_BREAK,{objPosition:this.node.position})
         this.node.destroy();
+    },
+    eliminateRowColumn()
+    {
+        this.onBeginContact();
     },
     onBeginContact(contact, self, other) {
         this.splashNode.active = true;

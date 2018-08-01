@@ -27,7 +27,7 @@ cc.Class({
     {
         //关卡模式
         cc.wwx.UserInfo.playMode = "checkPoint";
-        cc.director.loadScene("GameScene")
+        cc.director.loadScene("CheckPoint")
 
     },
     classicMode()

@@ -164,7 +164,13 @@
       "__uuid__": "06e696ca-59dd-4305-8005-07ae539e7f7e"
     },
     "_plusNum": 0,
-    "_isOnWall": false
+    "_isOnWall": false,
+    "_canMove": false,
+    "_centerPos": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

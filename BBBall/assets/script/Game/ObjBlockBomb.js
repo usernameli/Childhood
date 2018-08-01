@@ -21,7 +21,6 @@ cc.Class({
         _labelNum:0,
     },
     initLabelNum:function (num) {
-        cc.wwx.OutPut.log(this._tag,"initLabelNum",num);
 
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();

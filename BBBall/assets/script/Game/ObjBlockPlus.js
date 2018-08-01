@@ -39,7 +39,6 @@ cc.Class({
     },
     ballStopAction(argument)
     {
-        cc.wwx.OutPut.log(this._tag, 'ballStopAction:', JSON.stringify(argument));
         this._centerPos = argument["center"];
         if(this._isOnWall)
         {
@@ -80,27 +79,23 @@ cc.Class({
 
         if(other.tag === 2)
         {
-            //碰的地面
             this._isOnWall = true;
-            // this.body.type = cc.RigidBodyType.Static
-            // this.body.gravityScale = 0.0;
         }
         else if(other.tag === 0)
         {
             //碰的小球
             this.body.gravityScale = 100.0;
 
+
         }
     },
     update()
     {
+
         if(this._isOnWall)
         {
             this.body.active = false;
-
-            this.body.type = cc.RigidBodyType.Static;//改为静态刚体
             this.body.enabledContactListener = false;//关闭碰撞
-
             if(this._canMove)
             {
                 this._canMove = false;

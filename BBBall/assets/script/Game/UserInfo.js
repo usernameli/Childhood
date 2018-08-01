@@ -20,9 +20,15 @@ cc.Class({
             "diamond": 0,               // 没有用到，请使用 bagData.diamondCount
             'chip':0,
         },
+        checkPointData:[],
         bagData: {
             'diamondInfo': {},
             'diamondCount': 0   // 真实的钻石个数
+        },
+        ballInfo:{
+            speed:1500,
+            ballType:"ballID",
+            ballNum:10,
         },
         playMode:"checkPoint",  //默认关卡类型 checkPoint:关卡 classic:经典模式 ball100:百球模式
         SDKVersion:'',

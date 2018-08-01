@@ -3,7 +3,7 @@ cc.Class({
     statics:{
         _MapMax:1000, //最大关卡数量
         _Map100Max:10, //白球模式关卡数量
-        _getMapData(MapID)
+        _getMapData(MapID,cb)
         {
             if(MapID < 1 || MapID > this._MapMax)
             {
@@ -14,7 +14,10 @@ cc.Class({
             cc.loader.loadRes(mapFile,function(err,data){
                 if(err){
                     cc.wwx.OutPut.warn('_getMapData mapFile 加载失败：' + mapFile);
-                    return [];
+                    if(cb)
+                    {
+                        cb([]);
+                    }
                 }else{
                     let mapData=data.split(new RegExp('\\r\\n|\\r|\\n'));
                     let mapFilter = [];
@@ -30,10 +33,7 @@ cc.Class({
                                 mapFilter.push(mapData[i].split(new RegExp(',')))
 
                             }
-
-
                         }
-
                     }
 
                     for(let i = 0; i < mapFilter.length;i++)
@@ -49,14 +49,15 @@ cc.Class({
                         }
 
                     }
-
-                    cc.wwx.OutPut.log('_getMapData:', 'MapCheckPoint', JSON.stringify(mapFilter));
-                    return mapFilter;
+                    if(cb)
+                    {
+                        cb(mapFilter);
+                    }
 
                 }
             });
         },
-        _get100MapData()
+        _get100MapData(cb)
         {
             let MapID = Math.floor(Math.random() * 10+1);
             let mapFile = 'map/mapdata100ball_' + MapID + ".txt";
@@ -64,7 +65,10 @@ cc.Class({
             cc.loader.loadRes(mapFile,function(err,data){
                 if(err){
                     cc.wwx.OutPut.warn('_get100MapData mapFile 加载失败：' + mapFile);
-                    return [];
+                    if(cb)
+                    {
+                        cb([]);
+                    }
                 }else{
                     let mapData=data.split(new RegExp('\\r\\n|\\r|\\n'));
                     let mapFilter = [];
@@ -100,9 +104,10 @@ cc.Class({
                         }
 
                     }
-                    cc.wwx.OutPut.log('_get100MapData:', 'MapCheckPoint', JSON.stringify(mapFilter));
-
-                    return mapFilter;
+                    if(cb)
+                    {
+                        cb(mapFilter);
+                    }
 
                 }
             });
@@ -117,13 +122,13 @@ cc.Class({
             return this._Map100Max;
         },
         //获取一个关卡的数据
-        getMapCheckPointData(mapID)
+        getMapCheckPointData(mapID,cb)
         {
-            return this._getMapData(mapID);
+            this._getMapData(mapID,cb);
         },
-        get100MapCheckPointData()
+        get100MapCheckPointData(cb)
         {
-            return this._get100MapData()
+            this._get100MapData(cb)
         }
     }
 })

@@ -21,7 +21,6 @@ cc.Class({
 
     },
     initLabelNum:function (num) {
-        cc.wwx.OutPut.log("ObjBlockTriangle","initLabelNum",num);
 
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();
@@ -38,6 +37,10 @@ cc.Class({
         this.node.active = false;
         this.node.destroy();
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_OBJ_BREAK,{objPosition:this.node.position})
+    },
+    eliminateRowColumn()
+    {
+        this.onBeginContact();
     },
     onBeginContact(contact, self, other)
     {

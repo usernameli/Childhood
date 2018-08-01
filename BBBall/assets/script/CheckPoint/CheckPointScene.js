@@ -10,5 +10,11 @@ cc.Class({
         {
             initMgr();
         }
-    }
+
+    },
+    clickGoHome()
+    {
+        cc.director.loadScene("GameHall");
+
+    },
 })

@@ -14,6 +14,15 @@ cc.Class({
             default:null,
             type:cc.Prefab,
         },
+        itemNode:{
+            default:null,
+            type:cc.Node
+        },
+        recoveryBTN:{
+            default:null,
+            type:cc.Node
+        },
+
         _tag:"gameScene",
         _score:0,
         _sumScore:0,
@@ -28,13 +37,17 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB_END,this.demolitionBombEnd,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_SPORTS,this.ballSports,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_OBJ_BREAK,this.ballBomb,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
 
     },
     onDestroy()
     {
         cc.wwx.OutPut.log(this._tag,"onDestroy");
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB_END,this.demolitionBombEnd,this);
+
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_SPORTS,this.ballSports,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_OBJ_BREAK,this.ballBomb,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
 
     },
     ballBomb(argument)
@@ -68,6 +81,14 @@ cc.Class({
         //重置分数
         this._score = 10;
         this._sumScore = 0;
+        this.itemNode.active = false;
+        this.recoveryBTN.active = true;
+
+    },
+    ballStopAction()
+    {
+        this.itemNode.active = true;
+        this.recoveryBTN.active = false;
 
     },
     objBombBegin()
@@ -94,7 +115,7 @@ cc.Class({
     item2Click()
     {
         //
-        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB);
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL);
 
     },
     item3Click()

@@ -11,6 +11,10 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        itemAddBallsParticlePrefab:{
+            default:null,
+            type:cc.Prefab
+        },
         _tag:"DattleLineManager",
         _ctx:null,//Graphics
         isBallSporting:false, //球开始射出
@@ -23,7 +27,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.ballMaxNum = 10;
+        this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
         this._ballList = [];
         this.isBallSporting = false;
         this.isFirstBallCome = false;
@@ -38,12 +42,27 @@ cc.Class({
         this.node.on(cc.Node.EventType.TOUCH_END, this._touchEndCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_CANCEL, this._touchCancelCallBack, this);
 
-        this._createBall();
-        this.setBallNumTextPosition(this.ballMaxNum);
+        this._createBall(this.ballMaxNum,0);
 
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
 
+    },
+    onDestroy()
+    {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
+    },
+    itemAddBallsCallBack()
+    {
+        let particle = cc.instantiate(this.itemAddBallsParticlePrefab);
+        this.node.addChild(particle);
+        particle.setPosition(this.center);
+
+        let oldMaxNum = this.ballMaxNum;
+        this.ballMaxNum += 5;
+        this._createBall(5,oldMaxNum);
     },
     setBallNumTextPosition(ballNum)
     {
@@ -59,12 +78,18 @@ cc.Class({
         let plusNum = argument["plusNum"];
         let oldMaxNum = this.ballMaxNum;
         this.ballMaxNum += plusNum;
-        for(let b = 0; b < plusNum;b++)
+        this._createBall(plusNum,oldMaxNum);
+
+
+    },
+    _createBall:function(ballNum,index)
+    {
+        for(let i = 0; i < ballNum;i++)
         {
             let ballPrefab = cc.instantiate(this.ballPrefab);
             this.node.addChild(ballPrefab);
             let component = ballPrefab.getComponent('Ball');
-            component._index = oldMaxNum + 1;
+            component._index = index + i + 1;
             ballPrefab.setPosition(this.center);
             ballPrefab.getComponent('Ball').dottedLineManager = this;
             this._ballList.push(ballPrefab);
@@ -72,19 +97,6 @@ cc.Class({
         this.setBallNumTextPosition(this.ballMaxNum);
 
 
-    },
-    _createBall:function()
-    {
-        for(let i = 0; i < this.ballMaxNum;i++)
-        {
-            let ballPrefab = cc.instantiate(this.ballPrefab);
-            this.node.addChild(ballPrefab);
-            let component = ballPrefab.getComponent('Ball');
-            component._index = i + 1;
-            ballPrefab.setPosition(cc.p(this.node.width /2 , 118));
-            ballPrefab.getComponent('Ball').dottedLineManager = this;
-            this._ballList.push(ballPrefab);
-        }
     },
     _touchCancelCallBack:function()
     {
@@ -194,7 +206,6 @@ cc.Class({
         {
             lineLength= 100
         }
-        cc.wwx.OutPut.log('drawLine:', 'line', JSON.stringify(line));
 
         //设置虚线中每条线段的长度
         var length=5

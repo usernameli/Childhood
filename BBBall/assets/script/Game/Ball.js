@@ -53,11 +53,6 @@ cc.Class({
 
     },
 
-    _ballLStopinearVelocity:function(argument)
-    {
-        cc.wwx.OutPut.log('_ballLStopinearVelocity:', 'ball', JSON.stringify(argument));
-        this.body.linearVelocity = cc.v2(0,0);
-    },
     onBeginContact(contact, self, other) {
 
         if(this.dottedLineManager.isBallSporting === false)
@@ -119,7 +114,6 @@ cc.Class({
             //速度补偿
             if(nowLinearLength.mag() > 0 && this._speed !== parseInt(nowLinearLength.mag()))
             {
-
                 nowLinearLength.normalizeSelf();
                 nowLinearLength.mulSelf(this._speed);
                 this.body.linearVelocity = nowLinearLength;
