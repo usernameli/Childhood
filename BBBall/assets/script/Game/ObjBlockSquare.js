@@ -28,7 +28,13 @@ cc.Class({
         this._tag ="ObjBlockSquare";
         this._labelNum = 0;
     },
+    randomElimination()
+    {
+        let randNum = Math.floor(Math.random() * this._labelNum+1);
+        this._labelNum = randNum;
+        this.labelText.string = this._labelNum.toString();
 
+    },
     initLabelNum:function (num) {
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();

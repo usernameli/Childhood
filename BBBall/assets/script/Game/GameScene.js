@@ -22,7 +22,6 @@ cc.Class({
             default:null,
             type:cc.Node
         },
-
         _tag:"gameScene",
         _score:0,
         _sumScore:0,
@@ -105,6 +104,7 @@ cc.Class({
         this.demolitionBomb.active = false;
 
     },
+
     item1Click()
     {
         //爆炸销毁一部分砖块
@@ -115,17 +115,24 @@ cc.Class({
     item2Click()
     {
         //
+        //添加5个小球
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL);
 
     },
+
     item3Click()
     {
-        //
+        //消除最后一行
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS);
+
     },
     item4Click()
     {
-        //
-    }
+        //随机释放四个射线方块
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
+
+    },
+
 
 
 });

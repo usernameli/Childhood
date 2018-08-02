@@ -61,8 +61,13 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        aLineOfExplosionsNode:{
+            default:null,
+            type:cc.Node
+        },
         _objsPrefab:[],//预制资源列表
         _space:4,//方块与方块边界
+        _emptyGrid:[],
         _boundary:12,//方块与边界的距离
         _showRowNum:0,//先显示7行
         _showCocumn:11,//11列
@@ -71,15 +76,18 @@ cc.Class({
         _currentRowI:-1,//当前显示第几行了
         _currentRowJ:-1,
         _tag:"ObjManager",
+        _gameOver:false,
         _pointCheckList:null,//关卡数据
     },
     onLoad()
     {
 
-
+        this._emptyGrid = [];
+        this._gameOver = true;
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DROP_WARNING,this.showWarningAnim,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
 
         if(cc.wwx.UserInfo.playMode === "checkPoint")
         {
@@ -97,17 +105,96 @@ cc.Class({
             this._classicGame();
         }
 
+        //计算方块矩阵里面的空位置
+
+        this.findEmptyGridPosition();
+
+    },
+    findEmptyGridPosition()
+    {
+        this._emptyGrid = [];
+        let lowestPosY = this.findLastRowPosY();
+        let topPosY = this.findTopRowPosY(lowestPosY);
+        for(let posY = lowestPosY;posY <= topPosY;posY += (this._objWidth + this._space))
+        {
+            for(let k = 0; k < this._showCocumn;k++)
+            {
+                let posX =  this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space);
+
+                let find = false;
+                for (var i = 0; i < this.node.childrenCount; ++i)
+                {
+                    let name = this.node.children[i].name;
+                    let x = this.node.children[i].x;
+                    let y = this.node.children[i].y;
+
+                    if(name === "WarnNode" || name === "ALineOfExplosions")
+                    {
+                        continue;
+                    }
+
+                    if(x === posX && y === posY)
+                    {
+                        find = true;
+                        break;
+                    }
+                }
+                if(!find)
+                {
+                    this._emptyGrid.push({posX:posX,posY:posY});
+                }
+            }
+
+        }
+
+        cc.wwx.OutPut.log(this._tag,"findEmptyGridPosition",JSON.stringify(this._emptyGrid));
+
+    },
+    randomPlacement4Eliminate()
+    {
+        this.findEmptyGridPosition();
+
+        let eliminateType = [7,8];
+        let loopLenth = 4;
+        if(this._emptyGrid.length < loopLenth)
+        {
+            loopLenth = this._emptyGrid.length;
+        }
+        let haveIndexList = [];
+        while (haveIndexList.length < loopLenth)
+        {
+            let index = Math.floor(Math.random() * this._emptyGrid.length);
+            if(haveIndexList.contains(index))
+            {
+                continue;
+            }
+            let objPrefab = cc.instantiate(this.objEliminatePrefab);
+            this.node.addChild(objPrefab);
+            objPrefab.setPosition(cc.p(this._emptyGrid[index].posX , this._emptyGrid[index].posY));
+
+            haveIndexList.push(index);
+        }
 
     },
     showWarningAnim()
     {
         if(this.warningNode.active === false)
         {
-            this.warningNode.active = true;
             let anim = this.warningNode.getComponent(cc.Animation);
             let animState = anim.play();
             animState.wrapMode = cc.WrapMode.Loop;
+            this.warningNode.active = true;
 
+
+        }
+    },
+    hideWarningAnim()
+    {
+        if(this.warningNode.active)
+        {
+            let anim = this.warningNode.getComponent(cc.Animation);
+            anim.stop();
+            this.warningNode.active = false;
         }
     },
     haveEliminate(argument)
@@ -137,7 +224,8 @@ cc.Class({
         cc.wwx.OutPut.log(this._tag,"onDestroy");
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DROP_WARNING,this.showWarningAnim,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
 
     },
     _classicGame()
@@ -154,9 +242,9 @@ cc.Class({
             let objsID = Math.floor(Math.random() * objsList.length+1);
             if(objsList[objsID])
             {
-                this._createObjBlock(objsList[objsID],this._showRowNum,k,1,0)
-
+                this._createObjBlock(objsList[objsID],this._showRowNum,k,1,0);
             }
+
 
         }
         this._showRowNum += 1;
@@ -189,8 +277,8 @@ cc.Class({
                         let dataValueObj = dataList[k];
                         let dataValueLabel = pointCheckData[j][k];
                         this._createObjBlock(dataValueObj,dataValueLabel,k,this._showRowNum,haveShowRow)
-
                     }
+
                 }
                 haveShowRow += 1;
                 //_showRowNum行显示完了 退出循环
@@ -204,6 +292,67 @@ cc.Class({
             }
 
         }
+
+
+    },
+    findTopRowPosY(bottomPosY)
+    {
+        let posY = bottomPosY;
+        for (var i = 0; i < this.node.childrenCount; ++i)
+        {
+            var name = this.node.children[i].name;
+            if(name === "Ball_Block_Square" ||
+                name === "Ball_Block_Triangle_3" ||
+                name === "Ball_Block_Triangle_5" ||
+                name === "Ball_Block_Triangle_6" ||
+                name === "Ball_Block_Triangle_4")
+            {
+                if(this.node.children[i].y > posY)
+                {
+                    posY = this.node.children[i].y
+                }
+            }
+
+
+        }
+
+        return posY;
+    },
+    findLastRowPosY()
+    {
+        let posY = 0;
+        for (var i = 0; i < this.node.childrenCount; ++i)
+        {
+            var name = this.node.children[i].name;
+            if(name === "Ball_Block_Square" ||
+                name === "Ball_Block_Triangle_3" ||
+                name === "Ball_Block_Triangle_5" ||
+                name === "Ball_Block_Triangle_6" ||
+                name === "Ball_Block_Triangle_4")
+            {
+                if(this.node.children[i].y < posY)
+                {
+                    posY = this.node.children[i].y
+                }
+            }
+
+
+        }
+
+        return posY;
+    },
+    aLineOfExplosions()
+    {
+        let posY = this.findLastRowPosY();
+        if(posY === 0)
+        {
+            return;
+        }
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,{bomPosY:posY});
+        this.aLineOfExplosionsNode.setPosition(cc.p(this.node.width/2,posY));
+        this.aLineOfExplosionsNode.active = true;
+        let anim = this.aLineOfExplosionsNode.getComponent(cc.Animation);
+        anim.play();
     },
     _createObjBlock:function(dataValueObj,dataValueLabel,column,showRowNum,haveShowRow)
     {
@@ -289,14 +438,12 @@ cc.Class({
 
             }
             objPrefab.setPosition(cc.p(posX , posY));
+            cc.wwx.OutPut.log("objPrefab: ",JSON.stringify(objPrefab.getPosition()));
         }
     },
     ballStopAction:function(argument)
     {
-
-
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,{space:this._space});
-
         if(cc.wwx.UserInfo.playMode === "classic")
         {
             this._createOneRowObjs();
@@ -329,6 +476,10 @@ cc.Class({
             this._currentRowJ -= 1;
 
         }
+
+
+
+
     },
     _judgeArrayValue:function (dataList) {
         let isFg = false;
@@ -345,4 +496,26 @@ cc.Class({
         }
         return isFg;
     },
+    update()
+    {
+
+        if(this._gameOver)
+        {
+            return;
+        }
+        let posY = this.findLastRowPosY();
+        if(posY === -818)
+        {
+            this.showWarningAnim();
+        }
+        else if(posY === -882)
+        {
+            this._gameOver = true;
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_TOUCHBOTTOM)
+        }
+        else
+        {
+            this.hideWarningAnim();
+        }
+    }
 });

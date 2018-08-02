@@ -444,6 +444,25 @@ cc.Class({
         wstr_hmac_md5(key, data) {
             return this.binl2str(this.core_hmac_md5(key, data))
         },
+        _preventFastClicks()
+        {
+            if(this.btnClick === true)
+            {
+                return false;
+            }
+            else
+            {
+                this.btnClick = true;
+                let self = this;
+                setTimeout(function () {
+                    self.btnClick = false;
+                }, 5000);
+
+                return true;
+            }
+
+        },
+
     }
 });
 

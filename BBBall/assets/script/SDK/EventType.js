@@ -76,6 +76,9 @@ cc.Class({
         ACTION_BALL_SPORTS:'action_ball_sports', //球球开始运动了
         ACTION_BALL_TOUCHBOTTOM:'action_ball_touchbottom', //球球到了最底层
         ACTION_BALL_DROP_WARNING:'action_ball_drop_warning', //球球马上到了最底层
+        ACTION_A_LINE_OF_EXPLOSIONS:'action_a_line_of_explosions', //消除最后一行
+        RANDOM_PLACEMENT_4_ELIMINATE:'random_placement_4_eliminate', //随机放置4个射线
+        ACTION_RECOVERY_BALL:'action_recovery_ball', //收回球球
 
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     }

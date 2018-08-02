@@ -38,6 +38,13 @@ cc.Class({
         this.node.destroy();
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_OBJ_BREAK,{objPosition:this.node.position})
     },
+    randomElimination()
+    {
+        let randNum = Math.floor(Math.random() * this._labelNum+1);
+        this._labelNum = randNum;
+        this.labelText.string = this._labelNum.toString();
+
+    },
     eliminateRowColumn()
     {
         this.onBeginContact();

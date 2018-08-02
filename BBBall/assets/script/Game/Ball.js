@@ -24,7 +24,7 @@ cc.Class({
         cc.wwx.OutPut.log('onLoad:', 'ball');
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_START_LINEARVELOCITY, this._ballStartLinearVelocity, this);
-        // cc.wwx.NotificationCenter.listen(SML.Event.ACTION_BALL_STOP_LINEARVELOCITY, this._ballLStopinearVelocity, this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RECOVERY_BALL, this._ballRecoverNow, this);
     },
     _ballStartLinearVelocity:function(argument)
     {
@@ -52,7 +52,19 @@ cc.Class({
         }.bind(this), this._index * 50);
 
     },
+    _ballRecoverNow()
+    {
+        this.body.linearVelocity = cc.v2(0,0);
+        this._isOnWall = true;
+        this._isSports = false;
+        this.dottedLineManager.isBallSporting = false;
+        this.dottedLineManager.setBallNumTextPosition(this.dottedLineManager.ballMaxNum);
+        // this.body.enabledContactListener = false;
+        this.node.runAction(cc.moveTo(0.1,this.dottedLineManager.center),cc.callFunc(function () {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:this.dottedLineManager.center});
+        }));
 
+    },
     onBeginContact(contact, self, other) {
 
         if(this.dottedLineManager.isBallSporting === false)
@@ -68,17 +80,13 @@ cc.Class({
                 console.log("碰撞地面" + this._index);
 
                 this.body.linearVelocity = cc.v2(0,0);
-                this.body.enabledContactListener = true;
 
                 if(this.dottedLineManager.isFirstBallCome === false)
                 {
                     var worldManifold = contact.getWorldManifold();
                     var points = worldManifold.points;
-                    // var normal = worldManifold.normal;
                     cc.wwx.OutPut.log('onBeginContact:', 'ball points', JSON.stringify(points[0]));
                     let posX =  Math.ceil(points[0].x);
-                    let posY =  Math.ceil(points[0].y);
-                    //
                     this.dottedLineManager.isFirstBallCome = true;
                     this.dottedLineManager.center = cc.p(posX,118);
 

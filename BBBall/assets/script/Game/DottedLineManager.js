@@ -141,9 +141,16 @@ cc.Class({
     _drawDottleLine: function (point) {
 
         let touchPoint = cc.v2(point);
-        let DottedLineV2 = touchPoint.subSelf(this.center);
+
+        if(touchPoint.y <= this.center.y)
+        {
+            return;
+        }
+        touchPoint.subSelf(this.center);
+
         var p1 = this.center;
         var p2 = touchPoint.mulSelf(100).addSelf(this.center);
+
 
         this._ctx.clear();
 
@@ -247,6 +254,11 @@ cc.Class({
             this._ctx.fill();
         }
 
+    },
+    //回收球球call back
+    recoveryBallCallBack()
+    {
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RECOVERY_BALL)
     },
     // called every frame
     update: function (dt) {

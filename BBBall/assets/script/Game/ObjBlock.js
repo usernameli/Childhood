@@ -22,7 +22,7 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,this.ballMoveDrop,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,this.haveBombObj,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
-
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB,this.randomElimination,this);
 
     },
     start()
@@ -36,6 +36,12 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,this.ballMoveDrop,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,this.haveBombObj,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB,this.randomElimination,this);
+
+    },
+    //随机销毁一部分方块
+    randomElimination()
+    {
 
     },
     haveEliminate(argument)
@@ -62,7 +68,7 @@ cc.Class({
     },
     objsBreak()
     {
-
+        this.node.destroy();
     },
     haveBombObj(argument)
     {
@@ -90,6 +96,7 @@ cc.Class({
     update()
     {
 
+
         if(this._moveDrop)
         {
 
@@ -99,14 +106,6 @@ cc.Class({
 
             this._moveDrop = false;
 
-            if(posY === -754)
-            {
-                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DROP_WARNING)
-            }
-            else if(posY === -818)
-            {
-                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_TOUCHBOTTOM)
-            }
         }
     }
 })
