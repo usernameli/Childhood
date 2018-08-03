@@ -16,7 +16,7 @@ cc.Class({
          * @param {[type]}   delay     [description]
          */
         setTimer: function (obj, callback, interval, repeatNum, delay) {
-            if (obj && obj._TAG) {
+            if (obj && obj._tag) {
                 cc.wwx.OutPut.log('cc.wwx.Timer', '----------in setTimer----------' + (obj._TAG ? obj._TAG : ''));
             }
             var scheduler = cc.director.getScheduler();

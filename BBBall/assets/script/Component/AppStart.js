@@ -140,10 +140,12 @@ window.initMgr = function() {
     cc.wwx.TCPRECEIVER.init();
 
     cc.wwx.Loader = require("../Util/Loader");
-    cc.wwx.PopWindowManager = require("../Util/PopWindonwManager");
-    cc.wwx.TipManager = require("../Util/TipWindowManager");
+    cc.wwx.PopWindowManager = require("../Window/PopWindonwManager");
+    cc.wwx.TipManager = require("../Window/TipWindowManager");
 
     cc.wwx.PayModel = require("../Model/PayModel");
+
+    cc.wwx.SceneManager = require("../Util/SceneManager");
 }
 
 cc.Class({

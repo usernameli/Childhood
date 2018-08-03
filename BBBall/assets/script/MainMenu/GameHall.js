@@ -1,18 +1,6 @@
 cc.Class({
     extends:cc.Component,
     properties:{
-        shopPrefab:{
-            default:null,
-            type:cc.Prefab
-        },
-        signInPrefab:{
-            default:null,
-            type:cc.Prefab
-        },
-        invateRewardPrefab:{
-            default:null,
-            type:cc.Prefab
-        },
         _tag:"GameHall"
 
     },
@@ -27,7 +15,8 @@ cc.Class({
     {
         //关卡模式
         cc.wwx.UserInfo.playMode = "checkPoint";
-        cc.director.loadScene("CheckPoint")
+        cc.wwx.SceneManager.switchScene("CheckPoint");
+
 
     },
     classicMode()
@@ -35,19 +24,27 @@ cc.Class({
         //经典模式
         cc.wwx.UserInfo.playMode = "classic";
 
-        cc.director.loadScene("GameScene");
+        cc.wwx.SceneManager.switchScene("GameScene");
+
     },
     ball100Mode()
     {
         //白球模式
+        cc.wwx.UserInfo.ballInfo.ballNum = 100;
         cc.wwx.UserInfo.playMode = "ball100";
-        cc.director.loadScene("GameScene");
+
+        cc.wwx.MapCheckPoint.get100MapCheckPointData(function (checkPointData) {
+            cc.wwx.OutPut.log("clickItemCallBack: " + JSON.stringify(checkPointData));
+            cc.wwx.UserInfo.checkPointData = checkPointData;
+            cc.wwx.SceneManager.switchScene("GameScene");
+
+        });
+
     },
     signInReward()
     {
         //签到奖励
-        let ballPrefab = cc.instantiate(this.signInPrefab);
-        this.node.addChild(ballPrefab);
+        cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn");
 
     },
     showAdsReward()
@@ -61,14 +58,21 @@ cc.Class({
     shop()
     {
         //商城
-        let ballPrefab = cc.instantiate(this.shopPrefab);
-        this.node.addChild(ballPrefab);
+        // let ballPrefab = cc.instantiate(this.shopPrefab);
+        // this.node.addChild(ballPrefab);
+
+        cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop");
+
     },
     reward()
     {
         //奖励
-        let ballPrefab = cc.instantiate(this.invateRewardPrefab);
-        this.node.addChild(ballPrefab);
+        // let ballPrefab = cc.instantiate(this.invateRewardPrefab);
+        // this.node.addChild(ballPrefab);
+
+        cc.wwx.PopWindowManager.popWindow("prefab/invate/Invate");
+
+
     },
     skin()
     {

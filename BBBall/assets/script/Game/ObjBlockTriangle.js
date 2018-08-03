@@ -29,7 +29,6 @@ cc.Class({
     objsBreak()
     {
         this.body.enabledContactListener = false;
-        cc.wwx.OutPut.log('onBeginContact:', 'ObjBlockTriangle', JSON.stringify(this._labelNum));
         //生成粒子系统
         let particle = cc.instantiate(this.particlePrefab);
         particle.parent = this.node.parent;

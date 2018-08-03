@@ -3,13 +3,30 @@ cc.Class({
     statics:{
         isConnecting: false,
         _windowList:[],
+        _tag:"windowManager",
         preload()
         {
-            cc.loader.loadRes('prefab/connecting_wifi', cc.Prefab, function(completedCount, totalCount, item) {
-                // ty.Output.log('preload | connecting_wifi progress:' + completedCount + '/' + totalCount);
-            }, function(error, prefab) {
-                // ty.Output.log('preload | connecting_wifi finished:' + ddz.GlobalFuncs.obj2String1(error));
-            })
+
+            let prefabList = [
+                'prefab/connecting_wifi',
+                'prefab/GameStopWindow',
+                'prefab/PopBoxWindow',
+                'prefab/Invate',
+                'prefab/SignIn',
+                'prefab/node',
+                'prefab/Shop',
+            ];
+
+            for(let i = 0; i < prefabList.length;i++)
+            {
+                cc.loader.loadRes(prefabList[i], cc.Prefab, function(completedCount, totalCount, item) {
+                    cc.wwx.OutPut.log(prefabList[i],'preload  progress:' + completedCount + '/' + totalCount);
+                }, function(error, prefab) {
+                    cc.wwx.OutPut.log(prefabList[i],'preload  finished:' + cc.wwx.Util.obj2String1(error));
+                });
+            }
+
+
         },
         getScene () {
             var scene = cc.director.getScene();
@@ -33,10 +50,12 @@ cc.Class({
 
         remvoeWindowByName(windowName)
         {
+            cc.wwx.OutPut.log(this._tag,"remvoeWindowByName windowName: ", windowName);
+            cc.wwx.OutPut.log(this._tag,"remvoeWindowByName windowList: ", JSON.stringify(this._windowList[0]["windowName"]));
             let windowIndex = -1;
-            for(let window = 0; window < this._windowList;window++)
+            for(let window = 0; window < this._windowList.length;window++)
             {
-                if(this._windowList[window]["windowName"] === windowName)
+                if(this._windowList[window]["windowName"] == windowName)
                 {
                     this._windowList[window]["windowNode"].destroy();
                     windowIndex = window;
@@ -48,6 +67,27 @@ cc.Class({
             {
                 this._windowList.splice(windowIndex, 1);
             }
+        },
+        popWindow(windowName)
+        {
+            var baseScene = this.getScene();
+            let self = this;
+            cc.loader.loadRes(windowName, cc.Prefab, function(completedCount, totalCount, item) {
+                    // ty.Output.log('connecting_wifi progress:' + completedCount + '/' + totalCount);
+                }, function(error, prefab) {
+                    if(baseScene !== self.getScene())
+                    {
+                        return;
+                    }
+
+                    if(!error)
+                    {
+                        var window = cc.instantiate(prefab);
+                        window.position = cc.p(0, 0);
+                        baseScene.addChild(window);
+                        self._windowList.push({windowName:windowName,windowNode:window});
+                    }
+            });
         },
         showWifiView(windowName)
         {

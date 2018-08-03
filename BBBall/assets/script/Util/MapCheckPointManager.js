@@ -60,8 +60,9 @@ cc.Class({
         _get100MapData(cb)
         {
             let MapID = Math.floor(Math.random() * 10+1);
-            let mapFile = 'map/mapdata100ball_' + MapID + ".txt";
 
+            let mapFile = 'map/mapdata100ball_' + MapID + ".txt";
+            cc.wwx.OutPut.log("_get100MapData",mapFile);
             cc.loader.loadRes(mapFile,function(err,data){
                 if(err){
                     cc.wwx.OutPut.warn('_get100MapData mapFile 加载失败：' + mapFile);

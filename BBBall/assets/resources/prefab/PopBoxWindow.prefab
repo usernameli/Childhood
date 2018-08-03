@@ -200,7 +200,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "a2BEURcFJBjqQSmh+1GHa0",
     "sync": false
@@ -293,7 +293,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "42+NA+BbVAoaDvWmYhVTIf",
     "sync": false
@@ -386,7 +386,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "76lGf7rkRMHodvMDYyuLg9",
     "sync": false
@@ -473,7 +473,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "9fG4ICymtPaJBNe6i40ih0",
     "sync": false
@@ -621,7 +621,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "8eUCnWwJ9DvYFhsREWCOt6",
     "sync": false
@@ -724,7 +724,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "0fffiqMVJL1Jx1F8GMxqJX",
     "sync": false
@@ -811,7 +811,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "f2w2d8eXBM1pWR2hA7fbJR",
     "sync": false
@@ -959,7 +959,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "97sivjBeJAC6QFaLeTc43M",
     "sync": false
@@ -1062,7 +1062,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "27tuzptq1LcpCJzMRYnulj",
     "sync": false
@@ -1094,7 +1094,7 @@
     "_originalHeight": 0
   },
   {
-    "__type__": "fe08ahTPiVFYrNIEsJx7AW2",
+    "__type__": "16563CgTDJFR612h6VgpMtp",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -1108,7 +1108,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6ec1989a-0a98-4071-8653-417bab7c59a2"
     },
     "fileId": "0f/NSsONxBS5y9QrBrsCKp",
     "sync": false

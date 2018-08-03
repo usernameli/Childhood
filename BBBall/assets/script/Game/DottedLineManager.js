@@ -211,7 +211,7 @@ cc.Class({
 
         if(fg === false)
         {
-            lineLength= 100
+            lineLength= 300
         }
 
         //设置虚线中每条线段的长度

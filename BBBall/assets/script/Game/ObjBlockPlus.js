@@ -75,7 +75,6 @@ cc.Class({
     },
     onBeginContact(contact, self, other)
     {
-        cc.wwx.OutPut.log(this._tag, 'onBeginContact:', other.tag);
 
         if(other.tag === 2)
         {

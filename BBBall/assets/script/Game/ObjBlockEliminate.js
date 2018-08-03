@@ -29,7 +29,6 @@ cc.Class({
 
     },
     onBeginContact(contact, self, other) {
-        cc.wwx.OutPut.log(this._tag,"onBeginContact");
         this._isContactF = true;
 
         if(this._labelNum === 8)

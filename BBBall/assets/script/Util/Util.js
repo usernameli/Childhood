@@ -444,6 +444,33 @@ cc.Class({
         wstr_hmac_md5(key, data) {
             return this.binl2str(this.core_hmac_md5(key, data))
         },
+        obj2String1(_obj) {
+            let t = typeof (_obj);
+            if (t != 'object' || !_obj) {
+                // simple data type
+                if (t == 'string') {
+                    _obj = '"' + _obj + '"';
+                }
+                return String(_obj);
+            } else {
+                if (_obj instanceof Date) {
+                    return _obj.toLocaleString();
+                }
+                // recurse array or object
+                let n, v, json = [], arr = (_obj && _obj.constructor == Array);
+                for (n in _obj) {
+                    v = _obj[n];
+                    t = typeof (v);
+                    if (t == 'string') {
+                        v = '"' + v + '"';
+                    } else if (t == "object" && v !== null) {
+                        v = this.obj2String1(v);
+                    }
+                    json.push(( arr ? '' : '"' + n + '":') + String(v));
+                }
+                return ( arr ? '[' : '{') + String(json) + ( arr ? ']' : '}');
+            }
+        },
         _preventFastClicks()
         {
             if(this.btnClick === true)

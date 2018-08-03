@@ -79,7 +79,7 @@ cc.Class({
         ACTION_A_LINE_OF_EXPLOSIONS:'action_a_line_of_explosions', //消除最后一行
         RANDOM_PLACEMENT_4_ELIMINATE:'random_placement_4_eliminate', //随机放置4个射线
         ACTION_RECOVERY_BALL:'action_recovery_ball', //收回球球
-
+        ACTION_BALL_GAME_RESTART:'action_ball_game_restart',//游戏重新开始
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     }
 })

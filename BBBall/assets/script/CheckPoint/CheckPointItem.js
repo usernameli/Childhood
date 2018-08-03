@@ -38,10 +38,10 @@ cc.Class({
     clickItemCallBack()
     {
         console.log('clickItemCallBack ' + this._checkPointItem + ' clicked');
-        cc.wwx.MapCheckPoint.getMapCheckPointData(117,function (checkPointData) {
+        cc.wwx.MapCheckPoint.getMapCheckPointData(this._checkPointItem,function (checkPointData) {
             cc.wwx.OutPut.log("clickItemCallBack: " + JSON.stringify(checkPointData));
             cc.wwx.UserInfo.checkPointData = checkPointData;
-            cc.director.loadScene("GameScene");
+            cc.wwx.SceneManager.switchScene("GameScene");
 
         });
     },

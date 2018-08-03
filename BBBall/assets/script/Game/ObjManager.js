@@ -82,16 +82,35 @@ cc.Class({
     onLoad()
     {
 
-        this._emptyGrid = [];
-        this._gameOver = true;
+
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
 
+        this.gameInit();
+
+    },
+    onDestroy()
+    {
+        cc.wwx.OutPut.log(this._tag,"onDestroy");
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+
+    },
+    gameInit()
+    {
+        this._emptyGrid = [];
+        this._gameOver = false;
         if(cc.wwx.UserInfo.playMode === "checkPoint")
         {
             //关卡模式
+            this._showRowNum = 7;
+
             this._checkpointGame()
         }
         else if(cc.wwx.UserInfo.playMode === "ball100")
@@ -108,7 +127,21 @@ cc.Class({
         //计算方块矩阵里面的空位置
 
         this.findEmptyGridPosition();
+    },
+    gameRestart()
+    {
+        for (var i = 0; i < this.node.childrenCount; ++i)
+        {
+            let name = this.node.children[i].name;
 
+            if(name === "WarnNode" || name === "ALineOfExplosions")
+            {
+                continue;
+            }
+
+            this.node.children[i].destroy();
+        }
+        this.gameInit();
     },
     findEmptyGridPosition()
     {
@@ -219,15 +252,7 @@ cc.Class({
 
         }
     },
-    onDestroy()
-    {
-        cc.wwx.OutPut.log(this._tag,"onDestroy");
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
 
-    },
     _classicGame()
     {
         this._showRowNum = 1;
@@ -251,12 +276,26 @@ cc.Class({
     },
     _ball100Game()
     {
-        this._checkpointGame();
+
+        let pointCheckData = cc.wwx.UserInfo.checkPointData;
+        this._pointCheckList = pointCheckData;
+        let hallAhall = pointCheckData.length / 2;
+        this._showRowNum = 0;
+        for(let i = hallAhall - 1; i >= 0;i--)
+        {
+            let dataList = pointCheckData[i];
+            if(this._judgeArrayValue(dataList))
+            {
+                this._showRowNum += 1;
+            }
+        }
+
+        this._checkpointGame()
+
 
     },
     _checkpointGame()
     {
-        this._showRowNum = 7;
         this._currentRowI = -1;//当前显示第几行了
         this._currentRowJ = -1;
         let pointCheckData = cc.wwx.UserInfo.checkPointData;
@@ -265,6 +304,7 @@ cc.Class({
         let hallAhall = pointCheckData.length / 2;
         let hallAIndex = pointCheckData.length;
         let haveShowRow = 0;
+
         for(let i = hallAhall - 1,j = hallAIndex - 1; i >= 0,j >= hallAhall;i--,j--)
         {
             let dataList = pointCheckData[i];
@@ -449,6 +489,12 @@ cc.Class({
             this._createOneRowObjs();
             return;
         }
+        else if(cc.wwx.UserInfo.playMode === "ball100")
+        {
+            this._gameIsOver();
+            this._gameOver = true;
+            return;
+        }
         cc.wwx.OutPut.log("ObjManager","_currentRowI: ",this._currentRowI);
         cc.wwx.OutPut.log("ObjManager","_currentRowJ: ",this._currentRowJ);
 
@@ -481,6 +527,10 @@ cc.Class({
 
 
     },
+    _gameIsOver()
+    {
+        cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow");
+    },
     _judgeArrayValue:function (dataList) {
         let isFg = false;
         if(dataList.length > 0)
@@ -501,6 +551,7 @@ cc.Class({
 
         if(this._gameOver)
         {
+
             return;
         }
         let posY = this.findLastRowPosY();
@@ -511,6 +562,7 @@ cc.Class({
         else if(posY === -882)
         {
             this._gameOver = true;
+            this._gameIsOver();
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_TOUCHBOTTOM)
         }
         else

@@ -9,9 +9,11 @@ cc.Class({
         _speed:0,
         _isStop:true,
         _index:0,
+        _tag:"Ball",
         _recoverFg:false,
         _isOnWall:false,
         _isSports:false,
+        _noShut:false,
 
     },
 
@@ -20,6 +22,7 @@ cc.Class({
         this._recoverFg = false;
         this._isOnWall = false;
         this._isSports = false;
+        this._noShut = false;
         this.body = this.getComponent(cc.RigidBody);//初始化速度linearVelocity = cc.v2(800,800)
         cc.wwx.OutPut.log('onLoad:', 'ball');
 
@@ -33,6 +36,10 @@ cc.Class({
         let linearVelocity = argument["linearVelocity"].clone();
         linearVelocity.mulSelf(this._speed);
         setTimeout(function () {
+            if(this._noShut)
+            {
+                return;
+            }
             this.body.linearVelocity = linearVelocity;
             this._recoverFg = false;
             this._isOnWall = false;
@@ -54,22 +61,31 @@ cc.Class({
     },
     _ballRecoverNow()
     {
-        this.body.linearVelocity = cc.v2(0,0);
-        this._isOnWall = true;
-        this._isSports = false;
-        this.dottedLineManager.isBallSporting = false;
-        this.dottedLineManager.setBallNumTextPosition(this.dottedLineManager.ballMaxNum);
-        // this.body.enabledContactListener = false;
-        this.node.runAction(cc.moveTo(0.1,this.dottedLineManager.center),cc.callFunc(function () {
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:this.dottedLineManager.center});
-        }));
+
+        if(this._isSports)
+        {
+            cc.wwx.OutPut.log(this._tag,"_ballRecoverNow",this.dottedLineManager.isBallSporting)
+
+            this.body.active = false;
+            let self = this;
+            this._recoverFg = true;
+            this._isSports = false;
+            this.node.stopAllActions();
+            this.node.runAction(cc.sequence(cc.moveTo(0.1,this.dottedLineManager.center),cc.callFunc(function () {
+                self.onBeginContact(null,null,{tag:2},true);
+            })));
+        }
+        else
+        {
+            this._noShut = true;
+        }
+
 
     },
-    onBeginContact(contact, self, other) {
+    onBeginContact(contact, self, other,artificial) {
 
         if(this.dottedLineManager.isBallSporting === false)
         {
-            console.log("isBallSporting " + this._index);
 
             return;
         }
@@ -83,10 +99,17 @@ cc.Class({
 
                 if(this.dottedLineManager.isFirstBallCome === false)
                 {
-                    var worldManifold = contact.getWorldManifold();
-                    var points = worldManifold.points;
-                    cc.wwx.OutPut.log('onBeginContact:', 'ball points', JSON.stringify(points[0]));
-                    let posX =  Math.ceil(points[0].x);
+                    let posX = this.dottedLineManager.center.x;
+                    if(artificial)
+                    {
+                        posX = this.dottedLineManager.center.x;
+                    }
+                    else
+                    {
+                        var worldManifold = contact.getWorldManifold();
+                        var points = worldManifold.points;
+                        posX =  Math.ceil(points[0].x);
+                    }
                     this.dottedLineManager.isFirstBallCome = true;
                     this.dottedLineManager.center = cc.p(posX,118);
 

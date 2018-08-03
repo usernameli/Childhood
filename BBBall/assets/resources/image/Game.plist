@@ -20,7 +20,7 @@
             <key>Ball_BallChange.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{583,374},{66,66}}</string>
+                <string>{{953,720},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>Ball_Black_BG.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{294,374},{50,50}}</string>
+                <string>{{216,658},{50,50}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>Ball_Block_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{581,442},{60,60}}</string>
+                <string>{{154,912},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>Ball_Block_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{581,442},{60,60}}</string>
+                <string>{{154,912},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>Ball_Block_21.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{250,430},{32,32}}</string>
+                <string>{{543,348},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>Ball_Block_22.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{346,408},{32,32}}</string>
+                <string>{{543,314},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>Ball_Block_23.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{346,374},{32,32}}</string>
+                <string>{{543,280},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>Ball_Block_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{519,430},{60,60}}</string>
+                <string>{{154,850},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>Ball_Block_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{457,414},{60,60}}</string>
+                <string>{{154,720},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -163,7 +163,7 @@
             <key>Ball_Block_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{657,339},{60,60}}</string>
+                <string>{{154,658},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -176,7 +176,7 @@
             <key>Ball_Block_6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{962,454},{60,60}}</string>
+                <string>{{154,788},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>Ball_Block_9.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{962,392},{60,60}}</string>
+                <string>{{605,596},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -254,7 +254,7 @@
             <key>Ball_Blue_BTN.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,490},{20,137}}</string>
+                <string>{{273,280},{20,137}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -267,7 +267,7 @@
             <key>Ball_Close_Music_FG.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{651,401},{64,66}}</string>
+                <string>{{543,476},{64,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +280,7 @@
             <key>Ball_Continue_Icon.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{250,338},{42,48}}</string>
+                <string>{{976,424},{42,48}}</string>
                 <key>offset</key>
                 <string>{1,2}</string>
                 <key>rotated</key>
@@ -293,7 +293,7 @@
             <key>Ball_Effect_Classicbar.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{461,280},{70,64}}</string>
+                <string>{{643,404},{70,64}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -306,7 +306,7 @@
             <key>Ball_Effect_Img_Boom0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{722,261},{238,238}}</string>
+                <string>{{713,515},{238,238}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -345,7 +345,7 @@
             <key>Ball_Effect_Img_Damageblock.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{962,330},{60,60}}</string>
+                <string>{{543,542},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -358,7 +358,7 @@
             <key>Ball_Effect_Img_Damageblock_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{152,339},{96,96}}</string>
+                <string>{{577,306},{96,96}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -384,7 +384,7 @@
             <key>Ball_Effect_Img_Damageblock_t1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{962,268},{60,60}}</string>
+                <string>{{611,534},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -410,7 +410,7 @@
             <key>Ball_Effect_Img_Target.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{389,352},{66,66}}</string>
+                <string>{{953,652},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -436,7 +436,7 @@
             <key>Ball_Forthcoming_Head_BG.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{295,280},{92,92}}</string>
+                <string>{{163,490},{92,92}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -449,7 +449,7 @@
             <key>Ball_Game_BG.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{152,437},{51,51}}</string>
+                <string>{{154,604},{51,51}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -488,7 +488,7 @@
             <key>Ball_Hand.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,306},{182,148}}</string>
+                <string>{{139,306},{182,148}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -501,7 +501,7 @@
             <key>Ball_Home_Icon.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{229,280},{64,56}}</string>
+                <string>{{68,280},{64,56}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -514,7 +514,7 @@
             <key>Ball_Imag_Item1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{250,388},{40,42}}</string>
+                <string>{{976,474},{40,42}}</string>
                 <key>offset</key>
                 <string>{-1,1}</string>
                 <key>rotated</key>
@@ -527,7 +527,7 @@
             <key>Ball_Imag_Item2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{380,420},{46,44}}</string>
+                <string>{{976,378},{46,44}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -540,7 +540,7 @@
             <key>Ball_Imag_Item3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{529,360},{52,16}}</string>
+                <string>{{433,280},{52,16}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -553,11 +553,11 @@
             <key>Ball_Imag_Item4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{533,332},{52,26}}</string>
+                <string>{{543,382},{52,26}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{4,16},{52,26}}</string>
                 <key>sourceSize</key>
@@ -566,11 +566,11 @@
             <key>Ball_Img_ClassicTrophy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{294,426},{47,46}}</string>
+                <string>{{976,329},{47,46}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{47,46}}</string>
                 <key>sourceSize</key>
@@ -605,7 +605,7 @@
             <key>Ball_JieShao.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{461,346},{66,66}}</string>
+                <string>{{953,584},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -618,7 +618,7 @@
             <key>Ball_Music_Icon.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{163,280},{64,56}}</string>
+                <string>{{2,280},{64,56}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -631,7 +631,7 @@
             <key>Ball_Option.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{589,306},{66,66}}</string>
+                <string>{{953,516},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -644,7 +644,7 @@
             <key>Ball_Orange_Ball.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{141,490},{19,19}}</string>
+                <string>{{412,280},{19,19}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -657,7 +657,7 @@
             <key>Ball_Progress_Black.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,280},{20,22}}</string>
+                <string>{{2,492},{20,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -696,7 +696,7 @@
             <key>Ball_Red_BTN.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{24,280},{20,137}}</string>
+                <string>{{134,280},{20,137}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -709,7 +709,7 @@
             <key>Ball_Restart_Icon.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{533,280},{50,54}}</string>
+                <string>{{207,604},{50,54}}</string>
                 <key>offset</key>
                 <string>{-3,1}</string>
                 <key>rotated</key>
@@ -719,10 +719,75 @@
                 <key>sourceSize</key>
                 <string>{56,56}</string>
             </dict>
+            <key>Ball_Result_DeepYellow.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{24,492},{20,137}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{20,137}}</string>
+                <key>sourceSize</key>
+                <string>{20,137}</string>
+            </dict>
+            <key>Ball_Result_RedHeart.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,339},{151,135}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{151,135}}</string>
+                <key>sourceSize</key>
+                <string>{151,135}</string>
+            </dict>
+            <key>Ball_Result_ShowVideo.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{643,470},{68,62}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,0},{68,62}}</string>
+                <key>sourceSize</key>
+                <string>{70,62}</string>
+            </dict>
+            <key>Ball_Result_TimerBG.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{289,302},{252,252}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{252,252}}</string>
+                <key>sourceSize</key>
+                <string>{252,252}</string>
+            </dict>
+            <key>Ball_Result_TimerRed.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{722,261},{252,252}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{252,252}}</string>
+                <key>sourceSize</key>
+                <string>{252,252}</string>
+            </dict>
             <key>Ball_Score_BG.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{529,378},{50,50}}</string>
+                <string>{{216,788},{50,50}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -748,7 +813,7 @@
             <key>Ball_Stop_BTN.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{389,280},{70,70}}</string>
+                <string>{{571,404},{70,70}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -774,11 +839,11 @@
             <key>Ball_Warn_Triangle.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{643,467},{59,46}}</string>
+                <string>{{976,268},{59,46}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{59,46}}</string>
                 <key>sourceSize</key>
@@ -794,7 +859,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6a65ca1f2d907d50e2398dfbf8a8843b:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:c74b41241c79920228b461e56a1abd05:1/1$</string>
             <key>textureFileName</key>
             <string>Game.png</string>
         </dict>
