@@ -3128,6 +3128,9 @@
       "__id__": 2
     },
     "_enabled": true,
+    "diamondsNum": {
+      "__id__": 16
+    },
     "_tag": "GameHall"
   }
 ]

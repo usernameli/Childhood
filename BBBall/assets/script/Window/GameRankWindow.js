@@ -9,13 +9,8 @@ cc.Class({
     {
         this._super();
     },
-    onDestroy()
-    {
-
-    },
     closeWindowCallBack()
     {
-        this.closeWindow()
-
+        this.closeWindow();
     }
 });

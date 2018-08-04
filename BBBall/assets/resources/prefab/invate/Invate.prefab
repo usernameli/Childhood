@@ -343,7 +343,7 @@
       "__id__": 1
     },
     "component": "InvateRewardWindow",
-    "handler": "closeWindow",
+    "handler": "closeWindowCallBack",
     "customEventData": ""
   },
   {
@@ -5430,7 +5430,8 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "_windowName": "unName"
   },
   {
     "__type__": "cc.PrefabInfo",

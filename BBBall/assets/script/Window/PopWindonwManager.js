@@ -68,7 +68,7 @@ cc.Class({
                 this._windowList.splice(windowIndex, 1);
             }
         },
-        popWindow(windowName)
+        popWindow(windowName,componentName)
         {
             var baseScene = this.getScene();
             let self = this;
@@ -82,8 +82,10 @@ cc.Class({
 
                     if(!error)
                     {
-                        var window = cc.instantiate(prefab);
+                        let window = cc.instantiate(prefab);
                         window.position = cc.p(0, 0);
+                        let component = window.getComponent(componentName);
+                        component.setWindowName(windowName);
                         baseScene.addChild(window);
                         self._windowList.push({windowName:windowName,windowNode:window});
                     }

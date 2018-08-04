@@ -10,6 +10,7 @@ cc.Class({
             default:null,
             type:cc.ScrollView
         },
+        itemTemplateName:"",
         spawnCount: 0, // 实际创建的项数量
         totalCount: 0, // 在列表中显示的项数量
         spacing: 0, // 项之间的间隔大小
@@ -30,13 +31,14 @@ cc.Class({
     // 列表初始化
     initialize: function () {
         // 获取整个列表的高度
+        cc.wwx.OutPut.log("itemTemplateName",this.itemTemplateName);
         this.content.height = this.totalCount * (this.itemTemplate.height + this.spacing) + this.spacing;
         for (let i = 0; i < this.spawnCount; ++i) { // spawn items, we only need to do this once
             let item = cc.instantiate(this.itemTemplate);
             this.content.addChild(item);
             // 设置该item的坐标（注意父节点content的Anchor坐标是(0.5, 1)，所以item的y坐标总是负值）
             item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
-            item.getComponent('ShopTemplate').updateItem(i);
+            item.getComponent(this.itemTemplateName).updateItem(i);
             this.items.push(item);
         }
     },
@@ -64,7 +66,6 @@ cc.Class({
         let items = this.items;
         // 如果当前content的y坐标小于上次记录值，则代表往下滚动，否则往上。
         let isDown = this.scrollView.content.y < this.lastContentPosY;
-        console.log('Item ' + isDown + ' clicked');
 
         // 实际创建项占了多高（即它们的高度累加）
         let offset = (this.itemTemplate.height + this.spacing) * items.length;
@@ -80,7 +81,7 @@ cc.Class({
                 // 则更新item的坐标（即上移了一个offset的位置），同时更新item的显示内容
                 if (viewPos.y < -this.bufferZone && newY < 0) {
                     items[i].setPositionY(newY);
-                    let item = items[i].getComponent('ShopTemplate');
+                    let item = items[i].getComponent(this.itemTemplateName);
                     let itemId = item.itemID - items.length; // update item id
                     item.updateItem(itemId);
                 }
@@ -91,7 +92,7 @@ cc.Class({
                 // 则更新item的坐标（即下移了一个offset的位置），同时更新item的显示内容
                 if (viewPos.y > this.bufferZone && newY > -this.content.height) {
                     items[i].setPositionY(newY);
-                    let item = items[i].getComponent('ShopTemplate');
+                    let item = items[i].getComponent(this.itemTemplateName);
                     let itemId = item.itemID + items.length;
                     item.updateItem(itemId);
                 }

@@ -1,6 +1,10 @@
 cc.Class({
     extends:cc.Component,
     properties:{
+        diamondsNum:{
+            default:null,
+            type:cc.Label
+        },
         _tag:"GameHall"
 
     },
@@ -10,6 +14,8 @@ cc.Class({
         {
             initMgr();
         }
+
+        this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
     },
     checkpointMode()
     {
@@ -44,7 +50,7 @@ cc.Class({
     signInReward()
     {
         //签到奖励
-        cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn");
+        cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn","SignInWindow");
 
     },
     showAdsReward()
@@ -54,6 +60,8 @@ cc.Class({
     rank()
     {
         //排行榜
+        cc.wwx.PopWindowManager.popWindow("prefab/GameRanKWindow","GameRankWindow");
+
     },
     shop()
     {
@@ -61,7 +69,7 @@ cc.Class({
         // let ballPrefab = cc.instantiate(this.shopPrefab);
         // this.node.addChild(ballPrefab);
 
-        cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop");
+        cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop","ShopWindow");
 
     },
     reward()
@@ -70,7 +78,7 @@ cc.Class({
         // let ballPrefab = cc.instantiate(this.invateRewardPrefab);
         // this.node.addChild(ballPrefab);
 
-        cc.wwx.PopWindowManager.popWindow("prefab/invate/Invate");
+        cc.wwx.PopWindowManager.popWindow("prefab/invate/Invate","InvateRewardWindow");
 
 
     },

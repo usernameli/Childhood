@@ -135,7 +135,7 @@ cc.Class({
 
     clickStopCallBack()
     {
-        cc.wwx.PopWindowManager.popWindow("prefab/GameStopWindow");
+        cc.wwx.PopWindowManager.popWindow("prefab/GameStopWindow","GameStopWindow");
     },
     clickHelpCallBack()
     {

@@ -15,8 +15,7 @@ cc.Class({
     },
     _closeWindow()
     {
-        cc.wwx.PopWindowManager.remvoeWindowByName("prefab/GameStopWindow")
-
+        this.closeWindow();
     },
     goBackHallCallBack()
     {

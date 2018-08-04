@@ -35,7 +35,7 @@ cc.Class({
     },
     skipCallBack()
     {
-        cc.wwx.PopWindowManager.remvoeWindowByName("prefab/ResultFirstWindow");
+        this.closeWindow()
 
     },
     update()

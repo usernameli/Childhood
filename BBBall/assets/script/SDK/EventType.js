@@ -1,9 +1,12 @@
 cc.Class({
     extends:cc.Component,
     statics:{
+        CMD_GAME: 'game',
         CMD_BIND_USER: 'bind_user',
+        CMD_BIND_GAME: 'bind_game',
         CMD_USER_INFO: 'user_info',
         CMD_BAG: 'bag',
+        CMD_GAME_DATA: 'game_data',
         CMD_UPDATE_NOTIFY: 'update_notify',
 
         MSG_TCP_OPEN: 'tcp_open',
@@ -15,7 +18,7 @@ cc.Class({
         MSG_SERVER_MESSAGE: 'server_message',
 
         CMD_INVITE_INFO: 'invite_info', // 邀请信息
-
+        CMD_UPDATE_SCORE: 'update_score', //更新分数
         CMD_PAYMENT_LIST: 'store_config', // 支付 - 商品列表
         CMD_PAYMENT_EXCHANGE: 'store', // 支付 - 金币兑换
         CMD_PRODUCT_DELIVERY: 'prod_delivery', // 支付 - 金币兑换 回调

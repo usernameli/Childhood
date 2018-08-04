@@ -8,7 +8,7 @@ cc.Class({
     },
 
     updateItem: function(itemId) {
-        cc.wwx.OutPut.log('Shop Item ',itemId);
-
+        this.itemID = itemId;
+        cc.wwx.OutPut.log('Rank Item ' + itemId);
     }
 });

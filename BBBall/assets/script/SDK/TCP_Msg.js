@@ -44,6 +44,41 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+        /**
+         * 插件绑定
+         */
+        bindGame: function(gameId) {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_BIND_GAME,
+                'params': {
+                    'gameId': gameId || cc.wwx.SystemInfo.gameId,
+                    'authorCode': cc.wwx.UserInfo.authorCode
+                }
+            };
+            this._sendCmd(params);
+        },
+        /**
+         * 游戏结束更新分数
+         *
+         */
+        updateGameScore:function(gameId,playMode,score,curLevel,levelState,curLevelStar)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'gameId': gameId,
+                    'action': cc.wwx.EventType.CMD_UPDATE_SCORE,
+                    'authorCode': cc.wwx.UserInfo.authorCode,
+                    'playMode': playMode,
+                    'score': score,
+                    'curLevel': curLevel || 0,
+                    'levelState': levelState || 0,
+                    'curLevelStar': curLevelStar || 0,
+
+                }
+            };
+            this._sendCmd(params);
+        },
         fetchPaymentList : function() {
             var params = {
                 'cmd': cc.wwx.EventType.CMD_PAYMENT_LIST,

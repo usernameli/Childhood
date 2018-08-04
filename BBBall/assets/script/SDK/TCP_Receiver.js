@@ -24,6 +24,7 @@ cc.Class({
             this.register(cc.wwx.EventType.CMD_PAYMENT_EXCHANGE, this._onPaymentExchange);
             this.register(cc.wwx.EventType.CMD_PRODUCT_DELIVERY, this._onPaymentNotify);
             this.register(cc.wwx.EventType.CMD_BAG, this._onMsgBag);
+            this.register(cc.wwx.EventType.CMD_GAME_DATA, this._onMsgGameData);
 
         },
         _onMsgBag(params)
@@ -39,12 +40,28 @@ cc.Class({
                 cc.wwx.PayModel.parseInfo(result);
             }
         },
+        /**
+         * 绑定插件
+         * @param {"cmd":"game_data","result":{"gameId":101,"userId":60008,"gdata":{"levelLv":1,"levelScore":"[0]","levelStar":"[0]","levelTotalStar":0,"classicScore":0,"classicCup":0,"100ballScore":0,"chip":0,"headUrl":""}}}
+         * @private
+         */
+        _onMsgGameData (params) {
+            // ty.Output.log(JSON.stringify(params));
+            var result = params['result'];
+            if (result.gameId === cc.wwx.SystemInfo.gameId) {
+                cc.wwx.UserInfo.gdata = result["gdata"];
+
+                cc.wwx.SceneManager.switchScene("GameHall");
+
+                // cc.wwx.TCPMSG.updateGameScore(cc.wwx.SystemInfo.gameId,"level",100,100,1,3);
+            }
+        },
 
         _onPaymentExchange (params) {
             var result = params['result'];
             var action = result['action'];
 
-            if (action == ty.Event.ACTION_PAYMENT_EXCHANGE_BUY) {
+            if (action == cc.wwx.EventType.ACTION_PAYMENT_EXCHANGE_BUY) {
                 cc.wwx.PayModel.parseExchange(result);
             }
         },
@@ -102,6 +119,9 @@ cc.Class({
 
             // 分享发奖
             // ddz.Share.getShareRewards();
+
+            //绑定游戏
+            cc.wwx.TCPMSG.bindGame(cc.wwx.SystemInfo.gameId);
         },
         // 注册cmd回调
         register: function(eventName, func) {

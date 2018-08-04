@@ -13,9 +13,10 @@ cc.Class({
     {
 
     },
-    closeWindow()
+    closeWindowCallBack()
     {
-        cc.wwx.PopWindowManager.remvoeWindowByName("prefab/shop/Shop");
+        this.closeWindow()
+
 
     }
 });

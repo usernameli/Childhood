@@ -529,7 +529,7 @@ cc.Class({
     },
     _gameIsOver()
     {
-        cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow");
+        cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow","ResultFirstWindow");
     },
     _judgeArrayValue:function (dataList) {
         let isFg = false;

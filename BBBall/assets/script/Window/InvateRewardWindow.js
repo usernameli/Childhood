@@ -13,8 +13,9 @@ cc.Class({
     {
 
     },
-    closeWindow()
+    closeWindowCallBack()
     {
-        cc.wwx.PopWindowManager.remvoeWindowByName("prefab/invate/Invate");
+        this.closeWindow();
+
     }
 });

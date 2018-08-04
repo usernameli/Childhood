@@ -20,6 +20,9 @@ cc.Class({
             "diamond": 0,               // 没有用到，请使用 bagData.diamondCount
             'chip':0,
         },
+        gdata:{
+
+        },
         checkPointData:[],
         bagData: {
             'diamondInfo': {},
