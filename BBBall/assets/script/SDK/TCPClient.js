@@ -113,7 +113,7 @@ if(CC_WECHATGAME)
 
                             if (!isReceiveIgnored(_json)) {
                                 var strLog = unescape(content.replace(/\\u/gi,'%u'));
-                                cc.wwx.OutPut.info("[receive msg]: " + strLog);
+                                // cc.wwx.OutPut.info("[receive msg]: " + strLog);
                             } else {
                                 // var strLog = unescape(content.replace(/\\u/gi,'%u'));
                                 // cc.wwx.OutPut.log("[receive msg]: " + strLog);
@@ -328,10 +328,10 @@ else
                         var _json = JSON.parse(strJson);
                         if (!isReceiveIgnored(_json)) {
                             var strLog = unescape(content.replace(/\\u/gi,'%u'));
-                            cc.wwx.OutPut.info("[receive msg]: " + strLog);
+                            // cc.wwx.OutPut.info("[receive msg]: " + strLog);
                         } else {
                             var strLog = unescape(content.replace(/\\u/gi,'%u'));
-                            cc.wwx.OutPut.log("[receive msg]: " + strLog);
+                            // cc.wwx.OutPut.log("[receive msg]: " + strLog);
                         }
                         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_SERVER_MESSAGE, _json);
                     }

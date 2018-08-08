@@ -7,11 +7,6 @@ cc.Class({
     },
     onLoad()
     {
-        this._isAction = false;
-        this._super();
+
     },
-    closeWindowCallBack()
-    {
-        this.closeWindow();
-    }
-});
+})

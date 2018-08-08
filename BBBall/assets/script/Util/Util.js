@@ -7,6 +7,7 @@ cc.Class({
         hexcase: 0, /* hex output format. 0 - lowercase; 1 - uppercase        */
         b64pad: "", /* base-64 pad character. "=" for strict RFC compliance   */
         chrsz: 8, /* bits per input character. 8 - ASCII; 16 - Unicode      */
+        crypto:require('crypto'),
 
         isSceneQrCode: function (scene) {
             var qrCodeList = [1047, 1048, 1049]; //扫描小程序码,选取小程序码,识别小程序码
@@ -444,6 +445,20 @@ cc.Class({
         wstr_hmac_md5(key, data) {
             return this.binl2str(this.core_hmac_md5(key, data))
         },
+        // 深度拷贝，生成一个全新的对象,
+        deepCopy: function (obj) {
+            if (typeof obj == 'object') {
+                var newobj = {};
+                if (obj instanceof Array) {
+                    newobj = []
+                }
+                for (var k in obj) {
+                    newobj[k] = this.deepCopy(obj[k])
+                }
+                return newobj;
+            }
+            return obj;
+        },
         obj2String1(_obj) {
             let t = typeof (_obj);
             if (t != 'object' || !_obj) {
@@ -470,6 +485,260 @@ cc.Class({
                 }
                 return ( arr ? '[' : '{') + String(json) + ( arr ? ']' : '}');
             }
+        },
+        /* ---cc.wwx.Share.runShare接口处理逻辑太多,避免影响使用,定义以下两个分享接口
+         * 执行埋点分享
+         * burialType 为 cc.wwx.BurialShareType 类型
+         * */
+        runBurialShare: function (burialType) {
+            cc.wwx.Share.runShare(burialType);
+        },
+
+        /*
+         * 执行自定义分享
+         * customData 数据格式:
+         * {
+         "pointId":9999001, # 分享点ID ,          burialId\pointId至少有一个
+         "burialId":"default",                   burialId\pointId至少有一个
+
+         "title":"斗地主我又取得了胜利，快来给我点赞！",可选
+         "pic":"http://share.png",               可选
+         "whereToReward":"all",                  可选,默认为 all
+         "queryJson":{},                         可选
+         }
+         * */
+        runCustomShare: function (customData) {
+            if (!customData['pointId']) {
+                if (customData['burialId']) {
+                    //自定义的埋点分享
+                    cc.wwx.Share.runShare(customData['burialId'], customData);
+                    return;
+                }
+            }
+            cc.wwx.Share.runShare(customData);
+        },
+
+        /*
+         * 在离屏canvas上绘图并且生成文件,返回生成文件路径
+         * param:{
+         *   size:{width:500,height:400}, // 图片尺寸
+         *   nodes: [                      // 绘图节点内容数组,idx越小越先绘制,越大显示在更上层
+         *       {type:"img",url:"http://cdn-backgroung.png",pos:{x:0,y:0},scale:1}, //一张背景图,使用的是cdn资源
+         *       {type:"img",url:"resources/images/xxxxx/xxx.png",pos:{x:100,y:100},scale:1}, // 一个描述图片,使用的是本地资源
+         *       {type:"txt",pos:{x:200,y:200},fsize:20,content:"文本内容"},//一个文本
+         *   ]
+         *
+         *  share:{
+         "pointId":9999001, # 分享点ID
+         "title":"斗地主我又取得了胜利，快来给我点赞！",
+         "pic":"http://share.png",
+         "whereToReward":"all"
+         }
+         * }
+         */
+        runPaintingShare: function (param, share) {
+            // share = {
+            //     "pointId":9999001,
+            //     "title":"什么,小程序分享可以输入文字?!",
+            //     "pic":"http://share.png",
+            //     "whereToReward":"all"
+            // };
+            // var rt = wxDownloader.REMOTE_SERVER_ROOT;
+            // //先将所有cdn资源下载下来
+            // param = {
+            //    size:{width:500,height:400},
+            //    nodes: [
+            //        // {type:"img",url:"http://cc.wwx.dl.tuyoo.com/cdn37/majiang/images/others/majing_master_gitf_bag_2.png",pos:{x:100,y:100},scale:1},
+            //        // {type:"img",url:`https://cc.wwxqn.nalrer.cn/cc.wwx/other/icon_red_packet.png`,pos:{x:50,y:100},scale:1},
+            //        // {type:"img",url:`http://img13.360buyimg.com/n2/jfs/t6631/88/1446653549/309410/7e97c15f/5951c8f3N086189f8.jpg`,pos:{x:150,y:150},scale:1},
+            //        // {type:"img",url:"http://img13.360buyimg.com/n2/jfs/t5182/328/1540237053/220499/31ec3317/59113d9bN9c992c93.jpg",pos:{x:350,y:350},scale:1},
+            //        // {type:"img",url:"http://img13.360buyimg.com/n2/jfs/t5305/362/151614607/258841/b7f5bf5b/58f9a4c7N5b7948c5.jpg",pos:{x:250,y:450},scale:1},
+            //        // {type:"img",url:cc.wwx.UserInfo.userPic,pos:{x:60,y:60},scale:1,size:{width:100,height:100}},
+            //        {type:"txt",pos:{x:cc.wwx.GlobalFuncs.txtLabel[2]||10,y:cc.wwx.GlobalFuncs.txtLabel[3]|150},fsize:cc.wwx.GlobalFuncs.txtLabel[1]||50,content:cc.wwx.GlobalFuncs.txtLabel[0]}
+            //    ]
+            //  };
+
+            cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile start download : " + 0 + "/" + param.nodes.length);
+            var downLoadData = {
+                size: param.size || {width: 360, height: 280}, //canvas 尺寸
+                images: param.nodes, //下载资源列表
+                loadedCount: 0, //已下载的资源数
+                maxLoadCount: param.nodes.length,//需要下载的资源数
+                onloadCount: 0,//已加载完成的资源数
+                callback: function (path, obj) {//一次下载时间完成后的回调
+                    if (this.painting) {
+                        return;
+                    }
+                    cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile loadedCount : " + this.loadedCount);
+                    if (!path) {
+                        //图片下载失败 或者 不是图片资源
+                        cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile fail or not img : " + this.loadedCount);
+                        obj.imgObj = null;
+                        this.onloadCount++;
+                        this.checkPainting();
+                    } else {//图片下载成功 或者 是本地资源
+                        var img = new Image();
+                        obj.imgObj = img;
+                        img.src = path;
+                        var thisobj = this;
+                        img.onload = function () {
+                            if (this.painting) {
+                                return;
+                            }
+                            thisobj.onloadCount++;
+                            thisobj.checkPainting();
+                        };
+                        img.onerror = function () {
+                            cc.wwx.OutPut.info("load img fail : " + path);
+                            if (this.painting) {
+                                return;
+                            }
+                            thisobj.onloadCount++;
+                            thisobj.checkPainting();
+                        }
+                    }
+                    ;
+                    this.loadedCount++;
+                    (this.loadedCount == this.maxLoadCount) && cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile finished loadedCount!");
+                },
+                checkPainting: function () {
+                    cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile onloadCount : " + this.onloadCount + '/' + this.maxLoadCount);
+                    if (this.onloadCount == this.maxLoadCount) {
+                        cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile finished start drawImage");
+                        var params = {
+                            images: this.images,
+                            size: this.size,
+                            success: function (res) {
+                                cc.wwx.Share.runShare({
+                                    "pointId": share.pointId,
+                                    "title": share.title,
+                                    "pic": res.tempFilePath,
+                                    "whereToReward": "all",
+                                    "isPainted": true,
+                                    'shareId': share.shareId,
+                                });
+                            },
+                            fail: function (res) {
+                                cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile drawImage fail !!!!");
+                            }
+                        };
+                        this.painting = true;
+                        this.paintingCanvas(params);
+                    }
+                },
+            };
+
+            //同步下载
+            for (var i = 0; i < param.nodes.length; i++) {
+                this.downLoadFile(param.nodes[i], downLoadData);
+            }
+        },
+
+        /*
+         * 在离屏canvas上绘图并且生成文件
+         */
+        paintingCanvas: function (param) {
+            var canvas = wx.createCanvas();
+            canvas.width = param.size.width;
+            canvas.height = param.size.height;
+            var ctx = canvas.getContext("2d");
+            var images = param.images;
+            cc.wwx.OutPut.info(" drawImage canvas.width = " + canvas.width);
+            cc.wwx.OutPut.info(" drawImage canvas.height = " + canvas.height);
+            cc.wwx.OutPut.info(" drawImage images.length = " + images.length);
+            for (var j = 0; j < images.length; j++) {
+                var im = images[j];
+                ctx.rotate(0);
+                ctx.rotate(im.rotation || 0);
+                if (im.imgObj) {
+                    var pos = im['pos'];
+                    var scale = im['scale'];
+                    var size = im['size'];
+                    var i_w = im.imgObj.width;
+                    var i_h = im.imgObj.height;
+                    if (size) {
+                        i_w = size.width;
+                        i_h = size.height;
+                        scale = 1;
+                    }
+                    i_h *= scale;
+                    i_w *= scale;
+                    ctx.drawImage(im.imgObj, pos['x'] - i_w / 2, param.size.height - pos['y'] - i_h / 2, i_w, i_h);
+                } else if (im.type == "txt") {
+                    cc.wwx.OutPut.info(" drawImage im.content = " + im.content);
+                    ctx.font = im.fsize + "px Georgia";//fcolor
+                    ctx.fillStyle = im.fcolor;
+                    ctx.textAlign = im.align || "left";
+                    ctx.fillText(im.content, im.pos.x, param.size.height - im.pos.y);
+                } else {
+                    cc.wwx.OutPut.info(" drawImage im???? = " + JSON.stringify(im));
+                }
+            }
+            canvas.toTempFilePath({
+                x: 0,
+                y: 0,
+                width: param.size.width,
+                height: param.size.height,
+                destWidth: param.size.width,
+                destHeight: param.size.height,
+                success: (res) => {
+                    param.success(res);
+                },
+                fail: (res) => {
+                    param.fail(res);
+                }
+            });
+        },
+
+        downLoadFile: function (obj, param) {
+            var url = obj.url;
+            cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile : " + url);
+            if (!/^http/.test(url)) {
+                cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile local path : " + url);
+                param.callback(url, obj);
+                return;
+            }
+            wx.downloadFile({
+                url: url,
+                success: function (res) {
+                    var filePath = res.tempFilePath;
+                    cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile success : " + url + ",filePath:" + filePath);
+                    obj.failCount = 0;
+                    param.callback(filePath, obj);
+                },
+                fail: (res) => {
+                    cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile  fail!!!!! " + obj.failCount);
+                    if (!obj.failCount) {
+                        obj.failCount = 0;
+                    }
+                    obj.failCount++;
+                    if (obj.failCount <= 2) {
+                        cc.wwx.OutPut.info("cc.wwx.GlobalFuncs.downLoadFile  try again . " + obj.failCount);
+                        this.downLoadFile(obj, param);
+                    } else {
+                        obj.failCount = 0;
+                        param.callback(null, obj);
+                    }
+                }
+            });
+        },
+
+        /*
+         *加密数据解密算法
+         * crypted 加密数据
+         * iv由微信数据接口返回
+         * key是session_key : cc.wwx.UserInfo.wx_session_key
+         */
+        wxDecrypt: function (key, iv, crypted) {
+            cc.wwx.OutPut.info("wxDecrypt :" + key + " , " + iv + ", " + crypted);
+            // var crypto = require('crypto');
+            crypted = new Buffer(crypted, 'base64');
+            iv = new Buffer(iv, 'base64');
+            key = new Buffer(key, 'base64');
+            var decipher = this.crypto.createDecipheriv('aes-128-cbc', key, iv);
+            var decoded = decipher.update(crypted, 'binary', 'utf8');
+            decoded += decipher.final('utf8');
+            return decoded;
         },
         _preventFastClicks()
         {

@@ -25,7 +25,19 @@ cc.Class({
             this.register(cc.wwx.EventType.CMD_PRODUCT_DELIVERY, this._onPaymentNotify);
             this.register(cc.wwx.EventType.CMD_BAG, this._onMsgBag);
             this.register(cc.wwx.EventType.CMD_GAME_DATA, this._onMsgGameData);
+            this.register(cc.wwx.EventType.MSG_DAILY_CHECKIN_STATUS, this._onMsgDailyCheckinStatus);
+            this.register(cc.wwx.EventType.MSG_BALL_DAILY_CHECKIN, this._onMsgBallDailyCheckin);
 
+        },
+        _onMsgBallDailyCheckin(params)
+        {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN,params);
+
+        },
+        //签到数据返回
+        _onMsgDailyCheckinStatus(params)
+        {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,params);
         },
         _onMsgBag(params)
         {
@@ -52,8 +64,8 @@ cc.Class({
                 cc.wwx.UserInfo.gdata = result["gdata"];
 
                 cc.wwx.SceneManager.switchScene("GameHall");
+                cc.wwx.TCPMSG.updateGameScore(cc.wwx.SystemInfo.gameId,"level",0,1,1,3);
 
-                // cc.wwx.TCPMSG.updateGameScore(cc.wwx.SystemInfo.gameId,"level",100,100,1,3);
             }
         },
 
@@ -85,9 +97,9 @@ cc.Class({
             var result = params.result;
             var changes = result['changes'] || [];
             for (var i = 0; i < changes.length; i++) {
-                if (changes[i] == "udata") {
+                if (changes[i] === "udata" || changes[i] === "gdata") {
                     cc.wwx.TCPMSG.getUserInfo();
-                } else if (changes[i] == "item") {
+                } else if (changes[i] === "item") {
                     cc.wwx.TCPMSG.getBagInfo();
                 }
             }
@@ -118,7 +130,7 @@ cc.Class({
             cc.wwx.TCPMSG.fetchPaymentList();
 
             // 分享发奖
-            // ddz.Share.getShareRewards();
+            cc.wwx.Share.getShareRewards();
 
             //绑定游戏
             cc.wwx.TCPMSG.bindGame(cc.wwx.SystemInfo.gameId);
@@ -130,7 +142,6 @@ cc.Class({
         _onMsgTCPErrCountMax() {
             // Output.err('TCPErrCountMax');
             // SDK.login();
-            // ddz.ConnectManager.hideWifiView();
             cc.wwx.PopWindowManager.showWifiView("connecting_wifi");
 
         },
@@ -147,7 +158,6 @@ cc.Class({
             var cmd = params.cmd;
 
             if (cmd) {
-                // ddz.ConnectManager.hideWifiView();
                 // 过滤掉不要的协议
                 if (this.notNeedCmds.contains(cmd)) {
                     return;
@@ -163,7 +173,7 @@ cc.Class({
                 }
 
                 // 过滤牌桌协议
-                // if (!ddz.TableMsgManager.filterMsg(params)) {
+                // if (!wwx.TableMsgManager.filterMsg(params)) {
                 // }
 
                 // 缓存最后100条协议

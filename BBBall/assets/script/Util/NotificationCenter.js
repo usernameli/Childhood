@@ -46,7 +46,7 @@ cc.Class({
         },
 
         trigger: function (eventName, params) {
-            // cc.wwx.OutPut.log("EventTrigger", eventName);
+            cc.wwx.OutPut.log("EventTrigger", eventName,JSON.stringify(params));
             var fns = this.events[eventName];
             if (!fns) {
                 return;

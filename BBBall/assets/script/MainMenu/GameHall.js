@@ -5,6 +5,7 @@ cc.Class({
             default:null,
             type:cc.Label
         },
+        _openCheckIn:false,
         _tag:"GameHall"
 
     },
@@ -16,6 +17,53 @@ cc.Class({
         }
 
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
+
+        cc.wwx.TCPMSG.getDaily_checkin_status();
+
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,this.daily_checkin_status,this);
+
+    },
+    start()
+    {
+        // 获取玩家微信信息
+        if (!cc.wwx.UserInfo.wxAuthor) {
+            cc.wwx.SDKLogin.wxUserInfo1();
+        }
+    },
+    onDestroy()
+    {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,this.daily_checkin_status,this);
+
+    },
+
+    daily_checkin_status(params)
+    {
+        let result = params['result'];
+        let states = result['states'];
+        if(this._openCheckIn)
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn","SignInWindow",result);
+            return;
+        }
+
+        this._openCheckIn = false;
+
+        let isCheckIn = false;
+        for(let i = 0 ; i < states.length;i++)
+        {
+            if(states[i]['st'] === 1)
+            {
+                isCheckIn = true;
+                break;
+
+            }
+        }
+        if(isCheckIn)
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn","SignInWindow",result);
+
+        }
+
     },
     checkpointMode()
     {
@@ -50,7 +98,9 @@ cc.Class({
     signInReward()
     {
         //签到奖励
-        cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn","SignInWindow");
+        this._openCheckIn = true;
+        cc.wwx.TCPMSG.getDaily_checkin_status();
+
 
     },
     showAdsReward()

@@ -8,6 +8,8 @@ cc.Class({
         CMD_BAG: 'bag',
         CMD_GAME_DATA: 'game_data',
         CMD_UPDATE_NOTIFY: 'update_notify',
+        CMD_HALL_SHARE3: 'hall_share3',
+        CMD_HALL_SHARE2:'hall_share2',
 
         MSG_TCP_OPEN: 'tcp_open',
         MSG_TCP_CLOSE: 'tcp_close',
@@ -16,6 +18,8 @@ cc.Class({
         MSG_TCP_ERROR_COUNT_MAX: 'tcp_error_count_max', //  tcp心跳失败次数达到上限
         MSG_RECONNECT: 'reconnect',
         MSG_SERVER_MESSAGE: 'server_message',
+        MSG_TO_HIDE:'msg_to_hide',//进入后台
+        MSG_TO_SHOW:'msg_to_show',//进入后台
 
         CMD_INVITE_INFO: 'invite_info', // 邀请信息
         CMD_UPDATE_SCORE: 'update_score', //更新分数
@@ -23,6 +27,11 @@ cc.Class({
         CMD_PAYMENT_EXCHANGE: 'store', // 支付 - 金币兑换
         CMD_PRODUCT_DELIVERY: 'prod_delivery', // 支付 - 金币兑换 回调
         ACTION_PAYMENT_LIST_UPDATE : 'update',
+        CMD_DAILY_CHECKIN_STATUS : 'daily_checkin_status', //获取签到信息
+        CMD_DAILY_CHECKIN : 'daily_checkin',
+
+        MSG_DAILY_CHECKIN_STATUS : 'ball_daily_checkin_status',//签到数据返回
+        MSG_BALL_DAILY_CHECKIN : 'ball_daily_checkin', //签到返回
 
         ACTION_PAYMENT_EXCHANGE_BUY : 'buy',
 
@@ -32,6 +41,7 @@ cc.Class({
         WEIXIN_LOGIN_FAIL: 'weixin_login_fail',
 
         MSG_UPDATE_DIAMOND: 'msg_update_diamond',       // 钻石信息更新
+        MSG_WX_SHARE_SUCCESS:'msg_wx_share_success',        //分享成功
 
         GET_USER_FEATURE_SUCCESS: 'GET_USER_FEATURE_SUCCESS',
         GET_USER_FEATURE_FAIL: 'GET_USER_FEATURE_FAIL',
@@ -64,6 +74,10 @@ cc.Class({
         GETGROUPRANK_SUCCESS: "GETGROUPRANK_SUCCESS", //获取群排行数据
 
 
+        ACTION_GET_BURIALS : 'get_burials', //获取埋点数据列表
+        ACTION_GET_BURIAL_SHARE : 'get_burial_share',//获取埋点内容
+        ACTION_GET_SHARE_REWARD: 'get_share_reward',//获取share3奖励
+        ACTION_GET_REWARD : 'get_reward',
 
         ACTION_BALL_START_LINEARVELOCITY:'ball_start_linearvelocity', //球球线性运动
         ACTION_BALL_STOP_LINEARVELOCITY:'action_ball_stop_linearvelocity',//球球线性运动停止
@@ -83,6 +97,10 @@ cc.Class({
         RANDOM_PLACEMENT_4_ELIMINATE:'random_placement_4_eliminate', //随机放置4个射线
         ACTION_RECOVERY_BALL:'action_recovery_ball', //收回球球
         ACTION_BALL_GAME_RESTART:'action_ball_game_restart',//游戏重新开始
+
+        ACTION_BALL_DAILY_CHECKIN_STATUS:'action_ball_daily_checkin_status', //签到数据事件
+        ACTION_BALL_DAILY_CHECKIN:'action_ball_daily_checkin', //签到成功数据事件
+
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     }
 })

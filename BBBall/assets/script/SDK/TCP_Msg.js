@@ -57,6 +57,36 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+        /*
+         * 签到
+         */
+        daily_checkin:function(gameId)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'gameId': gameId || cc.wwx.SystemInfo.gameId,
+                    'action': cc.wwx.EventType.CMD_DAILY_CHECKIN,
+                }
+            };
+            this._sendCmd(params);
+        },
+        /**
+         *  获取签到数据
+         */
+
+        getDaily_checkin_status(gameId)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'gameId': gameId || cc.wwx.SystemInfo.gameId,
+                    'action': cc.wwx.EventType.CMD_DAILY_CHECKIN_STATUS,
+                    'authorCode': cc.wwx.UserInfo.authorCode
+                }
+            };
+            this._sendCmd(params);
+        },
         /**
          * 游戏结束更新分数
          *
@@ -77,6 +107,78 @@ cc.Class({
 
                 }
             };
+            this._sendCmd(params);
+        },
+        /*
+     * 领取分享奖励
+     */
+        getShareReward: function(pointId) {
+            if (!pointId || typeof pointId != 'number') {
+                return;
+            }
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_HALL_SHARE2,
+                'params': {
+                    'action': cc.wwx.EventType.ACTION_GET_REWARD,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'pointId' : pointId
+                }
+            };
+
+            this._sendCmd(params);
+        },
+
+        /*
+         * 获取分享埋点信息
+         */
+        getShare3Burials: function() {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_HALL_SHARE3,
+                'params': {
+                    'action': cc.wwx.EventType.ACTION_GET_BURIALS,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                }
+            };
+
+            this._sendCmd(params);
+        },
+
+        /*
+        * 领取新分享奖励
+        */
+        getShare3Reward: function(pointId,whereToShare) {
+            if (!pointId || typeof pointId != 'number') {
+                cc.wwx.OutPut.err('getShare3Reward err: pointId=' + pointId + ' whereToShare=' + whereToShare);
+                return;
+            }
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_HALL_SHARE3,
+                'params': {
+                    'action': cc.wwx.EventType.ACTION_GET_SHARE_REWARD,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'pointId': pointId,
+                    "whereToShare":whereToShare,
+                }
+            };
+
+            this._sendCmd(params);
+        },
+        /*
+         * 获取埋点详细信息
+        */
+        getShare3BurialInfo: function(burialId) {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_HALL_SHARE3,
+                'params': {
+                    'action': cc.wwx.EventType.ACTION_GET_BURIAL_SHARE,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'burialId': burialId,
+                    'urlParams': {
+                        'userName' : cc.wwx.UserInfo.userName
+                    }
+                }
+            };
+
             this._sendCmd(params);
         },
         fetchPaymentList : function() {

@@ -1,6 +1,10 @@
 cc.Class({
     extends:cc.Component,
     properties:{
+        sumStarNum:{
+            default:null,
+            type:cc.Label
+        },
 
         _tag:"CheckPointScene",
     },
@@ -10,7 +14,7 @@ cc.Class({
         {
             initMgr();
         }
-
+        this.sumStarNum.string = cc.wwx.UserInfo.gdata["levelTotalStar"];
     },
     clickGoHome()
     {

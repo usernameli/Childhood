@@ -129,7 +129,7 @@ cc.Class({
                         "logreporturl": ""
                     },
                     "userPwd": "ty817142",
-                    "purl": "http://ddz.image.tuyoo.com/avatar/head_female_0.png",
+                    "purl": "http://wwx.image.tuyoo.com/avatar/head_female_0.png",
                     "snsId": "wxapp:071Nehqt0Z4XEe1jN6qt007Cqt0Nehqz",
                     "userEmail": "",
                     "connectTimeOut": 35,
@@ -155,7 +155,127 @@ cc.Class({
             "errMsg": "request:ok"
         }
         */
-        loginTuyooWithCode: function (code, userInfo) {
+        /**
+         * 静默同步玩家信息
+         */
+        wxUserInfo1 () {
+            var self = this;
+            wx.login({
+                success: function(res) {
+                    if (res.code) {
+                        let code = res.code;
+                        cc.wwx.WeChat.getUserInfo(function(status, params) {
+                            if (status) {
+                                try {
+                                    var userInfo = JSON.parse(params)[0].data[0];
+                                    self.loginTuyooWithCode(code, userInfo, function(){
+                                        cc.wwx.UserInfo.wxAuthor = true;
+                                    });
+                                    cc.wwx.OutPut.info('wxUserInfo1.wx.getUserInfo.ok:', params);
+                                } catch (e) {
+                                    cc.wwx.OutPut.err('wxUserInfo1.wx.getUserInfo.ok.e:', params);
+                                }
+                            } else {
+                                cc.wwx.OutPut.err('wxUserInfo1.wx.getUserInfo.fail:', params);
+                            }
+                        });
+                    }
+                }
+            });
+        },
+
+        /**
+         *  获取用户授权
+         * @param obj.setting 是否已经同意授权了
+         */
+        wxUserInfo2 (obj) {
+            obj = obj || {};
+            var self = this;
+            var getUserInfo = function() {
+                wx.getUserInfo({
+                    'lang' : 'zh_CN',
+                    success: function (res) {
+                        cc.wwx.OutPut.log('wx getUserInfo ok:', JSON.stringify(res));
+                        var userInfo = res['userInfo'];
+
+                        wx.login({
+                            success: function (res) {
+                                if (res.code) {
+                                    let code = res.code;
+                                    self.loginTuyooWithCode(code, userInfo, function(res){
+                                        cc.wwx.UserInfo.wxAuthor = true;
+                                        if (typeof obj.onSuccess == 'function') {
+                                            obj.onSuccess(res);
+                                        }
+                                    }, function(errMsg){
+                                        if (typeof obj.onFail == 'function') {
+                                            obj.onFail(errMsg);
+                                        }
+                                    });
+                                } else {
+                                    if (typeof obj.onFail == 'function') {
+                                        obj.onFail();
+                                    }
+                                }
+                            }
+                        });
+                    },
+                    fail: function (res) {
+                        cc.wwx.OutPut.err('wx getUserInfo fail:', JSON.stringify(res));
+                        // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
+                        if (res.errMsg.indexOf('auth deny') > -1 || res.errMsg.indexOf('auth denied') > -1 ) {
+                            // 处理用户拒绝授权的情况
+                            cc.wwx.OutPut.log('wx getUserInfo fail:', 'to tip user');
+                            wx.showModal({
+                                title: '授权提示',
+                                content: '获取用户信息失败，请确认授权！',
+                                showCancel: false,
+                                success: function () {
+                                    ty.WeChat.openSetting();
+                                }
+                            });
+                        }
+                        if (typeof obj.onFail == 'function') {
+                            obj.onFail();
+                        }
+                    }
+                });
+            };
+            if (obj.setting) {
+                getUserInfo();
+            } else {
+                // 获取用户授权情况
+                wx.getSetting({
+                    success: function (res) {
+                        ty.Output.log('get user setting :', res);
+                        var authSetting = res.authSetting;
+                        if (authSetting['scope.userInfo'] === true) {
+                            cc.wwx.UserInfo.wxAuthor = true;
+                            // 用户已授权
+                            cc.wwx.OutPut.info('wxUserInfo2.auth.ok');
+                            if (typeof obj.onSuccess == 'function') {
+                                obj.onSuccess();
+                            }
+                        } else if (authSetting['scope.userInfo'] === false){
+                            // 用户已拒绝授权。处理用户拒绝授权的情况，跳出提示
+                            wx.showModal({
+                                title: '授权提示',
+                                content: '获取用户信息失败，请确认授权！',
+                                showCancel: false,
+                                success: function () {
+                                    cc.wwx.WeChat.openSetting();
+                                }
+                            });
+                        } else {
+                            // 未询问过用户授权
+                            getUserInfo();
+                        }
+                    }
+                });
+            }
+        },
+
+        loginTuyooWithCode: function (code, userInfo,onSuccess,onFail) {
             if (!cc.wwx.IsWechatPlatform()) {
                 return;
             }
@@ -182,11 +302,10 @@ cc.Class({
                 scene_param: cc.wwx.UserInfo.scene_param || "",
                 invite_id: cc.wwx.UserInfo.invite_id || 0
             };
-            if (userInfo && userInfo.nickName) {
-                dataObj.nikeName = userInfo.nickName;
-            }
-
-            if (userInfo && userInfo.avatarUrl) {
+            if (userInfo) {
+                cc.wwx.OutPut.info('_loginTuyooWithCode userInfo:' + JSON.stringify(userInfo));
+                dataObj.nickName = userInfo.nickName;
+                dataObj.gender = userInfo.gender;
                 dataObj.avatarUrl = userInfo.avatarUrl;
             }
 
@@ -204,15 +323,39 @@ cc.Class({
 
                 success: function (params) {
                     cc.wwx.OutPut.log(null, 'tuyoo login success, params:' + JSON.stringify(params));
-                    let checkData = params.data;
-                    if (checkData.error && checkData.error.code == 1) {
-                        console.log('tuyoo login fail...');
-                        return;
+                    let errMsg = null;
+                    if (params.data && params.data.error) {
+                        cc.wwx.OutPut.err('loginSdk success, but error params 1:' + JSON.stringify(params));
+                        var code = params.data.error.code;
+                        var info = params.data.error.info;
+                        errMsg = code + ':' + info;
                     }
-                    // 保存用户名/用户ID/用户头像
-                    let result = checkData.result;
+                    if (!params.data || !params.data.result || params.data.result.code !== 0) {
+                        cc.wwx.OutPut.err('loginSdk success, but error  params 2:' + JSON.stringify(params));
+                        if (params.data.result) {
+                            var code = params.data.result.code;
+                            var info = params.data.result.info;
+                            errMsg = code + ':' + info;
+                        } else {
+                            errMsg = params.data.statusCode;
+                        }
+                    }
+                    if (errMsg) {
+                        if (typeof onFail == 'function') {
+                            onFail(errMsg);
+                        }
+                    } else {
 
-                    that.updateUserInfo(result, local_uuid, code);
+                        // 保存用户名/用户ID/用户头像
+                        let result = params.data.result;
+                        that.updateUserInfo(result, local_uuid, code);
+
+                        if (typeof onSuccess == 'function') {
+                            onSuccess(result);
+                        }
+                    }
+
+
 
 
                 },

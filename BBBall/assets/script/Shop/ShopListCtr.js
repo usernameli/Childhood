@@ -20,13 +20,26 @@ cc.Class({
     {
         this.content = this.scrollView.content;
         this.items = []; // 存储实际创建的项数组
-        this.initialize();
         this.updateTimer = 0;
         this.updateInterval = 0.2;
         // 使用这个变量来判断滚动操作是向上还是向下
         this.lastContentPosY = 0;
+        cc.wwx.OutPut.log("onLoad: ",this.itemTemplateName);
+        cc.wwx.OutPut.log("cc.wwx.PayModel.mPurchaseList.length: ",cc.wwx.PayModel.mPurchaseList.length);
+        cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
+
+        if(this.itemTemplateName == "ShopTemplate")
+        {
+            this.totalCount = cc.wwx.PayModel.mPurchaseList.length;
+        }
+        cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
+
+
         // 设定缓冲矩形的大小为实际创建项的高度累加，当某项超出缓冲矩形时，则更新该项的显示内容
         this.bufferZone = this.spawnCount * (this.itemTemplate.height + this.spacing) / 2;
+
+        this.initialize();
+
     },
     // 列表初始化
     initialize: function () {
@@ -38,7 +51,7 @@ cc.Class({
             this.content.addChild(item);
             // 设置该item的坐标（注意父节点content的Anchor坐标是(0.5, 1)，所以item的y坐标总是负值）
             item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
-            item.getComponent(this.itemTemplateName).updateItem(i);
+            item.getComponent(this.itemTemplateName).updateItem(i + 1);
             this.items.push(item);
         }
     },

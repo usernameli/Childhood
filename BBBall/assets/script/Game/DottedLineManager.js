@@ -22,12 +22,17 @@ cc.Class({
         ballMaxNum:0, //球的数量
         center:cc.v2(0,0),//球的发球位置
         _ballList:[], //球保存的数组里面
+        _colliderMaxPoint:0,
+        _colliderPoint:0,
         ballOnWallNum:0, //回到地面的球的数量
     },
 
     // use this for initialization
     onLoad: function () {
+        this.remainLength = 1000;
         this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
+        this._colliderMaxPoint = 4;
+        this._colliderPoint = 0;
         this._ballList = [];
         this.isBallSporting = false;
         this.isFirstBallCome = false;
@@ -133,6 +138,7 @@ cc.Class({
         {
             return;
         }
+        this._colliderPoint = 0;
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
         cc.wwx.OutPut.log('touchStartCallBack:', 'dottedline', JSON.stringify(touchPos));
         this._drawDottleLine(touchPos);
@@ -154,13 +160,15 @@ cc.Class({
 
         this._ctx.clear();
 
-        this._rayCast(p1, p2);
+        this._rayCast(p1, p2,true);
     },
 
-    _rayCast: function (p1, p2) {
+    _rayCast: function (p1, p2,startF) {
         let manager = cc.director.getPhysicsManager();
-        let results = manager.rayCast(p1, p2,cc.RayCastType.All);
+        // let results = manager.rayCast(p1, p2);
         let result = null;
+        let results = manager.rayCast(p1, p2,cc.RayCastType.All);
+
         for (let i = 0; i < results.length; i++) {
             var collider = results[i].collider;
             if(collider.tag > 0)
@@ -176,28 +184,66 @@ cc.Class({
             this._ctx.circle(p2.x, p2.y, 10);
             this._ctx.fillColor = cc.Color.RED;
             this._ctx.fill();
+            if(startF)
+            {
+                this._colliderPoint = 0;
+                this._colliderPoint += 1;
+            }
+            else
+            {
+                this._colliderPoint += 1;
+            }
         }
-        else
+
+        if(this._colliderPoint >= this._colliderMaxPoint)
         {
+            this.drawLine(p1,p2,false);
+
             return;
         }
-
-        this.drawLine(p1,p2,true);
-        let normal = result.normal;
-        if(normal.y === 0)
+        else
         {
-            let newP = cc.v2(p1.x,2 * p2.y);
-            p1 = p2;
-            p2 = newP;
+            this.drawLine(p1,p2);
+        }
+        if (!result) return;
+
+        let normal = result.normal;
+        if(normal.y === 0 || normal.x === 0)
+        {
+            if(normal.y === 0)
+            {
+                let newP = cc.v2(p1.x,2 * p2.y);
+                p1 = p2;
+                p2 = newP;
+            }
+            else
+            {
+                let newP = cc.v2(p1.x + 2 * (p2.x - p1.x),p1.y);
+                p1 = p2;
+                p2 = newP;
+            }
+
+            // this.drawLine(p1,p2,false);
+            this._rayCast(p1,p2);
         }
         else
         {
-            let newP = cc.v2(p1.x + 2 * (p2.x - p1.x),p1.y);
+            let orRayCast = p2.sub(this.center);
+            orRayCast.normalizeSelf();
+            normal.normalizeSelf();
             p1 = p2;
-            p2 = newP;
+            p2 = orRayCast.sub( normal.mulSelf(2 * orRayCast.dot(normal)));
+            p2.mulSelf(1000);
+            // this.drawLine(p1,p2,false);
+            this._rayCast(p1,p2);
         }
 
-        this.drawLine(p1,p2,false);
+
+
+        // this.remainLength = this.remainLength - p2.sub(p1).mag();
+        // if (this.remainLength < 1) return;
+
+        // this._rayCast(p1,p2);
 
     },
     drawLine:function(start,end,fg)
@@ -215,7 +261,7 @@ cc.Class({
         }
 
         //设置虚线中每条线段的长度
-        var length=5
+        var length=10
         //根据每条线段的长度获得一个增量向量
         var increment=line.normalize().mul(length)
         //确定现在是画线还是留空的bool
@@ -233,7 +279,7 @@ cc.Class({
                 // com.lineTo(pos.x,pos.y)
                 // com.stroke()
                 this._ctx.circle(pos.x, pos.y, 3);
-                this._ctx.fillColor = cc.Color.GRAY;
+                this._ctx.fillColor = cc.Color.YELLOW;
                 this._ctx.fill();
                 pos.addSelf(increment)
             }

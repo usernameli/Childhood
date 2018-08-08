@@ -40,10 +40,5 @@ Array.prototype.contains = function (obj) {
 };
 
 
-window.ArrayUtils = {
-    remove: function (arr,idx) {
-        return arr.slice(0,index).concat(arr.slice(idx+1,arr.length));
-    },
 
-};
 

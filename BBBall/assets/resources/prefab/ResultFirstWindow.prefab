@@ -721,7 +721,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "8b90574d-fae8-45d8-86ef-d423ab172784"
+      "__uuid__": "d29a9a6d-319d-450d-a3b9-faed17b46b90"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1431,6 +1431,8 @@
       "__id__": 1
     },
     "_enabled": true,
+    "_windowName": "unName",
+    "_isAction": true,
     "scoreNum": {
       "__id__": 7
     },

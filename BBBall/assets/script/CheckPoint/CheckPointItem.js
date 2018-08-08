@@ -9,9 +9,13 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        checkPointNext:{
+            default:null,
+            type:cc.Node
+        },
         checkPointNum:{
             default:null,
-            type:cc.Label,
+            type:cc.Node,
         },
         pointStar1:{
             default:null,
@@ -29,14 +33,29 @@ cc.Class({
             default:null,
             type:cc.SpriteFrame
         },
+        starBlackSpriteFrame:{
+            default:null,
+            type:cc.SpriteFrame
+        },
         _checkPointItem:0,
+        _gameData:null,
+        _tag:"CheckPointItem"
     },
     onLoad()
     {
         this.bgUnLock.active = false;
+        this._gameData = cc.wwx.UserInfo.gdata;
+        this.checkPointNumLabel = this.checkPointNum.getComponent("cc.Label");
     },
     clickItemCallBack()
     {
+        if(this._checkPointItem > this._gameData["levelLv"])
+        {
+            cc.wwx.TipManager.showMsg("关卡还未解锁.....",1);
+
+            return;
+        }
+        cc.wwx.UserInfo.ballInfo.ballNum = cc.wwx.MapCheckPoint.getBallInfoByMapId(this._checkPointItem);
         console.log('clickItemCallBack ' + this._checkPointItem + ' clicked');
         cc.wwx.MapCheckPoint.getMapCheckPointData(this._checkPointItem,function (checkPointData) {
             cc.wwx.OutPut.log("clickItemCallBack: " + JSON.stringify(checkPointData));
@@ -47,9 +66,59 @@ cc.Class({
     },
     updateItem(itemID)
     {
-        this.checkPointNum.string =  itemID;
+        this.checkPointNumLabel.string =  itemID;
         this._checkPointItem = itemID;
+        cc.wwx.OutPut.log(this._tag,"updateItem ",itemID);
+        cc.wwx.OutPut.log(this._tag,"levelLv: ",this._gameData["levelLv"]);
+        this.checkPointNum.color = new cc.Color(58,78,133,255);
+        this.pointStar1.spriteFrame  =  this.starBlackSpriteFrame;
+        this.pointStar2.spriteFrame  =  this.starBlackSpriteFrame;
+        this.pointStar3.spriteFrame  =  this.starBlackSpriteFrame;
+        if(itemID === this._gameData["levelLv"])
+        {
+            cc.wwx.OutPut.log(this._tag,"updateItem == ",itemID);
 
+            this.bgLock.active = false;
+            this.bgUnLock.active = false;
+            this.checkPointNext.active = true;
+            this.checkPointNum.setPosition(cc.p(0,8));
+        }
+        else if(itemID < this._gameData["levelLv"])
+        {
+            cc.wwx.OutPut.log(this._tag,"updateItem < ",itemID);
+
+            this.bgLock.active = false;
+            this.bgUnLock.active = true;
+            this.checkPointNext.active = false;
+            this.checkPointNum.setPosition(cc.p(0,-10));
+            let starNum = this._gameData["levelStar"][itemID - 1];
+            this.checkPointNum.color = new cc.Color(255,255,255,255);
+
+            if(starNum === 1)
+            {
+                this.pointStar1.spriteFrame  =  this.starSpriteFrame;
+            }
+            else if(starNum === 2)
+            {
+                this.pointStar1.spriteFrame  =  this.starSpriteFrame;
+                this.pointStar2.spriteFrame  =  this.starSpriteFrame;
+
+            }
+            else
+            {
+                this.pointStar1.spriteFrame  =  this.starSpriteFrame;
+                this.pointStar2.spriteFrame  =  this.starSpriteFrame;
+                this.pointStar3.spriteFrame  =  this.starSpriteFrame;
+            }
+        }
+        else
+        {
+            this.bgLock.active = true;
+            this.bgUnLock.active = false;
+            this.checkPointNext.active = false;
+            this.checkPointNum.setPosition(cc.p(0,8));
+
+        }
     },
     update()
     {
