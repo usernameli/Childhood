@@ -27,6 +27,22 @@ cc.Class({
             this.register(cc.wwx.EventType.CMD_GAME_DATA, this._onMsgGameData);
             this.register(cc.wwx.EventType.MSG_DAILY_CHECKIN_STATUS, this._onMsgDailyCheckinStatus);
             this.register(cc.wwx.EventType.MSG_BALL_DAILY_CHECKIN, this._onMsgBallDailyCheckin);
+            this.register(cc.wwx.EventType.CMD_TODO_TASKS, this._todoTask);
+
+        },
+        _todoTask(params)
+        {
+            //{"cmd":"todo_tasks","result":{"gameId":101,"userId":60008,"tasks":[{"action":"get_reward","params":{"reward":[{"item":"1012","count":1}]}}]}}
+            let tasks = params['result']['tasks'];
+            for(let taskIndex = 0; taskIndex < tasks.length;taskIndex++)
+            {
+                if(tasks[taskIndex]['action'] === 'get_reward')
+                {
+                    cc.wwx.PopWindowManager.popWindow("prefab/CongratulationsWindow","CongratulationsWindow",tasks[taskIndex]['params']);
+
+                }
+            }
+
 
         },
         _onMsgBallDailyCheckin(params)
@@ -64,7 +80,6 @@ cc.Class({
                 cc.wwx.UserInfo.gdata = result["gdata"];
 
                 cc.wwx.SceneManager.switchScene("GameHall");
-                cc.wwx.TCPMSG.updateGameScore(cc.wwx.SystemInfo.gameId,"level",0,1,1,3);
 
             }
         },
@@ -108,7 +123,6 @@ cc.Class({
         {
             var result = params.result;
             cc.wwx.UserInfo.parseUdata(result);
-            cc.wwx.TipManager.showMsg("获取用户信息成功");
 
             if (parseInt(result.gameId) === cc.wwx.SystemInfo.appId) {
                 this.finishLogin();

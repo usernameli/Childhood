@@ -1433,6 +1433,7 @@
     "_enabled": true,
     "_windowName": "unName",
     "_isAction": true,
+    "_params": null,
     "scoreNum": {
       "__id__": 7
     },

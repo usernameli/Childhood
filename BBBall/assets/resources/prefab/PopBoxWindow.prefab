@@ -37,14 +37,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 28
+        "__id__": 29
       },
       {
-        "__id__": 29
+        "__id__": 30
       }
     ],
     "_prefab": {
-      "__id__": 30
+      "__id__": 31
     },
     "_id": "",
     "_opacity": 255,
@@ -716,7 +716,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 27
+      "__id__": 28
     },
     "_id": "",
     "_opacity": 255,
@@ -894,7 +894,11 @@
     },
     "duration": 0.1,
     "zoomScale": 1.2,
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 27
+      }
+    ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
@@ -932,6 +936,15 @@
     "_N$target": {
       "__id__": 21
     }
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "PopBoxWindow",
+    "handler": "closeWindowCallBack",
+    "customEventData": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -980,7 +993,10 @@
     "_enabled": true,
     "_windowName": "unName",
     "_isAction": true,
-    "_params": null
+    "_params": null,
+    "text": {
+      "__id__": 19
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

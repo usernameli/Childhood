@@ -3089,9 +3089,11 @@
   },
   {
     "__type__": "cc.ClickEvent",
-    "target": null,
-    "component": "",
-    "handler": "",
+    "target": {
+      "__id__": 69
+    },
+    "component": "ShopTemplate",
+    "handler": "clickCallBack",
     "customEventData": ""
   },
   {

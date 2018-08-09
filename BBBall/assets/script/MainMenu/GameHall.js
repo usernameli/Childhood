@@ -15,7 +15,7 @@ cc.Class({
         {
             initMgr();
         }
-
+        this._openCheckIn = false;
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
 
         cc.wwx.TCPMSG.getDaily_checkin_status();
@@ -26,7 +26,7 @@ cc.Class({
     start()
     {
         // 获取玩家微信信息
-        if (!cc.wwx.UserInfo.wxAuthor) {
+        if (CC_WECHATGAME && !cc.wwx.UserInfo.wxAuthor) {
             cc.wwx.SDKLogin.wxUserInfo1();
         }
     },
@@ -68,7 +68,7 @@ cc.Class({
     checkpointMode()
     {
         //关卡模式
-        cc.wwx.UserInfo.playMode = "checkPoint";
+        cc.wwx.UserInfo.playMode = "level";
         cc.wwx.SceneManager.switchScene("CheckPoint");
 
 
@@ -85,7 +85,7 @@ cc.Class({
     {
         //白球模式
         cc.wwx.UserInfo.ballInfo.ballNum = 100;
-        cc.wwx.UserInfo.playMode = "ball100";
+        cc.wwx.UserInfo.playMode = "100ball";
 
         cc.wwx.MapCheckPoint.get100MapCheckPointData(function (checkPointData) {
             cc.wwx.OutPut.log("clickItemCallBack: " + JSON.stringify(checkPointData));

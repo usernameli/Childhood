@@ -27,6 +27,7 @@ cc.Class({
 
         },
         checkPointData:[],
+        checkPointID:1,
         bagData: {
             m_normalItemList:[], //背包数据
             'diamondInfo': {},
@@ -37,6 +38,7 @@ cc.Class({
             ballType:"ballID",
             ballNum:30,
         },
+        currentSocre:0,
         playMode:"checkPoint",  //默认关卡类型 checkPoint:关卡 classic:经典模式 ball100:百球模式
         SDKVersion:'',
         parseUdata: function (userInfoResult) {

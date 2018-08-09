@@ -14,7 +14,13 @@ cc.Class({
         {
             initMgr();
         }
-        this.sumStarNum.string = cc.wwx.UserInfo.gdata["levelTotalStar"];
+        let levelHighStar = cc.wwx.UserInfo.gdata["levelHighStar"];
+        let sumStar = 0;
+        for(let i = 0; i < levelHighStar.length;i++)
+        {
+            sumStar += levelHighStar[i];
+        }
+        this.sumStarNum.string = sumStar;
     },
     clickGoHome()
     {

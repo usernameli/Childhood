@@ -30,6 +30,7 @@ cc.Class({
         },
 
         ignoreScope: function (scope) {
+
             for (var msg in this.events) {
                 var obs = this.events[msg];
                 if (obs) {
@@ -46,7 +47,7 @@ cc.Class({
         },
 
         trigger: function (eventName, params) {
-            cc.wwx.OutPut.log("EventTrigger", eventName,JSON.stringify(params));
+            cc.wwx.OutPut.log("eventName: ",eventName);
             var fns = this.events[eventName];
             if (!fns) {
                 return;

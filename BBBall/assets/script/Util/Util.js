@@ -740,6 +740,20 @@ cc.Class({
             decoded += decipher.final('utf8');
             return decoded;
         },
+        /*
+         * catalog: 大图名字
+         * cb:回调函数
+         */
+        loadResAtlas(catalog,cb)
+        {
+            cc.loader.loadRes(catalog, cc.SpriteAtlas, function (err, atlas) {
+                if(typeof cb == 'function')
+                {
+                    cb(err,atlas)
+                }
+            });
+        },
+
         _preventFastClicks()
         {
             if(this.btnClick === true)

@@ -32,6 +32,10 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        diamondList:{
+            default:[],
+            type:cc.Sprite
+        }
     },
     onLoad()
     {
@@ -56,26 +60,62 @@ cc.Class({
         if(checkData)
         {
             let haveCheckIn = false;
+            let self = this;
             for(let i = 0; i < checkData['states'].length;i++)
             {
                 let list = checkData['states'][i];
                 this.checkInRewardLabel[i].string = list['rewards'][0]['count'];
+                this.checkInYellowBG[i].active = false;
+
                 if(list['st'] === 2)
                 {
                     this.checkInMaskNode[i].active = true;
-                    this.checkInYellowBG[i].active = false;
+                }
+                else if(list['st'] === 0)
+                {
+                    this.checkInMaskNode[i].active = false;
+
                 }
                 else
                 {
                     this.checkInMaskNode[i].active = false;
                     this.checkInYellowBG[i].active = true;
-
                 }
 
                 if(list['st'] === 1)
                 {
                     haveCheckIn = true;
                 }
+
+                let itemId = list['rewards'][0]['itemId'];
+                let spriteFrame = 'Ball_Shop__Diamonds_1';
+                if(itemId === "item:1012")
+                {
+                    spriteFrame = 'Ball_Sigln_DiZheng';
+                }
+                else if(itemId === "item:1013")
+                {
+                    spriteFrame = 'Ball_Sigln_JiGuang';
+
+                }
+                else if(itemId === "item:1014")
+                {
+                    spriteFrame = 'Ball_Sigln_Row';
+
+                }
+                else if(itemId === "item:1015")
+                {
+                    spriteFrame = 'Ball_Sigln_Plus_Ball';
+
+                }
+                else
+                {
+                    spriteFrame = 'Ball_Shop__Diamonds_1';
+                }
+
+                cc.wwx.Util.loadResAtlas("image/MainMenu",function (err,atlas) {
+                    self.diamondList[i].spriteFrame = atlas.getSpriteFrame(spriteFrame);
+                });
             }
 
             if(haveCheckIn)
@@ -97,7 +137,7 @@ cc.Class({
     },
     onDestroy()
     {
-        cc.wwx.EventType.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN,this.ballDailyCheckin,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN,this.ballDailyCheckin,this);
 
     },
     closeWindowCallBack()

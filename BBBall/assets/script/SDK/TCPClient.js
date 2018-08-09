@@ -1,24 +1,43 @@
 /**
  * 微信小程序下TCP长连接使用websocket实现
  */
+
+var ignoreProtocols = [
+    {cmd : 'led', action : null},
+    {cmd : 'room_online_info', action : null},
+    {cmd : 'game_clientId', action : null},
+    {cmd : 'game_pricelist', action : null},
+    {cmd : 'game_config', action : null},
+    {cmd : 'heart_beat', action : null},
+    {cmd : 'module_tip', action : null},
+    {cmd : 'game_vipclientId', action : null},
+    {cmd : 'game_pricelist', action : null},
+    {cmd : 'dizhu', action : 'room_online_users'},
+    // {cmd : 'm_des', action : null},
+    // {cmd : 'hall_info', action : null},
+    // {cmd : 'hall_share3', action : null},
+    // {cmd : 'user_info', action : null},
+    // {cmd : 'game_data', action : null},
+]
+
 var isSendIgnored = function(_json) {
     var ignore = false;
-    // ignoreProtocols.forEach(function(row) {
-    //     if (_json.cmd == row.cmd && (!row.action || row.action == _json.params.action)) {
-    //         ignore = true;
-    //     }
-    // })
+    ignoreProtocols.forEach(function(row) {
+        if (_json.cmd == row.cmd && (!row.action || row.action == _json.params.action)) {
+            ignore = true;
+        }
+    })
 
     return ignore;
 }
 
 var isReceiveIgnored = function(_json) {
     var ignore = false;
-    // ignoreProtocols.forEach(function(row) {
-    //     if (_json.cmd == row.cmd && (!row.action || row.action == _json.result.action)) {
-    //         ignore = true;
-    //     }
-    // })
+    ignoreProtocols.forEach(function(row) {
+        if (_json.cmd == row.cmd && (!row.action || row.action == _json.result.action)) {
+            ignore = true;
+        }
+    })
 
     return ignore;
 }

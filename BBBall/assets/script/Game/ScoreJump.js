@@ -8,7 +8,6 @@ cc.Class({
         this._score = this.node.getComponent("cc.Label");
         this._anim = this.getComponent(cc.Animation);
 
-
     },
     jumpEndCallBack()
     {

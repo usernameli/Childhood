@@ -245,7 +245,7 @@ window.initMgr = function() {
 
     cc.wwx.WeChat = require('../SDK/weChat');
     cc.wwx.Share = require('../Model/Share');
-
+    cc.wwx.Share.init();
 
 };
 

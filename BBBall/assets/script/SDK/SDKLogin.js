@@ -158,7 +158,8 @@ cc.Class({
         /**
          * 静默同步玩家信息
          */
-        wxUserInfo1 () {
+        wxUserInfo1 ()
+        {
             var self = this;
             wx.login({
                 success: function(res) {

@@ -93,7 +93,7 @@ cc.Class({
             case 1://上面
                 break;
             case 2://地面
-                console.log("碰撞地面" + this._index);
+                cc.wwx.OutPut.log("碰撞地面" + this._index,this.dottedLineManager.ballMaxNum);
 
                 this.body.linearVelocity = cc.v2(0,0);
 
@@ -116,7 +116,8 @@ cc.Class({
                 }
                 this._isOnWall = true;
                 this.dottedLineManager.ballOnWallNum += 1;
-                if(this.dottedLineManager.ballMaxNum === this.dottedLineManager.ballOnWallNum)
+
+                if(this.dottedLineManager.ballMaxNum == this.dottedLineManager.ballOnWallNum)
                 {
                     //最后一个球回到地面
                     this.dottedLineManager.isBallSporting = false;

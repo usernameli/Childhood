@@ -10,7 +10,7 @@ cc.Class({
         CMD_UPDATE_NOTIFY: 'update_notify',
         CMD_HALL_SHARE3: 'hall_share3',
         CMD_HALL_SHARE2:'hall_share2',
-
+        CMD_TODO_TASKS:'todo_tasks',
         MSG_TCP_OPEN: 'tcp_open',
         MSG_TCP_CLOSE: 'tcp_close',
         MSG_TCP_ERROR: 'tcp_error',             // tcp 失败
@@ -100,6 +100,7 @@ cc.Class({
 
         ACTION_BALL_DAILY_CHECKIN_STATUS:'action_ball_daily_checkin_status', //签到数据事件
         ACTION_BALL_DAILY_CHECKIN:'action_ball_daily_checkin', //签到成功数据事件
+        ACTION_UPDATE_GAME_SCORE:'action_update_game_score', //更新分数
 
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     }

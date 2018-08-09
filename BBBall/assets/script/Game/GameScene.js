@@ -72,14 +72,14 @@ cc.Class({
         })));
 
 
-
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_UPDATE_GAME_SCORE,{updateScore:this._sumScore})
         this._score += 10;
+
     },
     ballSports()
     {
         //重置分数
         this._score = 10;
-        this._sumScore = 0;
         this.itemNode.active = false;
         this.recoveryBTN.active = true;
 
@@ -132,19 +132,22 @@ cc.Class({
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
 
     },
+    clickBallCallBack()
+    {
+        //商城界面
+        cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop","ShopWindow");
 
+    },
     clickStopCallBack()
     {
         cc.wwx.PopWindowManager.popWindow("prefab/GameStopWindow","GameStopWindow");
     },
     clickHelpCallBack()
     {
-
+        //技能帮助
+        cc.wwx.PopWindowManager.popWindow("prefab/HelpWindow","HelpWindow");
     },
-    clickBallCallBack()
-    {
 
-    }
 
 
 });

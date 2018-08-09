@@ -25,8 +25,13 @@ cc.Class({
         self.timerProgressRed.fillRange = 1;
         cc.wwx.Timer.setTimer(this,function () {
             timerNum -= 1;
-            self.timerProgressRed.fillRange = (timerNum / 10)
+            self.timerProgressRed.fillRange = (timerNum / 10);
             self.timerLabel.string = timerNum.toString();
+
+            if(timerNum === 0)
+            {
+                cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow");
+            }
         },1,9,0)
     },
     showVideoCallBack()
@@ -35,7 +40,8 @@ cc.Class({
     },
     skipCallBack()
     {
-        this.closeWindow()
+        this.closeWindow();
+        cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow");
 
     },
     update()

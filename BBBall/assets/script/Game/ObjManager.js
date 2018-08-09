@@ -106,14 +106,14 @@ cc.Class({
     {
         this._emptyGrid = [];
         this._gameOver = false;
-        if(cc.wwx.UserInfo.playMode === "checkPoint")
+        if(cc.wwx.UserInfo.playMode === "level")
         {
             //关卡模式
             this._showRowNum = 7;
 
             this._checkpointGame()
         }
-        else if(cc.wwx.UserInfo.playMode === "ball100")
+        else if(cc.wwx.UserInfo.playMode === "100ball")
         {
             //百球模式
             this._ball100Game();
@@ -489,9 +489,9 @@ cc.Class({
             this._createOneRowObjs();
             return;
         }
-        else if(cc.wwx.UserInfo.playMode === "ball100")
+        else if(cc.wwx.UserInfo.playMode === "100ball")
         {
-            this._gameIsOver();
+            this._gameIsSucess();
             this._gameOver = true;
             return;
         }
@@ -522,13 +522,36 @@ cc.Class({
             this._currentRowJ -= 1;
 
         }
+        else
+        {
+            if(this.node.childrenCount === 2)
+            {
+                this._gameIsSucess();
 
+            }
+        }
 
+    },
+    _gameIsSucess()
+    {
+        this._gameOver = true;
+        //上报分数
 
+        cc.wwx.TCPMSG.updateGameScore(cc.wwx.SystemInfo.gameId,
+            cc.wwx.UserInfo.playMode,
+            cc.wwx.UserInfo.currentSocre,
+            cc.wwx.UserInfo.checkPointID,1,3);
+        cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow");
 
     },
     _gameIsOver()
     {
+        //上报分数
+        cc.wwx.TCPMSG.updateGameScore(cc.wwx.SystemInfo.gameId,
+            cc.wwx.UserInfo.playMode,
+            cc.wwx.UserInfo.currentSocre,
+            cc.wwx.UserInfo.checkPointID,0,3);
+
         cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow","ResultFirstWindow");
     },
     _judgeArrayValue:function (dataList) {

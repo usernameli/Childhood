@@ -286,10 +286,12 @@ cc.Class({
         },
 
         purchase : function(prodId, prodPrice, prodName, prodCount) {
-            if (!CC_WECHATGAME) { return; }
+            if (!CC_WECHATGAME) {
+                return;
+            }
 
             if (cc.sys.os === cc.sys.OS_IOS) {
-                cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",'微信虚拟支付暂不支持IOS平台');
+                cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",{text:'微信虚拟支付暂不支持IOS平台'});
 
                 return;
             }
