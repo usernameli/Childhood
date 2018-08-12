@@ -33,30 +33,34 @@ cc.Class({
     {
         cc.wwx.OutPut.log('_ballStartLinearVelocity:', '_index: ' + this._index, JSON.stringify(argument));
 
+        this._noShut = false;
         let linearVelocity = argument["linearVelocity"].clone();
         linearVelocity.mulSelf(this._speed);
+        let self = this;
         setTimeout(function () {
-            if(this._noShut)
+            if(self._noShut)
             {
+                self._isOnWall = true;
+                self._recoverFg = false;
                 return;
             }
-            this.body.linearVelocity = linearVelocity;
-            this._recoverFg = false;
-            this._isOnWall = false;
-            this.body.active = true;
-            this._isSports = true;
-            this.body.enabledContactListener = true;
-            if(this._index === 1)
+            self.body.linearVelocity = linearVelocity;
+            self._recoverFg = false;
+            self._isOnWall = false;
+            self.body.active = true;
+            self._isSports = true;
+            self.body.enabledContactListener = true;
+            if(self._index === 1)
             {
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_SPORTS);
-                this.dottedLineManager.isBallSporting = true;
-                this.dottedLineManager.isFirstBallCome = false;
-                this.dottedLineManager.ballOnWallNum = 0;
-                this.dottedLineManager.ballNumText.active = false;
+                self.dottedLineManager.isBallSporting = true;
+                self.dottedLineManager.isFirstBallCome = false;
+                self.dottedLineManager.ballOnWallNum = 0;
+                self.dottedLineManager.ballNumText.active = false;
 
             }
 
-        }.bind(this), this._index * 50);
+        }, this._index * 50);
 
     },
     _ballRecoverNow()
@@ -78,11 +82,15 @@ cc.Class({
         else
         {
             this._noShut = true;
+
+
         }
 
 
     },
     onBeginContact(contact, self, other,artificial) {
+
+        cc.wwx.OutPut.log("碰撞地面" + this.dottedLineManager.isBallSporting);
 
         if(this.dottedLineManager.isBallSporting === false)
         {
@@ -153,7 +161,7 @@ cc.Class({
         }
 
 
-        if(this.dottedLineManager.isFirstBallCome && this._isOnWall)
+        if(this._isOnWall)
         {
             this.body.enabledContactListener = false;
 

@@ -22,7 +22,7 @@ cc.Class({
         MSG_TO_SHOW:'msg_to_show',//进入后台
 
         CMD_INVITE_INFO: 'invite_info', // 邀请信息
-        CMD_UPDATE_SCORE: 'update_score', //更新分数
+        GAME_RESULT_UPLOAD_SCORE: 'game_result_upload_score', //更新分数
         CMD_PAYMENT_LIST: 'store_config', // 支付 - 商品列表
         CMD_PAYMENT_EXCHANGE: 'store', // 支付 - 金币兑换
         CMD_PRODUCT_DELIVERY: 'prod_delivery', // 支付 - 金币兑换 回调

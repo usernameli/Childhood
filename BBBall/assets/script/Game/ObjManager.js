@@ -88,6 +88,7 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RECOVERY_BALL,this._gameRecoverBall,this);
 
         this.gameInit();
 
@@ -100,6 +101,7 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_RECOVERY_BALL,this._gameRecoverBall,this);
 
     },
     gameInit()
@@ -180,7 +182,6 @@ cc.Class({
 
         }
 
-        cc.wwx.OutPut.log(this._tag,"findEmptyGridPosition",JSON.stringify(this._emptyGrid));
 
     },
     randomPlacement4Eliminate()
@@ -300,7 +301,6 @@ cc.Class({
         this._currentRowJ = -1;
         let pointCheckData = cc.wwx.UserInfo.checkPointData;
         this._pointCheckList = pointCheckData;
-        cc.wwx.OutPut.log("ObjManager","_checkpointGame",pointCheckData.length);
         let hallAhall = pointCheckData.length / 2;
         let hallAIndex = pointCheckData.length;
         let haveShowRow = 0;
@@ -398,11 +398,19 @@ cc.Class({
     {
         let objsPrefab = null;
         let objsComponent = null;
-        if(parseInt(dataValueObj) === 1 || parseInt(dataValueObj) === 17)
+        if(parseInt(dataValueObj) === 1 ||
+            parseInt(dataValueObj) === 17 ||
+            parseInt(dataValueObj) === 2 ||
+            parseInt(dataValueObj) === 11)
         {
             //方块
             objsPrefab = this.objSquarePrefab;
             objsComponent = "ObjBlockSquare";
+
+            if(parseInt(dataValueObj) === 2)
+            {
+                dataValueLabel *= 2;
+            }
 
         }
         else if(parseInt(dataValueObj) === 3)
@@ -478,8 +486,11 @@ cc.Class({
 
             }
             objPrefab.setPosition(cc.p(posX , posY));
-            cc.wwx.OutPut.log("objPrefab: ",JSON.stringify(objPrefab.getPosition()));
         }
+    },
+    _gameRecoverBall()
+    {
+        this.ballStopAction();
     },
     ballStopAction:function(argument)
     {
@@ -495,8 +506,6 @@ cc.Class({
             this._gameOver = true;
             return;
         }
-        cc.wwx.OutPut.log("ObjManager","_currentRowI: ",this._currentRowI);
-        cc.wwx.OutPut.log("ObjManager","_currentRowJ: ",this._currentRowJ);
 
         if(this._currentRowI >= 0)
         {
@@ -537,17 +546,17 @@ cc.Class({
         this._gameOver = true;
         //上报分数
 
-        cc.wwx.TCPMSG.updateGameScore(cc.wwx.SystemInfo.gameId,
+        cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
             cc.wwx.UserInfo.currentSocre,
-            cc.wwx.UserInfo.checkPointID,1,3);
-        cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow");
+            cc.wwx.UserInfo.checkPointID,1,2);
+        cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:true});
 
     },
     _gameIsOver()
     {
         //上报分数
-        cc.wwx.TCPMSG.updateGameScore(cc.wwx.SystemInfo.gameId,
+        cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
             cc.wwx.UserInfo.currentSocre,
             cc.wwx.UserInfo.checkPointID,0,3);

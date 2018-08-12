@@ -44,7 +44,7 @@ cc.Class({
         parseUdata: function (userInfoResult) {
             this.loc = userInfoResult['loc'];
             this.udata = userInfoResult['udata'];
-            this.udata = userInfoResult['gdata'];
+            this.gdata = userInfoResult['gdata'];
         },
         parseBag: function (bagResult) {
             if (bagResult) {

@@ -30,7 +30,7 @@ cc.Class({
 
             if(timerNum === 0)
             {
-                cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow");
+                cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:false});
             }
         },1,9,0)
     },
@@ -41,7 +41,7 @@ cc.Class({
     skipCallBack()
     {
         this.closeWindow();
-        cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow");
+        cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:false});
 
     },
     update()

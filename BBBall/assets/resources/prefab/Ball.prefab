@@ -78,7 +78,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "2b3ae5b0-f370-4bde-b38d-c9fb4c7e9b88"
+      "__uuid__": "1a8ff193-c57f-43c1-8d53-c1a0ea3dfcc5"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -152,8 +152,11 @@
     "_speed": 0,
     "_isStop": true,
     "_index": 0,
+    "_tag": "Ball",
     "_recoverFg": false,
-    "_isOnWall": false
+    "_isOnWall": false,
+    "_isSports": false,
+    "_noShut": false
   },
   {
     "__type__": "cc.PrefabInfo",

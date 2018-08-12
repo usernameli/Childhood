@@ -56,10 +56,8 @@ cc.Class({
             return;
         }
         cc.wwx.UserInfo.ballInfo.ballNum = cc.wwx.MapCheckPoint.getBallInfoByMapId(this._checkPointItem);
-        console.log('clickItemCallBack ' + this._checkPointItem + ' clicked');
         let self = this;
         cc.wwx.MapCheckPoint.getMapCheckPointData(this._checkPointItem,function (checkPointData) {
-            cc.wwx.OutPut.log("clickItemCallBack: " + JSON.stringify(checkPointData));
             cc.wwx.UserInfo.checkPointData = checkPointData;
             cc.wwx.UserInfo.checkPointID = self._checkPointItem;
 
@@ -71,15 +69,12 @@ cc.Class({
     {
         this.checkPointNumLabel.string =  itemID;
         this._checkPointItem = itemID;
-        cc.wwx.OutPut.log(this._tag,"updateItem ",itemID);
-        cc.wwx.OutPut.log(this._tag,"levelLv: ",this._gameData["levelHighLv"]);
         this.checkPointNum.color = new cc.Color(58,78,133,255);
         this.pointStar1.spriteFrame  =  this.starBlackSpriteFrame;
         this.pointStar2.spriteFrame  =  this.starBlackSpriteFrame;
         this.pointStar3.spriteFrame  =  this.starBlackSpriteFrame;
         if(itemID === this._gameData["levelHighLv"])
         {
-            cc.wwx.OutPut.log(this._tag,"updateItem == ",itemID);
 
             this.bgLock.active = false;
             this.bgUnLock.active = false;
@@ -88,7 +83,6 @@ cc.Class({
         }
         else if(itemID < this._gameData["levelHighLv"])
         {
-            cc.wwx.OutPut.log(this._tag,"updateItem < ",itemID);
 
             this.bgLock.active = false;
             this.bgUnLock.active = true;

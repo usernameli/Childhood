@@ -28,6 +28,14 @@ cc.Class({
     },
     onLoad()
     {
+
+        this._init();
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_UPDATE_GAME_SCORE,this._updateScore,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this._ballGameRestart,this);
+
+    },
+    _init()
+    {
         cc.wwx.UserInfo.currentSocre = 0;
 
         let gameData = cc.wwx.UserInfo.gdata;
@@ -55,8 +63,15 @@ cc.Class({
 
             }
         }
-
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_UPDATE_GAME_SCORE,this._updateScore,this);
+    },
+    _ballGameRestart()
+    {
+        this._init();
+    },
+    onDestroy()
+    {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this._ballGameRestart,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_UPDATE_GAME_SCORE,this._updateScore,this);
 
     },
     _updateScore(params)

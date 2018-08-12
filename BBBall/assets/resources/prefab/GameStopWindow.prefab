@@ -114,8 +114,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 114,
-      "height": 50
+      "width": 131.25,
+      "height": 78.13
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -146,10 +146,12 @@
     "_fontSize": 50,
     "_lineHeight": 50,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "1bbc0484-741e-488e-9751-bba0b0f5d008"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "暂 停",
+    "_N$string": "暂停",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -1462,6 +1464,7 @@
     "_enabled": true,
     "_windowName": "unName",
     "_isAction": true,
+    "_params": null,
     "_tag": "GameStopWindow"
   },
   {

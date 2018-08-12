@@ -31,7 +31,7 @@ cc.Class({
     onLoad: function () {
         this.remainLength = 1000;
         this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
-        this._colliderMaxPoint = 4;
+        this._colliderMaxPoint = 2;
         this._colliderPoint = 0;
         this._ballList = [];
         this.isBallSporting = false;
@@ -138,7 +138,6 @@ cc.Class({
         {
             return;
         }
-        this._colliderPoint = 0;
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
         cc.wwx.OutPut.log('touchStartCallBack:', 'dottedline', JSON.stringify(touchPos));
         this._drawDottleLine(touchPos);
@@ -154,65 +153,70 @@ cc.Class({
         }
         touchPoint.subSelf(this.center);
 
-        var p1 = this.center;
-        var p2 = touchPoint.mulSelf(100).addSelf(this.center);
+        let p1 = this.center;
+        let p2 = touchPoint.mulSelf(100).addSelf(p1);
 
 
         this._ctx.clear();
-
-        this._rayCast(p1, p2,true);
+        this._colliderPoint = 0;
+        this._touchWallOn = false;
+        this._rayCast(p1, p2);
     },
-
-    _rayCast: function (p1, p2,startF) {
-        let manager = cc.director.getPhysicsManager();
-        // let results = manager.rayCast(p1, p2);
-        let result = null;
-        let results = manager.rayCast(p1, p2,cc.RayCastType.All);
-
-        for (let i = 0; i < results.length; i++) {
-            var collider = results[i].collider;
-            if(collider.tag > 0)
-            {
-                result = results[i];
-                break;
-            }
-
+    _filterCollider(tag)
+    {
+        let flg = true;
+        let filterTag = [2];
+        if(filterTag.contains(tag))
+        {
+            flg = false;
         }
+        return flg;
+    },
+    _rayCast: function (p1, p2) {
+        if(this._touchWallOn)
+        {
+            return;
+        }
+        if(this._colliderPoint >= this._colliderMaxPoint)
+        {
+            this.drawLine(p1,p2,false);
+            return;
+        }
+        let manager = cc.director.getPhysicsManager();
+        let result = manager.rayCast(p1, p2)[0];
 
-        if (result) {
+        if (result && this._filterCollider(result.collider.tag)) {
             p2 = result.point;
             this._ctx.circle(p2.x, p2.y, 10);
             this._ctx.fillColor = cc.Color.RED;
             this._ctx.fill();
-            if(startF)
-            {
-                this._colliderPoint = 0;
-                this._colliderPoint += 1;
-            }
-            else
-            {
-                this._colliderPoint += 1;
-            }
-        }
 
-        if(this._colliderPoint >= this._colliderMaxPoint)
-        {
-            this.drawLine(p1,p2,false);
+            this._colliderPoint += 1;
 
-            return;
         }
         else
         {
+            this._touchWallOn = true;
             this.drawLine(p1,p2);
+            return;
         }
-        if (!result) return;
+
+
+        this.drawLine(p1,p2);
 
         let normal = result.normal;
+
+
         if(normal.y === 0 || normal.x === 0)
         {
             if(normal.y === 0)
             {
-                let newP = cc.v2(p1.x,2 * p2.y);
+                let newP = cc.v2(p1.x,2 * p2.y - p1.y);
+
+                if(p1.y > p2.y)
+                {
+                    newP = cc.v2(p1.x,p1.y - p2.y * 2);
+                }
                 p1 = p2;
                 p2 = newP;
             }
@@ -224,18 +228,18 @@ cc.Class({
             }
 
             // this.drawLine(p1,p2,false);
-            this._rayCast(p1,p2);
+            this._rayCast(p1,p2.subSelf(p1).mulSelf(100));
         }
         else
         {
-            let orRayCast = p2.sub(this.center);
+            let orRayCast = p2.sub(p1);
             orRayCast.normalizeSelf();
             normal.normalizeSelf();
             p1 = p2;
             p2 = orRayCast.sub( normal.mulSelf(2 * orRayCast.dot(normal)));
             p2.mulSelf(1000);
             // this.drawLine(p1,p2,false);
-            this._rayCast(p1,p2);
+            this._rayCast(p1,p2.subSelf(p1).mulSelf(100));
         }
 
 
@@ -304,7 +308,9 @@ cc.Class({
     //回收球球call back
     recoveryBallCallBack()
     {
-        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RECOVERY_BALL)
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RECOVERY_BALL);
+        this.isBallSporting = false;
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:this.center});
     },
     // called every frame
     update: function (dt) {

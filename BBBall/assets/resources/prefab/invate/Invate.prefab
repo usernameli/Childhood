@@ -392,8 +392,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 294,
-      "height": 40
+      "width": 405.56,
+      "height": 52.5
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -424,8 +424,10 @@
     "_fontSize": 42,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "1bbc0484-741e-488e-9751-bba0b0f5d008"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_N$string": "邀请好友领奖励",
     "_N$horizontalAlign": 1,

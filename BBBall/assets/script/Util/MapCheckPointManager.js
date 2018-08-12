@@ -180,6 +180,16 @@ cc.Class({
             return this._Map100Max;
         },
         //获取一个关卡的数据
+        getTestMapCheckAllData()
+        {
+            for(let i = 1; i < 100;i++)
+            {
+                this._getMapData(i,function () {
+                    
+                });
+            }
+
+        },
         getMapCheckPointData(mapID,cb)
         {
             this._getMapData(mapID,cb);

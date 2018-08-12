@@ -70,6 +70,7 @@ cc.Class({
         },
         popWindow(windowName,componentName,params)
         {
+
             var baseScene = this.getScene();
             let self = this;
             cc.loader.loadRes(windowName, cc.Prefab, function(completedCount, totalCount, item) {

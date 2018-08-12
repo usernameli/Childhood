@@ -225,8 +225,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 126,
-      "height": 42
+      "width": 169.31,
+      "height": 55.13
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -257,8 +257,10 @@
     "_fontSize": 42,
     "_lineHeight": 42,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "1bbc0484-741e-488e-9751-bba0b0f5d008"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_N$string": "排行榜",
     "_N$horizontalAlign": 1,
@@ -3134,7 +3136,8 @@
     },
     "_enabled": true,
     "_windowName": "unName",
-    "_isAction": true
+    "_isAction": true,
+    "_params": null
   },
   {
     "__type__": "cc.PrefabInfo",
