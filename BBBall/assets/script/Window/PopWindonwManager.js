@@ -74,7 +74,6 @@ cc.Class({
             var baseScene = this.getScene();
             let self = this;
             cc.loader.loadRes(windowName, cc.Prefab, function(completedCount, totalCount, item) {
-                    // ty.Output.log('connecting_wifi progress:' + completedCount + '/' + totalCount);
                 }, function(error, prefab) {
                     if(baseScene !== self.getScene())
                     {
@@ -89,7 +88,6 @@ cc.Class({
                         component.setWindowName(windowName);
                         if(params)
                         {
-                            component.setWindowName(windowName);
                             component.setWindowParams(params);
                         }
                         baseScene.addChild(window);

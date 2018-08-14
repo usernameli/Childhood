@@ -8,7 +8,7 @@ cc.Class({
     },
     setWindowParams(params)
     {
-        cc.wwx.OutPut.log("setWindowParams: " + JSON.stringify(params));
+        // cc.wwx.OutPut.log("setWindowParams: " + JSON.stringify(params));
         this._params = params;
     },
     setWindowName(wName)
@@ -20,7 +20,6 @@ cc.Class({
 
         // 初始化弹窗的统一半透背景，具有防止点击事件穿透，点击弹窗外任意区域关闭，自动布局等功能
         // 若不继承此类，就需要手动每个弹窗单加背景，点击事件和屏蔽touch
-        // ty.Output.log(this.name, "BaseWindows onLoad");
         // 是否点击窗体外关闭弹窗
         this.closeByTouchOutside = false;
         // 窗体节点
@@ -47,7 +46,7 @@ cc.Class({
         widget.bottom = 0;
         widget.left = 0;
         widget.right = 0;
-        widget.isAlignOnce = false;
+        // widget.AlignMode.ONCE = false;
         let self = this;
         this._maskNode.on(cc.Node.EventType.TOUCH_START, function() {
             if(this.closeByTouchOutside)

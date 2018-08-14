@@ -87,11 +87,11 @@ cc.Class({
             let that = this;
             wx.login({
                 success: function (params) {
-                    cc.wwx.OutPut.log(null, 'wx login success, params:' + JSON.stringify(params));
+                    cc.wwx.OutPut.log("login", 'wx login success, params:' + JSON.stringify(params));
                     cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeWxLoginSuccess, [params.code]);
                     if (params.code) {
                         let code = params.code;
-                        that.loginTuyooWithCode(code, {});
+                        that.loginBallWithCode(code, {});
                         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.WEIXIN_LOGIN_SUCCESS);
                     }
                 },
@@ -129,7 +129,7 @@ cc.Class({
                         "logreporturl": ""
                     },
                     "userPwd": "ty817142",
-                    "purl": "http://wwx.image.tuyoo.com/avatar/head_female_0.png",
+                    "purl": "http://wwx.image.ball.com/avatar/head_female_0.png",
                     "snsId": "wxapp:071Nehqt0Z4XEe1jN6qt007Cqt0Nehqz",
                     "userEmail": "",
                     "connectTimeOut": 35,
@@ -160,6 +160,8 @@ cc.Class({
          */
         wxUserInfo1 ()
         {
+            cc.wwx.OutPut.info('wxUserInfo1.');
+
             var self = this;
             wx.login({
                 success: function(res) {
@@ -169,7 +171,7 @@ cc.Class({
                             if (status) {
                                 try {
                                     var userInfo = JSON.parse(params)[0].data[0];
-                                    self.loginTuyooWithCode(code, userInfo, function(){
+                                    self.loginBallWithCode(code, userInfo, function(){
                                         cc.wwx.UserInfo.wxAuthor = true;
                                     });
                                     cc.wwx.OutPut.info('wxUserInfo1.wx.getUserInfo.ok:', params);
@@ -203,7 +205,7 @@ cc.Class({
                             success: function (res) {
                                 if (res.code) {
                                     let code = res.code;
-                                    self.loginTuyooWithCode(code, userInfo, function(res){
+                                    self.loginBallWithCode(code, userInfo, function(res){
                                         cc.wwx.UserInfo.wxAuthor = true;
                                         if (typeof obj.onSuccess == 'function') {
                                             obj.onSuccess(res);
@@ -232,7 +234,7 @@ cc.Class({
                                 content: '获取用户信息失败，请确认授权！',
                                 showCancel: false,
                                 success: function () {
-                                    ty.WeChat.openSetting();
+                                    cc.wwx.WeChat.openSetting();
                                 }
                             });
                         }
@@ -248,7 +250,7 @@ cc.Class({
                 // 获取用户授权情况
                 wx.getSetting({
                     success: function (res) {
-                        ty.Output.log('get user setting :', res);
+                        cc.wwx.OutPut.log('get user setting :', res);
                         var authSetting = res.authSetting;
                         if (authSetting['scope.userInfo'] === true) {
                             cc.wwx.UserInfo.wxAuthor = true;
@@ -276,7 +278,7 @@ cc.Class({
             }
         },
 
-        loginTuyooWithCode: function (code, userInfo,onSuccess,onFail) {
+        loginBallWithCode: function (code, userInfo,onSuccess,onFail) {
             if (!cc.wwx.IsWechatPlatform()) {
                 return;
             }
@@ -304,7 +306,7 @@ cc.Class({
                 invite_id: cc.wwx.UserInfo.invite_id || 0
             };
             if (userInfo) {
-                cc.wwx.OutPut.info('_loginTuyooWithCode userInfo:' + JSON.stringify(userInfo));
+                cc.wwx.OutPut.info('_loginBallWithCode userInfo:' + JSON.stringify(userInfo));
                 dataObj.nickName = userInfo.nickName;
                 dataObj.gender = userInfo.gender;
                 dataObj.avatarUrl = userInfo.avatarUrl;
@@ -323,7 +325,7 @@ cc.Class({
                 method: 'GET',
 
                 success: function (params) {
-                    cc.wwx.OutPut.log(null, 'tuyoo login success, params:' + JSON.stringify(params));
+                    cc.wwx.OutPut.log("login", 'ball login success, params:' + JSON.stringify(params));
                     let errMsg = null;
                     if (params.data && params.data.error) {
                         cc.wwx.OutPut.err('loginSdk success, but error params 1:' + JSON.stringify(params));
@@ -363,7 +365,7 @@ cc.Class({
 
                 fail: function (params) {
                     cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeLoginSDKFailed, [code, local_uuid, userInfo.nickName]);
-                    cc.wwx.OutPut.log(null, 'tuyoo login fail, params:' + JSON.stringify(params));
+                    cc.wwx.OutPut.log(null, 'ball login fail, params:' + JSON.stringify(params));
                     cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.SDK_LOGIN_FAIL);
                 },
 
@@ -385,6 +387,9 @@ cc.Class({
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_LOGIN_SUCCESS);
             let token = result.token;
             cc.wwx.OutPut.log("updateUserInfo", 'token:' + token);
+
+            cc.wwx.WeChat.guideStatistical();
+            cc.wwx.UserInfo.wxEnterInfo = null;
             if(cc.wwx.IsWechatPlatform())
             {
                 wx.setStorage({
@@ -548,7 +553,7 @@ cc.Class({
                 success: function (result) {
                     if (isforce == true)
                         result["sharePoint"] = sharePoint
-                    cc.log("tuyoo wxShare = " + JSON.stringify(result))
+                    cc.log("ball wxShare = " + JSON.stringify(result))
                     cc.log("sharePoint = " + sharePoint)
                     cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.SHARE_RESULT, result);
 
@@ -600,7 +605,6 @@ cc.Class({
                     }
                     else if (query && query.sourceCode) {
                         //从小程序消息卡片中点入,该场景为"点击用户分享卡片进入游戏注册时，分享用户的user_id直接当做场景参数放在param02，param03和param04分别代表分享点id和分享图文id"
-                        //let query = "inviteCode="+ty.UserInfo.userId+"&sourceCode="+type +"&imageType="+imageMap.imageType+"&inviteName="+ty.UserInfo.userName;
                         cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeUserFrom, [scene, query.shareid, query.sourceCode, query.imageType]);
                     } else {
                         if (cc.wwx.Util.isSceneQrCode(scene)) {

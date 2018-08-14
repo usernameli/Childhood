@@ -44,7 +44,7 @@ cc.Class({
     {
         this._isAction = false;
         this._super();
-        this.tab1CallBack();
+        this._changeTabState(1);
 
         // cc.wwx.PayModel.mExchangeList
     },
@@ -54,33 +54,61 @@ cc.Class({
     },
     tab1CallBack()
     {
-        this.tab1Select.active = true;
-        this.tab2Select.active = false;
-        this.tab3Select.active = false;
+        this._changeTabState(1);
+    },
+    _changeTabState(index)
+    {
+        if(index === 1)
+        {
+            this.tab1Select.active = true;
+            this.tab1ProductNode.active = true;
+            this.tab1.active = false;
 
-        this.tab3GiftNode.active = false;
-        this.tab1ProductNode.active = true;
-        this.tab2ProductNode.active = false;
+            this.tab2Select.active = false;
+            this.tab2ProductNode.active = false;
+            this.tab2.active = true;
+
+            this.tab3Select.active = false;
+            this.tab3GiftNode.active = false;
+            this.tab3.active = true;
+        }
+        else if(index === 2)
+        {
+            this.tab1Select.active = false;
+            this.tab1ProductNode.active = false;
+            this.tab1.active = true;
+
+            this.tab2Select.active = true;
+            this.tab2ProductNode.active = true;
+            this.tab2.active = false;
+
+            this.tab3Select.active = false;
+            this.tab3GiftNode.active = false;
+            this.tab3.active = true;
+        }
+        else
+        {
+            this.tab1Select.active = false;
+            this.tab1ProductNode.active = false;
+            this.tab1.active = true;
+
+            this.tab2Select.active = false;
+            this.tab2ProductNode.active = false;
+            this.tab2.active = true;
+
+            this.tab3Select.active = true;
+            this.tab3GiftNode.active = true;
+            this.tab3.active = false;
+        }
     },
     tab2CallBack()
     {
-        this.tab1Select.active = false;
-        this.tab2Select.active = true;
-        this.tab3Select.active = false;
-
-        this.tab3GiftNode.active = false;
-        this.tab1ProductNode.active = false;
-        this.tab2ProductNode.active = true;
+        this._changeTabState(2);
 
     },
     tab3CallBack()
     {
-        this.tab1Select.active = false;
-        this.tab2Select.active = false;
-        this.tab3Select.active = true;
-        this.tab3GiftNode.active = true;
-        this.tab1ProductNode.active = false;
-        this.tab2ProductNode.active = false;
+        this._changeTabState(3);
 
     },
     closeWindowCallBack()

@@ -3,10 +3,12 @@
     "__type__": "cc.Prefab",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "data": {
       "__id__": 1
-    }
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -70,8 +72,9 @@
     "_enabled": true,
     "_custom": false,
     "_file": {
-      "__uuid__": "72aca396-15c4-4b85-bdcb-39ca7d780479"
+      "__uuid__": "1b7220e0-ff7f-4879-9071-100186f16d70"
     },
+    "_texture": null,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "playOnLoad": true,
@@ -157,7 +160,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "941669b2-32a8-4617-887b-043ae7158b1e"
+      "__uuid__": "d2919ed6-7af0-4c1b-b562-7552624c9ef4"
     },
     "fileId": "6bsy0bfHFG4JAVwbRb9wka",
     "sync": false

@@ -114,7 +114,6 @@ cc.Class({
             return;
         }
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
-        cc.wwx.OutPut.log('touchEndCallBack:', 'dottedline', JSON.stringify(touchPos));
         let touchPoint = cc.v2(touchPos);
         let linearVelocity = touchPoint.sub(this.center);
         linearVelocity.normalizeSelf();
@@ -130,6 +129,7 @@ cc.Class({
             return;
         }
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
+
         this._drawDottleLine(touchPos);
     },
     _touchStartCallBack:function(event)
@@ -139,14 +139,13 @@ cc.Class({
             return;
         }
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
-        cc.wwx.OutPut.log('touchStartCallBack:', 'dottedline', JSON.stringify(touchPos));
         this._drawDottleLine(touchPos);
     },
 
-    _drawDottleLine: function (point) {
+    _drawDottleLine: function (touchP) {
 
-        let touchPoint = cc.v2(point);
 
+        let touchPoint = cc.v2(touchP);
         if(touchPoint.y <= this.center.y)
         {
             return;
@@ -154,13 +153,14 @@ cc.Class({
         touchPoint.subSelf(this.center);
 
         let p1 = this.center;
-        let p2 = touchPoint.mulSelf(100).addSelf(p1);
+        touchPoint.mulSelf(100);
 
 
         this._ctx.clear();
         this._colliderPoint = 0;
         this._touchWallOn = false;
-        this._rayCast(p1, p2);
+
+        this._rayCast(p1, touchPoint);
     },
     _filterCollider(tag)
     {
@@ -173,86 +173,60 @@ cc.Class({
         return flg;
     },
     _rayCast: function (p1, p2) {
-        if(this._touchWallOn)
-        {
-            return;
-        }
-        if(this._colliderPoint >= this._colliderMaxPoint)
-        {
-            this.drawLine(p1,p2,false);
-            return;
-        }
-        let manager = cc.director.getPhysicsManager();
-        let result = manager.rayCast(p1, p2)[0];
 
-        if (result && this._filterCollider(result.collider.tag)) {
+        let manager = cc.director.getPhysicsManager();
+        let results = manager.rayCast(p1, p2,cc.RayCastType.All);
+        let result = null;
+        for (let i = 0; i < results.length; i++) {
+            var collider = results[i].collider;
+            if(collider.tag > 0)
+            {
+                result = results[i];
+                break;
+            }
+
+        }
+
+        if (result) {
             p2 = result.point;
             this._ctx.circle(p2.x, p2.y, 10);
             this._ctx.fillColor = cc.Color.RED;
             this._ctx.fill();
-
-            this._colliderPoint += 1;
-
         }
         else
         {
-            this._touchWallOn = true;
-            this.drawLine(p1,p2);
             return;
         }
 
-
-        this.drawLine(p1,p2);
-
+        this.drawLine(p1,p2,true);
         let normal = result.normal;
-
-
-        if(normal.y === 0 || normal.x === 0)
+        if(normal.y === 0)
         {
-            if(normal.y === 0)
-            {
-                let newP = cc.v2(p1.x,2 * p2.y - p1.y);
+            let newP = cc.v2(p1.x,2 * p2.y - p1.y);
 
-                if(p1.y > p2.y)
-                {
-                    newP = cc.v2(p1.x,p1.y - p2.y * 2);
-                }
-                p1 = p2;
-                p2 = newP;
-            }
-            else
+            if(p1.y > p2.y)
             {
-                let newP = cc.v2(p1.x + 2 * (p2.x - p1.x),p1.y);
-                p1 = p2;
-                p2 = newP;
+                newP = cc.v2(p1.x,p1.y - p2.y * 2);
             }
-
-            // this.drawLine(p1,p2,false);
-            this._rayCast(p1,p2.subSelf(p1).mulSelf(100));
+            p1 = p2;
+            p2 = newP;
         }
         else
         {
-            let orRayCast = p2.sub(p1);
-            orRayCast.normalizeSelf();
-            normal.normalizeSelf();
+            let newP = cc.v2(p1.x + 2 * (p2.x - p1.x),p1.y);
             p1 = p2;
-            p2 = orRayCast.sub( normal.mulSelf(2 * orRayCast.dot(normal)));
-            p2.mulSelf(1000);
-            // this.drawLine(p1,p2,false);
-            this._rayCast(p1,p2.subSelf(p1).mulSelf(100));
+            p2 = newP;
         }
 
+        this.drawLine(p1,p2,false);
 
 
-        // this.remainLength = this.remainLength - p2.sub(p1).mag();
-        // if (this.remainLength < 1) return;
-
-        // this._rayCast(p1,p2);
 
     },
     drawLine:function(start,end,fg)
     {
         //获得组件
+        cc.wwx.OutPut.log(this._tag,"drawLine");
         // this.ctx=this.node.getComponent(cc.Graphics)
         //获得从start到end的向量
         var line=end.sub(start)

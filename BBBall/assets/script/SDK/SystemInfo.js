@@ -11,7 +11,7 @@ cc.Class({
         //  loginUrl : "https://ztfz.nalrer.cn/",      //征途仿真
         // loginUrl : "http://localhost:1337/open.andla.cn/"          //线上
         shareManagerUrl : 'https://market.touch4.me/',
-        deviceId: 'wechatGame',
+        deviceId: 'ballGame',
         wxAppId: 'wx281737f4e987120b',
         appId: 9999,
         gameId: 101,

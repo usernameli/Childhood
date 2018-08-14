@@ -24,7 +24,8 @@ cc.Class({
     },
     clickGoHome()
     {
-        cc.director.loadScene("GameHall");
+        cc.wwx.SceneManager.switchScene("GameHall");
+
 
     },
 })

@@ -15,7 +15,7 @@ cc.Class({
                     cc.wwx.OutPut.warn('_getMapData mapFile 加载失败：' + mapFile);
 
                 } else {
-                    let mapData=data.split(new RegExp('\\r\\n|\\r|\\n'));
+                    let mapData=data.text.split(new RegExp('\\r\\n|\\r|\\n'));
 
                     let mapFilter = [];
                     for(let i = 0; i < mapData.length;i++)
@@ -67,7 +67,7 @@ cc.Class({
                 cc.wwx.OutPut.warn('_getMapData MapID 无效：' + MapID);
                 return [];
             }
-            let mapFile = 'map/mapdata' + MapID + ".txt";
+            let mapFile = 'map/mapdata'+MapID +'.txt';
             cc.loader.loadRes(mapFile,function(err,data){
                 if(err){
                     cc.wwx.OutPut.warn('_getMapData mapFile 加载失败：' + mapFile);
@@ -76,7 +76,7 @@ cc.Class({
                         cb([]);
                     }
                 }else{
-                    let mapData=data.split(new RegExp('\\r\\n|\\r|\\n'));
+                    let mapData=data.text.split(new RegExp('\\r\\n|\\r|\\n'));
                     let mapFilter = [];
                     for(let i = 0; i < mapData.length;i++)
                     {
@@ -128,7 +128,7 @@ cc.Class({
                         cb([]);
                     }
                 }else{
-                    let mapData=data.split(new RegExp('\\r\\n|\\r|\\n'));
+                    let mapData=data.text.split(new RegExp('\\r\\n|\\r|\\n'));
                     let mapFilter = [];
                     for(let i = 0; i < mapData.length;i++)
                     {

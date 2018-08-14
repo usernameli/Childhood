@@ -16,10 +16,6 @@ cc.Class({
             default:null,
             type:cc.Prefab
         },
-        jumpScorePrefab:{
-            default:null,
-            type:cc.Prefab
-        },
         _labelNum:0,
     },
     onLoad()

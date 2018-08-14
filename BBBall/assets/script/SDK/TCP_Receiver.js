@@ -74,7 +74,6 @@ cc.Class({
          * @private
          */
         _onMsgGameData (params) {
-            // ty.Output.log(JSON.stringify(params));
             var result = params['result'];
             if (result.gameId === cc.wwx.SystemInfo.gameId) {
                 cc.wwx.UserInfo.gdata = result["gdata"];

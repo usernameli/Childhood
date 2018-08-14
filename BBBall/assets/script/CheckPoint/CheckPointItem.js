@@ -55,6 +55,7 @@ cc.Class({
 
             return;
         }
+        cc.wwx.OutPut.log("this._checkPointItem: ",this._checkPointItem);
         cc.wwx.UserInfo.ballInfo.ballNum = cc.wwx.MapCheckPoint.getBallInfoByMapId(this._checkPointItem);
         let self = this;
         cc.wwx.MapCheckPoint.getMapCheckPointData(this._checkPointItem,function (checkPointData) {

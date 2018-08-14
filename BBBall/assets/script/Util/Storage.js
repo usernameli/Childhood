@@ -17,7 +17,7 @@ cc.Class({
             if (onSuccess) {
                 var result = cc.sys.localStorage.getItem(key);
                 result = result == null? defaultValue : result;
-                cc.wwx.OutPut.log("tuyoo_storage jsb getItem success",key,result);
+                cc.wwx.OutPut.log("ball_storage jsb getItem success",key,result);
                 onSuccess(result);
             }
         },

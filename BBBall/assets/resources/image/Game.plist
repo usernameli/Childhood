@@ -459,6 +459,19 @@
                 <key>sourceSize</key>
                 <string>{50,50}</string>
             </dict>
+            <key>Ball_Game_BottomBG.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{966,536},{50,50}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{50,50}}</string>
+                <key>sourceSize</key>
+                <string>{50,50}</string>
+            </dict>
             <key>Ball_Game_Img_Blockpiece.png</key>
             <dict>
                 <key>frame</key>
@@ -1106,7 +1119,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:55d71819df47784f4fc5174245e0c489:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:e9776bde050a137d70c0abaadada9225:1/1$</string>
             <key>textureFileName</key>
             <string>Game.png</string>
         </dict>

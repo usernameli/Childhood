@@ -548,7 +548,7 @@ cc.Class({
             // param = {
             //    size:{width:500,height:400},
             //    nodes: [
-            //        // {type:"img",url:"http://cc.wwx.dl.tuyoo.com/cdn37/majiang/images/others/majing_master_gitf_bag_2.png",pos:{x:100,y:100},scale:1},
+            //        // {type:"img",url:"http://cc.wwx.dl.Ball.com/cdn37/majiang/images/others/majing_master_gitf_bag_2.png",pos:{x:100,y:100},scale:1},
             //        // {type:"img",url:`https://cc.wwxqn.nalrer.cn/cc.wwx/other/icon_red_packet.png`,pos:{x:50,y:100},scale:1},
             //        // {type:"img",url:`http://img13.360buyimg.com/n2/jfs/t6631/88/1446653549/309410/7e97c15f/5951c8f3N086189f8.jpg`,pos:{x:150,y:150},scale:1},
             //        // {type:"img",url:"http://img13.360buyimg.com/n2/jfs/t5182/328/1540237053/220499/31ec3317/59113d9bN9c992c93.jpg",pos:{x:350,y:350},scale:1},

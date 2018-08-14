@@ -96,7 +96,7 @@ cc.Class({
                     signStr += key + '=' + reqObj[key];
                 }
             }
-            var finalSign = cc.wwx.hex_md5('market.tuyoo.com-api-' + signStr + '-market.tuyoo-api') || '';
+            var finalSign = cc.wwx.hex_md5('market.ball.com-api-' + signStr + '-market.ball-api') || '';
             return finalSign;
         },
     }

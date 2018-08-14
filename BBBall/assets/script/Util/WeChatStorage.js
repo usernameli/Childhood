@@ -28,7 +28,7 @@ cc.Class({
                 key     : key,
                 success : function(params) {
                     if (onSuccess) {
-                        cc.wwx.OutPut.info("tuyoo_storage wx getItem success:",key,params.data);
+                        cc.wwx.OutPut.info("ball_storage wx getItem success:",key,params.data);
                         onSuccess(params.data);
                     }
                 },

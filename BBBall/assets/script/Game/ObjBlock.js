@@ -100,8 +100,8 @@ cc.Class({
         if(this._moveDrop)
         {
 
-            let posY = this.node.getPositionY();
-            let posX = this.node.getPositionX();
+            let posY = this.node.y;
+            let posX = this.node.x;
             this.node.setPosition(cc.p(posX,posY + (this._height + this._space) * -1));
 
             this._moveDrop = false;

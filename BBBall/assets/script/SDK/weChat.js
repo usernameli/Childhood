@@ -133,7 +133,7 @@ cc.Class({
          * @param result
          * @private
          */
-        guideStatistical() {
+        guideStatistical:function(){
             var result = cc.wwx.UserInfo.wxEnterInfo;
             if (!result) return;
 

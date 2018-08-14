@@ -20,10 +20,21 @@ cc.Class({
         _anim:null,
         _labelNum:0,
     },
+    onLoad()
+    {
+        this._super();
+        this._anim = this.getComponent(cc.Animation);
+        this._tag = "ObjBlockBomb";
+
+    },
     initLabelNum:function (num) {
 
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();
+
+    },
+    objsBreak()
+    {
 
     },
     objBombEndCallBack()
@@ -42,18 +53,13 @@ cc.Class({
         else
         {
 
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,{bomPosY:this.node.getPositionY()});
-            this.bomb.active = false;
             this._anim.play();
+
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,{bomPosY:this.node.y});
+            this.bomb.active = false;
         }
     },
-    onLoad()
-    {
-        this._super();
-        this._anim = this.getComponent(cc.Animation);
-        this._tag = "ObjBlockBomb";
 
-    },
     update()
     {
         this._super();

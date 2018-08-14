@@ -3,10 +3,12 @@
     "__type__": "cc.Prefab",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "data": {
       "__id__": 1
-    }
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -139,7 +141,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "bfaf9cfc-1b43-4b17-b0d9-307b1d4a8a51"
+      "__uuid__": "7133fc04-f968-40b7-9929-29579fbadf06"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -155,7 +157,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_atlas": {
-      "__uuid__": "71b809de-2b7a-4e1d-8c23-d709916fefbf"
+      "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     }
   },
   {
@@ -164,7 +166,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "3e702404-9b7f-468a-b4db-3708de5db7ad"
+      "__uuid__": "16ee1fbc-b1aa-4d0b-9f77-302e4ce61791"
     },
     "fileId": "48RF3tBMZOza/HT6/goFmr",
     "sync": false
@@ -251,7 +253,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "3e702404-9b7f-468a-b4db-3708de5db7ad"
+      "__uuid__": "16ee1fbc-b1aa-4d0b-9f77-302e4ce61791"
     },
     "fileId": "62e/QCNaFCX4xvjfCkRTrT",
     "sync": false
@@ -265,7 +267,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "94c9b5b3-0c81-49d8-ba2d-25f9fe92c035"
+      "__uuid__": "94358ca3-1c62-4ab8-a25b-e15c1f920300"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -281,7 +283,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_atlas": {
-      "__uuid__": "71b809de-2b7a-4e1d-8c23-d709916fefbf"
+      "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     }
   },
   {
@@ -315,7 +317,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 13,
+    "tag": 0,
     "_density": 1,
     "_sensor": false,
     "_friction": 0,
@@ -345,7 +347,7 @@
     ]
   },
   {
-    "__type__": "8189bE5jiRFUrcI9qkBqchW",
+    "__type__": "5df90mmRsBBxb/cVxfG1k5o",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -364,7 +366,7 @@
       "__id__": 2
     },
     "particlePrefab": {
-      "__uuid__": "e96fbc76-1881-4ef0-be40-b69b30332f49"
+      "__uuid__": "450b87f6-89b8-4771-8e4b-e46c759b7c96"
     },
     "_labelNum": 0
   },
@@ -374,7 +376,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "3e702404-9b7f-468a-b4db-3708de5db7ad"
+      "__uuid__": "16ee1fbc-b1aa-4d0b-9f77-302e4ce61791"
     },
     "fileId": "8c3GNRZypF/rVsYakyBJrT",
     "sync": false

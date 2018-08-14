@@ -40,7 +40,7 @@ cc.Class({
     onLoad()
     {
         this._super();
-        cc.wwx.OutPut.log(this._windowName,"onLoad",JSON.stringify(this._params));
+        // cc.wwx.OutPut.log(this._windowName,"onLoad",JSON.stringify(this._params));
         this.isCheckInButton.active = false;
         this.isDoubleCheckInButton.active = false;
         this.checkInButton.active = true;
