@@ -3,10 +3,12 @@
     "__type__": "cc.Prefab",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "data": {
       "__id__": 1
-    }
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -146,13 +148,13 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "4ffc96b5-81fd-45f7-a925-8b510f3794f8"
+      "__uuid__": "ee1f1a16-c7ec-433b-b726-4399751991cd"
     },
     "fileId": "5aptOZbb1JyJg1yMQXEkeL",
     "sync": false
   },
   {
-    "__type__": "4f9ffUj34NFTrBdgnKvk+rI",
+    "__type__": "1bb1akB0NpFPZoIygc3iA96",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -166,7 +168,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "4ffc96b5-81fd-45f7-a925-8b510f3794f8"
+      "__uuid__": "ee1f1a16-c7ec-433b-b726-4399751991cd"
     },
     "fileId": "aa0dDN7sRObob3QqQmlmGN",
     "sync": false
