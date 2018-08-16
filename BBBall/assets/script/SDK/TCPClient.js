@@ -286,7 +286,7 @@ if(CC_WECHATGAME)
                         }
                         return content
                     }
-                    var data = cc.wwx.EncodeDecode.base64decode(data);
+                    var data = cc.wwx.EncodeDecode.base64Decode(data);
                     var mask = data.slice(0, 4);
                     data = data.slice(4);
                     for (var i = 0, len = data.length; i < len; i++) {

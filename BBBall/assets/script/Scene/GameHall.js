@@ -5,6 +5,24 @@ cc.Class({
             default:null,
             type:cc.Label
         },
+        checkInNode:{
+            default:null,
+            type:cc.Sprite
+        },
+        checkInSpriteFrame1:{
+            default:null,
+            type:cc.SpriteFrame,
+            displayName:"可以领取"
+        },
+        checkInSpriteFrame2:{
+            default:null,
+            type:cc.SpriteFrame,
+            displayName:"已经领取了"
+        },
+        checkInLabel:{
+            default:null,
+            type:cc.Label
+        },
         _openCheckIn:false,
         _tag:"GameHall"
 
@@ -60,9 +78,18 @@ cc.Class({
         }
         if(isCheckIn)
         {
+            this.checkInNode.spriteFrame = this.checkInSpriteFrame1;
+            this.checkInLabel.string = "可领取";
             cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn","SignInWindow",result);
 
         }
+        else
+        {
+            this.checkInLabel.string = "每日奖励";
+            this.checkInNode.spriteFrame = this.checkInSpriteFrame2;
+
+        }
+
 
     },
     checkpointMode()
@@ -118,8 +145,11 @@ cc.Class({
         //商城
         // let ballPrefab = cc.instantiate(this.shopPrefab);
         // this.node.addChild(ballPrefab);
+        if(cc.wwx.PayModel.mExchangeList.length > 0)
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop","ShopWindow");
 
-        cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop","ShopWindow");
+        }
 
     },
     reward()

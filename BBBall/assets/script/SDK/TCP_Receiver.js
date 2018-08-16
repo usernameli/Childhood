@@ -29,6 +29,30 @@ cc.Class({
             this.register(cc.wwx.EventType.MSG_BALL_DAILY_CHECKIN, this._onMsgBallDailyCheckin);
             this.register(cc.wwx.EventType.CMD_TODO_TASKS, this._todoTask);
 
+            this.register(cc.wwx.EventType.CMD_HALL_SHARE3, this._onMsgShare3);
+            this.register(cc.wwx.EventType.CMD_INVITE_INFO, this._onInviteInfo);
+
+            this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_INFO, this._onDailyInviteInfo);
+            this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_REWARD, this._onInviteReward);
+            this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_BIND_USER, this._onInviteBindUser);
+
+        },
+        _onDailyInviteInfo(result){
+            cc.wwx.Invite.parseInviteInfo(result);
+        },
+        _onInviteReward(result){
+            cc.wwx.Invite.parseReward(result);
+        },
+        _onInviteBindUser(result){
+
+        },
+        _onInviteInfo(params)
+        {
+
+        },
+        _onMsgShare3:function(params){
+            // ty.BiLog.record_game_progress('Share3Data');
+            cc.wwx.Share.parse(params);
         },
         _todoTask(params)
         {
@@ -40,6 +64,10 @@ cc.Class({
                 {
                     cc.wwx.PopWindowManager.popWindow("prefab/CongratulationsWindow","CongratulationsWindow",tasks[taskIndex]['params']);
 
+                }
+                else if(tasks[taskIndex]['action'] === 'pop_info_wnd')
+                {
+                    cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",{text: tasks[taskIndex]['params']["des"]});
                 }
             }
 
@@ -76,7 +104,7 @@ cc.Class({
         _onMsgGameData (params) {
             var result = params['result'];
             if (result.gameId === cc.wwx.SystemInfo.gameId) {
-                cc.wwx.UserInfo.gdata = result["gdata"];
+                cc.wwx.UserInfo.parseGdata(result);
 
                 cc.wwx.SceneManager.switchScene("GameHall");
 
@@ -125,6 +153,11 @@ cc.Class({
 
             if (parseInt(result.gameId) === cc.wwx.SystemInfo.appId) {
                 this.finishLogin();
+            }
+            else
+            {
+                cc.wwx.UserInfo.parseGdata(result);
+
             }
 
         },

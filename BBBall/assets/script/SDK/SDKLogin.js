@@ -380,7 +380,7 @@ cc.Class({
             cc.wwx.UserInfo.userPic = result.purl;
             cc.wwx.UserInfo.authorCode = result.authorCode;
             cc.wwx.UserInfo.wxgame_session_key = result.wxgame_session_key;
-            cc.wwx.OutPut.log(null, 'userId:' + cc.wwx.UserInfo.userId + ' userName:' + cc.wwx.UserInfo.userName + ' userPic:' + cc.wwx.UserInfo.userPic);
+            cc.wwx.OutPut.log("updateUserInfo", 'userId:' + cc.wwx.UserInfo.userId + ' userName:' + cc.wwx.UserInfo.userName + ' userPic:' + cc.wwx.UserInfo.userPic);
             cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeLoginSDKSuccess, [code, local_uuid, result.userName, result.userId]);
             // 发送登录成功事件
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.SDK_LOGIN_SUCCESS);

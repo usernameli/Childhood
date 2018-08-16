@@ -753,6 +753,24 @@ cc.Class({
                 }
             });
         },
+        kv2dic : function(list) {
+            var data = {};
+            for (var i = 0; i < list.length; i++) {
+                var row = list[i];
+                data[row.key] = row.value;
+            }
+            return data;
+        },
+
+        dic2kv : function(data) {
+            var list = [];
+            for (var key in data) {
+                var value = data[key];
+                value = typeof(value) == 'number'? value.toString() : value;
+                list.push({key : key, value : value})
+            }
+            return list;
+        },
 
         _preventFastClicks()
         {

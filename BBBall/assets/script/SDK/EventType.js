@@ -102,6 +102,16 @@ cc.Class({
         ACTION_BALL_DAILY_CHECKIN:'action_ball_daily_checkin', //签到成功数据事件
         ACTION_UPDATE_GAME_SCORE:'action_update_game_score', //更新分数
 
+        ACTION_CHANGE_TAB_SHOP:'action_change_tab_shop',  //切换商城界面的tab页
+
+
+        // 分享
+        ACTION_DAILY_INVITE_INFO : 'query_invite_info', //
+        ACTION_DAILY_INVITE_BIND_USER : 'bind_invite_user', //
+        ACTION_DAILY_INVITE_REWARD : 'get_invite_reward_all', //
+        Event_Daily_Invite_Complete_Status_Changed : 'event.daily.invite.complete.status.changed',
+
+
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     }
 })

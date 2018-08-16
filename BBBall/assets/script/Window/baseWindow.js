@@ -8,7 +8,7 @@ cc.Class({
     },
     setWindowParams(params)
     {
-        // cc.wwx.OutPut.log("setWindowParams: " + JSON.stringify(params));
+        cc.wwx.OutPut.log("setWindowParams: " + JSON.stringify(params));
         this._params = params;
     },
     setWindowName(wName)

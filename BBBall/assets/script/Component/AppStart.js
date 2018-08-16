@@ -7,7 +7,7 @@ window.initMgr = function() {
     //为了保证在creator下正常 微信平台下注掉
     cc.wwx.isInCreator = !("wechatgame"===cc.sys.browserType);
 
-    if(cc.wwx.isInCreator){
+    if(!CC_WECHATGAME){
 
         window.wx = {
             shareAppMessage (){},
@@ -247,6 +247,7 @@ window.initMgr = function() {
     cc.wwx.WeChat.init();
     cc.wwx.Share = require('../Model/Share');
     cc.wwx.Share.init();
+    cc.wwx.Invite = require('../Model/Invite');
 
 };
 

@@ -28,9 +28,14 @@ cc.Class({
         cc.wwx.OutPut.log("cc.wwx.PayModel.mPurchaseList.length: ",cc.wwx.PayModel.mPurchaseList.length);
         cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
 
-        if(this.itemTemplateName == "ShopTemplate")
+        if(this.itemTemplateName === "ShopTemplate")
         {
             this.totalCount = cc.wwx.PayModel.mPurchaseList.length;
+        }
+        else if(this.itemTemplateName === "ShopBallTemplate")
+        {
+            this.totalCount = cc.wwx.PayModel.mExchangeList.length;
+
         }
         cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
 

@@ -6,16 +6,27 @@ cc.Class({
         text:{
             default:null,
             type:cc.Label
-        }
+        },
+        _okCallBack:null,
     },
     onLoad()
     {
         this._super();
         this.text.string = this._params['text'];
+
+        if(typeof this._params['okCallBack']  === 'function')
+        {
+            this._okCallBack = this._params['okCallBack'];
+        }
     },
     okWindowCallBack()
     {
+        if(typeof  this._okCallBack === 'function')
+        {
+            this._okCallBack();
 
+        }
+        this.closeWindow();
     },
     closeWindowCallBack()
     {

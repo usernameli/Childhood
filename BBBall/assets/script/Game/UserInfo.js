@@ -39,13 +39,57 @@ cc.Class({
             ballType:"ballID",
             ballNum:30,
         },
+        mFriendRankList:[],
+        mIssue:null,
         currentSocre:0,
         playMode:"checkPoint",  //默认关卡类型 checkPoint:关卡 classic:经典模式 ball100:百球模式
         SDKVersion:'',
         parseUdata: function (userInfoResult) {
             this.loc = userInfoResult['loc'];
             this.udata = userInfoResult['udata'];
-            this.gdata = userInfoResult['gdata'];
+        },
+        getHighLevelStars()
+        {
+            let levelHighStar = cc.wwx.UserInfo.gdata["levelHighStar"];
+            let sumStar = 0;
+            for(let i = 0; i < levelHighStar.length;i++)
+            {
+                sumStar += levelHighStar[i];
+            }
+            return sumStar;
+        },
+        parseGdata:function(params)
+        {
+            this.gdata = params['gdata'];
+            this.mIssue = "mIssue";
+            cc.wwx.WeChat.uploadRank(function(status, params)
+            {
+                if (status) {
+                    this.mFriendRankList = [];
+                    JSON.parse(params)[0].data.forEach(function(data) {
+                        var kvdata = cc.wwx.Util.kv2dic(data.KVDataList);
+                        cc.wwx.OutPut.log("UserInfo kvdata: ",JSON.stringify(kvdata));
+                        if (kvdata.issue == this.mIssue) {
+                            this.mFriendRankList.push({
+                                total   : parseInt(kvdata.levelHighStars),
+                                userId  : parseInt(kvdata.userId),
+                                name    : data.nickname,
+                                avatar  : data.avatarUrl,
+                                levelHighLv : parseInt(kvdata.levelHighLv),
+                                ball100HighScore : parseInt(kvdata.ball100HighScore),
+                                classicHighScore     : parseInt(kvdata.classicHighScore),
+                            })
+                        }
+                    }.bind(this));
+
+                    this.mFriendRankList.sort(function(a, b) {
+                        return b.total - a.total;
+                    });
+                    for(var i = 0; i < this.mFriendRankList.length; i++) {
+                        this.mFriendRankList[i].rank = i + 1;
+                    }
+                }
+            }.bind(this));
         },
         parseBag: function (bagResult) {
             if (bagResult) {

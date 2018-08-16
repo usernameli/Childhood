@@ -36,7 +36,7 @@ cc.Class({
         let list = this._shopList[itemId - 1];
         this._shopItemList = list;
         let  price = this.diamondPrice.getComponent("cc.Label");
-        price.string =  list['price'] + ".00";
+        price.string =  "￥" + list['price'] + ".00";
 
         this.diamondsNum.string = list['price_diamond'];
         var self = this;

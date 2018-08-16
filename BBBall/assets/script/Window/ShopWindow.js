@@ -45,11 +45,17 @@ cc.Class({
         this._isAction = false;
         this._super();
         this._changeTabState(1);
-
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_CHANGE_TAB_SHOP,this._changeActionTab,this);
         // cc.wwx.PayModel.mExchangeList
+    },
+    _changeActionTab(argument)
+    {
+        let index = argument['index'];
+        this._changeTabState(index);
     },
     onDestroy()
     {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_CHANGE_TAB_SHOP,this._changeActionTab,this);
 
     },
     tab1CallBack()

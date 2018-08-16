@@ -17,5 +17,10 @@ cc.Class({
     {
         this.closeWindow();
 
+    },
+    invateCallBack()
+    {
+        cc.wwx.Share.runShare(cc.wwx.BurialShareType.DailyInvite);
+
     }
 });

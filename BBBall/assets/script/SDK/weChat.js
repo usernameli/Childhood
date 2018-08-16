@@ -522,26 +522,16 @@ cc.Class({
             if (!CC_WECHATGAME) { return; }
             if (!this.isOpenDataContextValid()) { return; }
 
-            if (!ty.Model.MatchTitle.mIssue) {
-                return;
-            }
-
             var openDataContext = wx.getOpenDataContext();
             var params = {
                 method : 'upload',
                 data : {
-                    totalStars  : ty.Model.MatchTitle.mTotalStar,
-                    segment     : ty.Model.MatchTitle.mSegment,
+                    levelHighStars  : cc.wwx.UserInfo.getHighLevelStars(),
+                    levelHighLv     : cc.wwx.UserInfo.gdata["levelHighLv"],
                     userId      : cc.wwx.UserInfo.userId,
-                    curStars    : ty.Model.MatchTitle.mCurStar,
-                    season      : ty.Model.MatchTitle.mSeason,
-                    issue       : ty.Model.MatchTitle.mIssue,
-                    money       : JSON.stringify({
-                        "wxgame": {
-                            "score": cc.wwx.UserInfo.allEarnedMoney(),
-                            "update_time": Math.floor((new Date()).valueOf() / 1000)
-                        }
-                    })
+                    classicHighScore    : cc.wwx.UserInfo.gdata["classicHighScore"],
+                    ball100HighScore      : cc.wwx.UserInfo.gdata["100ballHighScore"],
+                    issue       : cc.wwx.UserInfo.mIssue,
                 },
             };
             openDataContext.postMessage(params);
@@ -597,6 +587,8 @@ cc.Class({
                 return;
             }
 
+            cc.wwx.OutPut.log("_triggerUpdate: ",JSON.stringify(this.mEvents));
+            cc.wwx.OutPut.log("mOpenRegionScheduleExist: ",this.mOpenRegionScheduleExist);
             var exist = false;
             for (var key in this.mEvents) {
                 exist = true;
@@ -607,6 +599,7 @@ cc.Class({
                 this.mOpenRegionScheduleExist = true;
                 setTimeout(function() {
                     this.mOpenRegionScheduleExist = false;
+                    cc.wwx.OutPut.log("mOpenRegionScheduleExist: ",this.mOpenRegionScheduleExist);
 
                     var openDataContext = wx.getOpenDataContext();
                     var sharedCanvas = openDataContext.canvas;
@@ -614,6 +607,8 @@ cc.Class({
 
                     var removed = [];
                     for (var key in this.mEvents) {
+                        cc.wwx.OutPut.log("context[`game_${key}`] : ",context[`game_${key}`]);
+
                         if (typeof(context[`game_${key}`]) != 'undefined') {
                             this.mEvents[key](context["status_" + key], context["game_" + key]);
                             removed.push(key);
