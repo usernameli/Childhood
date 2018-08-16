@@ -516,7 +516,65 @@ cc.Class({
             }
             return true;
         },
+        /**
+         * 绘制好友关卡排行
+         */
+        drawFrienRank (canvasSize, count,rankType) {
+            if (!CC_WECHATGAME) { return; }
 
+            let openDataContext = wx.getOpenDataContext();
+            let sharedCanvas = openDataContext.canvas;
+            sharedCanvas.width = canvasSize.width;
+            sharedCanvas.height = canvasSize.height;
+
+            openDataContext.postMessage({
+                method : 'drawFriendRank',
+                data:{
+                    count: count,
+                    canvasSize: canvasSize,
+                    rankType:rankType,
+                    selfData: {
+                        levelHighStars  : cc.wwx.UserInfo.getHighLevelStars(),
+                        levelHighLv     : cc.wwx.UserInfo.gdata["levelHighLv"],
+                        userId      : cc.wwx.UserInfo.userId,
+                        classicHighScore    : cc.wwx.UserInfo.gdata["classicHighScore"],
+                        ball100HighScore      : cc.wwx.UserInfo.gdata["100ballHighScore"],
+                        name    : cc.wwx.UserInfo.userName,
+                        avatar  : cc.wwx.UserInfo.userPic,
+                    }
+                }
+            });
+        },
+        /**
+         * 绘制好友群排行
+         */
+        drawFriendGroupRank(canvasSize, count,rankType,shareTicket) {
+            if (!CC_WECHATGAME) { return; }
+
+            let openDataContext = wx.getOpenDataContext();
+            let sharedCanvas = openDataContext.canvas;
+            sharedCanvas.width = canvasSize.width;
+            sharedCanvas.height = canvasSize.height;
+
+            openDataContext.postMessage({
+                method : 'drawGroupRank',
+                data:{
+                    count: count,
+                    canvasSize: canvasSize,
+                    rankType:rankType,
+                    shareTicket: shareTicket,
+                    selfData: {
+                        levelHighStars  : cc.wwx.UserInfo.getHighLevelStars(),
+                        levelHighLv     : cc.wwx.UserInfo.gdata["levelHighLv"],
+                        userId      : cc.wwx.UserInfo.userId,
+                        classicHighScore    : cc.wwx.UserInfo.gdata["classicHighScore"],
+                        ball100HighScore      : cc.wwx.UserInfo.gdata["100ballHighScore"],
+                        name    : cc.wwx.UserInfo.userName,
+                        avatar  : cc.wwx.UserInfo.userPic,
+                    }
+                }
+            });
+        },
         // 上传排行榜数据
         uploadRank : function(cb) {
             if (!CC_WECHATGAME) { return; }
@@ -537,7 +595,6 @@ cc.Class({
             openDataContext.postMessage(params);
             cc.wwx.OutPut.log('uploadRank data:' + JSON.stringify(params));
 
-            this._listen('getFriendCloudStorage', cb);
         },
 
         getUserInfo : function(cb) {

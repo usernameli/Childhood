@@ -106,9 +106,11 @@ cc.Class({
             if (result.gameId === cc.wwx.SystemInfo.gameId) {
                 cc.wwx.UserInfo.parseGdata(result);
 
-                cc.wwx.SceneManager.switchScene("GameHall");
 
             }
+
+            cc.wwx.NotificationCenter.trigger(params.cmd,params);
+
         },
 
         _onPaymentExchange (params) {
@@ -159,6 +161,8 @@ cc.Class({
                 cc.wwx.UserInfo.parseGdata(result);
 
             }
+
+            cc.wwx.NotificationCenter.trigger(params.cmd,params);
 
         },
         finishLogin()
@@ -231,7 +235,6 @@ cc.Class({
         },
 
         _onMsgTcpOpen () {
-            // cc.wwx.BiLog.record_game_progress('TCPOpened');
             cc.wwx.TCPMSG.bindUser();
         },
 

@@ -105,6 +105,10 @@ cc.Class({
         ACTION_CHANGE_TAB_SHOP:'action_change_tab_shop',  //切换商城界面的tab页
 
 
+        MSG_SDK_WX_CHECK_SESSION: 'msg_sdk_wx_check_session',
+        MSG_SDK_WX_GET_SETTING: 'msg_sdk_wx_get_setting',
+        MSG_SDK_WX_GET_USERINFO: 'msg_sdk_wx_get_userinfo',
+
         // 分享
         ACTION_DAILY_INVITE_INFO : 'query_invite_info', //
         ACTION_DAILY_INVITE_BIND_USER : 'bind_invite_user', //
@@ -112,6 +116,12 @@ cc.Class({
         Event_Daily_Invite_Complete_Status_Changed : 'event.daily.invite.complete.status.changed',
 
 
+        //排行榜
+        ACTION_RANK_FRINED:'ball_rank_friend',
+        ACTION_RANK_WORLD:'ball_rank_world',
+        ACTION_RANK_LEVEL:'ball_rank_level',
+        ACTION_RANK_CHASSIC:'ball_rank_chassic',
+        ACTION_RANK_100BALL:'ball_rank_100ball',
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     }
 })

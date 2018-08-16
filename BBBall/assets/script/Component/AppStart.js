@@ -255,9 +255,16 @@ cc.Class({
     extends: cc.Component,
     properties:{
 
+        labelProgress: cc.Label,
     },
     onLoad()
     {
+
+        var progressPoint1 = 30 + Math.random() * 10;
+        var progressPoint2 = 52 + Math.random() * 10;
+        this.progressPoints = [0, progressPoint1, progressPoint2, 80, 84, 86, 90, 92, 94, 96, 98, 99];
+        this.curProgress = 0;
+
         this.initComponent();
 
         // 预加载
@@ -265,18 +272,90 @@ cc.Class({
         cc.wwx.PopWindowManager.preload();
 
 
-        cc.wwx.SDKLogin.login();
-        // cc.wwx.BiLog.uploadLogTimely("slsss");
     },
     start()
     {
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_RECONNECT, this._onMsgLoginSuccess, this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_LOGIN_SUCCESS, this._onMsgLoginSuccess, this);
+  
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_SDK_WX_CHECK_SESSION, this._onWxMsgLogin, this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TCP_OPEN, this._onMsgProgress, this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.CMD_USER_INFO, this._onMsgProgress, this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.CMD_GAME_DATA, this._onMsgProgress, this);
+        cc.wwx.SDKLogin.login();
+
+    },
+
+    _onMsgProgress () {
+        this.toNextProgress();
+    },
+
+    /**
+     * 开始登陆WX / 或者重新登陆
+     * @private
+     */
+    _onWxMsgLogin () {
+        this.curProgress = 0;
+        this.setProgress(this.progressPoints[1]);
+    },
+    // called every frame
+    update (dt) {
+        this.refreshProgress();
+    },
+
+    // 下一个进度点
+    nextPoint () {
+        var point = 101;
+        for (var i = 0; i < this.progressPoints.length; i++) {
+            if (this.curProgress < this.progressPoints[i]) {
+                point = this.progressPoints[i];
+                return point;
+            }
+        }
+        return point;
+    },
+    // 更新进度
+    refreshProgress () {
+        var point = this.nextPoint() - 1;
+        this.curProgress = this.curProgress + Math.random() * 0.8;
+        this.curProgress = Math.min(point, this.curProgress);
+        this.labelProgress.string = '正在加载：' + Math.floor(this.curProgress) + '%';
+        cc.wwx.OutPut.log("refreshProgress: " , this.curProgress);
+        if(this.curProgress === 100)
+        {
+            cc.wwx.SceneManager.switchScene("GameHall");
+
+        }
+    },
+    // 进入下一个进度点
+    toNextProgress () {
+        this.setProgress(this.nextPoint());
+    },
+    // 进入最后一步
+    toFinal () {
+        this.setProgress(100);
+    },
+    // 设置进度以进入下一个进度点
+    setProgress (progress) {
+        // ty.Output.log(this.name, 'login setProgress:' + progress);
+        this.curProgress = Math.max(progress, this.curProgress);
+        this.curProgress = Math.min(100, this.curProgress);
+    },
+    /**
+     * 登陆成功的回调
+     */
+    _onMsgLoginSuccess() {
+        cc.wwx.OutPut.info('login _onMsgLoginSuccess:' + cc.wwx.UserInfo.loc);
+
+        // 3
+        this.toNextProgress();
 
 
     },
+
     initComponent()
     {
         initMgr();
-        cc.wwx.SDKLogin.WechatInterfaceInit();
 
     }
 

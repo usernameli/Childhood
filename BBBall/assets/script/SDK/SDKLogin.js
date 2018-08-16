@@ -5,8 +5,10 @@ cc.Class({
         SESSION_KEY: 'BB_SESSION_STORAGE',
 
         login() {
-            if (cc.wwx.IsWechatPlatform()) {
+            if (CC_WECHATGAME) {
                 this.getSystemInfo();
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_SDK_WX_CHECK_SESSION);
+
                 this.wechatLogin();
             }
             else {
@@ -161,30 +163,43 @@ cc.Class({
         wxUserInfo1 ()
         {
             cc.wwx.OutPut.info('wxUserInfo1.');
-
             var self = this;
-            wx.login({
-                success: function(res) {
-                    if (res.code) {
-                        let code = res.code;
-                        cc.wwx.WeChat.getUserInfo(function(status, params) {
-                            if (status) {
-                                try {
-                                    var userInfo = JSON.parse(params)[0].data[0];
-                                    self.loginBallWithCode(code, userInfo, function(){
-                                        cc.wwx.UserInfo.wxAuthor = true;
-                                    });
-                                    cc.wwx.OutPut.info('wxUserInfo1.wx.getUserInfo.ok:', params);
-                                } catch (e) {
-                                    cc.wwx.OutPut.err('wxUserInfo1.wx.getUserInfo.ok.e:', params);
+
+            var getUserInfo = function() {
+                wx.getUserInfo({
+                    'lang' : 'zh_CN',
+                    success: function (res) {
+                        cc.wwx.OutPut.log('wx getUserInfo ok:', JSON.stringify(res));
+                        var userInfo = res['userInfo'];
+                        if (userInfo.nickName !== ty.UserInfo.userName || userInfo.avatarUrl !== ty.UserInfo.userPic) {
+                            wx.login({
+                                success: function (res) {
+                                    if (res.code) {
+                                        let code = res.code;
+                                        self.loginBallWithCode(code, userInfo);
+                                    }
                                 }
-                            } else {
-                                cc.wwx.OutPut.err('wxUserInfo1.wx.getUserInfo.fail:', params);
-                            }
-                        });
+                            });
+                        }
+                    },
+                    fail: function (res) {
+
+                    }
+                });
+            };
+            // 获取用户授权情况
+            wx.getSetting({
+                success: function (res) {
+                    cc.wwx.OutPut.log('get user setting :', res);
+                    var authSetting = res.authSetting;
+                    if (authSetting['scope.userInfo'] === true) {
+                        cc.wwx.UserInfo.wxAuthor = true;
+                        // 用户已授权
+                        getUserInfo();
                     }
                 }
             });
+
         },
 
         /**
@@ -279,7 +294,7 @@ cc.Class({
         },
 
         loginBallWithCode: function (code, userInfo,onSuccess,onFail) {
-            if (!cc.wwx.IsWechatPlatform()) {
+            if (!CC_WECHATGAME) {
                 return;
             }
             // 微信授权成功后使用code登录途游服务器
@@ -572,99 +587,5 @@ cc.Class({
                 }
             })
         },
-        WechatInterfaceInit: function () {
-            if (cc.wwx.IsWechatPlatform()) {
-                /**
-                 * 小程序回到前台,具体逻辑自己实现
-                 */
-                wx.onShow(function (result) {
-                    // {"0":{"scene":1044,"shareTicket":"beecdf9e-e881-492c-8a3f-a7d8c54dfcdb","query":{}}}  (从后台切到前台才有shareTicket,启动时没有)
-                    cc.wwx.OutPut.log('', "+++++++++++++++++onShow+++++++++++++++++" + JSON.stringify(result));
-                    //取相关参数
-                    let scene = result.scene;
-                    let query = result.query;
-                    let scenePath = '';
-                    //来源处理
-                    cc.wwx.UserInfo.scene_id = scene;
-                    cc.wwx.UserInfo.scene_param = query.from || "";
-                    cc.wwx.UserInfo.invite_id = query.shareid || 0;
-                    cc.wwx.StateInfo.isOnForeground = true;
-                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.GAME_SHOW, result);
-
-                    if (query && query.shareid) {
-                        //进行相应的处理和记录
-                        cc.wwx.ShareInfo.queryId = query.shareid;
-                        cc.wwx.OutPut.log("fengbing", "========share id : " + cc.wwx.ShareInfo.queryId);
-                    }
-
-                    if (query && query.gdt_vid && query.weixinadinfo) {
-                        //从广点通广告跳过来的，from的开头加入gdt标识区分
-                        let from = "gdt." + query.weixinadinfo;
-                        cc.wwx.UserInfo.scene_param = from;
-                        cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeUserFrom, [scene, from]);
-                    }
-                    else if (query && query.sourceCode) {
-                        //从小程序消息卡片中点入,该场景为"点击用户分享卡片进入游戏注册时，分享用户的user_id直接当做场景参数放在param02，param03和param04分别代表分享点id和分享图文id"
-                        cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeUserFrom, [scene, query.shareid, query.sourceCode, query.imageType]);
-                    } else {
-                        if (cc.wwx.Util.isSceneQrCode(scene)) {
-                            //从小程序码进入,相关见文档https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/qrcode.html
-                            if (query.hasOwnProperty('scene')) {
-                                scenePath = query.scene;
-                            } else if (result.hasOwnProperty('path')) {
-                                scenePath = result.path;
-                            }
-                            scenePath.replace(".html", "");     //生成时可能会在path后面添加.html
-                            scenePath = decodeURIComponent(scenePath);
-                            cc.wwx.UserInfo.scene_param = scenePath;
-                            cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeUserFrom, [scene, scenePath]);
-                        } else {
-                            //场景值和场景参数分别记录到可选参数param01和param02当中，如param01=1058，param02=tuyouqipai
-                            //场景参数由项目组接入推广渠道时配置，如公众号dacihua、tuyouqipai，二维码填写企业或个人标识
-                            cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeUserFrom, [scene, query.from]);
-                        }
-                    }
-                    this.login();
-                });
-                /**
-                 * 小程序进入后台
-                 */
-                wx.onHide(function () {
-                    cc.wwx.UserInfo.scene_id = 0;
-                    cc.wwx.StateInfo.isOnForeground = false;
-                    let date = new Date().getTime();
-                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.GAME_HIDE);
-                    cc.wwx.OutPut.log('', "+++++++++++++++++onHide+++++++++++++++++");
-                    // cc.wwx.TCPClient.close();
-                });
-
-                let getNetSuccess = function (res) {
-                    if (res.hasOwnProperty('isConnected')) {
-                        cc.wwx.StateInfo.networkConnected = res.isConnected;
-                    }
-                    else if (res.hasOwnProperty('errMsg')) {
-                        cc.wwx.StateInfo.networkConnected = res.errMsg == 'getNetworkType:ok'
-                    }
-                    else {
-                        cc.wwx.StateInfo.networkConnected = res.networkType != 'none';
-                    }
-
-                    cc.wwx.StateInfo.networkType = res.networkType;//wifi,2g,3g,4g,none,unknown
-                };
-
-                wx.getNetworkType({
-                    success: getNetSuccess
-                });
-
-                wx.onNetworkStatusChange(getNetSuccess);
-
-                wx.onError(function (res) {
-                    let d = new Date();
-                    let errMsg = 'userId:' + cc.wwx.UserInfo.userId + 'time:' + d.toDateString() + ' ' + d.toTimeString() + ';' + res.message;
-                    cc.wwx.BiLog.uploadLogTimely(errMsg);
-                });
-
-            }
-        }
     }
 });
