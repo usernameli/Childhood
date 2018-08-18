@@ -43,7 +43,7 @@ cc.Class({
         this.fgSprite.active = true;
         if(itemId === 1)
         {
-            cc.loader.loadRes("image/MainMenu", cc.SpriteAtlas, function (err, atlas) {
+            cc.loader.loadRes("images/MainMenu", cc.SpriteAtlas, function (err, atlas) {
 
                 self.fgSprite.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame('Ball_Shop__Free_Flg');
             });
@@ -57,7 +57,7 @@ cc.Class({
                 8:'Ball_Shop__25_Flag',
                 9:'Ball_Shop__50_Flag'
             };
-            cc.loader.loadRes("image/MainMenu", cc.SpriteAtlas, function (err, atlas) {
+            cc.loader.loadRes("images/MainMenu", cc.SpriteAtlas, function (err, atlas) {
                 self.fgSprite.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(fileName[itemId]);
             });
         }
@@ -66,7 +66,7 @@ cc.Class({
             this.fgSprite.active = false;
         }
 
-        cc.loader.loadRes("image/MainMenu", cc.SpriteAtlas, function (err, atlas) {
+        cc.loader.loadRes("images/MainMenu", cc.SpriteAtlas, function (err, atlas) {
             let diamondsFileName = 'Ball_Shop__Diamonds_' + itemId;
             self.diamondsIcon.spriteFrame = atlas.getSpriteFrame(diamondsFileName);
         });

@@ -33,6 +33,9 @@ cc.Class({
             initMgr();
         }
         this._score = 0;
+
+        cc.wwx.AudioManager.playGameStart();
+
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB_END,this.demolitionBombEnd,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_SPORTS,this.ballSports,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_OBJ_BREAK,this.ballBomb,this);
@@ -107,45 +110,85 @@ cc.Class({
 
     item1Click()
     {
+
+        cc.wwx.AudioManager.playAudioButton();
         //爆炸销毁一部分砖块
+        let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
+        if(100 > diamondNum) {
+            //砖石不够
+            cc.wwx.TipManager.showMsg('您的钻石不足', 3);
+            return;
+        }
         this.demolitionBomb.active = true;
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB);
 
     },
     item2Click()
     {
-        //
+
+
+        cc.wwx.AudioManager.playAudioButton();
         //添加5个小球
+        let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
+        if(100 > diamondNum) {
+            //砖石不够
+            cc.wwx.TipManager.showMsg('您的钻石不足', 1);
+            return;
+        }
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL);
 
     },
 
     item3Click()
     {
+        cc.wwx.AudioManager.playAudioButton();
         //消除最后一行
+        let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
+        if(100 > diamondNum) {
+            //砖石不够
+            cc.wwx.TipManager.showMsg('您的钻石不足', 1);
+            return;
+        }
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS);
 
     },
     item4Click()
     {
+        cc.wwx.AudioManager.playAudioButton();
         //随机释放四个射线方块
+        let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
+        if(100 > diamondNum) {
+            //砖石不够
+            cc.wwx.TipManager.showMsg('您的钻石不足', 1);
+            return;
+        }
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
 
     },
     clickBallCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         //商城界面
         cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop","ShopWindow");
 
     },
     clickStopCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         cc.wwx.PopWindowManager.popWindow("prefab/GameStopWindow","GameStopWindow");
     },
     clickHelpCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         //技能帮助
         cc.wwx.PopWindowManager.popWindow("prefab/HelpWindow","HelpWindow");
+    },
+    yellowGunCallBack()
+    {
+        cc.wwx.AudioManager.playAudioButton();
+        cc.wwx.TipManager.showMsg('功能暂未开放', 1);
+
+
     },
 
 

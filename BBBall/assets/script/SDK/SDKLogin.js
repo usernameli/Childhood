@@ -33,7 +33,7 @@ cc.Class({
 
             let sdkPath = cc.wwx.SystemInfo.loginUrl;
             let completeUrl = sdkPath + 'open/v6/user/loginBySnsIdNoVerify' + '?' + cc.wwx.Util.dataToUrlStr(dataObj);
-            let token = cc.sys.localStorage.getItem(self.SESSION_KEY);
+            let token = cc.wwx.Storage.getItem(self.SESSION_KEY);
 
             if (token && token !== '') {
                 dataObj = {
@@ -57,7 +57,7 @@ cc.Class({
                     cc.wwx.OutPut.warn('testLogin onSuccess:' + JSON.stringify(checkData.result));
                     if (!checkData || !checkData.result || checkData.result.code !== 0) {
                         cc.wwx.OutPut.warn('testLogin onSuccess no data, retry!');
-                        cc.sys.localStorage.setItem(self.SESSION_KEY, '');
+                        cc.wwx.Storage.setItem(self.SESSION_KEY, '');
                         // 失败
                         setTimeout(function () {
                             self.login();
@@ -71,7 +71,7 @@ cc.Class({
                 },
                 onFail: function (params) {
                     cc.wwx.OutPut.log('onFail loginSdk:', params);
-                    cc.sys.localStorage.setItem(self.SESSION_KEY, '');
+                    cc.wwx.Storage.setItem(self.SESSION_KEY, '');
                     setTimeout(function () {
                         self.login();
                     }, 5000);
@@ -415,7 +415,7 @@ cc.Class({
             else
             {
 
-                cc.sys.localStorage.setItem(this.SESSION_KEY, token);
+                cc.wwx.Storage.setItem(this.SESSION_KEY, token);
 
             }
 

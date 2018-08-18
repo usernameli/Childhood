@@ -202,7 +202,7 @@ cc.Class({
         {
             if(this._MapBallList.length > mapId)
             {
-                return this._MapBallList[mapId-1][1];
+                return parseInt(this._MapBallList[mapId-1][1]);
             }
             else
             {

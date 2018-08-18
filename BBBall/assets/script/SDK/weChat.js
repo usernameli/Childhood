@@ -5,7 +5,7 @@ cc.Class({
             if (!CC_WECHATGAME) { return; }
             var self = this;
             var isHide = false;
-
+            var lastHideTime = 0;  // 记录上次退出的时间（s）
             // 后台进入前台
             wx.onShow(function(res){
                 try {
@@ -42,8 +42,15 @@ cc.Class({
                 if (cc.game.isPaused) {
                     cc.game.resume();
                 }
+                cc.wwx.AudioManager && cc.wwx.AudioManager.onShow();
 
-                cc.wwx.TCPClient.resume();
+                var curTime = Math.floor((new Date()).valueOf() / 1000);
+                if (lastHideTime && curTime - lastHideTime > 60 * 60 * 5) {
+                    cc.wwx.SDKLogin.login();
+                } else {
+                    cc.wwx.TCPClient.resume();
+
+                }
 
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TO_SHOW);
             });
@@ -53,6 +60,7 @@ cc.Class({
                 isHide = true;
                 cc.game.pause();
                 cc.wwx.TCPClient.pause();
+                cc.wwx.AudioManager && cc.wwx.AudioManager.onHide();
 
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TO_HIDE);
             });

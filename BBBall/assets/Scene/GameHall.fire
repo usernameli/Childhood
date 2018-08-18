@@ -2640,7 +2640,7 @@
       "__id__": 2
     },
     "component": "GameHall",
-    "handler": "skin",
+    "handler": "invateCallBack",
     "customEventData": ""
   },
   {
@@ -3185,6 +3185,9 @@
     },
     "checkInLabel": {
       "__id__": 76
+    },
+    "rewardNode": {
+      "__id__": 58
     },
     "_openCheckIn": false,
     "_tag": "GameHall"

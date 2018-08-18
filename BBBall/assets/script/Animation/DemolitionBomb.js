@@ -22,6 +22,7 @@ cc.Class({
     },
     demolitionBomb()
     {
+        cc.wwx.AudioManager.playItem1();
         this._anim.play();
     },
     start()

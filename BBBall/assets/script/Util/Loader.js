@@ -49,7 +49,7 @@ cc.Class({
                 }
             }
 
-            var urlString = cc.wwx.hex_md5(url);
+            var urlString = cc.wwx.Util.whex_md5(url);
             if (this.imageDic[urlString] && this.imageDic[urlString] instanceof cc.Texture2D) {
                 cc.wwx.OutPut.log('Loader load with cache : ' + url);
                 successCB(this.imageDic[urlString]);

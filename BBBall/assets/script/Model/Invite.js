@@ -3,6 +3,7 @@ cc.Class({
     statics:{
         mRewardsList:[],
         mInviteList:[],
+        mInviteList2:[],
         parseInviteInfo : function(result) {
             var iList = [];
             var rList = [];
@@ -22,7 +23,10 @@ cc.Class({
             this.mInviteList = iList;
             this.mRewardsList = rList;
         },
-
+        parseInvite2(inviteList)
+        {
+            this.mInviteList2 = inviteList;
+        },
         parseReward : function(result) {
             this.mInviteList.forEach(element => {
                 element.rewarded = 1;

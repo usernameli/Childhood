@@ -113,7 +113,7 @@ cc.Class({
                     spriteFrame = 'Ball_Shop__Diamonds_1';
                 }
 
-                cc.wwx.Util.loadResAtlas("image/MainMenu",function (err,atlas) {
+                cc.wwx.Util.loadResAtlas("images/MainMenu",function (err,atlas) {
                     self.diamondList[i].spriteFrame = atlas.getSpriteFrame(spriteFrame);
                 });
             }

@@ -88,7 +88,6 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RECOVERY_BALL,this._gameRecoverBall,this);
 
         this.gameInit();
 
@@ -101,13 +100,11 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_RECOVERY_BALL,this._gameRecoverBall,this);
 
     },
     gameInit()
     {
         this._emptyGrid = [];
-        this._gameOver = false;
         if(cc.wwx.UserInfo.playMode === "level")
         {
             //关卡模式
@@ -129,21 +126,20 @@ cc.Class({
         //计算方块矩阵里面的空位置
 
         this.findEmptyGridPosition();
+
+        this._gameOver = false;
+
     },
     gameRestart()
     {
-        for (var i = 0; i < this.node.childrenCount; ++i)
-        {
-            let name = this.node.children[i].name;
 
-            if(name === "WarnNode" || name === "ALineOfExplosions")
-            {
-                continue;
-            }
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_REMOVE_OBJ_BLOCKS);
+        let self = this;
+        setTimeout(function () {
+            cc.wwx.OutPut.log(self._tag,"gameRestart ",self.node.childrenCount);
+            self.gameInit();
+        }, 500);
 
-            this.node.children[i].destroy();
-        }
-        this.gameInit();
     },
     findEmptyGridPosition()
     {
@@ -214,6 +210,8 @@ cc.Class({
     {
         if(this.warningNode.active === false)
         {
+            cc.wwx.AudioManager.playWarning();
+
             let anim = this.warningNode.getComponent(cc.Animation);
             let animState = anim.play();
             animState.wrapMode = cc.WrapMode.Loop;
@@ -234,6 +232,9 @@ cc.Class({
     haveEliminate(argument)
     {
         cc.wwx.OutPut.log(this._tag,"haveEliminate",JSON.stringify(argument));
+
+        cc.wwx.AudioManager.playJiGuang();
+
         if(argument["direction"] === "horizontal")
         {
             //水平
@@ -388,6 +389,8 @@ cc.Class({
         {
             return;
         }
+        cc.wwx.AudioManager.playBomb();
+
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,{bomPosY:posY});
         this.aLineOfExplosionsNode.setPosition(cc.p(this.node.width/2,posY));
         this.aLineOfExplosionsNode.active = true;
@@ -488,10 +491,7 @@ cc.Class({
             objPrefab.setPosition(cc.p(posX , posY));
         }
     },
-    _gameRecoverBall()
-    {
-        this.ballStopAction();
-    },
+
     ballStopAction:function(argument)
     {
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,{space:this._space});

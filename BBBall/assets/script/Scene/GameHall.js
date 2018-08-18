@@ -23,6 +23,10 @@ cc.Class({
             default:null,
             type:cc.Label
         },
+        rewardNode:{
+            default:null,
+            type:cc.Node
+        },
         _openCheckIn:false,
         _tag:"GameHall"
 
@@ -33,12 +37,15 @@ cc.Class({
         {
             initMgr();
         }
+
+        cc.wwx.AudioManager.playMusicGame();
         this._openCheckIn = false;
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
 
-        cc.wwx.TCPMSG.getDaily_checkin_status();
+
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,this.daily_checkin_status,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_INVITE_CONF,this.invate_conf_status,this);
 
     },
     start()
@@ -47,13 +54,40 @@ cc.Class({
         if (CC_WECHATGAME && !cc.wwx.UserInfo.wxAuthor) {
             cc.wwx.SDKLogin.wxUserInfo1();
         }
+
+        cc.wwx.TCPMSG.getDaily_checkin_status();
+        cc.wwx.TCPMSG.getInvite();
     },
     onDestroy()
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,this.daily_checkin_status,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_INVITE_CONF,this.invate_conf_status,this);
 
     },
+    invate_conf_status(params)
+    {
+        let result = params['result'];
+        let rewards = result['inviteConf']["rewards"];
 
+        let stateNum = 0;
+        for(let i = 0; i < rewards.length;i++)
+        {
+
+            if(rewards[i]["state"] == 1)
+            {
+                stateNum += 1;
+            }
+        }
+
+        if(stateNum > 0)
+        {
+            cc.wwx.Util.addRedPoint(this.rewardNode,stateNum,cc.p(45,45));
+        }
+        else
+        {
+            this.rewardNode.removeAllChildren();
+        }
+    },
     daily_checkin_status(params)
     {
         let result = params['result'];
@@ -94,6 +128,8 @@ cc.Class({
     },
     checkpointMode()
     {
+        cc.wwx.AudioManager.playAudioButton();
+
         //关卡模式
         cc.wwx.UserInfo.playMode = "level";
         cc.wwx.SceneManager.switchScene("CheckPoint");
@@ -102,6 +138,8 @@ cc.Class({
     },
     classicMode()
     {
+        cc.wwx.AudioManager.playAudioButton();
+
         //经典模式
         cc.wwx.UserInfo.playMode = "classic";
 
@@ -111,6 +149,8 @@ cc.Class({
     ball100Mode()
     {
         //白球模式
+        cc.wwx.AudioManager.playAudioButton();
+
         cc.wwx.UserInfo.ballInfo.ballNum = 100;
         cc.wwx.UserInfo.playMode = "100ball";
 
@@ -136,12 +176,18 @@ cc.Class({
     },
     rank()
     {
+        cc.wwx.AudioManager.playAudioButton();
+
         //排行榜
+        cc.wwx.TCPMSG.getRank();
+
         cc.wwx.PopWindowManager.popWindow("prefab/GameRanKWindow","GameRankWindow");
 
     },
     shop()
     {
+        cc.wwx.AudioManager.playAudioButton();
+
         //商城
         // let ballPrefab = cc.instantiate(this.shopPrefab);
         // this.node.addChild(ballPrefab);
@@ -154,16 +200,17 @@ cc.Class({
     },
     reward()
     {
-        //奖励
-        // let ballPrefab = cc.instantiate(this.invateRewardPrefab);
-        // this.node.addChild(ballPrefab);
+        cc.wwx.AudioManager.playAudioButton();
 
+        //奖励
         cc.wwx.PopWindowManager.popWindow("prefab/invate/Invate","InvateRewardWindow");
 
 
     },
-    skin()
+    invateCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
+
         //皮肤
     }
 });

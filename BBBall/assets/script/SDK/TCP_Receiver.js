@@ -35,7 +35,18 @@ cc.Class({
             this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_INFO, this._onDailyInviteInfo);
             this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_REWARD, this._onInviteReward);
             this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_BIND_USER, this._onInviteBindUser);
+            this.register(cc.wwx.EventType.CMD_USER, this._onUserInfo);
 
+        },
+        _onUserInfo(params)
+        {
+            let action = params["result"]["action"];
+            if(action === "invite_conf")
+            {
+                cc.wwx.Invite.parseInvite2(params["result"]["inviteConf"]["rewards"]);
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_INVITE_CONF,params);
+
+            }
         },
         _onDailyInviteInfo(result){
             cc.wwx.Invite.parseInviteInfo(result);
@@ -87,6 +98,8 @@ cc.Class({
         {
             var result = params['result'];
             cc.wwx.UserInfo.parseBag(result);
+            cc.wwx.NotificationCenter.trigger(params.cmd,params);
+
         },
         _onPayment (params) {
             var result = params['result'];
@@ -95,6 +108,9 @@ cc.Class({
             if (action == cc.wwx.EventType.ACTION_PAYMENT_LIST_UPDATE) {
                 cc.wwx.PayModel.parseInfo(result);
             }
+
+            cc.wwx.NotificationCenter.trigger(params.cmd,params);
+
         },
         /**
          * 绑定插件
@@ -176,7 +192,7 @@ cc.Class({
 
 
             // 获取背包
-            cc.wwx.TCPMSG.getBagInfo();
+            // cc.wwx.TCPMSG.getBagInfo();
             cc.wwx.TCPMSG.fetchPaymentList();
 
             // 分享发奖
@@ -204,6 +220,8 @@ cc.Class({
         },
         _onMsgServerMessage(params)
         {
+
+            cc.wwx.OutPut.log("_onMsgServerMessage: ",JSON.stringify(params));
             params = params || {};
             var cmd = params.cmd;
 
@@ -212,7 +230,6 @@ cc.Class({
                 if (this.notNeedCmds.contains(cmd)) {
                     return;
                 }
-                cc.wwx.OutPut.info("[_onMsgServerMessage msg]: " + JSON.stringify(params));
 
                 /**
                  * 协议数据优先处理

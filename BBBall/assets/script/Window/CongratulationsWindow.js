@@ -43,7 +43,7 @@ cc.Class({
             spriteFrame = 'Ball_GetRewardDamond';
         }
 
-        cc.wwx.Util.loadResAtlas("image/MainMenu",function (err,atlas) {
+        cc.wwx.Util.loadResAtlas("images/MainMenu",function (err,atlas) {
             self.itemSprite.spriteFrame = atlas.getSpriteFrame(spriteFrame);
         });
 

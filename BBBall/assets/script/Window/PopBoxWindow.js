@@ -21,6 +21,7 @@ cc.Class({
     },
     okWindowCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         if(typeof  this._okCallBack === 'function')
         {
             this._okCallBack();

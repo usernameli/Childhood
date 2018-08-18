@@ -109,11 +109,15 @@ cc.Class({
     },
     tab2CallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
+
         this._changeTabState(2);
 
     },
     tab3CallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
+
         this._changeTabState(3);
 
     },

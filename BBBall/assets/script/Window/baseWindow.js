@@ -31,7 +31,7 @@ cc.Class({
         this._maskNode = new cc.Node();
         var maskSpr = this._maskNode.addComponent(cc.Sprite);
         maskSpr.spriteFrame = new cc.SpriteFrame();
-        maskSpr.spriteFrame.setTexture(cc.url.raw("resources/nopack/Ball_SingleColor.png"));
+        maskSpr.spriteFrame.setTexture(cc.url.raw("resources/images/nopack/Ball_SingleColor.png"));
         this._maskNode.color = cc.Color.BLACK;
         this._maskNode.opacity = 0;
         this.node.addChild(this._maskNode,-1,9999);
@@ -76,6 +76,7 @@ cc.Class({
     },
     closeWindow()
     {
+        cc.wwx.AudioManager.playAudioButton();
         cc.wwx.PopWindowManager.remvoeWindowByName(this._windowName);
     },
     update()

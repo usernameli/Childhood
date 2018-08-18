@@ -7,7 +7,10 @@ cc.Class({
     },
     onLoad()
     {
+        this._isAction = false;
+
         this._super();
+
     },
     onDestroy()
     {
@@ -20,6 +23,7 @@ cc.Class({
     },
     invateCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         cc.wwx.Share.runShare(cc.wwx.BurialShareType.DailyInvite);
 
     }

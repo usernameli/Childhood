@@ -24,9 +24,6 @@ cc.Class({
         this.updateInterval = 0.2;
         // 使用这个变量来判断滚动操作是向上还是向下
         this.lastContentPosY = 0;
-        cc.wwx.OutPut.log("onLoad: ",this.itemTemplateName);
-        cc.wwx.OutPut.log("cc.wwx.PayModel.mPurchaseList.length: ",cc.wwx.PayModel.mPurchaseList.length);
-        cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
 
         if(this.itemTemplateName === "ShopTemplate")
         {
@@ -36,6 +33,10 @@ cc.Class({
         {
             this.totalCount = cc.wwx.PayModel.mExchangeList.length;
 
+        }
+        else if(this.itemTemplateName === "InvateTemplate")
+        {
+            this.totalCount = cc.wwx.Invite.mInviteList2.length;
         }
         cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
 

@@ -52,6 +52,7 @@ cc.Class({
     },
     clickTabChange(index)
     {
+
         if(index === 1)
         {
             this.tab1Select.active = true;
@@ -90,24 +91,28 @@ cc.Class({
     },
     tab1CallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         this.clickTabChange(1);
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RANK_LEVEL);
 
     },
     tab2CallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         this.clickTabChange(2);
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RANK_CHASSIC);
 
     },
     tab3CallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         this.clickTabChange(3);
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RANK_100BALL);
 
     },
     worldRankCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         if(this.worldButton.interactable == false)
         {
             return;
@@ -120,6 +125,7 @@ cc.Class({
     },
     friendRankCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         if(this.friendButton.interactable === false)
         {
             return;
@@ -134,6 +140,7 @@ cc.Class({
     },
     groupRankShareCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
         cc.wwx.Share.runShare(cc.wwx.BurialShareType.FetchGroupID);
     }
 });

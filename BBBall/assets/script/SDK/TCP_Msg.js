@@ -32,6 +32,33 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+        /*
+          * 获取邀请配置
+         */
+        getInvite: function(gameId) {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_USER ,
+                'params': {
+                    'gameId': gameId || cc.wwx.SystemInfo.gameId,
+                    'action': cc.wwx.EventType.ACTION_GET_INVITE_CONF
+                }
+            };
+            this._sendCmd(params);
+        },
+
+        /*
+            * 获取邀请配置
+        */
+        getRank: function(gameId) {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_CUSTOM_RANK ,
+                'params': {
+                    'action': cc.wwx.EventType.ACTION_QUERY,
+                    'rankKey':'normal_101',
+                }
+            };
+            this._sendCmd(params);
+        },
         /**
          * 用户绑定
          */

@@ -2672,7 +2672,8 @@
     "spawnCount": 10,
     "totalCount": 20,
     "spacing": 10,
-    "_rankType": "world"
+    "_rankType": "world",
+    "_shareTicket": null
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -29,6 +29,11 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_START_LINEARVELOCITY, this._ballStartLinearVelocity, this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RECOVERY_BALL, this._ballRecoverNow, this);
     },
+    onDestroy()
+    {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_START_LINEARVELOCITY, this._ballStartLinearVelocity, this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_RECOVERY_BALL, this._ballRecoverNow, this);
+    },
     _ballStartLinearVelocity:function(argument)
     {
         cc.wwx.OutPut.log('_ballStartLinearVelocity:', '_index: ' + this._index, JSON.stringify(argument));
@@ -77,7 +82,9 @@ cc.Class({
             this.node.stopAllActions();
             this.node.runAction(cc.sequence(cc.moveTo(0.1,this.dottedLineManager.center),cc.callFunc(function () {
                 self.onBeginContact(null,null,{tag:2},true);
+
             })));
+            this._noShut = false;
         }
         else
         {
@@ -90,9 +97,8 @@ cc.Class({
     },
     onBeginContact(contact, self, other,artificial) {
 
-        cc.wwx.OutPut.log("碰撞地面" + this.dottedLineManager.isBallSporting);
 
-        if(this.dottedLineManager.isBallSporting === false)
+        if(this.dottedLineManager.isBallSporting === false || this._isSports === false)
         {
 
             return;
@@ -101,7 +107,14 @@ cc.Class({
             case 1://上面
                 break;
             case 2://地面
-                cc.wwx.OutPut.log("碰撞地面" + this._index,this.dottedLineManager.ballMaxNum);
+
+                if(this._isOnWall)
+                {
+                    return;
+                }
+                cc.wwx.OutPut.log("碰撞地面" + this.dottedLineManager.isBallSporting);
+                cc.wwx.OutPut.log("碰撞地面" + this._index);
+                this._isOnWall = true;
 
                 this.body.linearVelocity = cc.v2(0,0);
 
@@ -122,8 +135,8 @@ cc.Class({
                     this.dottedLineManager.center = cc.p(posX,118);
 
                 }
-                this._isOnWall = true;
                 this.dottedLineManager.ballOnWallNum += 1;
+                cc.wwx.OutPut.log("碰撞地面 " + this.dottedLineManager.ballOnWallNum ,this.dottedLineManager.ballMaxNum);
 
                 if(this.dottedLineManager.ballMaxNum == this.dottedLineManager.ballOnWallNum)
                 {
@@ -158,6 +171,11 @@ cc.Class({
                 nowLinearLength.mulSelf(this._speed);
                 this.body.linearVelocity = nowLinearLength;
             }
+        }
+
+        if(this._noShut)
+        {
+            this._ballRecoverNow();
         }
 
 

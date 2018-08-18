@@ -19,6 +19,8 @@ cc.Class({
     onLoad()
     {
         this._super();
+        cc.wwx.AudioManager.playGameOver();
+
         let self = this;
         let timerNum = 10;
         self.timerLabel.string = "10";

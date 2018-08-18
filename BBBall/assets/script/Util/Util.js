@@ -63,10 +63,10 @@ cc.Class({
         },
 
         getItemFromLocalStorage: function (keyStr, defaultValue) {
-            if (!cc.sys.localStorage.getItem) {
+            if (!cc.wwx.Storage.getItem) {
                 return def_value;
             }
-            var tmp = cc.sys.localStorage.getItem(keyStr);
+            var tmp = cc.wwx.Storage.getItem(keyStr);
             if (!tmp) {
                 return defaultValue;
             }
@@ -75,7 +75,7 @@ cc.Class({
 
         setItemToLocalStorage: function (keyStr, ValueStr) {
             try {
-                cc.sys.localStorage.setItem(keyStr, ValueStr + "");
+                cc.wwx.Storage.setItem(keyStr, ValueStr + "");
             } catch (e) {
                 cc.wwx.OutPut.warn("cc.wwx.Util", "setItemToLocalStorage fail");
             }
@@ -314,19 +314,19 @@ cc.Class({
          * These functions implement the four basic operations the algorithm uses.
          */
         md5_cmn(q, a, b, x, s, t) {
-            return this.safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s), b);
+            return this.safe_add(this.bit_rol(this.safe_add(this.safe_add(a, q), this.safe_add(x, t)), s), b);
         },
         md5_ff(a, b, c, d, x, s, t) {
-            return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
+            return this.md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
         },
         md5_gg(a, b, c, d, x, s, t) {
-            return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
+            return this.md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
         },
         md5_hh(a, b, c, d, x, s, t) {
-            return md5_cmn(b ^ c ^ d, a, b, x, s, t);
+            return this.md5_cmn(b ^ c ^ d, a, b, x, s, t);
         },
         md5_ii(a, b, c, d, x, s, t) {
-            return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
+            return this.md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
         },
         /*
          * Calculate the HMAC-MD5, of a key and some data
@@ -751,6 +751,18 @@ cc.Class({
                 {
                     cb(err,atlas)
                 }
+            });
+        },
+        addRedPoint(parentNode,redNum,position)
+        {
+            // 加载 Prefab
+            cc.loader.loadRes("prefab/RedPoint", function (err, prefab) {
+                var newPrefab = cc.instantiate(prefab);
+                let component = newPrefab.getComponent("RedPoint");
+                parentNode.addChild(newPrefab);
+                newPrefab.setPosition(position);
+                component.setRedPointNum(redNum);
+
             });
         },
         kv2dic : function(list) {

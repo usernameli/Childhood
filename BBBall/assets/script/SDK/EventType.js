@@ -6,11 +6,13 @@ cc.Class({
         CMD_BIND_GAME: 'bind_game',
         CMD_USER_INFO: 'user_info',
         CMD_BAG: 'bag',
+        CMD_USER: 'user',
         CMD_GAME_DATA: 'game_data',
         CMD_UPDATE_NOTIFY: 'update_notify',
         CMD_HALL_SHARE3: 'hall_share3',
         CMD_HALL_SHARE2:'hall_share2',
         CMD_TODO_TASKS:'todo_tasks',
+        CMD_CUSTOM_RANK:'custom_rank',
         MSG_TCP_OPEN: 'tcp_open',
         MSG_TCP_CLOSE: 'tcp_close',
         MSG_TCP_ERROR: 'tcp_error',             // tcp 失败
@@ -78,6 +80,9 @@ cc.Class({
         ACTION_GET_BURIAL_SHARE : 'get_burial_share',//获取埋点内容
         ACTION_GET_SHARE_REWARD: 'get_share_reward',//获取share3奖励
         ACTION_GET_REWARD : 'get_reward',
+        ACTION_GET_INVITE_CONF: 'get_invite_conf',
+        ACTION_INVITE_CONF: 'invite_conf',
+        ACTION_QUERY: 'query',
 
         ACTION_BALL_START_LINEARVELOCITY:'ball_start_linearvelocity', //球球线性运动
         ACTION_BALL_STOP_LINEARVELOCITY:'action_ball_stop_linearvelocity',//球球线性运动停止
@@ -103,7 +108,7 @@ cc.Class({
         ACTION_UPDATE_GAME_SCORE:'action_update_game_score', //更新分数
 
         ACTION_CHANGE_TAB_SHOP:'action_change_tab_shop',  //切换商城界面的tab页
-
+        ACTION_REMOVE_OBJ_BLOCKS:'action_remove_obj_blocks',//删除所有的方块
 
         MSG_SDK_WX_CHECK_SESSION: 'msg_sdk_wx_check_session',
         MSG_SDK_WX_GET_SETTING: 'msg_sdk_wx_get_setting',

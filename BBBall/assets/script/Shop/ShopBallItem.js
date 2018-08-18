@@ -63,7 +63,7 @@ cc.Class({
             this.ballPrice.string = list['price_diamond'];
             let spriteFrame = 'SHOP_' + list['id'];
             let self = this;
-            cc.wwx.Util.loadResAtlas("image/Ball",function (err,atlas) {
+            cc.wwx.Util.loadResAtlas("images/Ball",function (err,atlas) {
                 self.ballSpriteFrame.spriteFrame = atlas.getSpriteFrame(spriteFrame);
             });
         }

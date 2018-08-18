@@ -2,9 +2,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-
         ballPrefab:{
-            default:null,
+            default:[],
             type:cc.Prefab
         },
         ballNumText:{
@@ -40,7 +39,7 @@ cc.Class({
 
         cc.wwx.OutPut.log('onLoad:', 'width', this.node.width);
         cc.wwx.OutPut.log('onLoad:', 'height', this.node.height);
-        this.center = cc.v2(this.node.width/ 2, 118);
+        this.center = cc.v2(this.node.width/ 2, 125);
 
         this.node.on(cc.Node.EventType.TOUCH_START, this._touchStartCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this._touchMoveCallBack, this);
@@ -91,7 +90,7 @@ cc.Class({
     {
         for(let i = 0; i < ballNum;i++)
         {
-            let ballPrefab = cc.instantiate(this.ballPrefab);
+            let ballPrefab = cc.instantiate(this.ballPrefab[0]);
             this.node.addChild(ballPrefab);
             let component = ballPrefab.getComponent('Ball');
             component._index = index + i + 1;
@@ -282,6 +281,8 @@ cc.Class({
     //回收球球call back
     recoveryBallCallBack()
     {
+        cc.wwx.AudioManager.playAudioButton();
+
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RECOVERY_BALL);
         this.isBallSporting = false;
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:this.center});

@@ -15,6 +15,9 @@
     "_children": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 11
       }
     ],
     "_tag": -1,
@@ -301,7 +304,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 98,
+      "width": 160,
       "height": 40
     },
     "_rotationX": 0,
@@ -336,7 +339,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "Label",
+    "_N$string": "正在加载",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -368,6 +371,155 @@
     "_enabled": true,
     "labelProgress": {
       "__id__": 8
+    },
+    "globalNode": {
+      "__id__": 11
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "GlobalNode",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [
+      {
+        "__id__": 12
+      }
+    ],
+    "_tag": -1,
+    "_active": true,
+    "_components": [],
+    "_prefab": null,
+    "_id": "6ab7ATKUNMTrZlD9CaEl6o",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "AudioManager",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 11
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 13
+      }
+    ],
+    "_prefab": null,
+    "_id": "e88Nn000dFGrvh2EEqqMN8",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "d652brB3hdKdZ21uhiq4SLD",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 12
+    },
+    "_enabled": true,
+    "audioGameBgm0": {
+      "__uuid__": "37d160c3-fb2a-47b8-bdd4-fdf18672662e"
+    },
+    "audioButtonClick": {
+      "__uuid__": "1dd75ba5-d1e5-4306-9524-053faabe62f2"
+    },
+    "audioWarning": {
+      "__uuid__": "07e4286c-5244-49a6-a891-8e904ca6c16c"
+    },
+    "audioBomb": {
+      "__uuid__": "6132ae83-6897-44fe-aa0a-9672e0db3a81"
+    },
+    "audioGameStart": {
+      "__uuid__": "8f59fa55-22f3-4610-a486-ad0db93534b4"
+    },
+    "audioObj": {
+      "__uuid__": "1dd75ba5-d1e5-4306-9524-053faabe62f2"
+    },
+    "audioGameOver": {
+      "__uuid__": "dd2630b3-553d-4fca-a748-074b6d2e2c5c"
+    },
+    "audioGameResultFail": {
+      "__uuid__": "5a9e49ee-3714-4744-8714-6ec93888f7e9"
+    },
+    "audioGameResultSuccess": {
+      "__uuid__": "78f0f30c-ca0a-4518-b62e-89851e6fdbc6"
+    },
+    "audioJiGuang": {
+      "__uuid__": "102ddbf8-bcbb-444b-a9aa-ae3e047c2095"
+    },
+    "audioItem1": {
+      "__uuid__": "cbf65a96-e7d0-40b1-96e4-68f8e839a5bb"
     }
   }
 ]

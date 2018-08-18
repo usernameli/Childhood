@@ -49,6 +49,14 @@ cc.Class({
         this.resultScore.string = cc.wwx.UserInfo.currentSocre;
         let gameData = cc.wwx.UserInfo.gdata;
         this._gameResult = gameResult;
+        if(this._gameResult)
+        {
+            cc.wwx.AudioManager.playGameResultSuccess();
+        }
+        else
+        {
+            cc.wwx.AudioManager.playGameResultFailed();
+        }
         if(cc.wwx.UserInfo.playMode === "level")
         {
 
@@ -56,11 +64,11 @@ cc.Class({
             this.experienceProgress.progress = gameData["curProgressValue"]/gameData['maxProgressValue']
             this.levelNode.active = true;
             this.tropNode.active = false;
-            this.continueSprite.spriteFrame = this.continueSpriteFrame;
 
 
             if(gameResult === true)
             {
+                this.continueSprite.spriteFrame = this.continueSpriteFrame;
                 let star = gameData["levelHighStar"][0];
                 if(star === 1)
                 {

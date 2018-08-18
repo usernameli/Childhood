@@ -23,7 +23,7 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,this.haveBombObj,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB,this.randomElimination,this);
-
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_REMOVE_OBJ_BLOCKS,this.removeObjBlock,this);
     },
     start()
     {
@@ -37,6 +37,12 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,this.haveBombObj,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB,this.randomElimination,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_REMOVE_OBJ_BLOCKS,this.removeObjBlock,this);
+
+    },
+    removeObjBlock()
+    {
+        this.node.destroy();
 
     },
     //随机销毁一部分方块
