@@ -42,7 +42,7 @@ cc.Class({
     },
     scrollToFixedPosition: function () {
         // 在2秒内完成
-        this.scrollView.scrollToOffset(cc.p(0, 500), 2);
+        this.scrollView.scrollToOffset(cc.v2(0, 500), 2);
     },
     scrollEvent()
     {
@@ -78,7 +78,7 @@ cc.Class({
                 // 如果往下滚动时item已经超出缓冲矩形，且newY未超出content上边界，
                 // 则更新item的坐标（即上移了一个offset的位置），同时更新item的显示内容
                 if (viewPos.y < -this.bufferZone && newY < 0) {
-                    items[i].setPositionY(newY);
+                    items[i].y = newY;
                     let item = items[i].getComponent('CheckPointTemplate');
                     let itemId = item.itemID - items.length; // update item id
                     item.updateItem(itemId);
@@ -90,7 +90,7 @@ cc.Class({
                 // 如果往上滚动时item已经超出缓冲矩形，且newY未超出content下边界，
                 // 则更新item的坐标（即下移了一个offset的位置），同时更新item的显示内容
                 if (viewPos.y > this.bufferZone && newY > -this.content.height) {
-                    items[i].setPositionY(newY);
+                    items[i].y = newY;
                     let item = items[i].getComponent('CheckPointTemplate');
                     let itemId = item.itemID + items.length;
                     item.updateItem(itemId);

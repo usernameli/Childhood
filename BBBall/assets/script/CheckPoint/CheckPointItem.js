@@ -68,7 +68,17 @@ cc.Class({
     },
     updateItem(itemID)
     {
-        this.checkPointNumLabel.string =  itemID;
+        if(itemID < 10)
+        {
+            this.checkPointNumLabel.string =  "0" + itemID;
+
+        }
+        else
+        {
+            this.checkPointNumLabel.string =  itemID;
+
+        }
+
         this._checkPointItem = itemID;
         this.checkPointNum.color = new cc.Color(58,78,133,255);
         this.pointStar1.spriteFrame  =  this.starBlackSpriteFrame;
@@ -80,7 +90,7 @@ cc.Class({
             this.bgLock.active = false;
             this.bgUnLock.active = false;
             this.checkPointNext.active = true;
-            this.checkPointNum.setPosition(cc.p(0,8));
+            this.checkPointNum.setPosition(0,8);
         }
         else if(itemID < this._gameData["levelHighLv"])
         {
@@ -88,7 +98,7 @@ cc.Class({
             this.bgLock.active = false;
             this.bgUnLock.active = true;
             this.checkPointNext.active = false;
-            this.checkPointNum.setPosition(cc.p(0,-10));
+            this.checkPointNum.setPosition(0,-10);
             let starNum = this._gameData["levelHighStar"][itemID - 1];
             this.checkPointNum.color = new cc.Color(255,255,255,255);
 
@@ -114,7 +124,7 @@ cc.Class({
             this.bgLock.active = true;
             this.bgUnLock.active = false;
             this.checkPointNext.active = false;
-            this.checkPointNum.setPosition(cc.p(0,8));
+            this.checkPointNum.setPosition(0,8);
 
         }
     },

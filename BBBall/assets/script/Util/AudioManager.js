@@ -86,6 +86,8 @@ cc.Class({
                 }.bind(this));
             }
             this.mAudioMap[audioSource] = context;
+            cc.wwx.OutPut.log('play audio effect : ' + audioSource);
+
             return audioSource;
         } else {
             var context = wx.createInnerAudioContext();
@@ -149,6 +151,42 @@ cc.Class({
         })
     },
 
+    getAudioMusicSwitch()
+    {
+        return this.mMusicSwitch;
+
+    },
+    getAudioEffectSwitch()
+    {
+        return this.mEffectSwitch;
+    },
+    trunAudioSound(on)
+    {
+        this.switchMusic(on);
+        this.switchEffect(on)
+    },
+    switchMusic : function(on) {
+        if (this.mMusicSwitch != (on?1:0))
+        {
+            this.mMusicSwitch = 1-this.mMusicSwitch;
+            this.save();
+            if(on)
+            {
+                this.playMusicGame();
+            }
+            else
+            {
+                this.stopMusic();
+            }
+        }
+    },
+    switchEffect : function(on) {
+        if (this.mEffectSwitch != (on?1:0)){
+            this.mEffectSwitch = 1-this.mEffectSwitch;
+            this.save();
+
+        }
+    },
     onHide () {
         if (CC_JSB) {
             cc.audioEngine.pauseAll();

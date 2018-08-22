@@ -39,24 +39,57 @@ cc.Class({
 
         cc.wwx.OutPut.log('onLoad:', 'width', this.node.width);
         cc.wwx.OutPut.log('onLoad:', 'height', this.node.height);
-        this.center = cc.v2(this.node.width/ 2, 125);
+        this.center = cc.v2(this.node.width/ 2, 10);
 
         this.node.on(cc.Node.EventType.TOUCH_START, this._touchStartCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this._touchMoveCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_END, this._touchEndCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_CANCEL, this._touchCancelCallBack, this);
 
-        this._createBall(this.ballMaxNum,0);
 
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
+
+
+        let physicsManager = cc.director.getPhysicsManager();
+        physicsManager.enabled = true;
+        // physicsManager.debugDrawFlags =
+        //     cc.PhysicsManager.DrawBits.e_jointBit |
+        //     cc.PhysicsManager.DrawBits.e_shapeBit
+        // ;
+        let width   =  this.node.width;
+        let height  =  this.node.height;
+
+        let node = new cc.Node();
+        node.group = "wall";
+        let body = node.addComponent(cc.RigidBody);
+        body.type = cc.RigidBodyType.Static;
+
+        this._addBound(node, width/2, height, width, 1,1);//上面
+        this._addBound(node, width/2, 0, width, 1,2);//下面
+        this._addBound(node, 0, height / 2, 1, height,3);//左面
+        this._addBound(node, width, height / 2, 1, height,4);//右面
+
+        node.parent = this.node;
+
+
+        this._createBall(this.ballMaxNum,0);
+
 
     },
     onDestroy()
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
+    },
+    _addBound (node, x, y, width, height,tag) {
+        let collider = node.addComponent(cc.PhysicsBoxCollider);
+        collider.offset.x = x;
+        collider.tag = tag;
+        collider.offset.y = y;
+        collider.size.width = width;
+        collider.size.height = height;
     },
     itemAddBallsCallBack()
     {
@@ -70,7 +103,7 @@ cc.Class({
     },
     setBallNumTextPosition(ballNum)
     {
-        this.ballNumText.setPosition(cc.p(this.center.x ,this.center.y + 20));
+        this.ballNumText.setPosition(this.center.x ,this.center.y + 20);
         this.ballNumText.active = true;
         var ballNumlabel = this.ballNumText.getComponent("cc.Label");
         ballNumlabel.string =  "x" + ballNum;
@@ -178,7 +211,7 @@ cc.Class({
         let result = null;
         for (let i = 0; i < results.length; i++) {
             var collider = results[i].collider;
-            if(collider.tag > 0)
+            if(collider.tag > 0 && collider.tag !== 2)
             {
                 result = results[i];
                 break;
@@ -186,8 +219,10 @@ cc.Class({
 
         }
 
+
         if (result) {
-            p2 = result.point;
+            // p2 = result.point;
+            p2 = this.node.convertToNodeSpaceAR(result.point);
             this._ctx.circle(p2.x, p2.y, 10);
             this._ctx.fillColor = cc.Color.RED;
             this._ctx.fill();
@@ -196,6 +231,10 @@ cc.Class({
         {
             return;
         }
+
+
+        cc.wwx.OutPut.log("collider.tag : ",collider.tag);
+        cc.wwx.OutPut.log("result.point : ",result.point);
 
         this.drawLine(p1,p2,true);
         let normal = result.normal;

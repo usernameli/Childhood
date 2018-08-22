@@ -17,6 +17,7 @@ cc.Class({
             type:cc.Node
         },
 
+
         _anim:null,
         _labelNum:0,
     },
@@ -25,6 +26,7 @@ cc.Class({
         this._super();
         this._anim = this.getComponent(cc.Animation);
         this._tag = "ObjBlockBomb";
+
 
     },
     initLabelNum:function (num) {

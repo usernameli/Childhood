@@ -17,13 +17,13 @@ cc.Class({
         _plusNum:0,
         _isOnWall:false, //是否已经碰撞的地面
         _canMove:false,
-        _centerPos:cc.p(0,0)
+        _centerPos:cc.v2(0,0)
     },
     onLoad()
     {
         this._super();
         this._plusNum = 0;
-        this._centerPos = cc.p(0,0);
+        this._centerPos = cc.v2(0,0);
         this._canMove = false;
         this._tag ="ObjBlockPlus";
         this._isOnWall = false;
@@ -79,11 +79,16 @@ cc.Class({
         if(other.tag === 2)
         {
             this._isOnWall = true;
+            // this.body.active = false;
+            this.body.linearVelocity = cc.v2(0,0);
+
+
         }
         else if(other.tag === 0)
         {
             //碰的小球
-            this.body.gravityScale = 100.0;
+            // this.body.gravityScale = 100.0;
+            this.body.linearVelocity = cc.v2(0,-2000);
 
 
         }
@@ -93,14 +98,18 @@ cc.Class({
 
         if(this._isOnWall)
         {
+
+            let parent = this.node.parent;
+            this.node.position = cc.v2(this.node.x,(parent.height - this.node.height/2 - 1) * -1);
+
             this.body.active = false;
             this.body.enabledContactListener = false;//关闭碰撞
+
             if(this._canMove)
             {
                 this._canMove = false;
 
-                let parent = this.node.parent;
-                let moveTo = cc.moveTo(0.4, cc.p(this._centerPos.x,(parent.height - this.node.height/2) * -1));
+                let moveTo = cc.moveTo(0.4, cc.v2(this._centerPos.x,(parent.height - this.node.height/2 - 1) * -1));
                 let spawn = cc.spawn(moveTo, cc.scaleTo(0.4,0.001));
                 let self = this;
                 let seq = cc.sequence(spawn,cc.callFunc(function () {

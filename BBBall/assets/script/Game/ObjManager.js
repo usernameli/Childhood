@@ -83,15 +83,18 @@ cc.Class({
     {
 
 
+
+
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
 
-        this.gameInit();
+
 
     },
+
     onDestroy()
     {
         cc.wwx.OutPut.log(this._tag,"onDestroy");
@@ -102,6 +105,7 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
 
     },
+
     gameInit()
     {
         this._emptyGrid = [];
@@ -129,6 +133,10 @@ cc.Class({
 
         this._gameOver = false;
 
+    },
+    start()
+    {
+        this.gameInit();
     },
     gameRestart()
     {
@@ -159,7 +167,7 @@ cc.Class({
                     let x = this.node.children[i].x;
                     let y = this.node.children[i].y;
 
-                    if(name === "WarnNode" || name === "ALineOfExplosions")
+                    if(name === "WarnNode" || name === "ALineOfExplosions" || name === "DottedLine")
                     {
                         continue;
                     }
@@ -200,7 +208,7 @@ cc.Class({
             }
             let objPrefab = cc.instantiate(this.objEliminatePrefab);
             this.node.addChild(objPrefab);
-            objPrefab.setPosition(cc.p(this._emptyGrid[index].posX , this._emptyGrid[index].posY));
+            objPrefab.setPosition(this._emptyGrid[index].posX , this._emptyGrid[index].posY);
 
             haveIndexList.push(index);
         }
@@ -241,7 +249,7 @@ cc.Class({
 
             let horizontal = cc.instantiate(this.horizontalLinePrefab);
             this.node.addChild(horizontal);
-            horizontal.setPosition(cc.p(this.node.width/2 ,parseInt(argument["objPosition"].y)))
+            horizontal.setPosition(this.node.width/2 ,parseInt(argument["objPosition"].y))
 
         }
         else
@@ -249,7 +257,7 @@ cc.Class({
             //竖
             let horizontal = cc.instantiate(this.verticalLinePrefab);
             this.node.addChild(horizontal);
-            horizontal.setPosition(cc.p(parseInt(argument["objPosition"].x),this.node.height / 2 * -1))
+            horizontal.setPosition(parseInt(argument["objPosition"].x),this.node.height / 2 * -1)
 
 
         }
@@ -392,7 +400,7 @@ cc.Class({
         cc.wwx.AudioManager.playBomb();
 
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,{bomPosY:posY});
-        this.aLineOfExplosionsNode.setPosition(cc.p(this.node.width/2,posY));
+        this.aLineOfExplosionsNode.setPosition(this.node.width/2,posY);
         this.aLineOfExplosionsNode.active = true;
         let anim = this.aLineOfExplosionsNode.getComponent(cc.Animation);
         anim.play();
@@ -488,7 +496,7 @@ cc.Class({
                 ObjBlockSquare.initLabelNum(dataValueLabel);
 
             }
-            objPrefab.setPosition(cc.p(posX , posY));
+            objPrefab.setPosition(posX , posY);
         }
     },
 
@@ -533,11 +541,11 @@ cc.Class({
         }
         else
         {
-            if(this.node.childrenCount === 2)
+            if(this.node.childrenCount === 3)
             {
                 this._gameIsSucess();
-
             }
+
         }
 
     },

@@ -133,6 +133,12 @@ cc.Class({
 
         }
     },
+    homeCallBack()
+    {
+        cc.wwx.AudioManager.playAudioButton();
+        cc.wwx.SceneManager.switchScene("GameHall");
+
+    },
     continueBtnCallBack()
     {
 

@@ -19,15 +19,16 @@ cc.Class({
         },
         testLogin() {
             let self = this;
-            let local_uuid = cc.wwx.Util.getLocalUUID();
+            let code = cc.wwx.SystemInfo._uuid();
+
             let dataObj = {
-                snsId: 'wxapp:' + local_uuid,
+                snsId: 'wxapp:' + code,
                 appId: cc.wwx.SystemInfo.appId,
                 wxAppId: cc.wwx.SystemInfo.wxAppId,
                 clientId: cc.wwx.SystemInfo.clientId,
                 gameId: cc.wwx.SystemInfo.gameId,
                 imei: null,
-                uuid: local_uuid,
+                uuid: cc.wwx.SystemInfo.uuid,
                 invite_id: cc.wwx.UserInfo.invite_id || 0
             };
 
@@ -42,7 +43,7 @@ cc.Class({
                     clientId: cc.wwx.SystemInfo.clientId,
                     gameId: cc.wwx.SystemInfo.gameId,
                     imei: null,
-                    uuid: local_uuid,
+                    uuid: cc.wwx.SystemInfo.uuid,
                     token: token,
                     invite_id: cc.wwx.UserInfo.invite_id || 0
                 };
@@ -66,7 +67,7 @@ cc.Class({
                     }
                     // 保存用户名/用户ID/用户头像
                     let result = checkData.result;
-                    self.updateUserInfo(result, local_uuid);
+                    self.updateUserInfo(result, cc.wwx.SystemInfo.uuid);
 
                 },
                 onFail: function (params) {
@@ -302,7 +303,7 @@ cc.Class({
                 withShareTicket: true
             });
 
-            let local_uuid = cc.wwx.Util.getLocalUUID();
+            let local_uuid = cc.wwx.SystemInfo.uuid;
             cc.wwx.OutPut.log("local_uuid:", local_uuid);
             let sdkPath = cc.wwx.SystemInfo.loginUrl;
             let dataObj = {
@@ -405,19 +406,8 @@ cc.Class({
 
             cc.wwx.WeChat.guideStatistical();
             cc.wwx.UserInfo.wxEnterInfo = null;
-            if(cc.wwx.IsWechatPlatform())
-            {
-                wx.setStorage({
-                    key: this.SESSION_KEY,
-                    data: token
-                });
-            }
-            else
-            {
+            cc.wwx.Storage.setItem(this.SESSION_KEY,token)
 
-                cc.wwx.Storage.setItem(this.SESSION_KEY, token);
-
-            }
 
             this.initWebSocketUrl(result);
 

@@ -26,7 +26,7 @@ origin_assets_to_build = [
     'resources/images/share'
 ]
 origin_assets_to_backup = [
-    'sounds'
+    #'sounds'
 ]
 
 cdn_url = "http://df.dl.huanyueqp.com/ball"

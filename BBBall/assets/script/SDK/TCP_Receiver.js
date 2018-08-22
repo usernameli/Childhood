@@ -87,6 +87,7 @@ cc.Class({
         _onMsgBallDailyCheckin(params)
         {
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN,params);
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,params);
 
         },
         //签到数据返回
@@ -121,7 +122,7 @@ cc.Class({
             var result = params['result'];
             if (result.gameId === cc.wwx.SystemInfo.gameId) {
                 cc.wwx.UserInfo.parseGdata(result);
-
+                cc.wwx.SceneManager.switchScene("GameHall");
 
             }
 
@@ -221,7 +222,6 @@ cc.Class({
         _onMsgServerMessage(params)
         {
 
-            cc.wwx.OutPut.log("_onMsgServerMessage: ",JSON.stringify(params));
             params = params || {};
             var cmd = params.cmd;
 
@@ -230,6 +230,8 @@ cc.Class({
                 if (this.notNeedCmds.contains(cmd)) {
                     return;
                 }
+
+                cc.wwx.OutPut.log("_onMsgServerMessage: ",JSON.stringify(params));
 
                 /**
                  * 协议数据优先处理

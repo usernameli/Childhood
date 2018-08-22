@@ -240,12 +240,12 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
                 }
                 else if(rankType === "Classic")
                 {
-                    sharedContext.fillText(classicHighScore + '分', cellWidth/2 + 120, baseY);
+                    sharedContext.fillText(params.classicHighScore + '分', cellWidth/2 + 120, baseY);
 
                 }
                 else
                 {
-                    sharedContext.fillText(ball100HighScore + '分', cellWidth/2 + 120, baseY);
+                    sharedContext.fillText(params.ball100HighScore + '分', cellWidth/2 + 120, baseY);
 
                 }
 

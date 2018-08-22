@@ -66,9 +66,9 @@ cc.Class({
         let component = jumpScorePrefab.getComponent('ScoreJump');
         component.setScoreNum(score);
 
-        let spawn1 = cc.spawn(cc.moveBy(0.2,cc.p(0,40)),cc.fadeIn(0.1));
-        let spawn2 = cc.spawn(cc.moveBy(0.1,cc.p(0,-15)),cc.scaleTo(0.1,2));
-        let spawn3 = cc.spawn(cc.moveBy(0.4,cc.p(0,25)),cc.scaleTo(0.4,1));
+        let spawn1 = cc.spawn(cc.moveBy(0.2,cc.v2(0,40)),cc.fadeIn(0.1));
+        let spawn2 = cc.spawn(cc.moveBy(0.1,cc.v2(0,-15)),cc.scaleTo(0.1,2));
+        let spawn3 = cc.spawn(cc.moveBy(0.4,cc.v2(0,25)),cc.scaleTo(0.4,1));
         jumpScorePrefab.runAction(cc.sequence(spawn1,spawn2,spawn3,cc.callFunc(function () {
 
             jumpScorePrefab.destroy();

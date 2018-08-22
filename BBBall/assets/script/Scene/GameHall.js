@@ -27,6 +27,18 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        soundBtnSprite:{
+            default:null,
+            type:cc.Sprite
+        },
+        soundOnSpriteFrame:{
+            default:null,
+            type:cc.SpriteFrame
+        },
+        soundOffSpriteFrame:{
+            default:null,
+            type:cc.SpriteFrame
+        },
         _openCheckIn:false,
         _tag:"GameHall"
 
@@ -55,8 +67,21 @@ cc.Class({
             cc.wwx.SDKLogin.wxUserInfo1();
         }
 
-        cc.wwx.TCPMSG.getDaily_checkin_status();
+        // cc.wwx.TCPMSG.getDaily_checkin_status();
         cc.wwx.TCPMSG.getInvite();
+
+
+        let musicSwith = cc.wwx.AudioManager.getAudioMusicSwitch();
+        let effectSwith = cc.wwx.AudioManager.getAudioEffectSwitch();
+        if(musicSwith || effectSwith)
+        {
+            this.soundBtnSprite.spriteFrame = this.soundOnSpriteFrame;
+        }
+        else
+        {
+            this.soundBtnSprite.spriteFrame = this.soundOffSpriteFrame;
+
+        }
     },
     onDestroy()
     {
@@ -81,7 +106,7 @@ cc.Class({
 
         if(stateNum > 0)
         {
-            cc.wwx.Util.addRedPoint(this.rewardNode,stateNum,cc.p(45,45));
+            cc.wwx.Util.addRedPoint(this.rewardNode,stateNum,cc.v2(45,45));
         }
         else
         {
@@ -142,7 +167,7 @@ cc.Class({
 
         //经典模式
         cc.wwx.UserInfo.playMode = "classic";
-
+        cc.wwx.UserInfo.ballInfo.ballNum = 1;
         cc.wwx.SceneManager.switchScene("GameScene");
 
     },
@@ -198,7 +223,7 @@ cc.Class({
         }
 
     },
-    reward()
+    invateRewardCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
 
@@ -207,7 +232,26 @@ cc.Class({
 
 
     },
-    invateCallBack()
+    soundCallBack()
+    {
+        let musicSwith = cc.wwx.AudioManager.getAudioMusicSwitch();
+        let effectSwith = cc.wwx.AudioManager.getAudioEffectSwitch();
+        if(musicSwith || effectSwith)
+        {
+            cc.wwx.AudioManager.trunAudioSound(0);
+            this.soundBtnSprite.spriteFrame = this.soundOffSpriteFrame;
+
+
+        }
+        else
+        {
+            cc.wwx.AudioManager.trunAudioSound(1);
+            this.soundBtnSprite.spriteFrame = this.soundOnSpriteFrame;
+
+
+        }
+    },
+    shareCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
 

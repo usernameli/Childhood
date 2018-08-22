@@ -36,7 +36,6 @@ cc.Class({
     },
     _ballStartLinearVelocity:function(argument)
     {
-        cc.wwx.OutPut.log('_ballStartLinearVelocity:', '_index: ' + this._index, JSON.stringify(argument));
 
         this._noShut = false;
         let linearVelocity = argument["linearVelocity"].clone();
@@ -50,6 +49,8 @@ cc.Class({
                 return;
             }
             self.body.linearVelocity = linearVelocity;
+            cc.wwx.OutPut.log('_ballStartLinearVelocity:', '_index: ' + self._index, linearVelocity);
+
             self._recoverFg = false;
             self._isOnWall = false;
             self.body.active = true;
@@ -132,7 +133,7 @@ cc.Class({
                         posX =  Math.ceil(points[0].x);
                     }
                     this.dottedLineManager.isFirstBallCome = true;
-                    this.dottedLineManager.center = cc.p(posX,118);
+                    this.dottedLineManager.center = cc.v2(posX,10);
 
                 }
                 this.dottedLineManager.ballOnWallNum += 1;

@@ -7,8 +7,6 @@ cc.Class({
         _height:0,
         _space:4,
         _tag:"ObjBlock"
-
-
     },
 
     onLoad()
@@ -32,7 +30,6 @@ cc.Class({
     onDestroy()
     {
         cc.wwx.OutPut.log(this._tag,'onDestory');
-
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,this.ballMoveDrop,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,this.haveBombObj,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
@@ -108,7 +105,7 @@ cc.Class({
 
             let posY = this.node.y;
             let posX = this.node.x;
-            this.node.setPosition(cc.p(posX,posY + (this._height + this._space) * -1));
+            this.node.setPosition(posX,posY + (this._height + this._space) * -1);
 
             this._moveDrop = false;
 

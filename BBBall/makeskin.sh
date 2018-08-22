@@ -55,6 +55,7 @@ publish_img()
 	cp -rf $IMG_TPS/../map/* 	    $IMG_OUTPUT/../map/
 	cp -rf $IMG_TPS/../public/* 	$IMG_OUTPUT/public/ 
 	cp -rf $IMG_TPS/../share/* 	    $IMG_OUTPUT/share/
+    cp -rf $IMG_TPS/../loading/*    $IMG_OUTPUT/loading/
 
 	echo "publish img DONE"
 }

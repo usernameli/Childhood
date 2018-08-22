@@ -22,19 +22,20 @@ cc.Class({
         cc.wwx.AudioManager.playGameOver();
 
         let self = this;
-        let timerNum = 10;
+        this.timerNum = 10;
         self.timerLabel.string = "10";
         self.timerProgressRed.fillRange = 1;
-        cc.wwx.Timer.setTimer(this,function () {
-            timerNum -= 1;
-            self.timerProgressRed.fillRange = (timerNum / 10);
-            self.timerLabel.string = timerNum.toString();
-
-            if(timerNum === 0)
-            {
-                cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:false});
-            }
-        },1,9,0)
+        cc.wwx.Timer.setTimer(this,this._timerCallBack,1,9,0);
+    },
+    _timerCallBack()
+    {
+        this.timerNum -= 1;
+        this.timerProgressRed.fillRange = (this.timerNum / 10);
+        this.timerLabel.string = this.timerNum.toString();
+    },
+    onDestroy()
+    {
+        cc.wwx.Timer.cancelTimer(this,this._timerCallBack)
     },
     showVideoCallBack()
     {

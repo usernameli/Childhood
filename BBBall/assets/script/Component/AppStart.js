@@ -177,7 +177,7 @@ window.initMgr = function() {
     };
     //应用系统信息
     cc.wwx.SystemInfo = require("../SDK/SystemInfo");
-
+    cc.wwx.SystemInfo.init();
     cc.wwx.EventType = require("../SDK/EventType");
 
     cc.wwx.UserInfo  = require("../Game/UserInfo");
@@ -252,101 +252,42 @@ cc.Class({
     extends: cc.Component,
     properties:{
 
-        labelProgress: cc.Label,
         globalNode:{
             default:null,
             type:cc.Node
-        }
+        },
+        loadingProgress:{
+            default:null,
+            type:cc.ProgressBar
+        },
     },
 
     onLoad()
     {
 
-        var progressPoint1 = 30 + Math.random() * 10;
-        var progressPoint2 = 52 + Math.random() * 10;
-        this.progressPoints = [0, progressPoint1, progressPoint2, 80, 84, 86, 100];
-        this.curProgress = 0;
         this.initComponent();
-
         cc.game.addPersistRootNode(this.globalNode);
         cc.wwx.AudioManager = cc.wwx.AudioManager || this.globalNode.getChildByName('AudioManager').getComponent('AudioManager');
-
-        // 预加载
-        cc.wwx.TipManager.proload();
-        cc.wwx.PopWindowManager.preload();
-
 
     },
     start()
     {
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_RECONNECT, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_LOGIN_SUCCESS, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TCP_OPEN, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.CMD_USER_INFO, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.CMD_GAME_DATA, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.CMD_BAG, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.CMD_PAYMENT_LIST, this._onMsgProgress, this);
+
         cc.wwx.SDKLogin.login();
+        let self = this;
+        self.loadingProgress.progress = 0.3;
+        cc.wwx.Timer.setTimer(this,function () {
+
+            self.loadingProgress.progress += 0.1;
+
+        },0.1,7,0)
 
     },
     onDestroy()
     {
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_RECONNECT, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_LOGIN_SUCCESS, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TCP_OPEN, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.CMD_USER_INFO, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.CMD_GAME_DATA, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.CMD_BAG, this._onMsgProgress, this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.CMD_PAYMENT_LIST, this._onMsgProgress, this);
+
 
     },
-    _onMsgProgress () {
-
-        this.toNextProgress();
-    },
-
-    /**
-     * 开始登陆WX / 或者重新登陆
-     * @private
-     */
-    _onWxMsgLogin () {
-        this.curProgress = 0;
-        this.setProgress(this.progressPoints[1]);
-    },
-
-
-    // 下一个进度点
-    nextPoint () {
-        var point = 101;
-        for (var i = 0; i < this.progressPoints.length; i++) {
-            if (this.curProgress < this.progressPoints[i]) {
-                point = this.progressPoints[i];
-                return point;
-            }
-        }
-        return point;
-    },
-
-    // 进入下一个进度点
-    toNextProgress () {
-        this.setProgress(this.nextPoint());
-    },
-
-    // 设置进度以进入下一个进度点
-    setProgress (progress) {
-        // ty.Output.log(this.name, 'login setProgress:' + progress);
-        this.curProgress = Math.max(progress, this.curProgress);
-        this.curProgress = Math.min(100, this.curProgress);
-
-        this.labelProgress.string = '正在加载：' + Math.floor(this.curProgress) + '%';
-
-        if(this.curProgress === 100)
-        {
-            cc.wwx.SceneManager.switchScene("GameHall");
-
-        }
-    },
-
 
     initComponent()
     {
