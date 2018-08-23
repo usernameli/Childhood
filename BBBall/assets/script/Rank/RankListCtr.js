@@ -24,11 +24,8 @@ cc.Class({
         // 使用这个变量来判断滚动操作是向上还是向下
         this.lastContentPosY = 0;
         this.itemTemplateName = "RankTemplate";
-        this.totalCount = cc.wwx.PayModel.mExchangeList.length;
-        cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
 
         // 设定缓冲矩形的大小为实际创建项的高度累加，当某项超出缓冲矩形时，则更新该项的显示内容
-        this.bufferZone = this.spawnCount * (this.itemTemplate.height + this.spacing) / 2;
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RANK_FRINED,this._rankFriend,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RANK_WORLD,this._rankWorld,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RANK_LEVEL,this._rankLevel,this);
@@ -65,6 +62,13 @@ cc.Class({
     // 列表初始化
     initialize: function () {
         // 获取整个列表的高度
+
+
+        this.totalCount = 30;
+        cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
+
+        this.bufferZone = this.spawnCount * (this.itemTemplate.height + this.spacing) / 2;
+
         this.items = []; // 存储实际创建的项数组
         this.content.removeAllChildren(true);
         cc.wwx.OutPut.log("itemTemplateName",this.itemTemplateName);
@@ -74,8 +78,17 @@ cc.Class({
             this.content.addChild(item);
             // 设置该item的坐标（注意父节点content的Anchor坐标是(0.5, 1)，所以item的y坐标总是负值）
             item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
+            item.getComponent(this.itemTemplateName).setRankIndex(0);
             item.getComponent(this.itemTemplateName).updateItem(i + 1);
             this.items.push(item);
+        }
+    },
+    reloadItem(index)
+    {
+        for (let i = 0; i < this.items.length; ++i) {
+            this.items[i].setPosition(0, -this.items[i].height * (0.5 + i) - this.spacing * (i + 1));
+            this.items[i].getComponent(this.itemTemplateName).setRankIndex(index);
+            this.items[i].getComponent(this.itemTemplateName).updateItem(i + 1);
         }
     },
     _createDisplay () {
@@ -108,6 +121,10 @@ cc.Class({
 
             cc.wwx.WeChat.drawFriendGroupRank(cc.size(580 , 90 * 20), 20,"Level",this._shareTicket);
         }
+        else
+        {
+            this.reloadItem(0);
+        }
     },
     _rank100Ball()
     {
@@ -124,6 +141,10 @@ cc.Class({
 
             cc.wwx.WeChat.drawFriendGroupRank(cc.size(580 , 90 * 20), 20,"Ball100",this._shareTicket);
         }
+        else
+        {
+            this.reloadItem(2);
+        }
     },
     _rankChassic()
     {
@@ -139,6 +160,10 @@ cc.Class({
             this._createDisplay();
 
             cc.wwx.WeChat.drawFriendGroupRank(cc.size(580 , 90 * 20), 20,"Chassic",this._shareTicket);
+        }
+        else
+        {
+            this.reloadItem(1);
         }
     },
     _rankWorld()

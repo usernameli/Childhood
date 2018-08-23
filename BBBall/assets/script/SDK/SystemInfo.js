@@ -21,14 +21,13 @@ cc.Class({
         remotePackPath:"remote_res/res.zip",
         biLogServer : "https://cbi.touch4.me/api/bilog5/text",
         errorLogServer : "https://clienterr.touch4.me/api/bilog5/clientlog",
-        // serverUrl : "https://openxyxfz.nalrer.cn/api/wx/",
         SysInfo:'',
         SYS:{},
         screenWidth:0,
         screenHeight:0,
         windowWidth:0,
         windowHeight:0,
-        serverUrl : "https://open.andla.cn/api/wx/",
+        rank:{},
         // 初始化uuid
         init:function()
         {

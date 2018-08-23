@@ -39,6 +39,10 @@ cc.Class({
             default:null,
             type:cc.Label
         },
+        topTitile:{
+            default:null,
+            type:cc.Label
+        },
         _gameResult:false,
 
     },
@@ -68,6 +72,7 @@ cc.Class({
 
             if(gameResult === true)
             {
+                this.topTitile.string = "闯关成功";
                 this.continueSprite.spriteFrame = this.continueSpriteFrame;
                 let star = gameData["levelHighStar"][0];
                 if(star === 1)
@@ -102,6 +107,7 @@ cc.Class({
             }
             else
             {
+                this.topTitile.string = "闯关失败";
                 let star1 = this.starNode[0].getChildByName('star1');
                 let star2 = this.starNode[0].getChildByName('star2');
                 star1.active = false;

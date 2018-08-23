@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.18984375,
-      "y": 0.18984375,
+      "x": 0.7244130336970522,
+      "y": 0.7244130336970522,
       "z": 1
     },
     "_quat": {
@@ -4143,6 +4143,12 @@
     },
     "soundOffSpriteFrame": {
       "__uuid__": "ea13542a-afc0-490a-a7d8-799dfc617a94"
+    },
+    "headIcon": {
+      "__id__": 12
+    },
+    "userName": {
+      "__id__": 15
     },
     "_openCheckIn": false,
     "_tag": "GameHall",

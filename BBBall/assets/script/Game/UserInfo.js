@@ -38,6 +38,7 @@ cc.Class({
             speed:1500,
             ballType:"ballID",
             ballNum:30,
+            ballPosY:15,
         },
         mFriendRankList:[],
         mIssue:null,
@@ -47,6 +48,10 @@ cc.Class({
         parseUdata: function (userInfoResult) {
             this.loc = userInfoResult['loc'];
             this.udata = userInfoResult['udata'];
+            if(!this.userPic)
+            {
+                this.userPic = this.udata["purl"];
+            }
         },
         getHighLevelStars()
         {

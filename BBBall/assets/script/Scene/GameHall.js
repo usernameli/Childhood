@@ -39,6 +39,14 @@ cc.Class({
             default:null,
             type:cc.SpriteFrame
         },
+        headIcon:{
+            default:null,
+            type:cc.Node,
+        },
+        userName:{
+            default:null,
+            type:cc.Label
+        },
         _openCheckIn:false,
         _tag:"GameHall"
 
@@ -58,7 +66,7 @@ cc.Class({
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,this.daily_checkin_status,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_INVITE_CONF,this.invate_conf_status,this);
-
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RANK_POP,this._rankPopWindow,this);
     },
     start()
     {
@@ -67,7 +75,10 @@ cc.Class({
             cc.wwx.SDKLogin.wxUserInfo1();
         }
 
-        // cc.wwx.TCPMSG.getDaily_checkin_status();
+        cc.wwx.Loader.loadImg(cc.wwx.UserInfo.userPic, this.headIcon);
+
+        this.userName.string = cc.wwx.UserInfo.userName;
+        cc.wwx.TCPMSG.getDaily_checkin_status();
         cc.wwx.TCPMSG.getInvite();
 
 
@@ -87,6 +98,7 @@ cc.Class({
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,this.daily_checkin_status,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_INVITE_CONF,this.invate_conf_status,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_RANK_POP,this._rankPopWindow,this);
 
     },
     invate_conf_status(params)
@@ -199,6 +211,10 @@ cc.Class({
     {
         //看广告得奖励
     },
+    _rankPopWindow()
+    {
+        cc.wwx.PopWindowManager.popWindow("prefab/GameRanKWindow","GameRankWindow");
+    },
     rank()
     {
         cc.wwx.AudioManager.playAudioButton();
@@ -206,7 +222,6 @@ cc.Class({
         //排行榜
         cc.wwx.TCPMSG.getRank();
 
-        cc.wwx.PopWindowManager.popWindow("prefab/GameRanKWindow","GameRankWindow");
 
     },
     shop()
@@ -214,8 +229,6 @@ cc.Class({
         cc.wwx.AudioManager.playAudioButton();
 
         //商城
-        // let ballPrefab = cc.instantiate(this.shopPrefab);
-        // this.node.addChild(ballPrefab);
         if(cc.wwx.PayModel.mExchangeList.length > 0)
         {
             cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop","ShopWindow");

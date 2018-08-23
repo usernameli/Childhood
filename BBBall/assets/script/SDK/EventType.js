@@ -13,6 +13,7 @@ cc.Class({
         CMD_HALL_SHARE2:'hall_share2',
         CMD_TODO_TASKS:'todo_tasks',
         CMD_CUSTOM_RANK:'custom_rank',
+        MSG_CUSTOM_RANK:'custom_rank',
         MSG_TCP_OPEN: 'tcp_open',
         MSG_TCP_CLOSE: 'tcp_close',
         MSG_TCP_ERROR: 'tcp_error',             // tcp 失败
@@ -127,6 +128,7 @@ cc.Class({
         ACTION_RANK_LEVEL:'ball_rank_level',
         ACTION_RANK_CHASSIC:'ball_rank_chassic',
         ACTION_RANK_100BALL:'ball_rank_100ball',
+        ACTION_RANK_POP:'ball_rank_pop',
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     }
 })

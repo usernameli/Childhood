@@ -49,7 +49,6 @@ cc.Class({
                 return;
             }
             self.body.linearVelocity = linearVelocity;
-            cc.wwx.OutPut.log('_ballStartLinearVelocity:', '_index: ' + self._index, linearVelocity);
 
             self._recoverFg = false;
             self._isOnWall = false;
@@ -133,7 +132,7 @@ cc.Class({
                         posX =  Math.ceil(points[0].x);
                     }
                     this.dottedLineManager.isFirstBallCome = true;
-                    this.dottedLineManager.center = cc.v2(posX,10);
+                    this.dottedLineManager.center = cc.v2(posX,cc.wwx.UserInfo.ballInfo.ballPosY);
 
                 }
                 this.dottedLineManager.ballOnWallNum += 1;
@@ -186,6 +185,7 @@ cc.Class({
 
             if(this._recoverFg === false)
             {
+                this.node.y = cc.wwx.UserInfo.ballInfo.ballPosY;
                 var moveTo = cc.moveTo(0.4, this.dottedLineManager.center);
                 this.node.runAction(moveTo);
                 this._recoverFg = true;

@@ -230,7 +230,7 @@ cc.Class({
                             var encryptedData = obj.encryptedData;
                             that.print("encryptedData :" + encryptedData);
 
-                            var decryptedData = cc.wwx.Util.wxDecrypt(cc.wwx.UserInfo.wx_session_key, obj.iv, obj.encryptedData);
+                            var decryptedData = cc.wwx.Util.wxDecrypt(cc.wwx.UserInfo.wxgame_session_key, obj.iv, obj.encryptedData);
                             that.print("decryptedData :" + decryptedData);
                             decryptedData = JSON.parse(decryptedData);
                             var groupId = decryptedData.openGId;

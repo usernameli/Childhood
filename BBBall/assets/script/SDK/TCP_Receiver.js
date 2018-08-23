@@ -36,7 +36,18 @@ cc.Class({
             this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_REWARD, this._onInviteReward);
             this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_BIND_USER, this._onInviteBindUser);
             this.register(cc.wwx.EventType.CMD_USER, this._onUserInfo);
+            this.register(cc.wwx.EventType.MSG_CUSTOM_RANK, this._onRankListInfo);
 
+        },
+        _onRankListInfo(params)
+        {
+            let cmd = params["cmd"];
+            if(cmd === "custom_rank")
+            {
+                cc.wwx.SystemInfo.rank = params["result"]['tabs'];
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RANK_POP);
+
+            }
         },
         _onUserInfo(params)
         {

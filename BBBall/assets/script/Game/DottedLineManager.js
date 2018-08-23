@@ -39,7 +39,7 @@ cc.Class({
 
         cc.wwx.OutPut.log('onLoad:', 'width', this.node.width);
         cc.wwx.OutPut.log('onLoad:', 'height', this.node.height);
-        this.center = cc.v2(this.node.width/ 2, 10);
+        this.center = cc.v2(this.node.width/ 2, cc.wwx.UserInfo.ballInfo.ballPosY);
 
         this.node.on(cc.Node.EventType.TOUCH_START, this._touchStartCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this._touchMoveCallBack, this);
@@ -171,6 +171,7 @@ cc.Class({
             return;
         }
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
+        cc.wwx.OutPut.log("_touchStartCallBack: ",JSON.stringify(touchPos));
         this._drawDottleLine(touchPos);
     },
 
@@ -189,8 +190,6 @@ cc.Class({
 
 
         this._ctx.clear();
-        this._colliderPoint = 0;
-        this._touchWallOn = false;
 
         this._rayCast(p1, touchPoint);
     },
@@ -221,8 +220,11 @@ cc.Class({
 
 
         if (result) {
-            // p2 = result.point;
-            p2 = this.node.convertToNodeSpaceAR(result.point);
+            p2 = result.point;
+            if(p2.y > 923)
+            {
+                p2 = this.node.convertToNodeSpaceAR(result.point);
+            }
             this._ctx.circle(p2.x, p2.y, 10);
             this._ctx.fillColor = cc.Color.RED;
             this._ctx.fill();
@@ -231,10 +233,6 @@ cc.Class({
         {
             return;
         }
-
-
-        cc.wwx.OutPut.log("collider.tag : ",collider.tag);
-        cc.wwx.OutPut.log("result.point : ",result.point);
 
         this.drawLine(p1,p2,true);
         let normal = result.normal;

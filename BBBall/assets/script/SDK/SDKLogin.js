@@ -172,7 +172,7 @@ cc.Class({
                     success: function (res) {
                         cc.wwx.OutPut.log('wx getUserInfo ok:', JSON.stringify(res));
                         var userInfo = res['userInfo'];
-                        if (userInfo.nickName !== ty.UserInfo.userName || userInfo.avatarUrl !== ty.UserInfo.userPic) {
+                        if (userInfo.nickName !== cc.wwx.UserInfo.userName || userInfo.avatarUrl !== cc.wwx.UserInfo.userPic) {
                             wx.login({
                                 success: function (res) {
                                     if (res.code) {
@@ -191,12 +191,16 @@ cc.Class({
             // 获取用户授权情况
             wx.getSetting({
                 success: function (res) {
-                    cc.wwx.OutPut.log('get user setting :', res);
+                    cc.wwx.OutPut.log('get user setting :', JSON.stringify(res));
                     var authSetting = res.authSetting;
                     if (authSetting['scope.userInfo'] === true) {
                         cc.wwx.UserInfo.wxAuthor = true;
                         // 用户已授权
                         getUserInfo();
+                    }
+                    else
+                    {
+                        self.wxUserInfo2({setting:true})
                     }
                 }
             });
@@ -323,9 +327,9 @@ cc.Class({
             };
             if (userInfo) {
                 cc.wwx.OutPut.info('_loginBallWithCode userInfo:' + JSON.stringify(userInfo));
-                dataObj.nickName = userInfo.nickName;
-                dataObj.gender = userInfo.gender;
-                dataObj.avatarUrl = userInfo.avatarUrl;
+                dataObj.snsName = userInfo.nickName;
+                dataObj.snsSex = userInfo.gender;
+                dataObj.snsPic = userInfo.avatarUrl;
             }
 
             cc.wwx.OutPut.log("SDKLogin", " *-*-*-*-*-  dataobj:  " + JSON.stringify(dataObj));
@@ -393,7 +397,7 @@ cc.Class({
         updateUserInfo(result, local_uuid, code) {
             cc.wwx.UserInfo.userId = result.userId;
             cc.wwx.UserInfo.userName = result.userName;
-            cc.wwx.UserInfo.userPic = result.purl;
+            cc.wwx.UserInfo.userPic = result.avatarUrl;
             cc.wwx.UserInfo.authorCode = result.authorCode;
             cc.wwx.UserInfo.wxgame_session_key = result.wxgame_session_key;
             cc.wwx.OutPut.log("updateUserInfo", 'userId:' + cc.wwx.UserInfo.userId + ' userName:' + cc.wwx.UserInfo.userName + ' userPic:' + cc.wwx.UserInfo.userPic);
