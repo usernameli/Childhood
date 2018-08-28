@@ -76,22 +76,17 @@ cc.Class({
         _currentRowI:-1,//当前显示第几行了
         _currentRowJ:-1,
         _tag:"ObjManager",
-        _gameOver:false,
+        _gameOver:true,
         _pointCheckList:null,//关卡数据
     },
     onLoad()
     {
-
-
-
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
-
-
 
     },
 
@@ -108,6 +103,8 @@ cc.Class({
 
     gameInit()
     {
+        cc.wwx.UserInfo.currentSocre = 0;
+        cc.wwx.UserInfo.currentStar = 0;
         this._emptyGrid = [];
         if(cc.wwx.UserInfo.playMode === "level")
         {
@@ -136,8 +133,11 @@ cc.Class({
     },
     start()
     {
+
+
         this.gameInit();
     },
+
     gameRestart()
     {
 
@@ -313,6 +313,35 @@ cc.Class({
         let hallAhall = pointCheckData.length / 2;
         let hallAIndex = pointCheckData.length;
         let haveShowRow = 0;
+
+        //查找数据有多少
+        if(cc.wwx.UserInfo.playMode === "level")
+        {
+            let listNum = 0;
+            for(let i = hallAhall - 1; i >= 0;i--)
+            {
+                let list = pointCheckData[i];
+                if(this._judgeArrayValue(list))
+                {
+                    listNum += 1;
+                }
+            }
+
+            if(listNum > 7)
+            {
+                this._showRowNum = 7;
+
+            }
+            else
+            {
+                this._showRowNum = listNum;
+
+            }
+        }
+
+
+
+
 
         for(let i = hallAhall - 1,j = hallAIndex - 1; i >= 0,j >= hallAhall;i--,j--)
         {
@@ -515,6 +544,7 @@ cc.Class({
             return;
         }
 
+        cc.wwx.OutPut.log("ballStopAction: ",this._currentRowI);
         if(this._currentRowI >= 0)
         {
 
@@ -541,23 +571,25 @@ cc.Class({
         }
         else
         {
-            if(this.node.childrenCount === 3)
+            cc.wwx.OutPut.log(this._tag,"this.node.childrenCount: ",this.node.childrenCount);
+            for (var i = 0; i < this.node.childrenCount; ++i)
             {
-                this._gameIsSucess();
-            }
+                var name = this.node.children[i].name;
+                cc.wwx.OutPut.log(this._tag,"this.node.childrenCount name: ",name);
 
+            }
         }
+
 
     },
     _gameIsSucess()
     {
-        this._gameOver = true;
         //上报分数
 
         cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
             cc.wwx.UserInfo.currentSocre,
-            cc.wwx.UserInfo.checkPointID,1,2);
+            cc.wwx.UserInfo.checkPointID,1,cc.wwx.UserInfo.currentStar);
         cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:true});
 
     },
@@ -567,7 +599,7 @@ cc.Class({
         cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
             cc.wwx.UserInfo.currentSocre,
-            cc.wwx.UserInfo.checkPointID,0,3);
+            cc.wwx.UserInfo.checkPointID,0,cc.wwx.UserInfo.currentStar);
 
         cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow","ResultFirstWindow");
     },
@@ -591,8 +623,13 @@ cc.Class({
 
         if(this._gameOver)
         {
-
             return;
+        }
+
+        if(this.node.childrenCount === 3)
+        {
+            this._gameOver = true;
+            this._gameIsSucess();
         }
         let posY = this.findLastRowPosY();
         if(posY === -818)

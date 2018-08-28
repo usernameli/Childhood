@@ -38,6 +38,9 @@ cc.Class({
             this.register(cc.wwx.EventType.CMD_USER, this._onUserInfo);
             this.register(cc.wwx.EventType.MSG_CUSTOM_RANK, this._onRankListInfo);
 
+
+
+
         },
         _onRankListInfo(params)
         {
@@ -57,6 +60,13 @@ cc.Class({
                 cc.wwx.Invite.parseInvite2(params["result"]["inviteConf"]["rewards"]);
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_INVITE_CONF,params);
 
+            }
+            else if(action === "use_ball_item")
+            {
+                if(parseInt(params["result"]["code"]) === 1)
+                {
+                    cc.wwx.TipManager.showMsg('使用成功',1);
+                }
             }
         },
         _onDailyInviteInfo(result){
@@ -204,7 +214,7 @@ cc.Class({
 
 
             // 获取背包
-            // cc.wwx.TCPMSG.getBagInfo();
+            cc.wwx.TCPMSG.getBagInfo();
             cc.wwx.TCPMSG.fetchPaymentList();
 
             // 分享发奖

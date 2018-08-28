@@ -213,7 +213,7 @@ cc.Class({
     update(dt)
     {
 
-        if (this.tex && this.display) {
+        if (CC_WECHATGAME && this.tex && this.display) {
             this._updateSubDomainCanvas();
             return;
         }

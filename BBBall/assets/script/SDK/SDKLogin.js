@@ -68,6 +68,8 @@ cc.Class({
                     // 保存用户名/用户ID/用户头像
                     let result = checkData.result;
                     self.updateUserInfo(result, cc.wwx.SystemInfo.uuid);
+                    self.initWebSocketUrl(result);
+
 
                 },
                 onFail: function (params) {
@@ -94,7 +96,9 @@ cc.Class({
                     cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeWxLoginSuccess, [params.code]);
                     if (params.code) {
                         let code = params.code;
-                        that.loginBallWithCode(code, {});
+                        that.loginBallWithCode(code, {},function (result) {
+                            that.initWebSocketUrl(result);
+                        });
                         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.WEIXIN_LOGIN_SUCCESS);
                     }
                 },
@@ -198,10 +202,10 @@ cc.Class({
                         // 用户已授权
                         getUserInfo();
                     }
-                    else
-                    {
-                        self.wxUserInfo2({setting:true})
-                    }
+                    // else
+                    // {
+                    //     self.wxUserInfo2({setting:true})
+                    // }
                 }
             });
 
@@ -218,7 +222,7 @@ cc.Class({
                 wx.getUserInfo({
                     'lang' : 'zh_CN',
                     success: function (res) {
-                        cc.wwx.OutPut.log('wx getUserInfo ok:', JSON.stringify(res));
+                        cc.wwx.OutPut.log('wx wxUserInfo2 ok:', JSON.stringify(res));
                         var userInfo = res['userInfo'];
 
                         wx.login({
@@ -303,9 +307,9 @@ cc.Class({
                 return;
             }
             // 微信授权成功后使用code登录途游服务器
-            wx.showShareMenu({
-                withShareTicket: true
-            });
+            // wx.showShareMenu({
+            //     withShareTicket: true
+            // });
 
             let local_uuid = cc.wwx.SystemInfo.uuid;
             cc.wwx.OutPut.log("local_uuid:", local_uuid);
@@ -327,9 +331,11 @@ cc.Class({
             };
             if (userInfo) {
                 cc.wwx.OutPut.info('_loginBallWithCode userInfo:' + JSON.stringify(userInfo));
-                dataObj.snsName = userInfo.nickName;
-                dataObj.snsSex = userInfo.gender;
-                dataObj.snsPic = userInfo.avatarUrl;
+                dataObj.nickName = userInfo.nickName;
+                dataObj.gender = userInfo.gender;
+                dataObj.avatarUrl = userInfo.avatarUrl;
+                cc.wwx.UserInfo.parseGender(userInfo.gender);
+
             }
 
             cc.wwx.OutPut.log("SDKLogin", " *-*-*-*-*-  dataobj:  " + JSON.stringify(dataObj));
@@ -397,7 +403,7 @@ cc.Class({
         updateUserInfo(result, local_uuid, code) {
             cc.wwx.UserInfo.userId = result.userId;
             cc.wwx.UserInfo.userName = result.userName;
-            cc.wwx.UserInfo.userPic = result.avatarUrl;
+            cc.wwx.UserInfo.userPic = result.purl;
             cc.wwx.UserInfo.authorCode = result.authorCode;
             cc.wwx.UserInfo.wxgame_session_key = result.wxgame_session_key;
             cc.wwx.OutPut.log("updateUserInfo", 'userId:' + cc.wwx.UserInfo.userId + ' userName:' + cc.wwx.UserInfo.userName + ' userPic:' + cc.wwx.UserInfo.userPic);
@@ -411,10 +417,6 @@ cc.Class({
             cc.wwx.WeChat.guideStatistical();
             cc.wwx.UserInfo.wxEnterInfo = null;
             cc.wwx.Storage.setItem(this.SESSION_KEY,token)
-
-
-            this.initWebSocketUrl(result);
-
 
         },
         /**
@@ -474,112 +476,5 @@ cc.Class({
             });
         },
 
-        wechatAuthorize: function () {
-            if (!cc.wwx.IsWechatPlatform()) {
-                return;
-            }
-            wx.getSetting({
-                success: function (res) {
-                    if (!res.authSetting['scope.userInfo']) {
-                        cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeAuthorizationStart, []);
-                        wx.authorize({
-                            scope: "scope.userInfo",
-                            success: function () {
-                                cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeAuthorizationSuccess, []);
-                                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.START_AUTHORIZATION_SUCCESS);
-                            },
-                            fail: function () {
-                                cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeAuthorizationFailed, []);
-                                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.START_AUTHORIZATION_FAILED);
-                            },
-                            complete: function () {
-                            }
-                        });
-                    }
-                    else {
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.START_AUTHORIZATION_SUCCESS);
-                    }
-                }
-            })
-        },
-
-        compareSDkVersion: function (SDkVersion) {
-            if (SDkVersion == "2.0.1") {
-                return true;
-            }
-            let data = SDkVersion.split(".");
-            let index = 2;
-            console.log("data" + JSON.stringify(data));
-            for (let i = 0; i < data.length; i++) {
-                let per = parseInt(data[i]);
-                if (i == 0) {
-                    index = 2;
-                } else if (i == 1) {
-                    index = 0;
-                } else {
-                    index = 1;
-                }
-                console.log("per" + per + "index" + index);
-                if (per > index) {
-                    return true;
-                } else if (per < index) {
-                    return false;
-                } else {
-                    continue;
-                }
-            }
-            return false;
-        },
-
-        wxInviteFriendShare: function (titlestr, imageUrl, successCallBackFun, failCallBackFun) {
-            let query = minihall.GlobalFuncs.getInvitedQuery();
-            wx.shareAppMessage({
-                title: titlestr,
-                imageUrl: imageUrl,//5:4
-                query: query,//'key1=val1&key2=val2',
-                success: function (result) {
-                    cc.wwx.OutPut.log(null, "shareAppMessage+++++++++++++++++" + JSON.stringify(result));
-                    if (successCallBackFun) {
-                        successCallBackFun(result);
-                    }
-                },
-                fail: function () {
-                    if (failCallBackFun) {
-                        failCallBackFun();
-                    }
-                    cc.wwx.OutPut.log(null, JSON.stringify(arguments));
-                },
-                complete: function () {
-                }
-            })
-        },
-
-        wxShare: function (titlestr, imageUrl, successCallBackFun, failCallBackFun, isforce, sharePoint) {
-            wx.shareAppMessage({
-                title: titlestr,
-                imageUrl: imageUrl,//5:4
-                query: 'shareid=' + cc.wwx.UserInfo.userId,
-                success: function (result) {
-                    if (isforce == true)
-                        result["sharePoint"] = sharePoint
-                    cc.log("ball wxShare = " + JSON.stringify(result))
-                    cc.log("sharePoint = " + sharePoint)
-                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.SHARE_RESULT, result);
-
-                    cc.wwx.OutPut.log(null, "shareAppMessage+++++++++++++++++" + JSON.stringify(result));
-                    if (successCallBackFun) {
-                        successCallBackFun(result);
-                    }
-                },
-                fail: function () {
-                    if (failCallBackFun) {
-                        failCallBackFun();
-                    }
-                    cc.wwx.OutPut.log(null, JSON.stringify(arguments));
-                },
-                complete: function () {
-                }
-            })
-        },
     }
 });

@@ -6,6 +6,11 @@ cc.Class({
             default: null,
             serializable: false
         },
+        ballSpriteFrame:{
+            default:[],
+            type:cc.SpriteFrame
+        },
+        _ballId:0,
         _speed:0,
         _isStop:true,
         _index:0,
@@ -28,6 +33,20 @@ cc.Class({
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_START_LINEARVELOCITY, this._ballStartLinearVelocity, this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RECOVERY_BALL, this._ballRecoverNow, this);
+    },
+    setBallID(id)
+    {
+        this._ballId = id;
+        if(id >= 1025)
+        {
+            this.node.getComponent("cc.Sprite").spriteFrame = this.ballSpriteFrame[this._ballId - 1025];
+
+        }
+        else
+        {
+            this.node.getComponent("cc.Sprite").spriteFrame = this.ballSpriteFrame[this._ballId - 1016];
+
+        }
     },
     onDestroy()
     {
@@ -73,7 +92,6 @@ cc.Class({
 
         if(this._isSports)
         {
-            cc.wwx.OutPut.log(this._tag,"_ballRecoverNow",this.dottedLineManager.isBallSporting)
 
             this.body.active = false;
             let self = this;
@@ -98,6 +116,7 @@ cc.Class({
     onBeginContact(contact, self, other,artificial) {
 
 
+
         if(this.dottedLineManager.isBallSporting === false || this._isSports === false)
         {
 
@@ -108,12 +127,11 @@ cc.Class({
                 break;
             case 2://地面
 
+
                 if(this._isOnWall)
                 {
                     return;
                 }
-                cc.wwx.OutPut.log("碰撞地面" + this.dottedLineManager.isBallSporting);
-                cc.wwx.OutPut.log("碰撞地面" + this._index);
                 this._isOnWall = true;
 
                 this.body.linearVelocity = cc.v2(0,0);
@@ -136,7 +154,6 @@ cc.Class({
 
                 }
                 this.dottedLineManager.ballOnWallNum += 1;
-                cc.wwx.OutPut.log("碰撞地面 " + this.dottedLineManager.ballOnWallNum ,this.dottedLineManager.ballMaxNum);
 
                 if(this.dottedLineManager.ballMaxNum == this.dottedLineManager.ballOnWallNum)
                 {
@@ -156,11 +173,14 @@ cc.Class({
     },
     update(dt)
     {
+
         if(this._isOnWall)
         {
+
             this.body.active = false;
 
         }
+
         if(this._isSports)
         {
             let nowLinearLength = this.body.linearVelocity;
@@ -190,6 +210,7 @@ cc.Class({
                 this.node.runAction(moveTo);
                 this._recoverFg = true;
                 this._isSports = false;
+                this._isOnWall = false;
             }
 
         }

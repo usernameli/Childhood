@@ -9,6 +9,8 @@ let segmentImgUrls = [
     "res/raw-assets/resources/images/share/Ball_Rank_Second.png",
     "res/raw-assets/resources/images/share/Ball_Rank_Third.png",
     "res/raw-assets/resources/images/share/Ball_Rank_Head.png",
+    "res/raw-assets/resources/images/share/Ball_Result_RankBG.png",
+    "res/raw-assets/resources/images/share/Ball_Result_RankHeadIcon.png",
 
 ];
 /**
@@ -21,11 +23,11 @@ function sliceStringToLength (str, length) {
     if(!str) {
         return str;
     }
-    var len = 0;
-    var tmp = 0;
-    var s;
-    for (var i = 0; i < str.length; i++) {
-        var charCode = str.charCodeAt(i);
+    let len = 0;
+    let tmp = 0;
+    let s;
+    for (let i = 0; i < str.length; i++) {
+        let charCode = str.charCodeAt(i);
         if (charCode >= 0 && charCode <= 128) {
             tmp += 1;
         } else { // 如果是中文则长度加2
@@ -51,10 +53,10 @@ let kv2dic = function(data) {
     }
     return dic;
 };
-var dic2kv = function(data) {
-    var list = [];
-    for (var key in data) {
-        var value = data[key];
+let dic2kv = function(data) {
+    let list = [];
+    for (let key in data) {
+        let value = data[key];
         value = typeof(value) == 'number'? value.toString() : value;
         list.push({key : key, value : value})
     }
@@ -69,13 +71,13 @@ function preloadImages (imgUrls, drawImageCallback) {
     let imageCache = {};
     let count = 0;
 
-    for (var i = 0; i < imgUrls.length; i++) {
+    for (let i = 0; i < imgUrls.length; i++) {
         (function(src) {
             console.log('preloadImages src=' + src);
-            var image = wx.createImage();
+            let image = wx.createImage();
             image.src = src;
             image.onload = function (event) {
-                var img = event.target;
+                let img = event.target;
                 if (!imageCache[src]) {
                     count++;
                 }
@@ -90,15 +92,15 @@ function preloadImages (imgUrls, drawImageCallback) {
 }
 
 function drawImage (context, url, level, x, y, w, h) {
-    var image = wx.createImage();
+    let image = wx.createImage();
     image.src = url;
     image.onload = function (event) {
         if (level != validRenderLv) {
             return;
         }
-        var img = event.target;
-        var width = w || img.width;
-        var height = h || img.height;
+        let img = event.target;
+        let width = w || img.width;
+        let height = h || img.height;
         context.drawImage(img, x - width / 2, y - height / 2, width, height);
     };
 }
@@ -107,8 +109,8 @@ function drawDirect (context, img, level, x, y, w, h) {
     if (level != validRenderLv) {
         return;
     }
-    var width = w || img.width;
-    var height = h || img.height;
+    let width = w || img.width;
+    let height = h || img.height;
     context.drawImage(img, x - width / 2, y - height / 2, width, height);
 }
 
@@ -117,7 +119,7 @@ function drawDirect (context, img, level, x, y, w, h) {
  * @param data
  */
 
-var upload = function(data) {
+let upload = function(data) {
     wx.setUserCloudStorage({
         KVDataList : dic2kv(data),
         success : function (params) {
@@ -144,8 +146,8 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
     sharedContext.clearRect(0, 0, canvasSize.width, canvasSize.height);
     sharedContext.textBaseline = "middle";
 
-    for (var i = 0; i < rankData.length; i++) {
-        var data = rankData[i];
+    for (let i = 0; i < rankData.length; i++) {
+        let data = rankData[i];
         data.rank = i + 1;
 
         if (data.userId == selfData.userId) {
@@ -154,9 +156,9 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
     }
 
     // 填充数据
-    var emptyCount = maxCount - rankData.length;
+    let emptyCount = maxCount - rankData.length;
     let len = rankData.length;
-    for (var i = 0; i < emptyCount; i++) {
+    for (let i = 0; i < emptyCount; i++) {
         rankData.push({
             rank: len + i + 1,
             default : true
@@ -168,14 +170,14 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
             return;
         }
 
-        var cellWidth = 580;
-        var cellHeight = 90;
+        let cellWidth = 580;
+        let cellHeight = 90;
         let baseX = cellWidth / 2;
-        var contentWidth = 0;
-        for (var i = 0; i < maxCount; i++) {
-            var baseY = contentWidth + cellHeight / 2;
+        let contentWidth = 0;
+        for (let i = 0; i < maxCount; i++) {
+            let baseY = contentWidth + cellHeight / 2;
 
-            var params = rankData[i] || selfData;
+            let params = rankData[i] || selfData;
             if (params.default) {
                 drawDirect(sharedContext, imageCache[segmentImgUrls[0]], curRenderLv, baseX, baseY);
 
@@ -184,9 +186,9 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
                 sharedContext.textAlign="center";
                 sharedContext.fillText('虚位以待', baseX, baseY);
 
-                var rank = params.rank;
+                let rank = params.rank;
                 // rank
-                var isTopRanker = rank < 4;
+                let isTopRanker = rank < 4;
                 if (isTopRanker) {
                     drawImage(sharedContext, segmentImgUrls[rank + 1], curRenderLv, cellWidth/2 - 240, baseY);
                 } else {
@@ -197,7 +199,7 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
                 }
 
             } else {
-                var rank = params.rank;
+                let rank = params.rank;
 
                 // panel
                 if (params.userId == selfData.userId) {
@@ -207,7 +209,7 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
                 }
 
                 // rank
-                var isTopRanker = rank < 4;
+                let isTopRanker = rank < 4;
                 if (isTopRanker) {
                     drawImage(sharedContext, segmentImgUrls[rank + 1], curRenderLv, cellWidth/2 - 240, baseY);
                 } else {
@@ -259,8 +261,178 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
             console.log("contentWidth: ",contentWidth);
         }
     })
-};
+}
+/**
+ * 游戏结果排行榜
+ * @param canvasSize
+ * @param rankData
+ * @param myUserId
+ */
 
+function drawCanvasResultRank(canvasSize, rankData, selfData, maxCount,rankType) {
+    validRenderLv++;
+    let curRenderLv = validRenderLv;
+    let sharedCanvas = wx.getSharedCanvas();
+    let sharedContext = sharedCanvas.getContext("2d");
+    sharedContext.clearRect(0, 0, canvasSize.width, canvasSize.height);
+    sharedContext.textBaseline = "middle";
+    let selfIndex = -1;
+    for (let i = 0; i < rankData.length; i++) {
+        let data = rankData[i];
+        data.rank = i + 1;
+        if (data.userId == selfData.userId) {
+            selfData.rank = i + 1;
+            selfIndex = i;
+        }
+
+    }
+
+    let rankList = [];
+
+    if(rankData.length <= 3)
+    {
+        rankList = rankData;
+    }
+    else
+    {
+        if(selfIndex === 0)
+        {
+            rankList.push(rankData[selfIndex]);
+            rankList.push(rankData[selfIndex + 1]);
+            rankList.push(rankData[selfIndex + 2]);
+
+        }
+        else if(selfIndex === rankData.length - 1)
+        {
+            rankList.push(rankData[selfIndex]);
+            rankList.push(rankData[selfIndex - 1]);
+            rankList.push(rankData[selfIndex - 2]);
+        }
+        else
+        {
+            rankList.push(rankData[selfIndex - 1]);
+            rankList.push(rankData[selfIndex]);
+            rankList.push(rankData[selfIndex + 1]);
+        }
+    }
+
+
+
+    preloadImages(segmentImgUrls, function(imageCache) {
+        if (curRenderLv != validRenderLv) {
+            return;
+        }
+
+        let cellWidth = 180;
+        let cellHeight = 258;
+        let baseY = cellHeight / 2;
+        let contentWidth = 0;
+        for (let i = 0; i < rankList.length; i++) {
+            let baseX = contentWidth + cellWidth / 2;
+
+            let params = rankList[i];
+
+            let rank = params.rank;
+
+            // panel
+            drawDirect(sharedContext, imageCache[segmentImgUrls[6]], curRenderLv, baseX, baseY);
+
+            // rank
+
+            sharedContext.font="30px Arial";
+            sharedContext.fillStyle="#FFFFFF";
+            sharedContext.textAlign="center";
+            sharedContext.fillText(rank, baseX, 20);
+
+
+
+            // avatar
+            drawDirect(sharedContext, imageCache[segmentImgUrls[7]], curRenderLv, baseX, 105);
+            drawImage(sharedContext, params.avatar, curRenderLv, baseX, 105, 128, 128);
+
+            // name
+            sharedContext.font="28px Arial";
+            sharedContext.fillStyle="#FFFFFF";
+            sharedContext.textAlign="center";
+            sharedContext.fillText(sliceStringToLength(params.name, 12), baseX, 195);
+
+            // star number
+            sharedContext.font="30px Arial";
+            sharedContext.fillStyle="#F1A040";
+            sharedContext.textAlign="center";
+            if(rankType === "level")
+            {
+                sharedContext.fillText("第" + params.levelHighLv + "关", baseX, 230);
+
+            }
+            else if(rankType === "classic")
+            {
+                sharedContext.fillText(params.classicHighScore + '分', baseX, 230);
+
+            }
+            else
+            {
+                sharedContext.fillText(params.ball100HighScore + '分', baseX, 230);
+
+            }
+
+            // increase
+            contentWidth = contentWidth + cellWidth;
+        }
+    })
+}
+
+function drawResultRank(data) {
+
+    let canvasSize = data['canvasSize'];
+    let selfData = data['selfData'];
+    let rankType = data['rankType'];
+    let itemCount  = data['count'];
+
+    wx.getFriendCloudStorage({
+        keyList : KEY_LIST,
+        success : function (res) {
+            console.log('drawFriendLevelRank.success =', JSON.stringify(res.data));
+            let rankList = [];
+            for (let i = 0; i < res.data.length; i++) {
+                let info = res.data[i];
+                let dicInfo = kv2dic(info['KVDataList']);
+                let rankData = {
+                    name: info['nickname'],
+                    avatar: info['avatarUrl'],
+                    userId: dicInfo['userId'],
+                    levelHighLv: parseInt(dicInfo['levelHighLv']),
+                    classicHighScore: parseInt(dicInfo['classicHighScore']),
+                    ball100HighScore: parseInt(dicInfo['ball100HighScore']),
+                };
+                rankList.push(rankData);
+            }
+            if(rankType === "level")
+            {
+                rankList.sort(function(a, b){
+                    return b.levelHighLv - a.levelHighLv;
+                });
+            }
+            else if(rankType === "classic")
+            {
+                rankList.sort(function(a, b){
+                    return b.classicHighScore - a.classicHighScore;
+                });
+            }
+            else
+            {
+                rankList.sort(function(a, b){
+                    return b.ball100HighScore - a.ball100HighScore;
+                });
+            }
+
+            drawCanvasResultRank(canvasSize, rankList, selfData, itemCount,rankType);
+        },
+        fail : function (res) {
+            console.log('drawFriendSegmentRank.fail =', JSON.stringify(res));
+        },
+    });
+}
 /**
  *  drawRank
  */
@@ -376,7 +548,8 @@ function drawGroupRank(data)
 let transformMap = {
     'upload' : upload,
     'drawFriendRank' : drawRank,
-    'drawGroupRank'  : drawGroupRank
+    'drawGroupRank'  : drawGroupRank,
+    'drawResultRank' : drawResultRank
 };
 
 wx.onMessage(function(data) {

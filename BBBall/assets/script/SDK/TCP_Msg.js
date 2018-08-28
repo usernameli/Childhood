@@ -230,5 +230,19 @@ cc.Class({
 
             this._sendCmd(params);
         },
+        useItemBall(itemId)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_USER,
+                'params': {
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'action' : cc.wwx.EventType.ACTION_USE_BALL_ITEM,
+                    'itemId' : parseInt(itemId),
+                }
+            };
+
+            this._sendCmd(params);
+        }
+
     }
 })

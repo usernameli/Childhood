@@ -3,20 +3,111 @@
   "_name": "DemolitionBomb",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 1,
+  "_duration": 1.1833333333333333,
   "sample": 60,
   "speed": 1,
   "wrapMode": 1,
   "curveData": {
     "comps": {
       "cc.Sprite": {
-        "spriteFrame": []
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "af554028-5426-453e-90b9-ecfb33b8a55b"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "0ab8757a-6f08-4864-ace9-d7aa62a48df2"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "b60d163b-9295-4660-8e28-e2c07214acb0"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "b60d163b-9295-4660-8e28-e2c07214acb0"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "1c01aa69-5c8d-4942-9db5-8172d22002a0"
+            }
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": {
+              "__uuid__": "1c01aa69-5c8d-4942-9db5-8172d22002a0"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "4f6b05e2-d9ed-4467-8ec3-8ecd1c59d423"
+            }
+          },
+          {
+            "frame": 0.5833333333333334,
+            "value": {
+              "__uuid__": "1b11b838-6c48-471b-939f-ae7a2c06dd05"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "1ca27414-73ad-4033-882f-8a4fc8c21cfa"
+            }
+          },
+          {
+            "frame": 0.75,
+            "value": {
+              "__uuid__": "ef36ac61-4a81-402f-9e41-5dca846c39b7"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "ef36ac61-4a81-402f-9e41-5dca846c39b7"
+            }
+          },
+          {
+            "frame": 0.9166666666666666,
+            "value": {
+              "__uuid__": "32e795c2-2823-42d3-8f2c-7b86af2ece80"
+            }
+          },
+          {
+            "frame": 1,
+            "value": {
+              "__uuid__": "674e07a9-1e90-4521-a962-cc4fd29965da"
+            }
+          },
+          {
+            "frame": 1.0833333333333333,
+            "value": {
+              "__uuid__": "0cc978b6-e0da-4b4b-a91c-08ad9181f422"
+            }
+          },
+          {
+            "frame": 1.1666666666666667,
+            "value": {
+              "__uuid__": "83f4e9f7-9c33-4412-b385-ee1cb72c4bdf"
+            }
+          }
+        ]
       }
     }
   },
   "events": [
     {
-      "frame": 1,
+      "frame": 1.1666666666666667,
       "func": "demolitionEndCallBack",
       "params": []
     }

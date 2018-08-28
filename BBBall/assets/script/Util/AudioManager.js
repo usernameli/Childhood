@@ -78,43 +78,43 @@ cc.Class({
 
         var volume = isBgMusic ? this.bgMusicVolume : this.effectMusicVolume;
 
-        if (CC_JSB) {
-            var context = cc.audioEngine.play(audioSource, loop, volume);
-            if (callback){
-                cc.audioEngine.setFinishCallback(context, function(){
-                    callback.call(this);
-                }.bind(this));
-            }
-            this.mAudioMap[audioSource] = context;
-            cc.wwx.OutPut.log('play audio effect : ' + audioSource);
-
-            return audioSource;
-        } else {
-            var context = wx.createInnerAudioContext();
-            context.autoplay = true;
-            context.loop = loop;
-            context.obeyMuteSwitch = true;
-            context.volume = volume;
-            if (callback) {
-                context.onEnded(function() {
-                    callback.call(this);
-                }.bind(this));
-            } else {
-                context.offEnded();
-            }
-
-            var audioPath = wxDownloader.REMOTE_SERVER_ROOT + audioSource;
-            if (audioSource && audioPath != wxDownloader.REMOTE_SERVER_ROOT && audioPath.endsWith('.mp3')) {
-                context.src = audioPath;
-                context.play();
-
-                this.mAudioMap[audioSource] = context;
-            }
-
-            cc.wwx.OutPut.log('play audio effect : ' + context.src);
-
-            return audioSource;
+        // if (CC_JSB) {
+        var context = cc.audioEngine.play(audioSource, loop, volume);
+        if (callback){
+            cc.audioEngine.setFinishCallback(context, function(){
+                callback.call(this);
+            }.bind(this));
         }
+        this.mAudioMap[audioSource] = context;
+        cc.wwx.OutPut.log('play audio effect : ' + audioSource);
+
+        return audioSource;
+        // } else {
+        //     var context = wx.createInnerAudioContext();
+        //     context.autoplay = true;
+        //     context.loop = loop;
+        //     context.obeyMuteSwitch = true;
+        //     context.volume = volume;
+        //     if (callback) {
+        //         context.onEnded(function() {
+        //             callback.call(this);
+        //         }.bind(this));
+        //     } else {
+        //         context.offEnded();
+        //     }
+        //
+        //     var audioPath = wxDownloader.REMOTE_SERVER_ROOT + audioSource;
+        //     if (audioSource && audioPath != wxDownloader.REMOTE_SERVER_ROOT && audioPath.endsWith('.mp3')) {
+        //         context.src = audioPath;
+        //         context.play();
+        //
+        //         this.mAudioMap[audioSource] = context;
+        //     }
+        //
+        //     cc.wwx.OutPut.log('play audio effect : ' + context.src);
+        //
+        //     return audioSource;
+        // }
     },
 
     save: function () {
@@ -188,29 +188,31 @@ cc.Class({
         }
     },
     onHide () {
-        if (CC_JSB) {
-            cc.audioEngine.pauseAll();
-        } else {
-            for (var key in this.mAudioMap) {
-                if (key === this.mMusicKey) {
-                    this.mAudioMap[key].pause();
-                } else {
-                    this.mAudioMap[key].stop();
-                }
-            }
-        }
+        cc.audioEngine.pauseAll();
+
+        // if (CC_JSB) {
+        // } else {
+        //     for (var key in this.mAudioMap) {
+        //         if (key === this.mMusicKey) {
+        //             this.mAudioMap[key].pause();
+        //         } else {
+        //             this.mAudioMap[key].stop();
+        //         }
+        //     }
+        // }
     },
 
     onShow () {
-        if (CC_JSB) {
-            cc.audioEngine.resumeAll();
-        } else {
-            if (!this.mMusicSwitch) return;
-            var context = this.mAudioMap[this.mMusicKey];
-            if (context) {
-                context.play();
-            }
-        }
+        cc.audioEngine.resumeAll();
+
+        // if (CC_JSB) {
+        // } else {
+        //     if (!this.mMusicSwitch) return;
+        //     var context = this.mAudioMap[this.mMusicKey];
+        //     if (context) {
+        //         context.play();
+        //     }
+        // }
     },
     playMusic : function(key, callback, loop) {
 
@@ -232,11 +234,13 @@ cc.Class({
         var context = this.mAudioMap[this.mMusicKey];
 
         if (typeof(context) != 'undefined') {
-            if (CC_JSB) {
-                cc.audioEngine.stop(context);
-            } else {
-                context.stop();
-            }
+            // if (CC_JSB) {
+            //     cc.audioEngine.stop(context);
+            // } else {
+            //     context.stop();
+            // }
+            cc.audioEngine.stop(context);
+
         }
     },
     // 炸弹、火箭爆炸音效

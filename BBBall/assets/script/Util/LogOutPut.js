@@ -27,7 +27,7 @@ cc.Class({
                 this.addLog(strLog);
             }
             if(cc.wwx.OUTPUT_LV & cc.wwx.OUTPUT_INFO){
-                let backLog = CC_WECHATGAME ? console.info : cc.info;
+                let backLog = CC_WECHATGAME ? console.info : cc.log;
                 // console.info('===================>>>[Start]');
                 if (CC_WECHATGAME) {
                     backLog.call(this, `【${cc.wwx.UserInfo.userId}】【info 】`, this.getDateString(), cc.js.formatStr.apply(cc,arguments));

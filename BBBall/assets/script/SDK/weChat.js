@@ -525,6 +525,35 @@ cc.Class({
             return true;
         },
         /**
+         *
+         */
+        drawResultFriendRank(canvasSize,rankType)
+        {
+            if (!CC_WECHATGAME) { return; }
+
+            let openDataContext = wx.getOpenDataContext();
+            let sharedCanvas = openDataContext.canvas;
+            sharedCanvas.width = canvasSize.width;
+            sharedCanvas.height = canvasSize.height;
+
+            openDataContext.postMessage({
+                method : 'drawResultRank',
+                data:{
+                    canvasSize: canvasSize,
+                    rankType:rankType,
+                    selfData: {
+                        levelHighStars  : cc.wwx.UserInfo.getHighLevelStars(),
+                        levelHighLv     : cc.wwx.UserInfo.gdata["levelHighLv"],
+                        userId      : cc.wwx.UserInfo.userId,
+                        classicHighScore    : cc.wwx.UserInfo.gdata["classicHighScore"],
+                        ball100HighScore      : cc.wwx.UserInfo.gdata["100ballHighScore"],
+                        name    : cc.wwx.UserInfo.userName,
+                        avatar  : cc.wwx.UserInfo.userPic,
+                    }
+                }
+            });
+        },
+        /**
          * 绘制好友关卡排行
          */
         drawFrienRank (canvasSize, count,rankType) {
@@ -692,6 +721,7 @@ cc.Class({
         openCustomerServiceConversation(object){
             if(CC_WECHATGAME && wx.openCustomerServiceConversation) {
                 object = object || {};
+                //客服消息
                 wx.openCustomerServiceConversation({
                     sessionFrom: object['sessionFrom'] || '',
                     showMessageCard: object['showMessageCard'] || true,

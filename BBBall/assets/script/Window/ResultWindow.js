@@ -19,7 +19,11 @@ cc.Class({
             default:[],
             type:cc.Node
         },
-        experienceLabel:{
+        experienceLabelSum:{
+            default:null,
+            type:cc.Label
+        },
+        experienceLabelOwn:{
             default:null,
             type:cc.Label
         },
@@ -43,6 +47,10 @@ cc.Class({
             default:null,
             type:cc.Label
         },
+        rankListLayOut:{
+            default:null,
+            type:cc.Node
+        },
         _gameResult:false,
 
     },
@@ -64,7 +72,8 @@ cc.Class({
         if(cc.wwx.UserInfo.playMode === "level")
         {
 
-            this.experienceLabel.string = gameData["curProgressValue"] + "/" + gameData['maxProgressValue'];
+            this.experienceLabelOwn.string = gameData["curProgressValue"] ;
+            this.experienceLabelSum.string = "/" + gameData['maxProgressValue'];
             this.experienceProgress.progress = gameData["curProgressValue"]/gameData['maxProgressValue']
             this.levelNode.active = true;
             this.tropNode.active = false;
@@ -74,7 +83,7 @@ cc.Class({
             {
                 this.topTitile.string = "闯关成功";
                 this.continueSprite.spriteFrame = this.continueSpriteFrame;
-                let star = gameData["levelHighStar"][0];
+                let star = gameData["levelHighStar"][cc.wwx.UserInfo.checkPointID - 1];
                 if(star === 1)
                 {
                     this.starNode[0].active = true;
@@ -98,7 +107,7 @@ cc.Class({
                     star1.active = false;
                     star2.active = false;
                 }
-                else
+                else if(star === 3)
                 {
                     this.starNode[0].active = true;
                     this.starNode[1].active = true;
@@ -137,6 +146,45 @@ cc.Class({
             this.tropNode.active = true;
             this.historyScoreLabel.string = "历史最佳:" +gameData['classicHighScore'];
 
+        }
+
+        if(CC_WECHATGAME)
+        {
+            this._createDisplay();
+            cc.wwx.WeChat.drawResultFriendRank(cc.size(550, 258),cc.wwx.UserInfo.playMode);
+        }
+
+    },
+    start()
+    {
+        this._super();
+        this.tex = new cc.Texture2D();
+    },
+    _createDisplay () {
+        this.scheduleOnce(function(){
+            let node = new cc.Node();
+            this.display = node.addComponent(cc.Sprite);
+            this.rankListLayOut.removeAllChildren(true);
+            this.rankListLayOut.addChild(node);
+        }, 1);
+    },
+    // 刷新开放数据域的纹理
+    _updateSubDomainCanvas () {
+
+        cc.wwx.OutPut.log('_updateSubDomainCanvas: width=' + this.display.node.width + ' height=' + this.display.node.height);
+        var openDataContext = wx.getOpenDataContext();
+        var sharedCanvas = openDataContext.canvas;
+        this.tex.initWithElement(sharedCanvas);
+        this.tex.handleLoadedTexture();
+        this.display.spriteFrame = new cc.SpriteFrame(this.tex);
+    },
+    update(dt)
+    {
+
+        if (CC_WECHATGAME && this.tex && this.display) {
+            this._updateSubDomainCanvas();
+
+            return;
         }
     },
     homeCallBack()

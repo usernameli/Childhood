@@ -2,8 +2,6 @@ cc.Class({
     extends:cc.Component,
     statics:{
 
-
-
         getLevelStarScore(level,ballNum)
         {
             if(level === 1)

@@ -2,6 +2,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        objArea:{
+            default:null,
+            type:cc.Node
+        }
         // label: {
         //     default: null,
         //     type: cc.Label
@@ -12,7 +16,9 @@ cc.Class({
     onLoad()
     {
 
-    }
+
+    },
+
 
 
 });

@@ -15,23 +15,13 @@ cc.Class({
 
     },
     onBeginContact(contact, self, other) {
-        let otherBody = other.body;
-        let linear = other.body.linearVelocity;
-        if(linear.y < 0)
-        {
-            return;
-        }
+
 
         let offsetId = Math.floor(Math.random() * 3+1);
         let offset = this._offset[offsetId - 1];
 
-        linear.normalizeSelf();
-
-        linear.addSelf(offset);
-        linear.normalizeSelf();
-
-        linear.mulSelf(cc.wwx.UserInfo.ballInfo.speed);
-        other.body.linearVelocity = linear;
+        offset.mulSelf(cc.wwx.UserInfo.ballInfo.speed);
+        other.body.linearVelocity = offset;
         this._isContactF = true;
 
     },

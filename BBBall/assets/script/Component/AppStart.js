@@ -231,6 +231,7 @@ window.initMgr = function() {
 
     cc.wwx.MapCheckPoint = require("../Util/MapCheckPointManager");
     cc.wwx.MapCheckPoint.initMapCheckPointBallInfo();
+    cc.wwx.MapPointScore = require("../CheckPoint/CheckPointScore");
 
 
     if (CC_WECHATGAME) {

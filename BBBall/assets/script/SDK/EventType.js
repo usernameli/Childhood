@@ -6,8 +6,10 @@ cc.Class({
         CMD_BIND_GAME: 'bind_game',
         CMD_USER_INFO: 'user_info',
         CMD_BAG: 'bag',
+        MSG_BAG: 'bag',
         CMD_USER: 'user',
         CMD_GAME_DATA: 'game_data',
+        MSG_GAME_DATA: 'game_data',
         CMD_UPDATE_NOTIFY: 'update_notify',
         CMD_HALL_SHARE3: 'hall_share3',
         CMD_HALL_SHARE2:'hall_share2',
@@ -84,17 +86,20 @@ cc.Class({
         ACTION_GET_INVITE_CONF: 'get_invite_conf',
         ACTION_INVITE_CONF: 'invite_conf',
         ACTION_QUERY: 'query',
+        ACTION_USE_BALL_ITEM:'use_ball_item',//使用球球
 
         ACTION_BALL_START_LINEARVELOCITY:'ball_start_linearvelocity', //球球线性运动
         ACTION_BALL_STOP_LINEARVELOCITY:'action_ball_stop_linearvelocity',//球球线性运动停止
         ACTION_BALL_MOVE_DROP:'action_ball_move_drop',
         ACTION_BALL_ADD_BALLS:'action_ball_add_balls',
         ACTION_BALL_DEMOLITION_BOMB:'action_ball_demolition_bomb', //道具爆炸效果
+        ACTION_BALL_GUIDE_ANIMATION:'action_ball_guide_animation', //新手引导动画
         ACTION_BALL_ITEM_ADD_BALL:'action_ball_item_add_ball', //道具添加球球效果
         ACTION_BALL_OBJ_BOMB:'action_ball_obj_bomb', //方块爆炸效果
         ACTION_BALL_ELIMINATE:'action_ball_eliminate', //消除行或者列
         ACTION_BALL_OBJ_BOMB_END:'action_ball_obj_bomb_end', //方块爆炸效果
         ACTION_BALL_DEMOLITION_BOMB_END:'action_ball_demolition_bomb_end', //道具爆炸效果
+        ACTION_BALL_GUIDE_ANIMATION_END:'action_ball_guide_animation_end', //新手引导结束
         ACTION_OBJ_BREAK:'action_obj_break', //方块碰碎了
         ACTION_BALL_SPORTS:'action_ball_sports', //球球开始运动了
         ACTION_BALL_TOUCHBOTTOM:'action_ball_touchbottom', //球球到了最底层

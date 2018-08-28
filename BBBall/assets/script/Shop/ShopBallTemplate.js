@@ -26,5 +26,10 @@ cc.Class({
 
 
     },
+    reloadData()
+    {
+        this["item0"].getComponent('ShopBallItem').reloadData();
+        this["item1"].getComponent('ShopBallItem').reloadData();
+    },
 
 });

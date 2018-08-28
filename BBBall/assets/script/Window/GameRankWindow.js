@@ -55,9 +55,9 @@ cc.Class({
         this._super();
         this.clickTabChange(1);
         this.worldButton.interactable = false;
-        this.worldLine.active = false;
+        this.worldLine.active = true;
         this.friendButton.interactable = true;
-        this.friendLine.active = true;
+        this.friendLine.active = false;
         cc.wwx.OutPut.log(this._tag,"mFriendRankList: ",JSON.stringify(cc.wwx.UserInfo.mFriendRankList))
     },
     clickTabChange(index)
@@ -131,8 +131,8 @@ cc.Class({
         this.ownTemplate.active = true;
         this.worldButton.interactable = false;
         this.friendButton.interactable = true;
-        this.worldLine.active = false;
-        this.friendLine.active = true;
+        this.worldLine.active = true;
+        this.friendLine.active = false;
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RANK_WORLD);
     },
     friendRankCallBack()
@@ -147,8 +147,8 @@ cc.Class({
 
         this.worldButton.interactable = true;
         this.friendButton.interactable = false;
-        this.worldLine.active = true;
-        this.friendLine.active = false;
+        this.worldLine.active = false;
+        this.friendLine.active = true;
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RANK_FRINED);
 
     },

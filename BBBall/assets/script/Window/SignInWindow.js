@@ -135,6 +135,7 @@ cc.Class({
     signInCallBack()
     {
         cc.wwx.TCPMSG.daily_checkin();
+        this.closeWindow()
     },
     onDestroy()
     {

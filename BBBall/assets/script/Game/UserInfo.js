@@ -43,6 +43,7 @@ cc.Class({
         mFriendRankList:[],
         mIssue:null,
         currentSocre:0,
+        currentStar:0,
         playMode:"checkPoint",  //默认关卡类型 checkPoint:关卡 classic:经典模式 ball100:百球模式
         SDKVersion:'',
         parseUdata: function (userInfoResult) {
@@ -116,6 +117,65 @@ cc.Class({
                     this.bagData.diamondCount = 0;
                 }
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_UPDATE_DIAMOND);
+            }
+        },
+        findBagUseBall()
+        {
+            let useId = 1016;
+            for(let i = 0; i < this.bagData.m_normalItemList.length;i++)
+            {
+                if(this.bagData.m_normalItemList[i]["canUse"])
+                {
+                    useId = this.bagData.m_normalItemList[i]["id"];
+                    break;
+                }
+            }
+            return useId;
+        },
+        getBagItemNum(itemId)
+        {
+            let num = 0;
+            for(let i = 0; i < this.bagData.m_normalItemList.length;i++)
+            {
+                if(itemId == this.bagData.m_normalItemList[i]["id"])
+                {
+                    num = this.bagData.m_normalItemList[i]["num"];
+                    break;
+                }
+            }
+
+            return parseInt(num);
+        },
+        findBagItem(itemId)
+        {
+
+            let findIndex = -1;
+            for(let i = 0; i < this.bagData.m_normalItemList.length;i++)
+            {
+                if(itemId == this.bagData.m_normalItemList[i]["id"])
+                {
+                    findIndex = i;
+                    break;
+                }
+            }
+            if(findIndex > -1)
+            {
+                return this.bagData.m_normalItemList[findIndex];
+            }
+
+            return null;
+        },
+        parseGender(gender){
+            switch(gender){
+                case 0:
+                    this.gender = 2;
+                    break;
+                case 1:
+                    this.gender = 0;
+                    break;
+                case 2:
+                    this.gender = 1;
+                    break;
             }
         },
 

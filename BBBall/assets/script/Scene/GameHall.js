@@ -47,6 +47,11 @@ cc.Class({
             default:null,
             type:cc.Label
         },
+        // 按钮点击
+        audioBg:{
+            default:null,
+            type:cc.AudioClip
+        },
         _openCheckIn:false,
         _tag:"GameHall"
 
@@ -58,7 +63,7 @@ cc.Class({
             initMgr();
         }
 
-        cc.wwx.AudioManager.playMusicGame();
+        cc.wwx.AudioManager.playMusic(this.audioBg);
         this._openCheckIn = false;
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
 
@@ -72,7 +77,7 @@ cc.Class({
     {
         // 获取玩家微信信息
         if (CC_WECHATGAME && !cc.wwx.UserInfo.wxAuthor) {
-            cc.wwx.SDKLogin.wxUserInfo1();
+            // cc.wwx.SDKLogin.wxUserInfo1();
         }
 
         cc.wwx.Loader.loadImg(cc.wwx.UserInfo.userPic, this.headIcon);

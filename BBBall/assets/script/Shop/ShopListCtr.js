@@ -31,7 +31,7 @@ cc.Class({
         }
         else if(this.itemTemplateName === "ShopBallTemplate")
         {
-            this.totalCount = cc.wwx.PayModel.mExchangeList.length;
+            this.totalCount = Math.ceil(cc.wwx.PayModel.mExchangeList.length / 2);
 
         }
         else if(this.itemTemplateName === "InvateTemplate")
@@ -44,8 +44,24 @@ cc.Class({
         // 设定缓冲矩形的大小为实际创建项的高度累加，当某项超出缓冲矩形时，则更新该项的显示内容
         this.bufferZone = this.spawnCount * (this.itemTemplate.height + this.spacing) / 2;
 
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
+
+
         this.initialize();
 
+    },
+    onDestroy()
+    {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
+
+    },
+    gameBagData()
+    {
+        if(this.itemTemplateName === "ShopBallTemplate")
+        {
+            this.reloadData();
+
+        }
     },
     // 列表初始化
     initialize: function () {
@@ -59,6 +75,13 @@ cc.Class({
             item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
             item.getComponent(this.itemTemplateName).updateItem(i + 1);
             this.items.push(item);
+        }
+    },
+    reloadData()
+    {
+        for (let i = 0; i < this.items.length; ++i) { // spawn items, we only need to do this once
+            // 设置该item的坐标（注意父节点content的Anchor坐标是(0.5, 1)，所以item的y坐标总是负值）
+            this.items[i].getComponent(this.itemTemplateName).reloadData();
         }
     },
     scrollToFixedPosition: function () {

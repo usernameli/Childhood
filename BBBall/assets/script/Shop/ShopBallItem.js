@@ -41,7 +41,10 @@ cc.Class({
         this._ballList = cc.wwx.PayModel.mExchangeList;
         this._ballItemList = null;
     },
-
+    reloadData()
+    {
+        this.updateItem(this.itemID);
+    },
     updateItem(itemID)
     {
         this.isOwn.active = false;
@@ -53,7 +56,9 @@ cc.Class({
 
         this.itemID = itemID;
         let list = this._ballList[itemID - 1];
-
+        //{"id":"PD101_BALL_10_STAR","name":"星星（大）","nameurl":"","price":"0",
+        // "priceurl":"","desc":"星星（大）","discount":[],"pic":"","tag":"","buy_type":"exchange",
+        // "price_diamond":"300","content":[{"itemId":"item:1025","count":1}]}
         if(list)
         {
             this.node.active = true;
@@ -66,6 +71,37 @@ cc.Class({
             cc.wwx.Util.loadResAtlas("images/Ball",function (err,atlas) {
                 self.ballSpriteFrame.spriteFrame = atlas.getSpriteFrame(spriteFrame);
             });
+
+            let itemInfo = cc.wwx.UserInfo.findBagItem(list["content"][0]["itemId"].split(":")[1]);
+            this.isOwn.active = false;
+            this.isUsed.active = false;
+
+            if(itemInfo)
+            {
+                this.isUnOwnBTN.active = false;
+                this.isUsedOwnBTN.active = true;
+                this.isUsed.active = false;
+                this.isOwn.active = true;
+
+                if(itemInfo["canUse"])
+                {
+                    this.isUsedOwnLabel.string = "使用中";
+                    this.isUsed.active = true;
+                    this.isOwn.active = false;
+
+                }
+                else
+                {
+                    this.isUsedOwnLabel.string = "未使用";
+
+                }
+
+            }
+            else
+            {
+                this.isUnOwnBTN.active = true;
+                this.isUsedOwnBTN.active = false;
+            }
         }
         else
         {
@@ -81,7 +117,6 @@ cc.Class({
         {
             //砖石不够
             cc.wwx.TipManager.showMsg('您的钻石不足', 3);
-
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_CHANGE_TAB_SHOP,{index:1});
         }
         else
@@ -97,7 +132,7 @@ cc.Class({
     },
     isOwnCallBack()
     {
-
+        cc.wwx.TCPMSG.useItemBall(this._ballItemList["content"][0]["itemId"].split(":")[1]);
     },
     update()
     {

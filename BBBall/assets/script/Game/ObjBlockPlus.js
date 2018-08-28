@@ -115,7 +115,8 @@ cc.Class({
                 let seq = cc.sequence(spawn,cc.callFunc(function () {
                     //增加球球数量
                     cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,{plusNum: self._plusNum});
-                    self.destroy();
+                    self.node.destroy();
+
                 }));
                 this.node.runAction(seq);
             }

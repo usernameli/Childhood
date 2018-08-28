@@ -47,7 +47,7 @@ cc.Class({
         },
 
         trigger: function (eventName, params) {
-            // cc.wwx.OutPut.log("NotificationCenter","trigger",eventName)
+            cc.wwx.OutPut.log("NotificationCenter","trigger",eventName)
             var fns = this.events[eventName];
             if (!fns) {
                 return;

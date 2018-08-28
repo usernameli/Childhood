@@ -14,6 +14,7 @@ cc.Class({
             default:null,
             type:cc.Prefab
         },
+        _usePrefabBall:null,
         _tag:"DattleLineManager",
         _ctx:null,//Graphics
         isBallSporting:false, //球开始射出
@@ -23,34 +24,24 @@ cc.Class({
         _ballList:[], //球保存的数组里面
         _colliderMaxPoint:0,
         _colliderPoint:0,
+        _userBallId:0,
         ballOnWallNum:0, //回到地面的球的数量
     },
 
     // use this for initialization
     onLoad: function () {
-        this.remainLength = 1000;
-        this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
-        this._colliderMaxPoint = 2;
-        this._colliderPoint = 0;
-        this._ballList = [];
-        this.isBallSporting = false;
-        this.isFirstBallCome = false;
+
         this._ctx = this.getComponent(cc.Graphics);
 
-        cc.wwx.OutPut.log('onLoad:', 'width', this.node.width);
-        cc.wwx.OutPut.log('onLoad:', 'height', this.node.height);
-        this.center = cc.v2(this.node.width/ 2, cc.wwx.UserInfo.ballInfo.ballPosY);
-
+        this.gameInit();
         this.node.on(cc.Node.EventType.TOUCH_START, this._touchStartCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this._touchMoveCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_END, this._touchEndCallBack, this);
         this.node.on(cc.Node.EventType.TOUCH_CANCEL, this._touchCancelCallBack, this);
 
-
-
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
-
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
 
         let physicsManager = cc.director.getPhysicsManager();
         physicsManager.enabled = true;
@@ -60,7 +51,6 @@ cc.Class({
         // ;
         let width   =  this.node.width;
         let height  =  this.node.height;
-
         let node = new cc.Node();
         node.group = "wall";
         let body = node.addComponent(cc.RigidBody);
@@ -72,16 +62,43 @@ cc.Class({
         this._addBound(node, width, height / 2, 1, height,4);//右面
 
         node.parent = this.node;
-
-
         this._createBall(this.ballMaxNum,0);
 
+    },
+    gameRestart()
+    {
+        for(var i = 0; i < this._ballList.length;i++)
+        {
+            this._ballList[i].destroy();
+        }
+        this._ballList = [];
+        this.gameInit();
+        this._createBall(this.ballMaxNum,0);
 
     },
-    onDestroy()
+    gameInit()
     {
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
+        this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
+        this._ballList = [];
+        this.isBallSporting = false;
+        this.isFirstBallCome = false;
+
+        cc.wwx.OutPut.log('onLoad:', 'width', this.node.width);
+        cc.wwx.OutPut.log('onLoad:', 'height', this.node.height);
+        this._userBallId = cc.wwx.UserInfo.findBagUseBall();
+        if(this._userBallId <= 1021)
+        {
+            this._usePrefabBall = this.ballPrefab[0];
+        }
+        else
+        {
+            this._usePrefabBall = this.ballPrefab[1];
+            cc.wwx.UserInfo.ballInfo.ballPosY = 20
+
+        }
+
+        this.center = cc.v2(this.node.width/ 2, cc.wwx.UserInfo.ballInfo.ballPosY);
+
     },
     _addBound (node, x, y, width, height,tag) {
         let collider = node.addComponent(cc.PhysicsBoxCollider);
@@ -90,6 +107,12 @@ cc.Class({
         collider.offset.y = y;
         collider.size.width = width;
         collider.size.height = height;
+    },
+    onDestroy()
+    {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
     },
     itemAddBallsCallBack()
     {
@@ -121,14 +144,17 @@ cc.Class({
     },
     _createBall:function(ballNum,index)
     {
+
         for(let i = 0; i < ballNum;i++)
         {
-            let ballPrefab = cc.instantiate(this.ballPrefab[0]);
+            let ballPrefab = cc.instantiate(this._usePrefabBall);
             this.node.addChild(ballPrefab);
             let component = ballPrefab.getComponent('Ball');
             component._index = index + i + 1;
             ballPrefab.setPosition(this.center);
             ballPrefab.getComponent('Ball').dottedLineManager = this;
+            ballPrefab.getComponent('Ball').setBallID(this._userBallId);
+
             this._ballList.push(ballPrefab);
         }
         this.setBallNumTextPosition(this.ballMaxNum);
@@ -179,6 +205,9 @@ cc.Class({
 
 
         let touchPoint = cc.v2(touchP);
+        cc.wwx.OutPut.log("_drawDottleLine touchPoint : ",JSON.stringify(touchPoint));
+        cc.wwx.OutPut.log("_drawDottleLine this.center : ",JSON.stringify(this.center));
+
         if(touchPoint.y <= this.center.y)
         {
             return;
@@ -218,7 +247,6 @@ cc.Class({
 
         }
 
-
         if (result) {
             p2 = result.point;
             if(p2.y > 923)
@@ -234,6 +262,7 @@ cc.Class({
             return;
         }
 
+        cc.wwx.OutPut.log("p2: ",p2);
         this.drawLine(p1,p2,true);
         let normal = result.normal;
         if(normal.y === 0)
