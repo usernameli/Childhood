@@ -58,6 +58,8 @@ cc.Class({
                     cc.wwx.OutPut.warn('testLogin onSuccess:' + JSON.stringify(checkData.result));
                     if (!checkData || !checkData.result || checkData.result.code !== 0) {
                         cc.wwx.OutPut.warn('testLogin onSuccess no data, retry!');
+
+                        cc.wwx.TipManager.showMsg(checkData.result.info,2);
                         cc.wwx.Storage.setItem(self.SESSION_KEY, '');
                         // 失败
                         setTimeout(function () {
@@ -202,10 +204,10 @@ cc.Class({
                         // 用户已授权
                         getUserInfo();
                     }
-                    // else
-                    // {
-                    //     self.wxUserInfo2({setting:true})
-                    // }
+                    else
+                    {
+                        self.wxUserInfo2({setting:true})
+                    }
                 }
             });
 
@@ -414,7 +416,7 @@ cc.Class({
             let token = result.token;
             cc.wwx.OutPut.log("updateUserInfo", 'token:' + token);
 
-            cc.wwx.WeChat.guideStatistical();
+            cc.wwx.WeChat.guideStatisticalball();
             cc.wwx.UserInfo.wxEnterInfo = null;
             cc.wwx.Storage.setItem(this.SESSION_KEY,token)
 

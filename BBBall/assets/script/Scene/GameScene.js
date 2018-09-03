@@ -63,20 +63,32 @@ cc.Class({
         _tag:"gameScene",
         _score:0,
         _sumScore:0,
+        _ballSporting:false,
     },
     onLoad()
     {
 
-        this._score = 0;
 
-        cc.wwx.AudioManager.playGameStart();
-
+        this.init();
+        this._ballSporting = false;
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB_END,this.demolitionBombEnd,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GUIDE_ANIMATION_END,this.guideAnimationEnd,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_SPORTS,this.ballSports,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_OBJ_BREAK,this.ballBomb,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
 
+    },
+    gameRestart()
+    {
+
+        this.init();
+    },
+    init()
+    {
+        this._score = 0;
+        this._sumScore = 0;
+        cc.wwx.AudioManager.playGameStart();
     },
     start()
     {
@@ -145,6 +157,7 @@ cc.Class({
     {
         cc.wwx.OutPut.log(this._tag,"onDestroy");
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB_END,this.demolitionBombEnd,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
 
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_SPORTS,this.ballSports,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_OBJ_BREAK,this.ballBomb,this);
@@ -185,12 +198,14 @@ cc.Class({
         this._score = 10;
         this.itemNode.active = false;
         this.recoveryBTN.active = true;
-
+        this._ballSporting = true;
     },
     ballStopAction()
     {
         this.itemNode.active = true;
         this.recoveryBTN.active = false;
+        this._ballSporting = false;
+
 
     },
     objBombBegin()
@@ -276,19 +291,31 @@ cc.Class({
     {
         cc.wwx.AudioManager.playAudioButton();
         //商城界面
-        cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop","ShopWindow");
+        if(this._ballSporting === false)
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/shop/Shop","ShopWindow");
+
+        }
 
     },
     clickStopCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
-        cc.wwx.PopWindowManager.popWindow("prefab/GameStopWindow","GameStopWindow");
+        if(this._ballSporting === false)
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/GameStopWindow","GameStopWindow");
+
+        }
     },
     clickHelpCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
         //技能帮助
-        cc.wwx.PopWindowManager.popWindow("prefab/HelpWindow","HelpWindow");
+        if(this._ballSporting === false)
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/HelpWindow","HelpWindow");
+
+        }
     },
     yellowGunCallBack()
     {

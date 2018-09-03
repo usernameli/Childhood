@@ -26,11 +26,16 @@ cc.Class({
         self.timerLabel.string = "10";
         self.timerProgressRed.fillRange = 1;
         cc.wwx.Timer.setTimer(this,this._timerCallBack,1,9,0);
+        cc.wwx.Timer.setTimer(this,this._timerCallBack1,0.01,999,0);
+    },
+    _timerCallBack1()
+    {
+        this.timerProgressRed.fillRange -= 0.001;
+
     },
     _timerCallBack()
     {
         this.timerNum -= 1;
-        this.timerProgressRed.fillRange = (this.timerNum / 10);
         this.timerLabel.string = this.timerNum.toString();
     },
     onDestroy()

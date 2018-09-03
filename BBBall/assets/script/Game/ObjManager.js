@@ -77,16 +77,19 @@ cc.Class({
         _currentRowJ:-1,
         _tag:"ObjManager",
         _gameOver:true,
+        _gameOverState:false,
         _pointCheckList:null,//关卡数据
     },
     onLoad()
     {
 
+        this._gameOverState = false;
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_USER_INFO,this.gameUserInfo,this);
 
     },
 
@@ -98,6 +101,7 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS,this.aLineOfExplosions,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE,this.randomPlacement4Eliminate,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_USER_INFO,this.gameUserInfo,this);
 
     },
 
@@ -105,6 +109,8 @@ cc.Class({
     {
         cc.wwx.UserInfo.currentSocre = 0;
         cc.wwx.UserInfo.currentStar = 0;
+        this._gameOverState = false;
+
         this._emptyGrid = [];
         if(cc.wwx.UserInfo.playMode === "level")
         {
@@ -582,26 +588,40 @@ cc.Class({
 
 
     },
+    gameUserInfo()
+    {
+        if(this._gameOverState)
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:true});
+
+        }
+        else
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow","ResultFirstWindow");
+
+        }
+    },
     _gameIsSucess()
     {
         //上报分数
+        this._gameOverState = true;
 
         cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
             cc.wwx.UserInfo.currentSocre,
             cc.wwx.UserInfo.checkPointID,1,cc.wwx.UserInfo.currentStar);
-        cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:true});
 
     },
     _gameIsOver()
     {
         //上报分数
+        this._gameOverState = false;
+
         cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
             cc.wwx.UserInfo.currentSocre,
             cc.wwx.UserInfo.checkPointID,0,cc.wwx.UserInfo.currentStar);
 
-        cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow","ResultFirstWindow");
     },
     _judgeArrayValue:function (dataList) {
         let isFg = false;

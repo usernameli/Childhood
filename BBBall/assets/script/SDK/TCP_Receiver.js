@@ -66,6 +66,8 @@ cc.Class({
                 if(parseInt(params["result"]["code"]) === 1)
                 {
                     cc.wwx.TipManager.showMsg('使用成功',1);
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_USE_BALL_ITEM);
+
                 }
             }
         },

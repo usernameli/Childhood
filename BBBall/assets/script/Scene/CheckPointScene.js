@@ -21,6 +21,11 @@ cc.Class({
             sumStar += levelHighStar[i];
         }
         this.sumStarNum.string = sumStar;
+
+
+        cc.director.preloadScene("GameScene", function () {
+            cc.log("Next GameScene scene preloaded");
+        });
     },
     clickGoHome()
     {

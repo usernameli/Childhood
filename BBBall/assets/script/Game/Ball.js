@@ -37,9 +37,9 @@ cc.Class({
     setBallID(id)
     {
         this._ballId = id;
-        if(id >= 1025)
+        if(id > 1021)
         {
-            this.node.getComponent("cc.Sprite").spriteFrame = this.ballSpriteFrame[this._ballId - 1025];
+            this.node.getComponent("cc.Sprite").spriteFrame = this.ballSpriteFrame[this._ballId - 1022];
 
         }
         else

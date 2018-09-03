@@ -21,7 +21,7 @@ cc.Class({
                     /**
                      * 导量统计
                      */
-                    self.guideStatistical();
+                    self.guideStatisticalball();
 
                 } catch (e) {
                     cc.wwx.OutPut.err('Init.err.2 :' + JSON.stringify(e));
@@ -141,7 +141,7 @@ cc.Class({
          * @param result
          * @private
          */
-        guideStatistical:function(){
+        guideStatisticalball(){
             var result = cc.wwx.UserInfo.wxEnterInfo;
             if (!result) return;
 

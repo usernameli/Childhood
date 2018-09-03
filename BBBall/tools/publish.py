@@ -7,6 +7,7 @@ import shutil
 import commands
 from optparse import OptionParser
 import re
+import atlas
 
 PROJ_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
 OUTPUT_PATH = os.path.join(PROJ_PATH, 'tools', 'confused')
@@ -23,13 +24,13 @@ pngquant_path = os.path.join(PROJ_PATH, 'tools/pngquant')
 
 origin_assets_to_build = [
     # 'resources/images/wechat'
-    # 'resources/images/share'
+    'resources/images/share'
 ]
 origin_assets_to_backup = [
-    'sounds'
+    'resources/sounds'
 ]
 
-cdn_url = "http://df.dl.huanyueqp.com/ball"
+cdn_url = "http://xdev.ks.shpuchi.com:9002/ball"
 odc_src = os.path.join(PROJ_PATH, 'odc')
 odc_target = os.path.join(build_dir, 'src')
 
@@ -78,13 +79,6 @@ def compress_json(target_file):
 
         with open(target_file, 'w') as wf:
             json.dump(json_info, wf)
-
-    with open(target_file, 'r') as rf:
-        content = ''
-        for line in rf:
-            content = content + line.replace(" ","").replace("\t","").strip()
-        with open(target_file, 'w') as wf:
-            wf.write(content)
 
 
 def compress_project_json():
@@ -153,12 +147,17 @@ def compress_png():
             split_path = os.path.splitext(file)
             basename = split_path[0]
             extname = split_path[1]
+            print "++++++++++++++++++++"
+            print basename
+            print extname
             if (basename[-4:] != '-fs8' and extname == '.png'):
                 png_path = os.path.join(root, file)
+                print png_path
                 tinypng_path = os.path.join(root, split_path[0] + '-fs8' + extname)
-
+                print tinypng_path
                 # execute
                 cmd = pngquant_path + ' -f ' + png_path
+                print cmd
                 commands.getstatusoutput(cmd)
 
                 # rm
@@ -240,17 +239,47 @@ def confuse():
         shutil.copyfile(os.path.join(OUTPUT_PATH, JSName), destJS)
         print destJS + ' confuse success'
 
+
+def filterBySize():
+    backup_root = os.path.join(backup_dir2,'res/import')
+    original_root = os.path.join(build_dir,'res/import')
+    for parent,dirs,files in os.walk(backup_root):
+        for file in files :
+            file_path = os.path.join(parent,file)
+            type=os.path.splitext(file_path)[1]
+            size=os.path.getsize(file_path)
+
+            catalog = parent.split(backup_root+'/')[1]
+            original_parent = os.path.join(original_root,catalog)
+            original_path = os.path.join(original_parent,file)
+
+            if type == '.json' and size >= 50*1000:
+                print '>>>>>>>>>> %s   type=%s   size=%f' % (file_path,type,size)
+                if os.path.isdir(parent) and not os.path.exists(original_parent) :
+                    os.makedirs(original_parent)
+                
+                shutil.move(file_path,original_path)
+                continue
+
+
 if __name__ == '__main__':
     parser = OptionParser()
     parser.set_defaults(release=True)
     parser.set_defaults(cdn=cdn_url)
     parser.set_defaults(tiny=False)
     parser.set_defaults(build=False)
+    parser.set_defaults(pack=False)
     parser.add_option('-d', '--debug', action="store_false", dest='release', help=u'保留本地raw-assets目录')
     parser.add_option('-c', '--cdn', type="string", dest='cdn', help=u'指定cdn地址')
     parser.add_option('-t', '--tiny', action="store_true", dest='tiny', help=u'使用pngquant压缩')
     parser.add_option('-b', '--build', action="store_true", dest='build', help=u'构建项目，等同于在编辑器中执行构建')
+    parser.add_option('-p', '--pack', action="store_true", dest='pack', help=u'是否创建自动图集将散图打包成大图')
     (options, args) = parser.parse_args()
+
+    # if options.pack:
+    #     atlas.create()
+    # else:
+    #     atlas.delete()
 
     if options.build:
         build()
@@ -263,5 +292,7 @@ if __name__ == '__main__':
     # if options.release:
         # confuse()
 
-    if options.tiny:
-        compress_png()
+    #if options.tiny:
+    #    compress_png()
+
+    filterBySize()

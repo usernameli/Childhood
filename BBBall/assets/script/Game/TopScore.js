@@ -40,7 +40,8 @@ cc.Class({
         unStarSpriteFrame:{
             default:null,
             type:cc.SpriteFrame
-        }
+        },
+        _objNum:0,
     },
     onLoad()
     {
@@ -54,6 +55,25 @@ cc.Class({
     },
     _init()
     {
+        this._objNum = 0;
+        if(cc.wwx.UserInfo.playMode === "level")
+        {
+            let pointCheckData = cc.wwx.UserInfo.checkPointData;
+            let hallAhall = pointCheckData.length / 2;
+            for(let i = hallAhall - 1; i >= 0;i--)
+            {
+                let list = pointCheckData[i];
+                for(let k = 0; k < list.length;k++)
+                {
+                    if(list[k] > 0)
+                    {
+                        this._objNum += 1;
+                    }
+                }
+
+            }
+        }
+
         cc.wwx.UserInfo.currentSocre = 0;
 
         let gameData = cc.wwx.UserInfo.gdata;
@@ -102,27 +122,29 @@ cc.Class({
         this.levelScoreLabel.string = params['updateScore'];
         cc.wwx.UserInfo.currentSocre = params['updateScore'];
 
-
-        let levelStarScore = cc.wwx.MapPointScore.getLevelStarScore(cc.wwx.UserInfo.checkPointID,cc.wwx.UserInfo.ballInfo.ballNum);
-        this.starProgress.progress = cc.wwx.UserInfo.currentSocre / levelStarScore;
-        if(cc.wwx.UserInfo.currentSocre > 0)
+        if(cc.wwx.UserInfo.playMode === "level")
         {
-            this.starSprite[0].spriteFrame = this.starSpriteFrame;
-            cc.wwx.UserInfo.currentStar = 1
-        }
-        if(cc.wwx.UserInfo.currentSocre >= levelStarScore * 0.7)
-        {
-            this.starSprite[1].spriteFrame = this.starSpriteFrame;
-            cc.wwx.UserInfo.currentStar = 2
+            let levelStarScore = cc.wwx.MapPointScore.getLevelStarScore(cc.wwx.UserInfo.checkPointID,cc.wwx.UserInfo.ballInfo.ballNum,this._objNum);
+            this.starProgress.progress = cc.wwx.UserInfo.currentSocre / levelStarScore;
+            if(cc.wwx.UserInfo.currentSocre > 0)
+            {
+                this.starSprite[0].spriteFrame = this.starSpriteFrame;
+                cc.wwx.UserInfo.currentStar = 1
+            }
+            if(cc.wwx.UserInfo.currentSocre >= levelStarScore * 0.7)
+            {
+                this.starSprite[1].spriteFrame = this.starSpriteFrame;
+                cc.wwx.UserInfo.currentStar = 2
 
-        }
-        if(cc.wwx.UserInfo.currentSocre >= levelStarScore)
-        {
-            this.starSprite[2].spriteFrame = this.starSpriteFrame;
-            cc.wwx.UserInfo.currentStar = 3
+            }
+            if(cc.wwx.UserInfo.currentSocre >= levelStarScore)
+            {
+                this.starSprite[2].spriteFrame = this.starSpriteFrame;
+                cc.wwx.UserInfo.currentStar = 3
 
-
+            }
         }
+
 
     },
 })

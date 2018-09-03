@@ -5,6 +5,7 @@ cc.Class({
         CMD_BIND_USER: 'bind_user',
         CMD_BIND_GAME: 'bind_game',
         CMD_USER_INFO: 'user_info',
+        MSG_USER_INFO: 'user_info',
         CMD_BAG: 'bag',
         MSG_BAG: 'bag',
         CMD_USER: 'user',

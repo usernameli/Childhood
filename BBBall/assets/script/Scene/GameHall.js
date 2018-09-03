@@ -77,7 +77,7 @@ cc.Class({
     {
         // 获取玩家微信信息
         if (CC_WECHATGAME && !cc.wwx.UserInfo.wxAuthor) {
-            // cc.wwx.SDKLogin.wxUserInfo1();
+            cc.wwx.SDKLogin.wxUserInfo1();
         }
 
         cc.wwx.Loader.loadImg(cc.wwx.UserInfo.userPic, this.headIcon);
@@ -98,6 +98,11 @@ cc.Class({
             this.soundBtnSprite.spriteFrame = this.soundOffSpriteFrame;
 
         }
+
+
+        cc.director.preloadScene("GameScene", function () {
+            cc.log("Next GameScene scene preloaded");
+        });
     },
     onDestroy()
     {

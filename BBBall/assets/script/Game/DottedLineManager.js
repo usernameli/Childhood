@@ -25,6 +25,7 @@ cc.Class({
         _colliderMaxPoint:0,
         _colliderPoint:0,
         _userBallId:0,
+        _isUseBallChange:false,
         ballOnWallNum:0, //回到地面的球的数量
     },
 
@@ -32,6 +33,7 @@ cc.Class({
     onLoad: function () {
 
         this._ctx = this.getComponent(cc.Graphics);
+        this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
 
         this.gameInit();
         this.node.on(cc.Node.EventType.TOUCH_START, this._touchStartCallBack, this);
@@ -42,6 +44,8 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_USE_BALL_ITEM,this.useBallItem,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
 
         let physicsManager = cc.director.getPhysicsManager();
         physicsManager.enabled = true;
@@ -76,13 +80,41 @@ cc.Class({
         this._createBall(this.ballMaxNum,0);
 
     },
+    gameBagData()
+    {
+        if(this._isUseBallChange)
+        {
+            for(var i = 0; i < this._ballList.length;i++)
+            {
+                this._ballList[i].destroy();
+            }
+            this._ballList = [];
+            this._userBallId = cc.wwx.UserInfo.findBagUseBall();
+            if(this._userBallId <= 1021)
+            {
+                this._usePrefabBall = this.ballPrefab[0];
+            }
+            else
+            {
+                this._usePrefabBall = this.ballPrefab[1];
+                cc.wwx.UserInfo.ballInfo.ballPosY = 20
+
+            }
+            this._createBall(this.ballMaxNum,0);
+        }
+    },
+    useBallItem()
+    {
+        this._isUseBallChange = true;
+
+
+    },
     gameInit()
     {
-        this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
         this._ballList = [];
         this.isBallSporting = false;
         this.isFirstBallCome = false;
-
+        this._isUseBallChange = false;
         cc.wwx.OutPut.log('onLoad:', 'width', this.node.width);
         cc.wwx.OutPut.log('onLoad:', 'height', this.node.height);
         this._userBallId = cc.wwx.UserInfo.findBagUseBall();
@@ -97,6 +129,7 @@ cc.Class({
 
         }
 
+
         this.center = cc.v2(this.node.width/ 2, cc.wwx.UserInfo.ballInfo.ballPosY);
 
     },
@@ -110,6 +143,9 @@ cc.Class({
     },
     onDestroy()
     {
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
+
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_USE_BALL_ITEM,this.useBallItem,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
