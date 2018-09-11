@@ -26,7 +26,6 @@ cc.Class({
         MSG_SERVER_MESSAGE: 'server_message',
         MSG_TO_HIDE:'msg_to_hide',//进入后台
         MSG_TO_SHOW:'msg_to_show',//进入后台
-
         CMD_INVITE_INFO: 'invite_info', // 邀请信息
         GAME_RESULT_UPLOAD_SCORE: 'game_result_upload_score', //更新分数
         CMD_PAYMENT_LIST: 'store_config', // 支付 - 商品列表
@@ -80,12 +79,7 @@ cc.Class({
         GETGROUPRANK_SUCCESS: "GETGROUPRANK_SUCCESS", //获取群排行数据
 
 
-        ACTION_GET_BURIALS : 'get_burials', //获取埋点数据列表
-        ACTION_GET_BURIAL_SHARE : 'get_burial_share',//获取埋点内容
-        ACTION_GET_SHARE_REWARD: 'get_share_reward',//获取share3奖励
-        ACTION_GET_REWARD : 'get_reward',
-        ACTION_GET_INVITE_CONF: 'get_invite_conf',
-        ACTION_INVITE_CONF: 'invite_conf',
+
         ACTION_QUERY: 'query',
         ACTION_USE_BALL_ITEM:'use_ball_item',//使用球球
 
@@ -120,13 +114,17 @@ cc.Class({
         MSG_SDK_WX_CHECK_SESSION: 'msg_sdk_wx_check_session',
         MSG_SDK_WX_GET_SETTING: 'msg_sdk_wx_get_setting',
         MSG_SDK_WX_GET_USERINFO: 'msg_sdk_wx_get_userinfo',
-
-        // 分享
         ACTION_DAILY_INVITE_INFO : 'query_invite_info', //
         ACTION_DAILY_INVITE_BIND_USER : 'bind_invite_user', //
         ACTION_DAILY_INVITE_REWARD : 'get_invite_reward_all', //
         Event_Daily_Invite_Complete_Status_Changed : 'event.daily.invite.complete.status.changed',
-
+        ACTION_GET_BURIALS : 'get_burials', //获取埋点数据列表
+        ACTION_GET_BURIAL_SHARE : 'share_conf',//获取埋点内容
+        ACTION_GET_SHARE_REWARD: 'get_share_reward',//获取share3奖励
+        ACTION_GET_INVITE_CONF: 'get_invite_conf',
+        ACTION_INVITE_CONF: 'invite_conf',
+        ACTION_BIND_INVITE_INFO:'share_enter_game',
+        ACTION_GET_REWARD:'get_reward',
 
         //排行榜
         ACTION_RANK_FRINED:'ball_rank_friend',
@@ -137,4 +135,4 @@ cc.Class({
         ACTION_RANK_POP:'ball_rank_pop',
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
     }
-})
+});

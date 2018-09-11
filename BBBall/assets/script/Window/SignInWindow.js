@@ -45,7 +45,7 @@ cc.Class({
         this.isCheckInButton.active = false;
         this.isDoubleCheckInButton.active = false;
         this.checkInButton.active = true;
-        this.doubleCheckInButton.active = true;
+        // this.doubleCheckInButton.active = true;
         this.refreshUI(this._params);
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN,this.ballDailyCheckin,this);

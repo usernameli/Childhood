@@ -29,7 +29,7 @@ cc.Class({
             this.register(cc.wwx.EventType.MSG_BALL_DAILY_CHECKIN, this._onMsgBallDailyCheckin);
             this.register(cc.wwx.EventType.CMD_TODO_TASKS, this._todoTask);
 
-            this.register(cc.wwx.EventType.CMD_HALL_SHARE3, this._onMsgShare3);
+            this.register(cc.wwx.EventType.ACTION_GET_BURIAL_SHARE, this._onMsgShare3);
             this.register(cc.wwx.EventType.CMD_INVITE_INFO, this._onInviteInfo);
 
             this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_INFO, this._onDailyInviteInfo);
@@ -221,6 +221,20 @@ cc.Class({
 
             // 分享发奖
             cc.wwx.Share.getShareRewards();
+
+            // cc.wwx.TCPMSG.bindInviteCode(20005);
+
+            // ty.UserInfo.query = {'burialId':'treasureChestHelp','inviteCode':10802};
+            if (cc.wwx.UserInfo.query){
+                // 给邀请我的人宝箱加速
+
+                    // 给邀请我的人发奖
+                    if(cc.wwx.UserInfo.query.inviteCode) {
+                        cc.wwx.TCPMSG.bindInviteCode(cc.wwx.UserInfo.query.inviteCode);
+
+                    }
+
+            }
 
             //绑定游戏
             cc.wwx.TCPMSG.bindGame(cc.wwx.SystemInfo.gameId);

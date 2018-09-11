@@ -37,7 +37,7 @@ cc.Class({
     },
     objsBreak()
     {
-
+        this.node.destroy();
     },
     objBombEndCallBack()
     {

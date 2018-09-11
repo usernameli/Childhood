@@ -56,6 +56,11 @@ cc.Class({
         audioItem1:{
             default:null,
             type:cc.AudioClip
+        },
+        //碰撞声音
+        brickSound:{
+            default:null,
+            type:cc.AudioClip
         }
 
     },
@@ -293,6 +298,13 @@ cc.Class({
     {
         return this.play(this.audioWarning,false);
 
+    },
+    /*
+     * 方块碰撞的声音
+     */
+    playBrick()
+    {
+        return this.play(this.brickSound,false);
     },
     /**
      * 按钮

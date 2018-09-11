@@ -292,7 +292,7 @@ if __name__ == '__main__':
     # if options.release:
         # confuse()
 
-    if options.tiny:
-        compress_png()
+    #if options.tiny:
+    #    compress_png()
 
     filterBySize()

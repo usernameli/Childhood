@@ -60,10 +60,10 @@ cc.Class({
         let body = node.addComponent(cc.RigidBody);
         body.type = cc.RigidBodyType.Static;
 
-        this._addBound(node, width/2, height, width, 1,1);//上面
-        this._addBound(node, width/2, 0, width, 1,2);//下面
-        this._addBound(node, 0, height / 2, 1, height,3);//左面
-        this._addBound(node, width, height / 2, 1, height,4);//右面
+        this._addBound(node, width/2, height, width, 10,1);//上面
+        this._addBound(node, width/2, 108, width, 10,2);//下面
+        this._addBound(node, 0, height / 2, 10, height,3);//左面
+        this._addBound(node, width, height / 2, 10, height,4);//右面
 
         node.parent = this.node;
         this._createBall(this.ballMaxNum,0);
@@ -125,7 +125,7 @@ cc.Class({
         else
         {
             this._usePrefabBall = this.ballPrefab[1];
-            cc.wwx.UserInfo.ballInfo.ballPosY = 20
+            cc.wwx.UserInfo.ballInfo.ballPosY = 20 + 108
 
         }
 
@@ -275,6 +275,9 @@ cc.Class({
         let result = null;
         for (let i = 0; i < results.length; i++) {
             var collider = results[i].collider;
+            cc.wwx.OutPut.log("p2: ",collider.tag);
+            cc.wwx.OutPut.log("p2: ",collider.tag);
+
             if(collider.tag > 0 && collider.tag !== 2)
             {
                 result = results[i];
@@ -285,11 +288,18 @@ cc.Class({
 
         if (result) {
             p2 = result.point;
+            // let p2x = p2.x;
             if(p2.y > 923)
             {
-                p2 = this.node.convertToNodeSpaceAR(result.point);
+                // p2 = this.node.convertToNodeSpaceAR(p2);
+                // p2.y -= 108;
+                this._ctx.circle(p2.x, p2.y, 10);
+
             }
-            this._ctx.circle(p2.x, p2.y, 10);
+            else
+            {
+                this._ctx.circle(p2.x, p2.y, 10);
+            }
             this._ctx.fillColor = cc.Color.RED;
             this._ctx.fill();
         }
@@ -299,7 +309,10 @@ cc.Class({
         }
 
         cc.wwx.OutPut.log("p2: ",p2);
+
         this.drawLine(p1,p2,true);
+
+
         let normal = result.normal;
         if(normal.y === 0)
         {
@@ -320,6 +333,8 @@ cc.Class({
         }
 
         this.drawLine(p1,p2,false);
+
+
 
 
 

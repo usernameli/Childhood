@@ -34,7 +34,16 @@ cc.Class({
     initLabelNum:function (num) {
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();
+        if(num >=50)
+        {
+            this.node.color =new cc.Color(150, 150, 150);
 
+        }
+        else
+        {
+            this.node.color =new cc.Color(255, 255, 255);
+
+        }
     },
     objsBreak()
     {
@@ -54,6 +63,18 @@ cc.Class({
     },
     onBeginContact(contact, self, other) {
         this.splashNode.active = true;
+
+        cc.wwx.AudioManager.playBrick();
+
+        if(this._labelNum >=50)
+        {
+            this.node.color =new cc.Color(150, 150, 150);
+        }
+        else
+        {
+            this.node.color =new cc.Color(255, 255, 255);
+
+        }
 
         if(this._labelNum > 1)
         {

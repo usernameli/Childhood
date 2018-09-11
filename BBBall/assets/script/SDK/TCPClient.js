@@ -172,7 +172,7 @@ if(CC_WECHATGAME)
                     if (cc.wwx.SystemInfo.webSocketUrl && cc.wwx.SystemInfo.webSocketUrl != '') {
                         this.connect(cc.wwx.SystemInfo.webSocketUrl);
                     } else {
-                        cc.wwx.SDK.login();
+                        cc.wwx.SDKLogin.login();
                     }
                 },
 

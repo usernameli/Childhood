@@ -597,7 +597,9 @@ cc.Class({
         }
         else
         {
-            cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow","ResultFirstWindow");
+            cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:false});
+
+            // cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow","ResultFirstWindow");
 
         }
     },
@@ -610,6 +612,15 @@ cc.Class({
             cc.wwx.UserInfo.playMode,
             cc.wwx.UserInfo.currentSocre,
             cc.wwx.UserInfo.checkPointID,1,cc.wwx.UserInfo.currentStar);
+        if(cc.wwx.UserInfo.playMode === "100ball")
+        {
+
+        }
+        else
+        {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RECOVERY_BALL);
+
+        }
 
     },
     _gameIsOver()

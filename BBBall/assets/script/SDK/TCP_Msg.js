@@ -190,16 +190,47 @@ cc.Class({
 
             this._sendCmd(params);
         },
+        getReward:function(index)
+        {
+            var params = {
+                "cmd": cc.wwx.EventType.CMD_GAME,
+                "params": {
+                    "action":  cc.wwx.EventType.ACTION_GET_REWARD,
+                    "rewardType": "invite_friend",
+                    'gameId':  cc.wwx.SystemInfo.gameId,
+                    'rewardIndex':index
+                }
+            };
+
+            this._sendCmd(params);
+        },
+        bindInviteCode:function(inviteCode)
+        {
+            var userId = parseInt(inviteCode);
+            if (!userId || isNaN(userId)) {
+                return;
+            }
+            var params = {
+                "cmd": cc.wwx.EventType.CMD_GAME,
+                "params": {
+                    "action":  cc.wwx.EventType.ACTION_BIND_INVITE_INFO,
+                    'gameId':  cc.wwx.SystemInfo.gameId,
+                    "sharerId": userId,
+                }
+            };
+
+            this._sendCmd(params);
+        },
         /*
          * 获取埋点详细信息
         */
         getShare3BurialInfo: function(burialId) {
             var params = {
-                'cmd': cc.wwx.EventType.CMD_HALL_SHARE3,
+                'cmd': cc.wwx.EventType.CMD_GAME,
                 'params': {
                     'action': cc.wwx.EventType.ACTION_GET_BURIAL_SHARE,
                     'gameId': cc.wwx.SystemInfo.gameId,
-                    'burialId': burialId,
+                    'shareType': burialId,
                     'urlParams': {
                         'userName' : cc.wwx.UserInfo.userName
                     }

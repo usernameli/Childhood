@@ -225,8 +225,8 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
                 // name
                 sharedContext.font="34px Arial";
                 sharedContext.fillStyle="#87D4FF";
-                sharedContext.textAlign="center";
-                sharedContext.fillText(sliceStringToLength(params.name, 12), cellWidth/2 - 50, baseY);
+                sharedContext.textAlign="left";
+                sharedContext.fillText(sliceStringToLength(params.name, 12), cellWidth/2 - 100, baseY);
 
 
 
@@ -253,12 +253,8 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
 
 
             }
-            console.log("params.rank: ",params.rank);
-            console.log("baseX: " ,baseX);
-            console.log("baseY: " ,baseY);
             // increase
             contentWidth = contentWidth + cellHeight;
-            console.log("contentWidth: ",contentWidth);
         }
     })
 }
@@ -382,6 +378,27 @@ function drawCanvasResultRank(canvasSize, rankData, selfData, maxCount,rankType)
     })
 }
 
+function drawSelfUserInfo(canvasSize,data) {
+    validRenderLv++;
+    let curRenderLv = validRenderLv;
+    let sharedCanvas = wx.getSharedCanvas();
+    let sharedContext = sharedCanvas.getContext("2d");
+    sharedContext.clearRect(0, 0, canvasSize.width, canvasSize.height);
+    sharedContext.textBaseline = "middle";
+    let imgUrl = [data.avatarUrl];
+    preloadImages(imgUrl, function(imageCache) {
+
+        drawDirect(sharedContext, imageCache[imgUrl[0]], curRenderLv, 50, 50,100,100);
+
+        sharedContext.font="28px Arial";
+        sharedContext.fillStyle="#FFFFFF";
+        sharedContext.textAlign="center";
+        sharedContext.fillText(sliceStringToLength(data.nickName, 12), 170, 30);
+
+    });
+
+}
+
 function drawResultRank(data) {
 
     let canvasSize = data['canvasSize'];
@@ -392,7 +409,6 @@ function drawResultRank(data) {
     wx.getFriendCloudStorage({
         keyList : KEY_LIST,
         success : function (res) {
-            console.log('drawFriendLevelRank.success =', JSON.stringify(res.data));
             let rankList = [];
             for (let i = 0; i < res.data.length; i++) {
                 let info = res.data[i];
@@ -446,7 +462,6 @@ function drawRank (data)
     wx.getFriendCloudStorage({
         keyList : KEY_LIST,
         success : function (res) {
-            console.log('drawFriendLevelRank.success =', JSON.stringify(res.data));
             let rankList = [];
             for (let i = 0; i < res.data.length; i++) {
                 let info = res.data[i];
@@ -490,6 +505,20 @@ function drawRank (data)
 
 }
 
+function drawUserInfo(data) {
+    let canvasSize = data['canvasSize'];
+    wx.getUserInfo({
+        openIdList: ['selfOpenId'],
+        lang: 'zh_CN',
+        success: function(res) {
+            console.log('success', res.data[0]);
+            drawSelfUserInfo(canvasSize,res.data[0]);
+        },
+        fail: function(res){
+
+        }
+    })
+}
 function drawGroupRank(data)
 {
     let itemCount  = data['count'];
@@ -549,7 +578,8 @@ let transformMap = {
     'upload' : upload,
     'drawFriendRank' : drawRank,
     'drawGroupRank'  : drawGroupRank,
-    'drawResultRank' : drawResultRank
+    'drawResultRank' : drawResultRank,
+    'getUserInfo'    : drawUserInfo,
 };
 
 wx.onMessage(function(data) {

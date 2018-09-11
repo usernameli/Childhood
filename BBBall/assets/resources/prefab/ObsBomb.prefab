@@ -256,7 +256,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "deIV6blsBGFo4azYzzwIGV"
+    "_id": "5fRY9gXSlK5LCtOGkIQgJr"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -360,7 +360,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "09sagcGhpII7OybDf5azKn"
+    "_id": "039qo8/dJC7b6d++Y/RW4T"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -459,7 +459,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "33En31NodLJpZiZQNeUt9q"
+    "_id": "11emIQ1kZN35L6LH2V4uPY"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -550,7 +550,7 @@
       "__uuid__": "506e8c1a-970f-45a9-905d-4a2ffe1000c0"
     },
     "_spriteFrame": null,
-    "_stopped": false,
+    "_stopped": true,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 150,
@@ -627,7 +627,7 @@
     "rotatePerS": 0,
     "rotatePerSVar": 0,
     "_N$preview": true,
-    "_id": "85rGjTEntGxprC2dwqAisT"
+    "_id": "b31vU2eaxIFbwvarrBkmQt"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -742,7 +742,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "1bXYsahj5DAJj8qj8bqC9g"
+    "_id": "20N+1yzm5ARZUEkpvpBrAY"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -846,7 +846,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "79WERZCd1BsYjwizZMY1Hq"
+    "_id": "06YldhvcpDpoNRblShcEZi"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -950,7 +950,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "1dJ2MFbshFq6ggNUb071do"
+    "_id": "3dqylXeypMEZykLWrjy7ks"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -985,7 +985,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "dfiopKW6JKT6RWSYCVVBSc"
+    "_id": "5dnN/gwVFKybzvqBThOxpg"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -1011,7 +1011,7 @@
       "width": 60,
       "height": 60
     },
-    "_id": "a0jVNCPKJG8Yh1CU4I/o31"
+    "_id": "90IHx0oeJOwZwmsP6Yp7ml"
   },
   {
     "__type__": "cc.Animation",
@@ -1030,7 +1030,7 @@
       }
     ],
     "playOnLoad": false,
-    "_id": "846manopNJqpKKT4PlZWuV"
+    "_id": "ffbabtLnxNRaUKzFLpk943"
   },
   {
     "__type__": "f08e1+inX5IHqbfUEHJ0V+S",
@@ -1056,7 +1056,7 @@
     },
     "_anim": null,
     "_labelNum": 0,
-    "_id": "af1T7ZXLZHfbZq+myM/M1O"
+    "_id": "b5GIWiLU5NYof9hhLWbEbt"
   },
   {
     "__type__": "cc.PrefabInfo",

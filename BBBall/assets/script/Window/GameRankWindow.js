@@ -155,6 +155,9 @@ cc.Class({
     groupRankShareCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
-        cc.wwx.Share.runShare(cc.wwx.BurialShareType.FetchGroupID);
+        this.ownTemplate.active = false;
+        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.FetchGroupID);
+
+
     }
 });

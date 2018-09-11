@@ -14,6 +14,7 @@ cc.Class({
         shareManagerUrl : 'https://market.touch4.me/',
         deviceId: 'ballGame',
         wxAppId: 'wx281737f4e987120b',
+        testAppId:'wx6ac3f5090a6b99c5',
         appId: 9999,
         gameId: 101,
         uuid: '',

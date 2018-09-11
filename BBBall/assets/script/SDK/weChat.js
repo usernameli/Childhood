@@ -10,7 +10,7 @@ cc.Class({
             wx.onShow(function(res){
                 try {
 
-                    cc.wwx.OutPut.warn('onShow:' + JSON.stringify(res));
+                    cc.wwx.OutPut.warn('onShow query:' + JSON.stringify(res));
                     cc.wwx.UserInfo.query = cc.wwx.Util.deepCopy(res.query);
                     cc.wwx.UserInfo.wxEnterInfo = res;
                 } catch (e) {
@@ -186,6 +186,7 @@ cc.Class({
             }
         },
 
+        //显示微信转发按钮
         initShareDefault:function() {
             if (!CC_WECHATGAME) { return; }
 
@@ -550,6 +551,22 @@ cc.Class({
                         name    : cc.wwx.UserInfo.userName,
                         avatar  : cc.wwx.UserInfo.userPic,
                     }
+                }
+            });
+        },
+        drawUserInfo(canvasSize)
+        {
+            if (!CC_WECHATGAME) { return; }
+
+            let openDataContext = wx.getOpenDataContext();
+            let sharedCanvas = openDataContext.canvas;
+            sharedCanvas.width = canvasSize.width;
+            sharedCanvas.height = canvasSize.height;
+
+            openDataContext.postMessage({
+                method : 'getUserInfo',
+                data:{
+                    canvasSize: canvasSize,
                 }
             });
         },

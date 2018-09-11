@@ -23,6 +23,8 @@ cc.Class({
             else
             {
                 var result = cc.sys.localStorage.getItem(key);
+                cc.wwx.OutPut.log("ball_storage jsb getItem success",key,result);
+
                 return result;
             }
         },

@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.18984375,
-      "y": 0.18984375,
+      "x": 0.19140625,
+      "y": 0.19140625,
       "z": 1
     },
     "_quat": {
@@ -1007,6 +1007,9 @@
     },
     "audioItem1": {
       "__uuid__": "cbf65a96-e7d0-40b1-96e4-68f8e839a5bb"
+    },
+    "brickSound": {
+      "__uuid__": "18000c07-ec0b-4ba2-86c9-4f9bfba6191e"
     },
     "_id": "5avkP8uRRBdJMHfXqvp/KC"
   },

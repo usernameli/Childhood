@@ -202,7 +202,6 @@ cc.Class({
     // 刷新开放数据域的纹理
     _updateSubDomainCanvas () {
 
-        cc.wwx.OutPut.log('_updateSubDomainCanvas: width=' + this.display.node.width + ' height=' + this.display.node.height);
         var openDataContext = wx.getOpenDataContext();
         var sharedCanvas = openDataContext.canvas;
         this.tex.initWithElement(sharedCanvas);

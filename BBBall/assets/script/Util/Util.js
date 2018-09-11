@@ -486,37 +486,8 @@ cc.Class({
                 return ( arr ? '[' : '{') + String(json) + ( arr ? ']' : '}');
             }
         },
-        /* ---cc.wwx.Share.runShare接口处理逻辑太多,避免影响使用,定义以下两个分享接口
-         * 执行埋点分享
-         * burialType 为 cc.wwx.BurialShareType 类型
-         * */
-        runBurialShare: function (burialType) {
-            cc.wwx.Share.runShare(burialType);
-        },
 
-        /*
-         * 执行自定义分享
-         * customData 数据格式:
-         * {
-         "pointId":9999001, # 分享点ID ,          burialId\pointId至少有一个
-         "burialId":"default",                   burialId\pointId至少有一个
 
-         "title":"斗地主我又取得了胜利，快来给我点赞！",可选
-         "pic":"http://share.png",               可选
-         "whereToReward":"all",                  可选,默认为 all
-         "queryJson":{},                         可选
-         }
-         * */
-        runCustomShare: function (customData) {
-            if (!customData['pointId']) {
-                if (customData['burialId']) {
-                    //自定义的埋点分享
-                    cc.wwx.Share.runShare(customData['burialId'], customData);
-                    return;
-                }
-            }
-            cc.wwx.Share.runShare(customData);
-        },
 
         /*
          * 在离屏canvas上绘图并且生成文件,返回生成文件路径

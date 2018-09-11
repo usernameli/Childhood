@@ -24,7 +24,8 @@ cc.Class({
     invateCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
-        cc.wwx.Share.runShare(cc.wwx.BurialShareType.DailyInvite);
+        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInvite);
+
 
     }
 });

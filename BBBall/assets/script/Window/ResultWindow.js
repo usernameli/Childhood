@@ -171,7 +171,6 @@ cc.Class({
     // 刷新开放数据域的纹理
     _updateSubDomainCanvas () {
 
-        cc.wwx.OutPut.log('_updateSubDomainCanvas: width=' + this.display.node.width + ' height=' + this.display.node.height);
         var openDataContext = wx.getOpenDataContext();
         var sharedCanvas = openDataContext.canvas;
         this.tex.initWithElement(sharedCanvas);
@@ -211,7 +210,12 @@ cc.Class({
         }
         else
         {
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_RESTART);
+            cc.wwx.MapCheckPoint.get100MapCheckPointData(function (checkPointData) {
+                cc.wwx.OutPut.log("clickItemCallBack: " + JSON.stringify(checkPointData));
+                cc.wwx.UserInfo.checkPointData = checkPointData;
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_RESTART);
+
+            });
             this.closeWindow();
 
         }

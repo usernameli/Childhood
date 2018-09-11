@@ -44,7 +44,12 @@ cc.Class({
     {
         this._isAction = false;
         this._super();
-        this._changeTabState(1);
+        this._changeTabState(2);
+        this.tab1.active = false;
+        this.tab2.active = false;
+        this.tab3.active = false;
+        this.tab2Select.active = false;
+        this.tab2ProductNode.position = cc.v2(0,0);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_CHANGE_TAB_SHOP,this._changeActionTab,this);
         // cc.wwx.PayModel.mExchangeList
     },

@@ -3,7 +3,7 @@ cc.Class({
     statics:{
         wxAuthor:false,
         userId: 10001,
-        userName: 'BBName',
+        userName: undefined,
         userPic: '',
         authorCode: '',
         systemType: 0, //1:苹果非iPhone X  2:iPhone X 3、安卓
@@ -38,7 +38,7 @@ cc.Class({
             speed:1500,
             ballType:"ballID",
             ballNum:30,
-            ballPosY:15,
+            ballPosY:15 + 108,
         },
         mFriendRankList:[],
         mIssue:null,

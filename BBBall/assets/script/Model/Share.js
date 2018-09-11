@@ -29,10 +29,6 @@ cc.Class({
                 this.print(' setLocalShareRecord error');
                 return;
             }
-            if (!cc.wwx.BurialShareConfig[burialId]) {
-                this.print(' setLocalShareRecord unnecessary:' + burialId);
-                return;
-            }
             var record = this.localShareRecord[burialId];
             if (!record) {
                 record = {};
@@ -70,10 +66,7 @@ cc.Class({
                 return true;
             }
             this.print(' checkShareTodayVaild burialId:' + burialId + ", groupId:" + groupId);
-            if (!cc.wwx.BurialShareConfig[burialId]) {
-                this.print(' checkShareTodayVaild unnecessary:' + burialId);
-                return true;
-            }
+
             var record = this.localShareRecord[burialId];
             if (!record) {
                 //一直都没有分享过,肯定是有效的分享
@@ -128,7 +121,33 @@ cc.Class({
                 this.saveShareRecordToLocaL();
             }
         },
-
+        // wxNewShare : function(titlestr, imageUrl, successCallBackFun, failCallBackFun, isforce,sharePoint){
+        //     wx.shareAppMessage({
+        //         title: titlestr,
+        //         imageUrl : imageUrl,//5:4
+        //         query : 'shareid='+cc.wwx.UserInfo.userId,
+        //         success : function (result) {
+        //             if(isforce==true)
+        //                 result["sharePoint"] = sharePoint
+        //             cc.log("tuyoo wxShare = "+ JSON.stringify(result))
+        //             cc.log("sharePoint = "+sharePoint)
+        //             tywx.NotificationCenter.trigger(tywx.EventType.SHARE_RESULT, result);
+        //
+        //             tywx.LOGE(null, "shareAppMessage+++++++++++++++++"+JSON.stringify(result));
+        //             if (successCallBackFun){
+        //                 successCallBackFun(result);
+        //             }
+        //         },
+        //         fail : function () {
+        //             if (failCallBackFun){
+        //                 failCallBackFun();
+        //             }
+        //             tywx.LOGD(null, JSON.stringify(arguments));
+        //         },
+        //         complete : function () {
+        //         }
+        //     })
+        // },
         cleanup: function () {
             this.burialShareList = [];
         },
@@ -139,77 +158,34 @@ cc.Class({
         ,
         parse: function (param) {
             var result = param['result'];
-            var action = result['action'];
-            if (action == cc.wwx.EventType.ACTION_GET_BURIAL_SHARE) {
-                //获取到了一个埋点具体信息
-                var share = this.getBurialByType(result['burialId']);
-                if (!share) {
-                    //容错:
-                    share = new cc.wwx.ShareData();
-                    share.parseBurial(result['share']);
-                    share.burialId = result['burialId'];
-                    this.burialShareList.push(share);
-                }
-                share.parseShare(result['share'], this.customDataMap[result['burialId']]);
-                this.customDataMap[result['burialId']] = null;
-                this.shareData = share;
+            let action = result["action"];
 
-                if (result['burialId'] == cc.wwx.BurialShareType.Default) {
-                    //default数据更新成功,更新微信按钮分享数据
-                    this.print("cc.wwx.WeChat.initShareDefault");
-                    cc.wwx.WeChat.initShareDefault();
-                } else {
-                    this.burialAutoShareMap[result['burialId']] && this.runShare(share);
-                    this.burialAutoShareMap[result['burialId']] = false;
-                }
-            } else if (action == cc.wwx.EventType.ACTION_GET_SHARE_REWARD) {
-                //获取分享奖励
-                var rewards = result['rewards'];
-                if (rewards.length > 0) {
-                    var hasCoupon = false;  // 现金奖励弹窗干掉，分享只有新手首胜分享有现金，已经单独处理
-                    var msg = '恭喜获得分享奖励：\n\n';
-                    for (var i = 0; i < rewards.length; i++) {
-                        var fuhaoStr = (i == rewards.length - 1 ? '' : '  ');
-                        if (rewards[i]['itemId'] == "user:coupon") {
-                            msg = msg + (rewards[i]['count'] / 100).toFixed(2) + '元红包' + fuhaoStr;
-                            hasCoupon = true;
-                            break;
-                        } else {
-                            msg = msg + rewards[i]['count'] + rewards[i]['name'] + fuhaoStr;
-                        }
-                    }
-                    if (!hasCoupon) {
-                        cc.wwx.WindowsManager.showWindows(cc.wwx.EventType.MSG_WINDOWS_COMMON_TIP, msg);
-                    }
-                }
+            var share = new cc.wwx.ShareData();
+            share.parseBurial(result['conf']);
+            share.burialId = result['action'];
+            if(share.burialId === cc.wwx.BurialShareType.DailyInvite)
+            {
+                share.whereToReward =cc.wwx.ShareWhereReward.Friend
             }
+            else if(share.burialId === cc.wwx.BurialShareType.FetchGroupID)
+            {
+                share.whereToReward =cc.wwx.ShareWhereReward.Group
+
+            }
+            else
+            {
+                share.whereToReward =cc.wwx.ShareWhereReward.All
+
+            }
+            share.parseShare(result['conf']);
+            this.shareData = share;
+
+            this.runShare(share);
+
+
         },
 
-        /*
-        * 请求一个埋点的详细数据
-        * 埋点key必须在列表中存在,自动分享接口
-        * */
-        requestBurialInfo: function (burialId) {
-            if (typeof burialId == 'string') {
-                this.burialAutoShareMap[burialId] = true;
-                cc.wwx.TCPMSG.getShare3BurialInfo(burialId);
-            }
-        },
 
-        getBurialByType: function (burialType) {
-            if (!burialType) {
-                this.print("getBurialByType fail : burialType invalid !");
-                return null;
-            }
-            var len = this.burialShareList.length;
-            for (var i = 0; i < len; i++) {
-                if (burialType == this.burialShareList[i]["burialId"]) {
-                    return this.burialShareList[i];
-                }
-            }
-            this.print("getBurialByType fail : " + burialType);
-            return null;
-        },
 
         getShareRewards: function () {
             var rewardGetList = this.rewardGetList;
@@ -234,9 +210,8 @@ cc.Class({
                             that.print("decryptedData :" + decryptedData);
                             decryptedData = JSON.parse(decryptedData);
                             var groupId = decryptedData.openGId;
-                            if (that.checkShareTodayVaild(bid, groupId)) {
-                                cc.wwx.TCPMSG.getShare3Reward(pid, cc.wwx.ShareWhereReward.Group);
-                            } else {
+                            if (!that.checkShareTodayVaild(bid, groupId)) {
+
                                 cc.wwx.TipManager.showMsg('今天已经分享过这个微信群咯');
                             }
                             that.setLocalShareRecord(bid, groupId);
@@ -273,30 +248,10 @@ cc.Class({
         *  (2)burialShareList列表元素 - 不完整数据,需要请求,customData附带自定义参数
         *  (3)完整分享数据,customData附带自定义参数
         * */
-        runShare: function (shareDataOrBurialType, customData) {
+        runShare: function (share, customData) {
 
-            var shareData = null;
-            if (typeof shareDataOrBurialType == "string") {
-                this.print(' runShare ' + shareDataOrBurialType);
-                this.customDataMap[shareDataOrBurialType] = null || customData;
-                this.requestBurialInfo(shareDataOrBurialType);
-            } else {
-                var share = shareDataOrBurialType;
-                if (share["pointId"] && share["title"] && share["pic"]) {
-                    //完整分享数据
-                    shareData = share;
-                } else if (share['burialId']) {
-                    //不完整
-                    this.customDataMap[share['burialId']] = null || customData;
-                    this.requestBurialInfo(share['burialId']);
-                } else {
-                    //一个构造错误的分享数据
-                }
-            }
-
-            if (!shareData) {
-                return;
-            }
+            let shareData = share.getShareData();
+            cc.wwx.OutPut.log("runShare: ",JSON.stringify(shareData));
             this.print('ready share');
             var that = this;
             var success = function (res) {
@@ -304,22 +259,17 @@ cc.Class({
                 cc.wwx.OutPut.log('[cc.wwx.Share]', 'whereToReward=' + shareData["whereToReward"] + ' result=' + result);
                 if (shareData["whereToReward"] != cc.wwx.ShareWhereReward.All && shareData["whereToReward"] != result) {
                     // 不要此类提示
-                    // var str = shareData["whereToReward"] == cc.wwx.ShareWhereReward.Group ? '群' : '好友';
-                    // cc.wwx.TipManager.showMsg('只有分享到微信'+str+'才可获得奖励哟');
+                    var str = shareData["whereToReward"] == cc.wwx.ShareWhereReward.Group ? '群' : '好友';
+                    cc.wwx.TipManager.showMsg('只有分享到微信'+str+'才可获得奖励哟');
                 } else {
-                    //可能网络已断开,需在登录成功后进行处理
-                    // cc.wwx.TCPMSG.getShare3Reward(shareData["pointId"],result);
-                    that.rewardGetList.push({
-                        pointId: shareData["pointId"],
-                        result: res.shareTickets ? res.shareTickets[0] : null,
-                        burialId: shareData['burialId']
-                    });
+
+                    that.rewardGetList.push({pointId:shareData["pointId"],result:res.shareTickets?res.shareTickets[0]:null,burialId:shareData['burialId']});
 
                     that.record_share_success_behavior(shareData);
 
                     if (cc.wwx.TCPClient.opened) {
                         // 分享发奖
-                        that.getShareRewards();
+                        cc.wwx.Share.getShareRewards();
                     }
                 }
             };
@@ -381,20 +331,13 @@ cc.Class({
             var whereToReward = cc.wwx.ShareWhereReward.All;
             var pointId = 0;
             var url = wxDownloader.REMOTE_SERVER_ROOT + 'share/share_default.jpg';
-            var title = ' 斗地主水平全国考试，快来看看你能考到什么级别和分数！';
+            var title = ' 发现一款很好玩的弹弹球游戏，快来一起看看！';
 
-            var share = that.getBurialByType(cc.wwx.BurialShareType.Default);
-            if (share) {
-                whereToReward = share['whereToReward'] || cc.wwx.ShareWhereReward.All;
-                pointId = share['pointId'];
-                url = share['pic'];
-                title = share['title'];
-            }
             var shareQueryStr = that.jsonToQuery({
                 'inviteCode': cc.wwx.UserInfo.userId,
                 'pointId': pointId,
                 "burialId": cc.wwx.BurialShareType.Default,
-                'shareId': share.shareId,
+                'shareId': 0,
             });
 
             return {
@@ -413,7 +356,6 @@ cc.Class({
                             result: obj.shareTickets ? obj.shareTickets[0] : null,
                             burialId: cc.wwx.BurialShareType.Default
                         });
-                        that.record_share_success_behavior(share);
 
                         if (cc.wwx.TCPClient.opened) {
                             // 分享发奖
@@ -426,7 +368,7 @@ cc.Class({
                 },
                 'complete': function (obj) {
                     that.print('onShareAppMessage: complete:' + JSON.stringify(obj));
-                    that.record_invoke_share_behavior(share);
+                    // that.record_invoke_share_behavior(share);
                 }
             }
         }

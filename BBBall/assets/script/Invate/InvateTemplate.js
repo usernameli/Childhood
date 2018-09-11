@@ -38,6 +38,11 @@ cc.Class({
 
 
     },
+    getRewardCallBack()
+    {
+        cc.wwx.TCPMSG.getReward(this.itemID - 1);
+
+    },
 
     updateItem: function(itemId) {
         cc.wwx.OutPut.log('Invate Item ',itemId);
@@ -62,15 +67,17 @@ cc.Class({
                 this.rewardBTN.active = true;
                 this.rewordSprite.active = false;
                 this.isRewoarded.active = false;
+
             }
             else
             {
                 this.rewardBTN.active = false;
                 this.rewordSprite.active = false;
                 this.isRewoarded.active = true;
-                cc.wwx.Loader.loadImg(list["inviteeHeadUrl"], this.rewardHeadIcon);
 
             }
+            cc.wwx.Loader.loadImg(list["inviteeHeadUrl"], this.rewardHeadIcon);
+
 
         }
         else

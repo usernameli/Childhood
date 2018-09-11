@@ -24,7 +24,7 @@ cc.Class({
             let dataObj = {
                 snsId: 'wxapp:' + code,
                 appId: cc.wwx.SystemInfo.appId,
-                wxAppId: cc.wwx.SystemInfo.wxAppId,
+                wxAppId: cc.wwx.SystemInfo.testAppId,
                 clientId: cc.wwx.SystemInfo.clientId,
                 gameId: cc.wwx.SystemInfo.gameId,
                 imei: null,
@@ -34,8 +34,8 @@ cc.Class({
 
             let sdkPath = cc.wwx.SystemInfo.loginUrl;
             let completeUrl = sdkPath + 'open/v6/user/loginBySnsIdNoVerify' + '?' + cc.wwx.Util.dataToUrlStr(dataObj);
-            let token = cc.wwx.Storage.getItem(self.SESSION_KEY);
-
+            let token = cc.wwx.Storage.getItem(this.SESSION_KEY);
+            // let token = "7cc8c4d6-cd3a-4b36-ae2f-ae59a812473c";
             if (token && token !== '') {
                 dataObj = {
                     appId: cc.wwx.SystemInfo.appId,
@@ -98,7 +98,7 @@ cc.Class({
                     cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeWxLoginSuccess, [params.code]);
                     if (params.code) {
                         let code = params.code;
-                        that.loginBallWithCode(code, {},function (result) {
+                        that.loginBallWithCode(code, null,function (result) {
                             that.initWebSocketUrl(result);
                         });
                         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.WEIXIN_LOGIN_SUCCESS);
@@ -257,7 +257,7 @@ cc.Class({
                             cc.wwx.OutPut.log('wx getUserInfo fail:', 'to tip user');
                             wx.showModal({
                                 title: '授权提示',
-                                content: '获取用户信息失败，请确认授权！',
+                                content: '获取用户信息，请确认授权！',
                                 showCancel: false,
                                 success: function () {
                                     cc.wwx.WeChat.openSetting();
@@ -309,9 +309,9 @@ cc.Class({
                 return;
             }
             // 微信授权成功后使用code登录途游服务器
-            // wx.showShareMenu({
-            //     withShareTicket: true
-            // });
+            wx.showShareMenu({
+                withShareTicket: true
+            });
 
             let local_uuid = cc.wwx.SystemInfo.uuid;
             cc.wwx.OutPut.log("local_uuid:", local_uuid);
@@ -324,9 +324,6 @@ cc.Class({
                 snsId: 'wxapp:' + code,
                 imei: null,
                 uuid: local_uuid,
-                //以下为上传玩家的微信用户信息
-                //nickName: userInfo.nickName,
-                //avatarUrl: userInfo.avatarUrl,
                 scene_id: cc.wwx.UserInfo.scene_id || "",
                 scene_param: cc.wwx.UserInfo.scene_param || "",
                 invite_id: cc.wwx.UserInfo.invite_id || 0
@@ -342,7 +339,7 @@ cc.Class({
 
             cc.wwx.OutPut.log("SDKLogin", " *-*-*-*-*-  dataobj:  " + JSON.stringify(dataObj));
 
-            cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeLoginSDKStart, [code, local_uuid, userInfo.nickName]);
+            // cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeLoginSDKStart, [code, local_uuid, userInfo.nickName]);
             let that = this;
             wx.request({
                 url: sdkPath + 'open/v6/user/loginBySnsIdNoVerify',
@@ -386,9 +383,6 @@ cc.Class({
                         }
                     }
 
-
-
-
                 },
 
                 fail: function (params) {
@@ -408,17 +402,18 @@ cc.Class({
             cc.wwx.UserInfo.userPic = result.purl;
             cc.wwx.UserInfo.authorCode = result.authorCode;
             cc.wwx.UserInfo.wxgame_session_key = result.wxgame_session_key;
-            cc.wwx.OutPut.log("updateUserInfo", 'userId:' + cc.wwx.UserInfo.userId + ' userName:' + cc.wwx.UserInfo.userName + ' userPic:' + cc.wwx.UserInfo.userPic);
+            cc.wwx.OutPut.log("updateUserInfo1", 'userId:' + cc.wwx.UserInfo.userId + ' userName:' + cc.wwx.UserInfo.userName + ' userPic:' + cc.wwx.UserInfo.userPic);
             cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeLoginSDKSuccess, [code, local_uuid, result.userName, result.userId]);
             // 发送登录成功事件
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.SDK_LOGIN_SUCCESS);
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_LOGIN_SUCCESS);
             let token = result.token;
-            cc.wwx.OutPut.log("updateUserInfo", 'token:' + token);
+            cc.wwx.OutPut.log("updateUserInfo2", 'token:' + token);
 
             cc.wwx.WeChat.guideStatisticalball();
             cc.wwx.UserInfo.wxEnterInfo = null;
-            cc.wwx.Storage.setItem(this.SESSION_KEY,token)
+            cc.wwx.Storage.setItem(this.SESSION_KEY,token);
+            cc.wwx.OutPut.log("updateUserInfo3", 'token:' + token);
 
         },
         /**

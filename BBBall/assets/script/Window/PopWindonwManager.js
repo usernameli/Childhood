@@ -70,6 +70,10 @@ cc.Class({
         },
         popWindow(windowName,componentName,params)
         {
+            if(this.findWindowByName(windowName))
+            {
+                return;
+            }
 
             var baseScene = this.getScene();
             let self = this;
@@ -97,7 +101,7 @@ cc.Class({
         },
         showWifiView(windowName)
         {
-            if(this.isConnecting)
+            if(this.isConnecting || this.findWindowByName(windowName))
             {
                 return;
             }
@@ -125,6 +129,20 @@ cc.Class({
                 }
             });
 
+        },
+        findWindowByName(windowName)
+        {
+            let windowF = false;
+            for(let window = 0; window < this._windowList.length;window++)
+            {
+                if(this._windowList[window]["windowName"] == windowName)
+                {
+                    windowF = true;
+                    break;
+                }
+            }
+
+            return windowF
         },
         hideWifiView()
         {

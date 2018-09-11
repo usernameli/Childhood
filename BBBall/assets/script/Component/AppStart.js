@@ -57,7 +57,8 @@ window.initMgr = function() {
         RankNotify : 'RankNotify',  // 排行榜普通分享，炫耀，支持发给好友
         TaskDouble : 'TaskDouble',  // 任务奖励加倍，指定为群分享
         CashExchange : 'cash', // 提现分享
-        DailyInvite : 'DailyInvite', // 日常邀请
+        DailyInvite : 'invite_friend', // 日常邀请
+
         MatchResult : 'matchResult',  // 比赛结算分享
         MatchFix5: 'MatchFix5',                          // 5元红包赛
         MatchFix20: 'MatchFix20',                        // 20元红包赛
@@ -76,7 +77,10 @@ window.initMgr = function() {
         invite:{
             oneGroupDayCount:1//同一个群一天最多分享次数:超过次数将不再向服务器获取奖励,并且提醒用户分享到不同的群
         },
+        FetchGroupID:{
+            oneGroupDayCount:1//同一个群一天最多分享次数:超过次数将不再向服务器获取奖励,并且提醒用户分享到不同的群
 
+        },
         SegmentUp:{
             painting :true, //升星分享指定为截屏分享模式
         },
@@ -242,9 +246,12 @@ window.initMgr = function() {
 
 
     cc.wwx.WeChat = require('../SDK/weChat');
+    cc.wwx.WeChat.initShareDefault();
     cc.wwx.WeChat.init();
     cc.wwx.Share = require('../Model/Share');
     cc.wwx.Share.init();
+    cc.wwx.ShareData = require('../Model/ShareData');
+
     cc.wwx.Invite = require('../Model/Invite');
 
 };

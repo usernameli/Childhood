@@ -232,11 +232,25 @@ cc.Class({
         let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
         if(itemNum == 0 && 100 > diamondNum) {
             //砖石不够
-            cc.wwx.TipManager.showMsg('您的钻石不足', 3);
+            cc.wwx.TipManager.showMsg('您的钻石不足,邀请好友可以获得钻石奖励', 3);
             return;
         }
-        this.demolitionBomb.active = true;
-        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB);
+        if(itemNum > 0)
+        {
+            this.demolitionBomb.active = true;
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB);
+
+        }
+        else
+        {
+            let that = this;
+            cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
+                {text:'您确定花费100钻石使用道具吗?',okCallBack:function () {
+                        that.demolitionBomb.active = true;
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB);
+
+                    }});
+        }
 
     },
     item2Click()
@@ -250,10 +264,22 @@ cc.Class({
         let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
         if(itemNum === 0 && 100 > diamondNum) {
             //砖石不够
-            cc.wwx.TipManager.showMsg('您的钻石不足', 1);
+            cc.wwx.TipManager.showMsg('您的钻石不足,邀请好友可以获得钻石奖励', 1);
             return;
         }
-        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL);
+        if(itemNum > 0)
+        {
+
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL);
+
+        }
+        else
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
+                {text:'您确定花费100钻石使用道具吗?',okCallBack:function () {
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL);
+                    }});
+        }
 
     },
 
@@ -266,10 +292,21 @@ cc.Class({
         let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
         if(itemNum === 0 && 100 > diamondNum) {
             //砖石不够
-            cc.wwx.TipManager.showMsg('您的钻石不足', 1);
+            cc.wwx.TipManager.showMsg('您的钻石不足,邀请好友可以获得钻石奖励', 1);
             return;
         }
-        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS);
+        if(itemNum > 0)
+        {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS);
+
+        }
+        else
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
+                {text:'您确定花费100钻石使用道具吗?',okCallBack:function () {
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS);
+                    }});
+        }
 
     },
     item4Click()
@@ -281,10 +318,22 @@ cc.Class({
         let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
         if(itemNum && 100 > diamondNum) {
             //砖石不够
-            cc.wwx.TipManager.showMsg('您的钻石不足', 1);
+            cc.wwx.TipManager.showMsg('您的钻石不足,邀请好友可以获得钻石奖励', 1);
             return;
         }
-        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
+
+        if(itemNum > 0)
+        {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
+
+        }
+        else
+        {
+            cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
+                {text:'您确定花费100钻石使用道具吗?',okCallBack:function () {
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
+                    }});
+        }
 
     },
     clickBallCallBack()

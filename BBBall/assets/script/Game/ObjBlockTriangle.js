@@ -51,6 +51,7 @@ cc.Class({
     onBeginContact(contact, self, other)
     {
         this.splashNode.active = true;
+        cc.wwx.AudioManager.playBrick();
 
         if (this._labelNum > 1)
         {
