@@ -90,6 +90,7 @@ cc.Class({
     _ballRecoverNow()
     {
 
+
         if(this._isSports)
         {
 

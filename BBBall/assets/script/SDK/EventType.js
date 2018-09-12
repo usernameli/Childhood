@@ -45,7 +45,7 @@ cc.Class({
         WEIXIN_LOGIN_SUCCESS: 'weixin_login_success',
         WEIXIN_LOGIN_FAIL: 'weixin_login_fail',
 
-        MSG_UPDATE_DIAMOND: 'msg_update_diamond',       // 钻石信息更新
+        MSG_UPDATE_DIAMOND: 'msg_update_diamond',       // 宝石信息更新
         MSG_WX_SHARE_SUCCESS:'msg_wx_share_success',        //分享成功
 
         GET_USER_FEATURE_SUCCESS: 'GET_USER_FEATURE_SUCCESS',
@@ -82,6 +82,7 @@ cc.Class({
 
         ACTION_QUERY: 'query',
         ACTION_USE_BALL_ITEM:'use_ball_item',//使用球球
+        ACTION_CONSUME_ITEM:'consume_item',//消耗道具
 
         ACTION_BALL_START_LINEARVELOCITY:'ball_start_linearvelocity', //球球线性运动
         ACTION_BALL_STOP_LINEARVELOCITY:'action_ball_stop_linearvelocity',//球球线性运动停止

@@ -116,14 +116,14 @@ cc.Class({
         if(this._ballItemList["price_diamond"] > diamondNum)
         {
             //砖石不够
-            cc.wwx.TipManager.showMsg('您的钻石不足', 3);
+            cc.wwx.TipManager.showMsg('您的宝石不足', 3);
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_CHANGE_TAB_SHOP,{index:1});
         }
         else
         {
             let self = this;
             cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
-                {text:'您确定使用'+this._ballItemList["price_diamond"]+"钻石兑换" + this._ballItemList["name"]+"吗？",okCallBack:function () {
+                {text:'您确定使用'+this._ballItemList["price_diamond"]+"宝石兑换" + this._ballItemList["name"]+"吗？",okCallBack:function () {
                         cc.wwx.TCPMSG.exchange(self._ballItemList["id"])
                     }});
 

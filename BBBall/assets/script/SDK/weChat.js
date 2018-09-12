@@ -10,7 +10,7 @@ cc.Class({
             wx.onShow(function(res){
                 try {
 
-                    cc.wwx.OutPut.warn('onShow query:' + JSON.stringify(res));
+                    cc.wwx.OutPut.log('onShow query:' + JSON.stringify(res));
                     cc.wwx.UserInfo.query = cc.wwx.Util.deepCopy(res.query);
                     cc.wwx.UserInfo.wxEnterInfo = res;
                 } catch (e) {
@@ -134,8 +134,20 @@ cc.Class({
                     cc.wwx.SystemInfo.SYS.networkType = res['networkType'];
                 }
             });
+
+            this.initShareCanvas();
         },
 
+        initShareCanvas () {
+            if (!CC_WECHATGAME) { return; }
+            if (!this.isOpenDataContextValid()) { return; }
+
+            var openDataContext = wx.getOpenDataContext();
+            var params = {
+                method : 'initShareCanvas'
+            };
+            openDataContext.postMessage(params);
+        },
         /**
          * 导量统计
          * @param result
@@ -244,7 +256,7 @@ cc.Class({
                 const updateManager = wx.getUpdateManager();
                 updateManager.onCheckForUpdate(function (res) {
                     // 请求完新版本信息的回调
-                    cc.wwx.OutPut.warn('下载更新 hasUpdate：' + JSON.stringify(res));
+                    cc.wwx.OutPut.log('下载更新 hasUpdate：' + JSON.stringify(res));
                 });
                 updateManager.onUpdateReady(function () {
                     // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
@@ -276,23 +288,7 @@ cc.Class({
             wx.triggerGC();
         },
 
-        openSetting:function() {
-            if (!CC_WECHATGAME) { return; }
-            wx.openSetting({
-                success: function(res) {
-                    cc.wwx.OutPut.log('set user info success:', res)
-                    if (res.authSetting['scope.userInfo'] == true) {
-                        cc.wwx.SDKLogin.wxUserInfo2({setting:true});
-                    }
-                },
-                fail: function(res) {
-                    cc.wwx.OutPut.log('set user info fail:', res)
-                },
-                complete: function(res) {
-                    cc.wwx.OutPut.log('set user info complete:', res)
-                }
-            });
-        },
+
 
         purchase : function(prodId, prodPrice, prodName, prodCount) {
             if (!CC_WECHATGAME) {
@@ -631,6 +627,7 @@ cc.Class({
         },
         // 上传排行榜数据
         uploadRank : function(cb) {
+            return;
             if (!CC_WECHATGAME) { return; }
             if (!this.isOpenDataContextValid()) { return; }
 

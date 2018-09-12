@@ -49,9 +49,13 @@ cc.Class({
             default:null,
             type:cc.Node
         },
-        iconInner:{
+        headIcon:{
             default:null,
-            type:cc.Node
+            type:cc.Sprite
+        },
+        userName:{
+            default:null,
+            type:cc.Label
         },
         _openCheckIn:false,
         _tag:"GameHall"
@@ -59,20 +63,23 @@ cc.Class({
     },
     onLoad()
     {
-        if(!cc.wwx)
-        {
-            initMgr();
-        }
 
+        this.loginSuccessCallBack();
         cc.wwx.AudioManager.playMusic(this.audioBg);
         this._openCheckIn = false;
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_LOGIN_SUCCESS, this.loginSuccessCallBack, this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,this.daily_checkin_status,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_INVITE_CONF,this.invate_conf_status,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RANK_POP,this._rankPopWindow,this);
+    },
+    gameBagData()
+    {
+        //更新钻石数量
+        this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
     },
     loginSuccessCallBack()
     {
@@ -81,36 +88,28 @@ cc.Class({
             cc.wwx.Loader.loadImg(cc.wwx.UserInfo.userPic, this.headIcon);
             this.userName.string = cc.wwx.UserInfo.userName;
             this.headBG.active = true;
-
         }
         else
         {
             this.headBG.active = false;
         }
     },
-    _createDisplay () {
-        this.scheduleOnce(function(){
-            let node = new cc.Node();
-            this.display = node.addComponent(cc.Sprite);
-            this.iconInner.removeAllChildren(true);
-            this.iconInner.addChild(node);
-            node.setAnchorPoint(0,0.5);
-        }, 1);
-    },
+
     start()
     {
-        this.tex = new cc.Texture2D();
         // 获取玩家微信信息
         if (CC_WECHATGAME && !cc.wwx.UserInfo.wxAuthor) {
-            // cc.wwx.SDKLogin.wxUserInfo1();
-            // this._createDisplay();
-            // cc.wwx.WeChat.drawUserInfo(cc.size(310 , 100))
+
+
+            // 低版本兼容处理,微信wx.getUserInfo()方法已经不弹授权了,度需要用微信授权按钮
+            cc.wwx.SDKLogin.wxUserInfo1();
+
+
         }
 
 
         cc.wwx.TCPMSG.getDaily_checkin_status();
         cc.wwx.TCPMSG.getInvite();
-
 
         let musicSwith = cc.wwx.AudioManager.getAudioMusicSwitch();
         let effectSwith = cc.wwx.AudioManager.getAudioEffectSwitch();
@@ -135,6 +134,7 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_INVITE_CONF,this.invate_conf_status,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_RANK_POP,this._rankPopWindow,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_LOGIN_SUCCESS, this.loginSuccessCallBack, this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
 
     },
     invate_conf_status(params)
@@ -307,20 +307,5 @@ cc.Class({
 
         //皮肤
     },
-    // 刷新开放数据域的纹理
-    _updateSubDomainCanvas () {
 
-        var openDataContext = wx.getOpenDataContext();
-        var sharedCanvas = openDataContext.canvas;
-        this.tex.initWithElement(sharedCanvas);
-        this.tex.handleLoadedTexture();
-        this.display.spriteFrame = new cc.SpriteFrame(this.tex);
-    },
-    update()
-    {
-        if (CC_WECHATGAME && this.tex && this.display) {
-            this._updateSubDomainCanvas();
-            return;
-        }
-    }
 });

@@ -38,6 +38,10 @@ cc.Class({
 
 
     },
+    reloadData()
+    {
+        this.updateItem(this.itemID);
+    },
     getRewardCallBack()
     {
         cc.wwx.TCPMSG.getReward(this.itemID - 1);

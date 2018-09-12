@@ -69,12 +69,14 @@ cc.Class({
         {
             cc.wwx.AudioManager.playGameResultFailed();
         }
+        this.experienceLabelOwn.string = gameData["curProgressValue"] ;
+        this.experienceLabelSum.string = "/" + gameData['maxProgressValue'];
+        this.experienceProgress.progress = gameData["curProgressValue"]/gameData['maxProgressValue'];
+
         if(cc.wwx.UserInfo.playMode === "level")
         {
 
-            this.experienceLabelOwn.string = gameData["curProgressValue"] ;
-            this.experienceLabelSum.string = "/" + gameData['maxProgressValue'];
-            this.experienceProgress.progress = gameData["curProgressValue"]/gameData['maxProgressValue']
+
             this.levelNode.active = true;
             this.tropNode.active = false;
 
@@ -210,12 +212,21 @@ cc.Class({
         }
         else
         {
-            cc.wwx.MapCheckPoint.get100MapCheckPointData(function (checkPointData) {
-                cc.wwx.OutPut.log("clickItemCallBack: " + JSON.stringify(checkPointData));
-                cc.wwx.UserInfo.checkPointData = checkPointData;
+            if(cc.wwx.UserInfo.playMode === "classic")
+            {
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_RESTART);
 
-            });
+            }
+            else
+            {
+                cc.wwx.MapCheckPoint.get100MapCheckPointData(function (checkPointData) {
+                    cc.wwx.OutPut.log("clickItemCallBack: " + JSON.stringify(checkPointData));
+                    cc.wwx.UserInfo.checkPointData = checkPointData;
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_RESTART);
+
+                });
+            }
+
             this.closeWindow();
 
         }

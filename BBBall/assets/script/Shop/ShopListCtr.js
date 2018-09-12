@@ -45,6 +45,7 @@ cc.Class({
         this.bufferZone = this.spawnCount * (this.itemTemplate.height + this.spacing) / 2;
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_INVITE_CONF,this.invateConfData,this);
 
 
         this.initialize();
@@ -53,6 +54,12 @@ cc.Class({
     onDestroy()
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_INVITE_CONF,this.invateConfData,this);
+
+    },
+    invateConfData()
+    {
+        this.reloadData();
 
     },
     gameBagData()

@@ -22,6 +22,21 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+        //消耗道具
+        consumeItem:function(itemID,num)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_USER,
+                'params' : {
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'count':num,
+                    'action':'consume_item',
+                    'itemId':itemID
+                }
+            };
+            this._sendCmd(params);
+
+        },
         //获取背包信息
         getBagInfo: function() {
             var params = {
@@ -137,8 +152,8 @@ cc.Class({
             this._sendCmd(params);
         },
         /*
-     * 领取分享奖励
-     */
+         * 领取分享奖励
+         */
         getShareReward: function(pointId) {
             if (!pointId || typeof pointId != 'number') {
                 return;

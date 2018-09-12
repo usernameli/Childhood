@@ -37,7 +37,11 @@ cc.Class({
     },
     objsBreak()
     {
-        this.node.destroy();
+        if(this.bomb.active)
+        {
+            this.node.destroy();
+
+        }
     },
     objBombEndCallBack()
     {
@@ -57,9 +61,9 @@ cc.Class({
 
             this._anim.play();
             cc.wwx.AudioManager.playBomb();
-
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,{bomPosY:this.node.y});
             this.bomb.active = false;
+
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_OBJ_BOMB,{bomPosY:parseInt(this.node.y)});
         }
     },
 

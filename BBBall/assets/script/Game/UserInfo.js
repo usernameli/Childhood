@@ -32,7 +32,7 @@ cc.Class({
         bagData: {
             m_normalItemList:[], //背包数据
             'diamondInfo': {},
-            'diamondCount': 0   // 真实的钻石个数
+            'diamondCount': 0   // 真实的宝石个数
         },
         ballInfo:{
             speed:1500,
@@ -106,7 +106,7 @@ cc.Class({
                 for (let  i = 0 ; i < bagList.length ; i ++){
                     let bagInfo = bagList[i];
                     let bagID = bagInfo["id"];
-                    // 钻石
+                    // 宝石
                     if (bagID == 1011){
                         this.bagData.diamondInfo = bagInfo;
                         this.bagData.diamondCount = bagInfo["num"];

@@ -256,7 +256,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "5fRY9gXSlK5LCtOGkIQgJr"
+    "_id": "e26m5ZhdtEn4Qpc1tdVD0A"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -360,7 +360,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "039qo8/dJC7b6d++Y/RW4T"
+    "_id": "71D5in0tNLlI6eCmMn63JP"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -459,7 +459,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "11emIQ1kZN35L6LH2V4uPY"
+    "_id": "e299JT21hO6Ln6ilHHFca/"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -627,7 +627,7 @@
     "rotatePerS": 0,
     "rotatePerSVar": 0,
     "_N$preview": true,
-    "_id": "b31vU2eaxIFbwvarrBkmQt"
+    "_id": "93GLppt0dAHZfQSguUHMpU"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -742,7 +742,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "20N+1yzm5ARZUEkpvpBrAY"
+    "_id": "28VrORaeVHE5ZJgfT5Lbpw"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -846,7 +846,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "06YldhvcpDpoNRblShcEZi"
+    "_id": "25ojLzrGpKTqF16SJUTT+1"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -950,7 +950,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "3dqylXeypMEZykLWrjy7ks"
+    "_id": "f3Gm7oRvBFUbGo2it2idhd"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -985,7 +985,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "5dnN/gwVFKybzvqBThOxpg"
+    "_id": "b3ZwpEgh1LeIogFDb3iFhr"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -1011,7 +1011,7 @@
       "width": 60,
       "height": 60
     },
-    "_id": "90IHx0oeJOwZwmsP6Yp7ml"
+    "_id": "e1BIhEVQVIfqj7O/symUV/"
   },
   {
     "__type__": "cc.Animation",
@@ -1030,7 +1030,7 @@
       }
     ],
     "playOnLoad": false,
-    "_id": "ffbabtLnxNRaUKzFLpk943"
+    "_id": "64FwYttTZG/JKZcgXVUoWN"
   },
   {
     "__type__": "f08e1+inX5IHqbfUEHJ0V+S",
@@ -1056,7 +1056,7 @@
     },
     "_anim": null,
     "_labelNum": 0,
-    "_id": "b5GIWiLU5NYof9hhLWbEbt"
+    "_id": "dfS6h8rONDdJqSpEWRMOWg"
   },
   {
     "__type__": "cc.PrefabInfo",

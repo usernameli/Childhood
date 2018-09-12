@@ -75,7 +75,9 @@ cc.Class({
     },
     haveBombObj(argument)
     {
-        if(parseInt(argument["bomPosY"]) === this.node.y)
+        cc.wwx.OutPut.log("haveBombObj: ",JSON.stringify(argument));
+        cc.wwx.OutPut.log("this.node.y: ",parseInt(this.node.y));
+        if(Math.abs(parseInt(argument["bomPosY"]) - parseInt(this.node.y)) < 2)
         {
             this.objsBreak();
 

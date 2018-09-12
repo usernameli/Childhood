@@ -147,6 +147,7 @@ cc.Class({
     gameRestart()
     {
 
+        this._gameOver = true;
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_REMOVE_OBJ_BLOCKS);
         let self = this;
         setTimeout(function () {
@@ -345,10 +346,6 @@ cc.Class({
             }
         }
 
-
-
-
-
         for(let i = hallAhall - 1,j = hallAIndex - 1; i >= 0,j >= hallAhall;i--,j--)
         {
             let dataList = pointCheckData[i];
@@ -516,6 +513,9 @@ cc.Class({
             this.node.addChild(objPrefab);
             let posY = -1 * (84 + (showRowNum - haveShowRow - 1) * (this._objHeight + this._space) + this._objHeight / 2);
             let posX =  this._boundary + this._objWidth / 2 + column * (this._objWidth + this._space);
+
+            cc.wwx.OutPut.log("objsPrefab posX: ",posX);
+            cc.wwx.OutPut.log("objsPrefab posY: ",posY);
             let ObjBlockSquare = objPrefab.getComponent(objsComponent);
             if(objsComponent === "ObjBlockPlus")
             {
@@ -531,7 +531,7 @@ cc.Class({
                 ObjBlockSquare.initLabelNum(dataValueLabel);
 
             }
-            objPrefab.setPosition(posX , posY);
+            objPrefab.setPosition(cc.v2(parseInt(posX) , parseInt(posY)));
         }
     },
 

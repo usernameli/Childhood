@@ -34,6 +34,7 @@ cc.Class({
 
             let sdkPath = cc.wwx.SystemInfo.loginUrl;
             let completeUrl = sdkPath + 'open/v6/user/loginBySnsIdNoVerify' + '?' + cc.wwx.Util.dataToUrlStr(dataObj);
+            // let token = null;
             let token = cc.wwx.Storage.getItem(this.SESSION_KEY);
             // let token = "7cc8c4d6-cd3a-4b36-ae2f-ae59a812473c";
             if (token && token !== '') {
@@ -206,103 +207,14 @@ cc.Class({
                     }
                     else
                     {
-                        self.wxUserInfo2({setting:true})
+                        getUserInfo();
                     }
                 }
             });
 
         },
 
-        /**
-         *  获取用户授权
-         * @param obj.setting 是否已经同意授权了
-         */
-        wxUserInfo2 (obj) {
-            obj = obj || {};
-            var self = this;
-            var getUserInfo = function() {
-                wx.getUserInfo({
-                    'lang' : 'zh_CN',
-                    success: function (res) {
-                        cc.wwx.OutPut.log('wx wxUserInfo2 ok:', JSON.stringify(res));
-                        var userInfo = res['userInfo'];
 
-                        wx.login({
-                            success: function (res) {
-                                if (res.code) {
-                                    let code = res.code;
-                                    self.loginBallWithCode(code, userInfo, function(res){
-                                        cc.wwx.UserInfo.wxAuthor = true;
-                                        if (typeof obj.onSuccess == 'function') {
-                                            obj.onSuccess(res);
-                                        }
-                                    }, function(errMsg){
-                                        if (typeof obj.onFail == 'function') {
-                                            obj.onFail(errMsg);
-                                        }
-                                    });
-                                } else {
-                                    if (typeof obj.onFail == 'function') {
-                                        obj.onFail();
-                                    }
-                                }
-                            }
-                        });
-                    },
-                    fail: function (res) {
-                        cc.wwx.OutPut.err('wx getUserInfo fail:', JSON.stringify(res));
-                        // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
-                        if (res.errMsg.indexOf('auth deny') > -1 || res.errMsg.indexOf('auth denied') > -1 ) {
-                            // 处理用户拒绝授权的情况
-                            cc.wwx.OutPut.log('wx getUserInfo fail:', 'to tip user');
-                            wx.showModal({
-                                title: '授权提示',
-                                content: '获取用户信息，请确认授权！',
-                                showCancel: false,
-                                success: function () {
-                                    cc.wwx.WeChat.openSetting();
-                                }
-                            });
-                        }
-                        if (typeof obj.onFail == 'function') {
-                            obj.onFail();
-                        }
-                    }
-                });
-            };
-            if (obj.setting) {
-                getUserInfo();
-            } else {
-                // 获取用户授权情况
-                wx.getSetting({
-                    success: function (res) {
-                        cc.wwx.OutPut.log('get user setting :', res);
-                        var authSetting = res.authSetting;
-                        if (authSetting['scope.userInfo'] === true) {
-                            cc.wwx.UserInfo.wxAuthor = true;
-                            // 用户已授权
-                            cc.wwx.OutPut.info('wxUserInfo2.auth.ok');
-                            if (typeof obj.onSuccess == 'function') {
-                                obj.onSuccess();
-                            }
-                        } else if (authSetting['scope.userInfo'] === false){
-                            // 用户已拒绝授权。处理用户拒绝授权的情况，跳出提示
-                            wx.showModal({
-                                title: '授权提示',
-                                content: '获取用户信息失败，请确认授权！',
-                                showCancel: false,
-                                success: function () {
-                                    cc.wwx.WeChat.openSetting();
-                                }
-                            });
-                        } else {
-                            // 未询问过用户授权
-                            getUserInfo();
-                        }
-                    }
-                });
-            }
-        },
 
         loginBallWithCode: function (code, userInfo,onSuccess,onFail) {
             if (!CC_WECHATGAME) {

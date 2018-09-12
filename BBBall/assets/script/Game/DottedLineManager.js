@@ -33,7 +33,6 @@ cc.Class({
     onLoad: function () {
 
         this._ctx = this.getComponent(cc.Graphics);
-        this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
 
         this.gameInit();
         this.node.on(cc.Node.EventType.TOUCH_START, this._touchStartCallBack, this);
@@ -111,6 +110,8 @@ cc.Class({
     },
     gameInit()
     {
+        this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
+
         this._ballList = [];
         this.isBallSporting = false;
         this.isFirstBallCome = false;
@@ -244,7 +245,7 @@ cc.Class({
         cc.wwx.OutPut.log("_drawDottleLine touchPoint : ",JSON.stringify(touchPoint));
         cc.wwx.OutPut.log("_drawDottleLine this.center : ",JSON.stringify(this.center));
 
-        if(touchPoint.y <= this.center.y)
+        if(touchPoint.y <= this.center.y + 10)
         {
             return;
         }

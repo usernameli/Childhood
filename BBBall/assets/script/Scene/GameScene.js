@@ -70,13 +70,14 @@ cc.Class({
 
 
         this.init();
-        this._ballSporting = false;
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB_END,this.demolitionBombEnd,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GUIDE_ANIMATION_END,this.guideAnimationEnd,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_SPORTS,this.ballSports,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_OBJ_BREAK,this.ballBomb,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_CONSUME_ITEM,this.consumeItemCallBack,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
 
     },
     gameRestart()
@@ -88,6 +89,7 @@ cc.Class({
     {
         this._score = 0;
         this._sumScore = 0;
+        this._ballSporting = false;
         cc.wwx.AudioManager.playGameStart();
     },
     start()
@@ -104,6 +106,12 @@ cc.Class({
 
         }
 
+    },
+    gameBagData()
+    {
+        let list = cc.wwx.UserInfo.bagData.m_normalItemList;
+
+        this.refreshBottomItem(list);
     },
     guideAnimationEnd()
     {
@@ -158,12 +166,45 @@ cc.Class({
         cc.wwx.OutPut.log(this._tag,"onDestroy");
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB_END,this.demolitionBombEnd,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_CONSUME_ITEM,this.consumeItemCallBack,this);
 
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_SPORTS,this.ballSports,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_OBJ_BREAK,this.ballBomb,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GUIDE_ANIMATION_END,this.guideAnimationEnd,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
 
+    },
+    consumeItemCallBack(argument)
+    {
+        //{"cmd":"user","params":{"gameId":101,"count":1,"action":"consume_item","itemId":1012,"userId":20006,"version":2.25,"clientId":"H5_1.21_weixin.weixin.0-hall101.weixin.test"}}
+        cc.wwx.OutPut.log(this._tag,"consumeItemCallBack: ",JSON.stringify(argument));
+
+        if(argument["action"]==="consume_item")
+        {
+            if(argument["itemId"] == 1012)
+            {
+                this.demolitionBomb.active = true;
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB);
+
+            }
+            else if(argument["itemId"] == 1015)
+            {
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL);
+
+            }
+            else if(argument["itemId"] == 1014)
+            {
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS);
+
+            }
+            else if(argument["itemId"] == 1013)
+            {
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
+
+            }
+
+        }
     },
     ballBomb(argument)
     {
@@ -226,115 +267,56 @@ cc.Class({
     item1Click()
     {
 
-        cc.wwx.AudioManager.playAudioButton();
-        let itemNum = cc.wwx.UserInfo.getBagItemNum("1012");
-        //爆炸销毁一部分砖块
-        let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
-        if(itemNum == 0 && 100 > diamondNum) {
-            //砖石不够
-            cc.wwx.TipManager.showMsg('您的钻石不足,邀请好友可以获得钻石奖励', 3);
-            return;
-        }
-        if(itemNum > 0)
-        {
-            this.demolitionBomb.active = true;
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB);
+        this.userItem("1012");
 
-        }
-        else
-        {
-            let that = this;
-            cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
-                {text:'您确定花费100钻石使用道具吗?',okCallBack:function () {
-                        that.demolitionBomb.active = true;
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB);
-
-                    }});
-        }
 
     },
     item2Click()
     {
 
 
-        cc.wwx.AudioManager.playAudioButton();
-        //添加5个小球
-        let itemNum = cc.wwx.UserInfo.getBagItemNum("1015");
-        //爆炸销毁一部分砖块
-        let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
-        if(itemNum === 0 && 100 > diamondNum) {
-            //砖石不够
-            cc.wwx.TipManager.showMsg('您的钻石不足,邀请好友可以获得钻石奖励', 1);
-            return;
-        }
-        if(itemNum > 0)
-        {
+        this.userItem("1015");
 
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL);
-
-        }
-        else
-        {
-            cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
-                {text:'您确定花费100钻石使用道具吗?',okCallBack:function () {
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL);
-                    }});
-        }
 
     },
 
     item3Click()
     {
-        cc.wwx.AudioManager.playAudioButton();
-        //消除最后一行
-        let itemNum = cc.wwx.UserInfo.getBagItemNum("1014");
+        this.userItem("1014");
 
-        let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
-        if(itemNum === 0 && 100 > diamondNum) {
-            //砖石不够
-            cc.wwx.TipManager.showMsg('您的钻石不足,邀请好友可以获得钻石奖励', 1);
-            return;
-        }
-        if(itemNum > 0)
-        {
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS);
-
-        }
-        else
-        {
-            cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
-                {text:'您确定花费100钻石使用道具吗?',okCallBack:function () {
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_A_LINE_OF_EXPLOSIONS);
-                    }});
-        }
 
     },
     item4Click()
     {
+        this.userItem("1013");
+
+    },
+    userItem(itemID)
+    {
         cc.wwx.AudioManager.playAudioButton();
         //随机释放四个射线方块
-        let itemNum = cc.wwx.UserInfo.getBagItemNum("1013");
+        let itemNum = cc.wwx.UserInfo.getBagItemNum(itemID);
 
         let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
         if(itemNum && 100 > diamondNum) {
             //砖石不够
-            cc.wwx.TipManager.showMsg('您的钻石不足,邀请好友可以获得钻石奖励', 1);
+            cc.wwx.TipManager.showMsg('您的宝石不足,邀请好友可以获得宝石奖励', 1);
             return;
         }
 
         if(itemNum > 0)
         {
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
+            cc.wwx.TCPMSG.consumeItem(parseInt(itemID),1);
 
         }
         else
         {
             cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
-                {text:'您确定花费100钻石使用道具吗?',okCallBack:function () {
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
+                {text:'您确定花费100宝石使用道具吗?',okCallBack:function () {
+                        // cc.wwx.TCPMSG.consumeItem("1011",1);
+                        cc.wwx.TCPMSG.exchange(parseInt(itemID));
                     }});
         }
-
     },
     clickBallCallBack()
     {

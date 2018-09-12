@@ -573,9 +573,15 @@ function drawGroupRank(data)
         },
     });
 }
+function initShareCanvas () {
+    let sharedCanvas = wx.getSharedCanvas();
+    let sharedContext = sharedCanvas.getContext("2d");
+    sharedContext.clearRect(0, 0, 100, 100);
+}
 
 let transformMap = {
     'upload' : upload,
+    'initShareCanvas': initShareCanvas,
     'drawFriendRank' : drawRank,
     'drawGroupRank'  : drawGroupRank,
     'drawResultRank' : drawResultRank,

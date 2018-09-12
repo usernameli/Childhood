@@ -4,31 +4,8 @@ window.initMgr = function() {
     cc.wwx = {};
 
     console.log("初始化");
-    //为了保证在creator下正常 微信平台下注掉
-    cc.wwx.isInCreator = !("wechatgame"===cc.sys.browserType);
 
-    if(!CC_WECHATGAME){
 
-        window.wx = {
-            shareAppMessage (){},
-            onShareAppMessage(){},
-            onShow(){},
-            getUserInfo(){},
-            getSetting(){},
-            getStorage(){},
-            request(){},
-            showShareMenu(){},
-            onHide(){},
-            getNetworkType(){},
-            onNetworkStatusChange(){},
-            onError(){},
-            showToast(){},
-            getOpenDataContext(){},
-            createInnerAudioContext(){},
-            createGameClubButton(){},
-            getSystemInfo(){}
-        };
-    }
 
     //基础状态信息
     cc.wwx.StateInfo = {
@@ -268,32 +245,116 @@ cc.Class({
             default:null,
             type:cc.ProgressBar
         },
+        _userInfoButton:null,
     },
 
     onLoad()
     {
 
         this.initComponent();
+        this._userInfoButton = null;
         cc.game.addPersistRootNode(this.globalNode);
         cc.wwx.AudioManager = cc.wwx.AudioManager || this.globalNode.getChildByName('AudioManager').getComponent('AudioManager');
 
     },
+    createGetUserInfoBtn()
+    {
+        let self = this;
+        var info = wx.getSystemInfoSync();
+        var btnwidth = info['windowWidth'];
+        var btnheight = info['windowHeight'];
+        this._userInfoButton = wx.createUserInfoButton({
+            type: 'image',
+            text: '',
+            image: 'res/raw-assets/resources/images/share/Ball_LoginBtn.png',
+            style: {
+                left: btnwidth / 2 - 100,
+                top: btnheight/2 + 100,
+                width: 200,
+                height: 70,
+                lineHeight: 40,
+                backgroundColor: '#ff0000',
+                color: '#ffffff',
+                textAlign: 'center',
+                fontSize: 16,
+                borderRadius: 4
+            }
+        });
+        this._userInfoButton.onTap(function(res){
+            console.log("获取用户信息: "+JSON.stringify(res));
+            self.enterGame();
+        });
+        this._userInfoButton.show();
+    },
+    getOpenSetting()
+    {
+        let self = this;
+
+        wx.getSetting({
+            success: function (res) {
+                cc.wwx.OutPut.log('get user setting :', JSON.stringify(res));
+                var authSetting = res.authSetting;
+                if (authSetting['scope.userInfo'] === true) {
+                    cc.wwx.UserInfo.wxAuthor = true;
+                    // 用户已授权 直接进入游戏
+                    // self.enterGame();
+                    self.createGetUserInfoBtn();
+
+                }
+                else
+                {
+                    self.createGetUserInfoBtn();
+                }
+            }
+        });
+
+
+    },
     start()
     {
-
-        cc.wwx.SDKLogin.login();
         let self = this;
-        self.loadingProgress.progress = 0.3;
-        cc.wwx.Timer.setTimer(this,function () {
+        if(CC_WECHATGAME)
+        {
+            if (cc.wwx.Util.compareVersion(cc.wwx.SystemInfo.SYS.SDKVersion, '2.0.1') < 0)
+            {
+                if (cc.wwx.Util.compareVersion(cc.wwx.SystemInfo.SYS.wechatType, '6.6.6') > 0)
+                {
+                    self.getOpenSetting();
+                }
+                else
+                {
+                    self.enterGame();
+                }
+            }
+            else
+            {
+                self.getOpenSetting();
+            }
+        }
+        else
+        {
+            self.enterGame();
+        }
 
-            self.loadingProgress.progress += 0.1;
-
-        },0.1,7,0)
-
+    },
+    enterGame()
+    {
+        cc.wwx.SDKLogin.login();
+        this.loadingProgress.progress = 0.3;
+        cc.wwx.Timer.setTimer(this,this.loadingCallBack,0.1,7,0)
+    },
+    loadingCallBack()
+    {
+        this.loadingProgress.progress += 0.1;
     },
     onDestroy()
     {
-
+        cc.wwx.OutPut.log("AppStar OnDestroy");
+        if(this._userInfoButton)
+        {
+            this._userInfoButton.destroy();
+        }
+        cc.wwx.Timer.cancelTimer(this,this.loadingCallBack)
 
     },
 

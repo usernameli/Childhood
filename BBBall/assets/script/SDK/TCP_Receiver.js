@@ -37,10 +37,35 @@ cc.Class({
             this.register(cc.wwx.EventType.ACTION_DAILY_INVITE_BIND_USER, this._onInviteBindUser);
             this.register(cc.wwx.EventType.CMD_USER, this._onUserInfo);
             this.register(cc.wwx.EventType.MSG_CUSTOM_RANK, this._onRankListInfo);
+            this.register(cc.wwx.EventType.ACTION_GET_REWARD, this._onGetReward);
 
 
 
 
+        },
+        _onGetReward(params)
+        {
+            let cmd = params["cmd"];
+            if(cmd === "get_reward")
+            {
+
+                let result = params['result'];
+                if(result['rewardType'] === "invite_friend")
+                {
+                    if(result['code'] === 1)
+                    {
+                        //重新更新邀请奖励
+                        cc.wwx.TCPMSG.getInvite();
+                    }
+                    else
+                    {
+                        cc.wwx.TipManager.showMsg(result['info'],1);
+                    }
+
+                }
+
+
+            }
         },
         _onRankListInfo(params)
         {
@@ -69,6 +94,11 @@ cc.Class({
                     cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_USE_BALL_ITEM);
 
                 }
+            }
+            else if(action === "consume_item")
+            {
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_CONSUME_ITEM,params["result"]);
+
             }
         },
         _onDailyInviteInfo(result){
@@ -166,7 +196,7 @@ cc.Class({
             var result = params['result'];
 
             if (result.info.indexOf('成功') >= 0) {
-                if (result.prodName.indexOf('钻石') >= 0) {
+                if (result.prodName.indexOf('宝石') >= 0) {
                     cc.wwx.TipManager.showMsg(`购买成功!`);
                 } else {
                     cc.wwx.TipManager.showMsg(`兑换成功!`);
@@ -222,7 +252,7 @@ cc.Class({
             // 分享发奖
             cc.wwx.Share.getShareRewards();
 
-            // cc.wwx.TCPMSG.bindInviteCode(20005);
+            // cc.wwx.TCPMSG.bindInviteCode(20004);
 
             // ty.UserInfo.query = {'burialId':'treasureChestHelp','inviteCode':10802};
             if (cc.wwx.UserInfo.query){

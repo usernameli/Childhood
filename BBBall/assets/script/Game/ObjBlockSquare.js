@@ -47,6 +47,7 @@ cc.Class({
     },
     objsBreak()
     {
+        cc.wwx.OutPut.log("objsBreak: ",this._labelNum);
         this.body.enabledContactListener = false;
         //生成粒子系统
         let particle = cc.instantiate(this.particlePrefab);
