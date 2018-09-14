@@ -627,7 +627,7 @@ cc.Class({
     {
         //上报分数
         this._gameOverState = false;
-
+        cc.wwx.UserInfo.currentStar = 0;
         cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
             cc.wwx.UserInfo.currentSocre,

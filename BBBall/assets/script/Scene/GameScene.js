@@ -314,7 +314,8 @@ cc.Class({
             cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",
                 {text:'您确定花费100宝石使用道具吗?',okCallBack:function () {
                         // cc.wwx.TCPMSG.consumeItem("1011",1);
-                        cc.wwx.TCPMSG.exchange(parseInt(itemID));
+                        cc.wwx.TCPMSG.consumeItem(parseInt(itemID),1);
+
                     }});
         }
     },

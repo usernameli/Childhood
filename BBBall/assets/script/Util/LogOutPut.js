@@ -111,6 +111,7 @@ cc.Class({
         },
 
         addLog (msg) {
+            return;
             this.tmpLogsForServer.push('【' + this.index + '】' + msg);
             this.index++;
             if (this.tmpLogsForServer.length > this.maxCount) {

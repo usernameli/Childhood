@@ -338,12 +338,12 @@ cc.Class({
                 let port = loginResult.tcpsrv.wsport || loginResult.tcpsrv.port; //优先使用wsport
                 let webSocketUrl;
                 if (cc.wwx.SystemInfo.loginUrl.indexOf("https://") > -1) {
-                    webSocketUrl = 'wss://' + ip + '/';
+                    webSocketUrl = 'wss://' + ip + ':' + port.toString() + '/';
                 }
                 else {
                     webSocketUrl = 'ws://' + ip + ':' + port.toString() + '/';
                 }
-                cc.wwx.OutPut.log(null, 'webSocketUrl:' + webSocketUrl);
+                cc.wwx.OutPut.log("initWebSocketUrl", 'webSocketUrl:' + webSocketUrl);
                 cc.wwx.SystemInfo.webSocketUrl = webSocketUrl;
                 cc.wwx.TCPClient.connect(cc.wwx.SystemInfo.webSocketUrl);
 

@@ -96,7 +96,7 @@ cc.Class({
             else
             {
                 this._usePrefabBall = this.ballPrefab[1];
-                cc.wwx.UserInfo.ballInfo.ballPosY = 20
+                cc.wwx.UserInfo.ballInfo.ballPosY = 20 + 108
 
             }
             this._createBall(this.ballMaxNum,0);

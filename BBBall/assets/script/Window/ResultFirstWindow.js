@@ -26,7 +26,7 @@ cc.Class({
         self.timerLabel.string = "10";
         self.timerProgressRed.fillRange = 1;
         cc.wwx.Timer.setTimer(this,this._timerCallBack,1,9,0);
-        cc.wwx.Timer.setTimer(this,this._timerCallBack1,0.01,999,0);
+        // cc.wwx.Timer.setTimer(this,this._timerCallBack1,0.01,999,0);
     },
     _timerCallBack1()
     {
@@ -37,12 +37,23 @@ cc.Class({
     {
         this.timerNum -= 1;
         this.timerLabel.string = this.timerNum.toString();
+        this.timerProgressRed.fillRange -= 0.1;
+
+        if(this.timerNum == 10)
+        {
+            this.skipCallBack();
+        }
+
     },
     onDestroy()
     {
         cc.wwx.Timer.cancelTimer(this,this._timerCallBack)
     },
     showVideoCallBack()
+    {
+
+    },
+    consumeDiamondCallBack()
     {
 
     },

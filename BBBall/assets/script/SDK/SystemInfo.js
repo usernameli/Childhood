@@ -7,7 +7,7 @@ cc.Class({
         cloudId:28,
         version:2.25,
         webSocketUrl: 'ws://192.168.10.88/',
-        loginUrl : "http://xdev.ks.shpuchi.com/",      //线上
+        loginUrl : "https://xol.mstar.xianleqipai.com/",      //线上
         // loginUrl : "http://localhost:9000/",      //自己仿真
         //  loginUrl : "https://ztfz.nalrer.cn/",      //征途仿真
         // loginUrl : "http://localhost:1337/open.andla.cn/"          //线上

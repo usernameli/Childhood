@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.1,
-      "y": 0.1,
+      "x": 0.19140625,
+      "y": 0.19140625,
       "z": 1
     },
     "_quat": {
@@ -962,6 +962,7 @@
     "loadingProgress": {
       "__id__": 16
     },
+    "_userInfoButton": null,
     "_id": "efWjuLcVVEP6tJtQBT8ypi"
   },
   {

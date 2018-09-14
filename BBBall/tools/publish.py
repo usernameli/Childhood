@@ -30,7 +30,7 @@ origin_assets_to_backup = [
     'resources/sounds'
 ]
 
-cdn_url = "http://xdev.ks.shpuchi.com:9002/ball"
+cdn_url = "https://cdn.mstar.xianleqipai.com/ball"
 odc_src = os.path.join(PROJ_PATH, 'odc')
 odc_target = os.path.join(build_dir, 'src')
 

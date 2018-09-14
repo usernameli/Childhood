@@ -229,6 +229,9 @@ window.initMgr = function() {
     cc.wwx.Share.init();
     cc.wwx.ShareData = require('../Model/ShareData');
 
+    cc.wwx.IOSSDK = require("../IOS/IOSSDK");
+    cc.wwx.IOSSDK.init();
+
     cc.wwx.Invite = require('../Model/Invite');
 
 };
@@ -297,8 +300,8 @@ cc.Class({
                 if (authSetting['scope.userInfo'] === true) {
                     cc.wwx.UserInfo.wxAuthor = true;
                     // 用户已授权 直接进入游戏
-                    // self.enterGame();
-                    self.createGetUserInfoBtn();
+                    self.enterGame();
+                    // self.createGetUserInfoBtn();
 
                 }
                 else
@@ -315,21 +318,40 @@ cc.Class({
         let self = this;
         if(CC_WECHATGAME)
         {
-            if (cc.wwx.Util.compareVersion(cc.wwx.SystemInfo.SYS.SDKVersion, '2.0.1') < 0)
-            {
-                if (cc.wwx.Util.compareVersion(cc.wwx.SystemInfo.SYS.wechatType, '6.6.6') > 0)
-                {
-                    self.getOpenSetting();
+
+            wx.getSetting({
+                success: function (res) {
+                    cc.wwx.OutPut.log('get user setting :', JSON.stringify(res));
+                    var authSetting = res.authSetting;
+                    if (authSetting['scope.userInfo'] === true) {
+                        cc.wwx.UserInfo.wxAuthor = true;
+                        // 用户已授权 直接进入游戏
+                        self.enterGame();
+                        // self.createGetUserInfoBtn();
+
+                    }
+                    else
+                    {
+                        if (cc.wwx.Util.compareVersion(cc.wwx.SystemInfo.SYS.SDKVersion, '2.0.1') < 0)
+                        {
+                            if (cc.wwx.Util.compareVersion(cc.wwx.SystemInfo.SYS.wechatType, '6.6.6') > 0)
+                            {
+                                self.getOpenSetting();
+                            }
+                            else
+                            {
+                                self.enterGame();
+                            }
+                        }
+                        else
+                        {
+                            self.getOpenSetting();
+                        }
+                    }
                 }
-                else
-                {
-                    self.enterGame();
-                }
-            }
-            else
-            {
-                self.getOpenSetting();
-            }
+            });
+
+
         }
         else
         {
