@@ -84,21 +84,21 @@ cc.Class({
                     // this.imageDic[urlString] = texture;
                 });
             };
-
+            var self = this;
             var loadType = this.dealHeadIconUrl(url,tag);
             if (liftComponent) {
                 callLoader(loadType);
                 // liftComponent.schedule(callLoader, 5, cc.macro.REPEAT_FOREVER, 0);
                 liftComponent.scheduleOnce(function(){
-                    var loadType2 = this.dealHeadIconUrl(url, '/96');
+                    var loadType2 = self.dealHeadIconUrl(url, '/96');
                     callLoader(loadType2);
                 }, 5);
                 liftComponent.scheduleOnce(function(){
-                    var loadType2 = this.dealHeadIconUrl(url, '/64');
+                    var loadType2 = self.dealHeadIconUrl(url, '/64');
                     callLoader(loadType2);
                 }, 10);
                 liftComponent.scheduleOnce(function(){
-                    var loadType2 = this.dealHeadIconUrl(url, '/46');
+                    var loadType2 = self.dealHeadIconUrl(url, '/46');
                     callLoader(loadType2);
                 }, 15);
             } else {

@@ -28,6 +28,16 @@ Array.prototype.removeValue = function(obj)
     this.splice(idx,1);
 };
 
+Array.prototype.compareArray = function (x, y) {//比较函数
+    if (x < y) {
+        return -1;
+    } else if (x > y) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+;
 
 Array.prototype.contains = function (obj) {
     var i = this.length;

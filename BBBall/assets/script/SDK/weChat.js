@@ -627,7 +627,6 @@ cc.Class({
         },
         // 上传排行榜数据
         uploadRank : function(cb) {
-            return;
             if (!CC_WECHATGAME) { return; }
             if (!this.isOpenDataContextValid()) { return; }
 

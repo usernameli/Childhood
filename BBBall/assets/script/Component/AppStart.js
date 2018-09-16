@@ -298,7 +298,6 @@ cc.Class({
                 cc.wwx.OutPut.log('get user setting :', JSON.stringify(res));
                 var authSetting = res.authSetting;
                 if (authSetting['scope.userInfo'] === true) {
-                    cc.wwx.UserInfo.wxAuthor = true;
                     // 用户已授权 直接进入游戏
                     self.enterGame();
                     // self.createGetUserInfoBtn();
@@ -324,7 +323,6 @@ cc.Class({
                     cc.wwx.OutPut.log('get user setting :', JSON.stringify(res));
                     var authSetting = res.authSetting;
                     if (authSetting['scope.userInfo'] === true) {
-                        cc.wwx.UserInfo.wxAuthor = true;
                         // 用户已授权 直接进入游戏
                         self.enterGame();
                         // self.createGetUserInfoBtn();

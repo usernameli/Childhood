@@ -101,6 +101,7 @@ cc.Class({
         ACTION_BALL_TOUCHBOTTOM:'action_ball_touchbottom', //球球到了最底层
         ACTION_BALL_DROP_WARNING:'action_ball_drop_warning', //球球马上到了最底层
         ACTION_A_LINE_OF_EXPLOSIONS:'action_a_line_of_explosions', //消除最后一行
+        ACTION_THIRD_LINE_OF_EXPLOSIONS:'action_3_line_of_explosions', //消除最后三行
         RANDOM_PLACEMENT_4_ELIMINATE:'random_placement_4_eliminate', //随机放置4个射线
         ACTION_RECOVERY_BALL:'action_recovery_ball', //收回球球
         ACTION_BALL_GAME_RESTART:'action_ball_game_restart',//游戏重新开始

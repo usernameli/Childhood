@@ -6,6 +6,7 @@ cc.Class({
         index: 0,
         log: function (){
             if (CC_WECHATGAME) {
+                return;
                 var strLog = this.getDateString() + cc.js.formatStr.apply(cc,arguments);
                 this.addLog(strLog);
             }
@@ -23,6 +24,7 @@ cc.Class({
 
         info: function () {
             if (CC_WECHATGAME) {
+                return;
                 var strLog = this.getDateString() + cc.js.formatStr.apply(cc,arguments);
                 this.addLog(strLog);
             }
@@ -40,6 +42,7 @@ cc.Class({
 
         warn: function(){
             if (CC_WECHATGAME) {
+                return;
                 var strLog = this.getDateString() + cc.js.formatStr.apply(cc,arguments);
                 this.addLog(strLog);
             }

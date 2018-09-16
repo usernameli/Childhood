@@ -92,13 +92,17 @@ cc.Class({
             if(this._userBallId <= 1021)
             {
                 this._usePrefabBall = this.ballPrefab[0];
+                cc.wwx.UserInfo.ballInfo.ballPosY = 15 + 108
+
             }
             else
             {
                 this._usePrefabBall = this.ballPrefab[1];
-                cc.wwx.UserInfo.ballInfo.ballPosY = 20 + 108
+                cc.wwx.UserInfo.ballInfo.ballPosY = 25 + 108
 
             }
+            this.center = cc.v2(this.node.width/ 2, cc.wwx.UserInfo.ballInfo.ballPosY);
+
             this._createBall(this.ballMaxNum,0);
         }
     },
@@ -122,11 +126,13 @@ cc.Class({
         if(this._userBallId <= 1021)
         {
             this._usePrefabBall = this.ballPrefab[0];
+            cc.wwx.UserInfo.ballInfo.ballPosY = 15 + 108
+
         }
         else
         {
             this._usePrefabBall = this.ballPrefab[1];
-            cc.wwx.UserInfo.ballInfo.ballPosY = 20 + 108
+            cc.wwx.UserInfo.ballInfo.ballPosY = 25 + 108
 
         }
 
@@ -144,7 +150,7 @@ cc.Class({
     },
     onDestroy()
     {
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
 
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_USE_BALL_ITEM,this.useBallItem,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
@@ -402,7 +408,7 @@ cc.Class({
         cc.wwx.AudioManager.playAudioButton();
 
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RECOVERY_BALL);
-        this.isBallSporting = false;
+        // this.isBallSporting = false;
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:this.center});
     },
     // called every frame

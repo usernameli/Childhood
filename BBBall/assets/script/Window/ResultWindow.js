@@ -197,18 +197,30 @@ cc.Class({
     continueBtnCallBack()
     {
 
-        if(this._gameResult && cc.wwx.UserInfo.playMode === "level")
+        if(cc.wwx.UserInfo.playMode === "level")
         {
-            //下一关
-            cc.wwx.UserInfo.checkPointID += 1;
             let self = this;
-            cc.wwx.MapCheckPoint.getMapCheckPointData(cc.wwx.UserInfo.checkPointID ,function (checkPointData) {
-                cc.wwx.UserInfo.checkPointData = checkPointData;
+
+            //下一关
+            if(this._gameResult)
+            {
+                cc.wwx.UserInfo.checkPointID += 1;
+                cc.wwx.MapCheckPoint.getMapCheckPointData(cc.wwx.UserInfo.checkPointID ,function (checkPointData) {
+                    cc.wwx.UserInfo.checkPointData = checkPointData;
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_RESTART);
+                    self.closeWindow();
+
+
+                });
+            }
+            else
+            {
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_RESTART);
                 self.closeWindow();
 
+            }
 
-            });
+
         }
         else
         {

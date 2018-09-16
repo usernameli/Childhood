@@ -31,6 +31,7 @@ origin_assets_to_backup = [
 ]
 
 cdn_url = "https://cdn.mstar.xianleqipai.com/ball"
+cdn_urldev = "https://cdndev.mstar.xianleqipai.com/ball"
 odc_src = os.path.join(PROJ_PATH, 'odc')
 odc_target = os.path.join(build_dir, 'src')
 

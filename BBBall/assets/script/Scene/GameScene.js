@@ -203,6 +203,14 @@ cc.Class({
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE);
 
             }
+            else if(argument["itemId"] == 1011)
+            {
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_THIRD_LINE_OF_EXPLOSIONS);
+                cc.wwx.PopWindowManager.remvoeWindowByName("prefab/ResultFirstWindow");
+
+
+
+            }
 
         }
     },

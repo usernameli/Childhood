@@ -26,7 +26,13 @@ cc.Class({
         self.timerLabel.string = "10";
         self.timerProgressRed.fillRange = 1;
         cc.wwx.Timer.setTimer(this,this._timerCallBack,1,9,0);
+
         // cc.wwx.Timer.setTimer(this,this._timerCallBack1,0.01,999,0);
+    },
+
+    thirdLineOfExplosions()
+    {
+        this.closeWindow();
     },
     _timerCallBack1()
     {
@@ -47,7 +53,8 @@ cc.Class({
     },
     onDestroy()
     {
-        cc.wwx.Timer.cancelTimer(this,this._timerCallBack)
+        cc.wwx.Timer.cancelTimer(this,this._timerCallBack);
+
     },
     showVideoCallBack()
     {
@@ -55,6 +62,7 @@ cc.Class({
     },
     consumeDiamondCallBack()
     {
+        cc.wwx.TCPMSG.consumeItem(1011,1);
 
     },
     skipCallBack()

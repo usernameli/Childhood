@@ -60,20 +60,27 @@ cc.Class({
         let linearVelocity = argument["linearVelocity"].clone();
         linearVelocity.mulSelf(this._speed);
         let self = this;
+        this._recoverFg = false;
+
         setTimeout(function () {
+
             if(self._noShut)
             {
-                self._isOnWall = true;
-                self._recoverFg = false;
                 return;
             }
             self.body.linearVelocity = linearVelocity;
-
-            self._recoverFg = false;
-            self._isOnWall = false;
             self.body.active = true;
+            self._isOnWall = false;
+
             self._isSports = true;
             self.body.enabledContactListener = true;
+
+            cc.wwx.OutPut.log('_recoverFg:', self._recoverFg);
+            cc.wwx.OutPut.log('_isOnWall:', self._isOnWall);
+            cc.wwx.OutPut.log('_isSports:', self._isSports);
+            cc.wwx.OutPut.log('self._noShut:', self._noShut);
+
+
             if(self._index === 1)
             {
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_SPORTS);
@@ -91,23 +98,38 @@ cc.Class({
     {
 
 
+        this._noShut = true;
+        this.body.active = false;
+
+
+        if(this._recoverFg)
+        {
+            return;
+        }
+
+
+        cc.wwx.OutPut.log('_ballRecoverNow _recoverFg:', this._recoverFg);
+        cc.wwx.OutPut.log('_ballRecoverNow _noShut:', this._noShut);
+
+        // cc.wwx.OutPut.log('_ballRecoverNow _isOnWall:', this._isOnWall);
+        // cc.wwx.OutPut.log('_ballRecoverNow _isSports:', this._isSports);
+
+
         if(this._isSports)
         {
 
-            this.body.active = false;
-            let self = this;
-            this._recoverFg = true;
-            this._isSports = false;
-            this.node.stopAllActions();
-            this.node.runAction(cc.sequence(cc.moveTo(0.1,this.dottedLineManager.center),cc.callFunc(function () {
-                self.onBeginContact(null,null,{tag:2},true);
 
-            })));
-            this._noShut = false;
+
+            this.onBeginContact(null,null,{tag:2},true);
+
+
         }
         else
         {
-            this._noShut = true;
+
+            this._isSports = true;
+            this.onBeginContact(null,null,{tag:2},true);
+            this._isSports = false;
 
 
         }
@@ -123,6 +145,8 @@ cc.Class({
 
             return;
         }
+        cc.wwx.OutPut.log('onBeginContact other.tag:', other.tag);
+
         switch (other.tag) {
             case 1://上面
                 break;
@@ -155,6 +179,8 @@ cc.Class({
 
                 }
                 this.dottedLineManager.ballOnWallNum += 1;
+                cc.wwx.OutPut.log("this.dottedLineManager.ballOnWallNum: " ,this.dottedLineManager.ballOnWallNum)
+                cc.wwx.OutPut.log("this.dottedLineManager.ballMaxNum: " ,this.dottedLineManager.ballMaxNum)
 
                 if(this.dottedLineManager.ballMaxNum == this.dottedLineManager.ballOnWallNum)
                 {
@@ -192,11 +218,6 @@ cc.Class({
                 nowLinearLength.mulSelf(this._speed);
                 this.body.linearVelocity = nowLinearLength;
             }
-        }
-
-        if(this._noShut)
-        {
-            this._ballRecoverNow();
         }
 
 
