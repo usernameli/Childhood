@@ -27,6 +27,8 @@ cc.Class({
         self.timerProgressRed.fillRange = 1;
         cc.wwx.Timer.setTimer(this,this._timerCallBack,1,9,0);
 
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS,this.wxShareSuccess,this);
+
         // cc.wwx.Timer.setTimer(this,this._timerCallBack1,0.01,999,0);
     },
 
@@ -54,10 +56,23 @@ cc.Class({
     onDestroy()
     {
         cc.wwx.Timer.cancelTimer(this,this._timerCallBack);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS,this.wxShareSuccess,this);
+
 
     },
-    showVideoCallBack()
+    wxShareSuccess(argument)
     {
+        cc.wwx.OutPut.log("ResultFirstWindow wxShareSuccess",JSON.stringify(argument));
+        if( !argument["isShareGroupId"] && argument["burialId"] === cc.wwx.BurialShareType.DailyInviteGroupAlive)
+        {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_THIRD_LINE_OF_EXPLOSIONS);
+            this.closeWindow();
+
+        }
+    },
+    shareWeixCallBack()
+    {
+        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupAlive);
 
     },
     consumeDiamondCallBack()

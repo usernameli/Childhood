@@ -45,9 +45,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 97,
-      "g": 97,
-      "b": 97,
+      "r": 200,
+      "g": 0,
+      "b": 0,
       "a": 255
     },
     "_contentSize": {
@@ -178,7 +178,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "30qFMPOgRGOoEuJj5aGEzT"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -277,7 +277,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "9drQCjLQpAK5bfGqynkR7p"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -318,7 +318,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "1f3aManH1HvonzTrnq4R7g"
+    "_id": ""
   },
   {
     "__type__": "cc.RigidBody",
@@ -342,7 +342,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "84rujfi6VKkqdrkhYOBcE0"
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -368,7 +368,7 @@
       "width": 60,
       "height": 60
     },
-    "_id": "d9vhoRghRAUpq5D4i2RV2F"
+    "_id": ""
   },
   {
     "__type__": "e33101EWnxDgaQ/kP5k5AJ7",
@@ -393,7 +393,7 @@
       "__uuid__": "450b87f6-89b8-4771-8e4b-e46c759b7c96"
     },
     "_labelNum": 0,
-    "_id": "f0kPjEJB1Ck5oWdvxrO7Zf"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

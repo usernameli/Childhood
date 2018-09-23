@@ -82,8 +82,17 @@ cc.Class({
         {
             this.rankNode.active = true;
             this.noRankTip.active = false;
-            this.rankName.string = rankList[itemId -1 ]["detail"]["name"];
-            this.rankSocre.string = rankList[itemId -1 ]["detail"]["rankValue"];
+            this.rankName.string = cc.wwx.Util.sliceStringToLength(rankList[itemId -1 ]["detail"]["name"],12);
+            if(this._rankIndex === 0)
+            {
+                this.rankSocre.string = "第" + rankList[itemId -1 ]["detail"]["rankValue"] + "关";
+
+            }
+            else
+            {
+                this.rankSocre.string = rankList[itemId -1 ]["detail"]["rankValue"];
+
+            }
             cc.wwx.Loader.loadImg(rankList[itemId -1 ]["detail"]["headUrl"], this.headNode);
 
 

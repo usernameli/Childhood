@@ -29,21 +29,16 @@ cc.Class({
         let randNum = Math.floor(Math.random() * this._labelNum+1);
         this._labelNum = randNum;
         this.labelText.string = this._labelNum.toString();
+        let randomColor = this.setRandomColor(this._labelNum);
+        this.node.color = new cc.Color(randomColor.r,randomColor.g,randomColor.b);
 
     },
     initLabelNum:function (num) {
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();
-        if(num >=50)
-        {
-            this.node.color =new cc.Color(150, 150, 150);
+        let randomColor = this.setRandomColor(this._labelNum);
+        this.node.color = new cc.Color(randomColor.r,randomColor.g,randomColor.b);
 
-        }
-        else
-        {
-            this.node.color =new cc.Color(255, 255, 255);
-
-        }
     },
     objsBreak()
     {
@@ -67,15 +62,8 @@ cc.Class({
 
         cc.wwx.AudioManager.playBrick();
 
-        if(this._labelNum >=50)
-        {
-            this.node.color =new cc.Color(150, 150, 150);
-        }
-        else
-        {
-            this.node.color =new cc.Color(255, 255, 255);
-
-        }
+        let randomColor = this.setRandomColor(this._labelNum);
+        this.node.color = new cc.Color(randomColor.r,randomColor.g,randomColor.b);
 
         if(this._labelNum > 1)
         {

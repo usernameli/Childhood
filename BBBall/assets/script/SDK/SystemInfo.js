@@ -6,9 +6,10 @@ cc.Class({
         intClientId: 23832,
         cloudId:28,
         version:2.25,
+        debug:true,
         webSocketUrl: 'ws://192.168.10.88/',
         loginUrl : "https://xol.mstar.xianleqipai.com/",      //线上服线上
-        loginUrl1 : "https://xdev.mstar.xianleqipai.com/",      //测试服线上
+        loginUrlDev : "https://xdev.mstar.xianleqipai.com/",      //测试服线上
         // loginUrl : "http://localhost:9000/",      //自己仿真
         //  loginUrl : "https://ztfz.nalrer.cn/",      //征途仿真
         // loginUrl : "http://localhost:1337/open.andla.cn/"          //线上
@@ -25,6 +26,8 @@ cc.Class({
         errorLogServer : "https://clienterr.touch4.me/api/bilog5/clientlog",
         SysInfo:'',
         SYS:{},
+        isScrollFlg:false,
+        reLogin:true,
         screenWidth:0,
         screenHeight:0,
         windowWidth:0,

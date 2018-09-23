@@ -25,16 +25,13 @@ window.initMgr = function() {
     cc.wwx.BurialShareType = {
         Default : "default",        //默认分享类型,分享到群
         Invite : "invite",          // 邀请好友
-        SegmentRecover : "segementRecover", // 天梯赛保段
-        SegmentUp : 'SegmentUp',   // 升段升星炫耀
-        UserInfo : "userInfo", //个人信息
-        FriendTableInvite : "FTInvite", //朋友桌邀请
-        FriendTableResult : "FTResult", //朋友桌结算
-        FetchGroupID : 'FetchGroupID', // 群排行
-        RankNotify : 'RankNotify',  // 排行榜普通分享，炫耀，支持发给好友
-        TaskDouble : 'TaskDouble',  // 任务奖励加倍，指定为群分享
-        CashExchange : 'cash', // 提现分享
-        DailyInvite : 'invite_friend', // 日常邀请
+
+        DailyInviteFriend : 'invite_friend', // 日常邀请好友
+        DailyInviteGroup : 'invate_group', // 日常分享群
+        DailyInviteGroupAlive: 'invate_alive', //日常分享群复活
+        DailyInviteGroupReward: 'invate_rewared',//分享奖励翻倍
+        DailyInviteGroupBox: 'invate_box',  //宝箱分享奖励
+        DailyInviteGroupBall: 'invate_ball',  //分享领取球球
 
         MatchResult : 'matchResult',  // 比赛结算分享
         MatchFix5: 'MatchFix5',                          // 5元红包赛
@@ -228,6 +225,8 @@ window.initMgr = function() {
     cc.wwx.Share = require('../Model/Share');
     cc.wwx.Share.init();
     cc.wwx.ShareData = require('../Model/ShareData');
+
+    cc.wwx.Gift = require("../Model/GiftBox");
 
     cc.wwx.IOSSDK = require("../IOS/IOSSDK");
     cc.wwx.IOSSDK.init();

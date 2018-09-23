@@ -30,8 +30,8 @@ origin_assets_to_backup = [
     'resources/sounds'
 ]
 
-cdn_url = "https://cdn.mstar.xianleqipai.com/ball"
-cdn_urldev = "https://cdndev.mstar.xianleqipai.com/ball"
+cdn_urldev = "https://cdn.mstar.xianleqipai.com/ball"
+cdn_url = "http://xdev.mstar.xianleqipai.com:9002/ball"
 odc_src = os.path.join(PROJ_PATH, 'odc')
 odc_target = os.path.join(build_dir, 'src')
 
@@ -61,7 +61,7 @@ def config_cdn(cdn):
         lines = []
         for line in f:
             if line.find('wxDownloader.REMOTE_SERVER_ROOT') >= 0:
-                lines.append('wxDownloader.REMOTE_SERVER_ROOT = "%s/";\n' % cdn)
+                lines.append('wxDownloader.REMOTE_SERVER_ROOT = "%s";\n' % cdn)
             else:
                 lines.append(line)
 

@@ -84,6 +84,8 @@ cc.Class({
         ACTION_USE_BALL_ITEM:'use_ball_item',//使用球球
         ACTION_CONSUME_ITEM:'consume_item',//消耗道具
 
+        ACTION_OPEN_BOX:'open_box',
+
         ACTION_BALL_START_LINEARVELOCITY:'ball_start_linearvelocity', //球球线性运动
         ACTION_BALL_STOP_LINEARVELOCITY:'action_ball_stop_linearvelocity',//球球线性运动停止
         ACTION_BALL_MOVE_DROP:'action_ball_move_drop',
@@ -127,6 +129,8 @@ cc.Class({
         ACTION_INVITE_CONF: 'invite_conf',
         ACTION_BIND_INVITE_INFO:'share_enter_game',
         ACTION_GET_REWARD:'get_reward',
+        ACTION_SHARE_REWARD:'share_reward',
+        ACTION_LEVEL_GIFT_CONF:'level_gift_conf',
 
         //排行榜
         ACTION_RANK_FRINED:'ball_rank_friend',

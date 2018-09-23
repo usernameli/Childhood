@@ -38,10 +38,19 @@ cc.Class({
             this.register(cc.wwx.EventType.CMD_USER, this._onUserInfo);
             this.register(cc.wwx.EventType.MSG_CUSTOM_RANK, this._onRankListInfo);
             this.register(cc.wwx.EventType.ACTION_GET_REWARD, this._onGetReward);
+            this.register(cc.wwx.EventType.ACTION_LEVEL_GIFT_CONF, this._onLevelGiftConf);
 
 
 
 
+        },
+        _onLevelGiftConf(params)
+        {
+            let cmd = params["cmd"];
+            if(cmd === "level_gift_conf")
+            {
+                cc.wwx.Gift.ParseGift(params['result'])
+            }
         },
         _onGetReward(params)
         {
@@ -126,12 +135,16 @@ cc.Class({
             {
                 if(tasks[taskIndex]['action'] === 'get_reward')
                 {
-                    cc.wwx.PopWindowManager.popWindow("prefab/CongratulationsWindow","CongratulationsWindow",tasks[taskIndex]['params']);
+                    cc.wwx.PopWindowManager.popWindow("prefab/CongratulationsWindow","CongratulationsWindow",tasks[taskIndex]['params'],1000);
 
                 }
                 else if(tasks[taskIndex]['action'] === 'pop_info_wnd')
                 {
-                    cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",{text: tasks[taskIndex]['params']["des"]});
+                    cc.wwx.PopWindowManager.popWindow("prefab/PopBoxWindow","PopBoxWindow",{text: tasks[taskIndex]['params']["des"]},1000);
+                }
+                else if(tasks[taskIndex]['action'] === 'open_box')
+                {
+                    cc.wwx.PopWindowManager.popWindow("prefab/GameBoxWindow","GameBoxWindow",{level:false},100);
                 }
             }
 
@@ -175,7 +188,11 @@ cc.Class({
             var result = params['result'];
             if (result.gameId === cc.wwx.SystemInfo.gameId) {
                 cc.wwx.UserInfo.parseGdata(result);
-                cc.wwx.SceneManager.switchScene("GameHall");
+                if(cc.wwx.SystemInfo.reLogin)
+                {
+                    cc.wwx.SceneManager.switchScene("GameHall");
+
+                }
 
             }
 
@@ -247,6 +264,7 @@ cc.Class({
 
             // 获取背包
             cc.wwx.TCPMSG.getBagInfo();
+            cc.wwx.TCPMSG.getLevelGiftConf();
             cc.wwx.TCPMSG.fetchPaymentList();
 
             // 分享发奖
@@ -263,6 +281,10 @@ cc.Class({
                         cc.wwx.TCPMSG.bindInviteCode(cc.wwx.UserInfo.query.inviteCode);
 
                     }
+
+                cc.wwx.UserInfo.query = {}
+
+
 
             }
 
@@ -321,6 +343,8 @@ cc.Class({
         },
 
         _onMsgTcpOpen () {
+            cc.wwx.PopWindowManager.hideWifiView();
+
             cc.wwx.TCPMSG.bindUser();
         },
 

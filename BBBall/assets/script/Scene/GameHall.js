@@ -57,6 +57,14 @@ cc.Class({
             default:null,
             type:cc.Label
         },
+        shopNode:{
+            default:null,
+            type:cc.Node
+        },
+        shareNode:{
+            default:null,
+            type:cc.Node
+        },
         _openCheckIn:false,
         _tag:"GameHall"
 
@@ -75,10 +83,29 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DAILY_CHECKIN_STATUS,this.daily_checkin_status,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_INVITE_CONF,this.invate_conf_status,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RANK_POP,this._rankPopWindow,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.CMD_PAYMENT_LIST,this.shopList,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS,this.wxShareSuccess,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_USER_INFO, this.gameUserInfo, this);
+
+        this.shopList();
+
+    },
+    shopList()
+    {
+        let taiji  = cc.wwx.PayModel.mExchangeList[0];
+        let isOwn = cc.wwx.UserInfo.findBagItem(taiji["content"][0]["itemId"].split(":")[1]);
+        this.shopNode.removeAllChildren();
+        if(!isOwn)
+        {
+            cc.wwx.Util.addRedPoint(this.shopNode,1,cc.v2(45,45));
+
+        }
+
     },
     gameBagData()
     {
         //更新钻石数量
+        this.shopList();
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
     },
     loginSuccessCallBack()
@@ -104,6 +131,16 @@ cc.Class({
             // 低版本兼容处理,微信wx.getUserInfo()方法已经不弹授权了,度需要用微信授权按钮
             cc.wwx.SDKLogin.wxUserInfo1();
 
+            // let button = wx.createGameClubButton({
+            //     icon: 'green',
+            //     style: {
+            //         left: 10,
+            //         top: 76,
+            //         width: 40,
+            //         height: 40
+            //     }
+            // })
+
 
         }
 
@@ -122,11 +159,41 @@ cc.Class({
             this.soundBtnSprite.spriteFrame = this.soundOffSpriteFrame;
 
         }
+        this.shareNode.removeAllChildren();
+        let dayShareGroupRewardCount = cc.wwx.UserInfo.gdata["dayShareGroupRewardLeftCount"];
+        if(dayShareGroupRewardCount > 0)
+        {
+            cc.wwx.Util.addRedPoint(this.shareNode,dayShareGroupRewardCount,cc.v2(45,45));
+
+        }
 
 
         cc.director.preloadScene("GameScene", function () {
             cc.log("Next GameScene scene preloaded");
         });
+    },
+    gameUserInfo()
+    {
+        this.shareNode.removeAllChildren();
+
+        let dayShareGroupRewardCount = cc.wwx.UserInfo.gdata["dayShareGroupRewardLeftCount"];
+        if(dayShareGroupRewardCount > 0)
+        {
+            cc.wwx.Util.addRedPoint(this.shareNode,dayShareGroupRewardCount,cc.v2(45,45));
+
+        }
+
+        cc.wwx.TCPMSG.getInvite();
+
+    },
+    wxShareSuccess(argument)
+    {
+        cc.wwx.OutPut.log("InvateRewardWindow wxShareSuccess",JSON.stringify(argument));
+        if(!argument["isShareGroupId"] && argument["burialId"] === cc.wwx.BurialShareType.DailyInviteGroup)
+        {
+            cc.wwx.TCPMSG.getShareReward("group");
+
+        }
     },
     onDestroy()
     {
@@ -135,6 +202,9 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_RANK_POP,this._rankPopWindow,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_LOGIN_SUCCESS, this.loginSuccessCallBack, this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.CMD_PAYMENT_LIST,this.shopList,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS,this.wxShareSuccess,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_USER_INFO, this.gameUserInfo, this);
 
     },
     invate_conf_status(params)
@@ -152,26 +222,34 @@ cc.Class({
             }
         }
 
-        if(stateNum > 0)
+        this.rewardNode.removeAllChildren();
+
+        let dayShareGroupRewardCount = cc.wwx.UserInfo.gdata["dayShareGroupRewardLeftCount"];
+
+        if(stateNum + dayShareGroupRewardCount> 0)
         {
-            cc.wwx.Util.addRedPoint(this.rewardNode,stateNum,cc.v2(45,45));
+
+            if(dayShareGroupRewardCount  + stateNum> 0)
+            {
+                cc.wwx.Util.addRedPoint(this.rewardNode,dayShareGroupRewardCount  + stateNum,cc.v2(45,45));
+
+            }
         }
-        else
-        {
-            this.rewardNode.removeAllChildren();
-        }
+
     },
     daily_checkin_status(params)
     {
         let result = params['result'];
         let states = result['states'];
-        if(this._openCheckIn)
-        {
-            cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn","SignInWindow",result);
-            return;
-        }
-
-        this._openCheckIn = false;
+        cc.wwx.OutPut.log("daily_checkin_status: " + JSON.stringify(params));
+        //
+        // if(this._openCheckIn)
+        // {
+        //     cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn","SignInWindow",result);
+        //     return;
+        // }
+        //
+        // this._openCheckIn = false;
 
         let isCheckIn = false;
         for(let i = 0 ; i < states.length;i++)
@@ -194,8 +272,15 @@ cc.Class({
         {
             this.checkInLabel.string = "每日奖励";
             this.checkInNode.spriteFrame = this.checkInSpriteFrame2;
+            if(this._openCheckIn)
+            {
+                cc.wwx.PopWindowManager.popWindow("prefab/signIn/SignIn","SignInWindow",result);
+            }
+            this._openCheckIn = false;
+
 
         }
+        cc.wwx.OutPut.log("daily_checkin_status: " + isCheckIn);
 
 
     },
@@ -303,7 +388,7 @@ cc.Class({
     shareCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
-        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInvite);
+        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroup);
 
         //皮肤
     },

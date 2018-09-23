@@ -13,6 +13,7 @@ cc.Class({
          * @param logtxt:log内容
          */
         uploadLogTimely: function (logtxt) {
+            return;
             if (!cc.wwx.StateInfo.networkConnected) {
                 cc.wwx.OutPut.log('cc.wwx.BiLog', 'net error!');
                 return;

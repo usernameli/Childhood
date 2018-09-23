@@ -35,22 +35,7 @@ cc.Class({
         {
             this["item" + i ].getComponent('CheckPointItem').updateItem(maxID + i);
         }
-        // if(this.itemID % 2 === 0)
-        // {
-        //     //偶数行
-        //     for(let i = maxID,k = 0 ; i >= 0,k < 4;i--,k++)
-        //     {
-        //         this["item" + k ].getComponent('CheckPointItem').updateItem(i);
-        //     }
-        // }
-        // else
-        // {
-        //     //奇数行
-        //     for(let i = maxID,j = 3; j >=0;i--,j--)
-        //     {
-        //         this["item" + j ].getComponent('CheckPointItem').updateItem(i);
-        //     }
-        // }
+
 
     },
 

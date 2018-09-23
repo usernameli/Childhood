@@ -108,7 +108,7 @@
     "_atlas": {
       "__uuid__": "1c46d690-b02e-4878-9da3-da799eb4a2ab"
     },
-    "_id": "7epi7b8cFIZ4QnfImXZGcs"
+    "_id": ""
   },
   {
     "__type__": "cc.RigidBody",
@@ -132,7 +132,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "ceils3ZR1AT4n3a/Qs3KY0"
+    "_id": ""
   },
   {
     "__type__": "306ecyCZk1D46G2L7CjWJU8",
@@ -166,6 +166,9 @@
       },
       {
         "__uuid__": "6e5263e4-f071-461b-84a2-3672fa317d80"
+      },
+      {
+        "__uuid__": "7e2f6fbd-49a8-4df2-819e-608d6e1874c5"
       }
     ],
     "_ballId": 0,
@@ -177,7 +180,7 @@
     "_isOnWall": false,
     "_isSports": false,
     "_noShut": false,
-    "_id": "6b3ZxkcURGnYiJ/hlrIukZ"
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -199,7 +202,7 @@
       "y": 0
     },
     "_radius": 15,
-    "_id": "aefLg8u6xP/aRx4U1ozHkb"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

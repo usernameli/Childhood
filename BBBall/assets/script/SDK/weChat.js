@@ -46,8 +46,10 @@ cc.Class({
 
                 var curTime = Math.floor((new Date()).valueOf() / 1000);
                 if (lastHideTime && curTime - lastHideTime > 60 * 60 * 5) {
+                    cc.wwx.SystemInfo.reLogin = true;
                     cc.wwx.SDKLogin.login();
                 } else {
+                    cc.wwx.SystemInfo.reLogin = false;
                     cc.wwx.TCPClient.resume();
 
                 }
@@ -61,7 +63,7 @@ cc.Class({
                 cc.game.pause();
                 cc.wwx.TCPClient.pause();
                 cc.wwx.AudioManager && cc.wwx.AudioManager.onHide();
-
+                lastHideTime = Math.floor((new Date()).valueOf() / 1000);
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TO_HIDE);
             });
             // // 错误信息收集
@@ -71,6 +73,13 @@ cc.Class({
             //    cc.wwx.OutPut.err('[WX]', stack, message);
             // });
 
+            let launchOpthion = wx.getLaunchOptionsSync();
+            cc.wwx.OutPut.log('launchOpthion query: ' + JSON.stringify(launchOpthion["query"]));
+            if(launchOpthion["query"])
+            {
+                cc.wwx.UserInfo.query = cc.wwx.Util.deepCopy(launchOpthion.query);
+
+            }
             wx.getSystemInfo({
                 success:function(res) {
                     cc.wwx.OutPut.info('wx.getSystemInfo success:', JSON.stringify(res));
@@ -228,13 +237,13 @@ cc.Class({
                 'imageUrl': imageUrl,
                 'query': this.jsonToQuery(queryJson),
                 'success': function(res) {
-                    cc.wwx.OutPut.info('shareWXMsg:', 'success', JSON.stringify(res));
+                    cc.wwx.OutPut.log('shareWXMsg:', 'success', JSON.stringify(res));
                     if(successCallback){
                         successCallback(res);
                     }
                 },
                 'fail': function(res) {
-                    cc.wwx.OutPut.warn('shareWXMsg:', 'fail', JSON.stringify(res));
+                    cc.wwx.OutPut.log('shareWXMsg:', 'fail', JSON.stringify(res));
                     failCallback && failCallback(res);
                 },
                 'complete': function(res) {

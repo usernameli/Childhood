@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.10722474901467702,
-      "y": 0.10722474901467702,
+      "x": 0.5754290033219733,
+      "y": 0.5754290033219733,
       "z": 1
     },
     "_quat": {
@@ -4368,6 +4368,7 @@
     "_colliderPoint": 0,
     "_userBallId": 0,
     "_isUseBallChange": false,
+    "_dottleLineNo": false,
     "ballOnWallNum": 0,
     "_id": "4ba/xRAA5Bk7xMtLMri7yP"
   },

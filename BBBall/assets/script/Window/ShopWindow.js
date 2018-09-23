@@ -51,6 +51,7 @@ cc.Class({
         this.tab2Select.active = false;
         this.tab2ProductNode.position = cc.v2(0,0);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_CHANGE_TAB_SHOP,this._changeActionTab,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS,this.wxShareSuccess,this);
         // cc.wwx.PayModel.mExchangeList
     },
     _changeActionTab(argument)
@@ -61,7 +62,17 @@ cc.Class({
     onDestroy()
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_CHANGE_TAB_SHOP,this._changeActionTab,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS,this.wxShareSuccess,this);
 
+    },
+    wxShareSuccess(argument)
+    {
+        cc.wwx.OutPut.log("ResultFirstWindow wxShareSuccess",JSON.stringify(argument));
+        if(!argument["isShareGroupId"] &&  argument["burialId"] === cc.wwx.BurialShareType.DailyInviteGroupBall)
+        {
+            cc.wwx.TCPMSG.getShareReward("taiji_ball");
+
+        }
     },
     tab1CallBack()
     {

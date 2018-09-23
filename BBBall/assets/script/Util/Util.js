@@ -754,7 +754,33 @@ cc.Class({
             }
             return list;
         },
+        sliceStringToLength (str, length) {
+            if(!str) {
+                return str;
+            }
+            let len = 0;
+            let tmp = 0;
+            let s;
+            for (let i = 0; i < str.length; i++) {
+                let charCode = str.charCodeAt(i);
+                if (charCode >= 0 && charCode <= 128) {
+                    tmp += 1;
+                } else { // 如果是中文则长度加2
+                    tmp += 2;
+                }
+                if (tmp <= length - 3) {
+                    len++;
+                }
+            }
 
+            if (tmp <= length) {
+                s = str.slice(0);
+            } else {
+                s = str.slice(0, len);
+                s += "...";
+            }
+            return s;
+        },
         _preventFastClicks()
         {
             if(this.btnClick === true)

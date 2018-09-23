@@ -23,6 +23,7 @@ cc.Class({
         let reward = this._params['reward'][0];
         let self = this;
         let spriteFrame = 'Ball_GetRewardDamond';
+        this.itemSprite.node.active = false;
         if(reward['item'] === "1012")
         {
             spriteFrame = 'Ball_DiZheng';
@@ -45,15 +46,16 @@ cc.Class({
             spriteFrame = 'Ball_Plus_Ball';
             this.tipLable.string = "仅限当次增加小球数量";
 
-
         }
         else
         {
             spriteFrame = 'Ball_GetRewardDamond';
+            this.tipLable.node.active = false;
         }
 
         cc.wwx.Util.loadResAtlas("images/MainMenu",function (err,atlas) {
             self.itemSprite.spriteFrame = atlas.getSpriteFrame(spriteFrame);
+            self.itemSprite.node.active = true;
         });
 
         this.itemNum.string = "x" + reward['count'];

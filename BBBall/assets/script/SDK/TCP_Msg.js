@@ -47,6 +47,42 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+        //获取关卡礼包
+        getLevelGiftConf:function()
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'action': 'get_level_gift_conf'
+                }
+            };
+            this._sendCmd(params);
+        },
+        getShareReward(shareRewardType)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'shareRewardType':shareRewardType,
+                    'action': cc.wwx.EventType.ACTION_SHARE_REWARD
+                }
+            };
+            this._sendCmd(params);
+        },
+        openGiftBox:function(level)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'level' : level,
+                    'action': 'open_gift'
+                }
+            };
+            this._sendCmd(params);
+        },
         /*
           * 获取邀请配置
          */
@@ -129,6 +165,21 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+        /*
+         * 开启宝箱
+         */
+        openGameBox(playMode)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'action': cc.wwx.EventType.ACTION_OPEN_BOX,
+                    'playMode': playMode,
+                }
+            };
+            this._sendCmd(params);
+        },
         /**
          * 游戏结束更新分数
          *
@@ -151,24 +202,7 @@ cc.Class({
             };
             this._sendCmd(params);
         },
-        /*
-         * 领取分享奖励
-         */
-        getShareReward: function(pointId) {
-            if (!pointId || typeof pointId != 'number') {
-                return;
-            }
-            var params = {
-                'cmd': cc.wwx.EventType.CMD_HALL_SHARE2,
-                'params': {
-                    'action': cc.wwx.EventType.ACTION_GET_REWARD,
-                    'gameId': cc.wwx.SystemInfo.gameId,
-                    'pointId' : pointId
-                }
-            };
 
-            this._sendCmd(params);
-        },
 
         /*
          * 获取分享埋点信息

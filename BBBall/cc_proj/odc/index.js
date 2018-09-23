@@ -235,12 +235,12 @@ function drawCanvasRank (canvasSize, rankData, selfData, maxCount,rankType) {
                 sharedContext.font="34px Arial";
                 sharedContext.fillStyle="#87D4FF";
                 sharedContext.textAlign="left";
-                if(rankType === "Level")
+                if(rankType === "level")
                 {
                     sharedContext.fillText("第" + params.levelHighLv + "关", cellWidth/2 + 120, baseY);
 
                 }
-                else if(rankType === "Classic")
+                else if(rankType === "classic")
                 {
                     sharedContext.fillText(params.classicHighScore + '分', cellWidth/2 + 120, baseY);
 
@@ -284,6 +284,7 @@ function drawCanvasResultRank(canvasSize, rankData, selfData, maxCount,rankType)
     }
 
     let rankList = [];
+    console.log('drawFriendSegmentRank.selfIndex =', selfIndex);
 
     if(rankData.length <= 3)
     {
@@ -291,7 +292,13 @@ function drawCanvasResultRank(canvasSize, rankData, selfData, maxCount,rankType)
     }
     else
     {
-        if(selfIndex === 0)
+        if(selfIndex === -1)
+        {
+            rankList.push(rankData[0]);
+            rankList.push(rankData[1]);
+            rankList.push(rankData[2]);
+        }
+        else if(selfIndex === 0)
         {
             rankList.push(rankData[selfIndex]);
             rankList.push(rankData[selfIndex + 1]);
@@ -300,9 +307,10 @@ function drawCanvasResultRank(canvasSize, rankData, selfData, maxCount,rankType)
         }
         else if(selfIndex === rankData.length - 1)
         {
-            rankList.push(rankData[selfIndex]);
-            rankList.push(rankData[selfIndex - 1]);
             rankList.push(rankData[selfIndex - 2]);
+            rankList.push(rankData[selfIndex - 1]);
+            rankList.push(rankData[selfIndex]);
+
         }
         else
         {
@@ -312,6 +320,7 @@ function drawCanvasResultRank(canvasSize, rankData, selfData, maxCount,rankType)
         }
     }
 
+    console.log('drawFriendSegmentRank.rankList =', JSON.stringify(rankList));
 
 
     preloadImages(segmentImgUrls, function(imageCache) {
@@ -441,6 +450,7 @@ function drawResultRank(data) {
                     return b.ball100HighScore - a.ball100HighScore;
                 });
             }
+            console.log('drawFriendSegmentRank.rankList =', JSON.stringify(rankList));
 
             drawCanvasResultRank(canvasSize, rankList, selfData, itemCount,rankType);
         },
@@ -466,6 +476,27 @@ function drawRank (data)
             for (let i = 0; i < res.data.length; i++) {
                 let info = res.data[i];
                 let dicInfo = kv2dic(info['KVDataList']);
+                if(rankType === "level")
+                {
+                    if(parseInt(dicInfo['levelHighLv']) ===  0)
+                    {
+                        continue;
+                    }
+                }
+                else if(rankType === "classic")
+                {
+                    if(parseInt(dicInfo['classicHighScore']) ===  0)
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    if(parseInt(dicInfo['ball100HighScore']) === 0)
+                    {
+                        continue;
+                    }
+                }
                 let rankData = {
                     name: info['nickname'],
                     avatar: info['avatarUrl'],
@@ -476,13 +507,13 @@ function drawRank (data)
                 };
                 rankList.push(rankData);
             }
-            if(rankType === "Level")
+            if(rankType === "level")
             {
                 rankList.sort(function(a, b){
                     return b.levelHighLv - a.levelHighLv;
                 });
             }
-            else if(rankType === "Chassic")
+            else if(rankType === "classic")
             {
                 rankList.sort(function(a, b){
                     return b.classicHighScore - a.classicHighScore;
@@ -547,13 +578,13 @@ function drawGroupRank(data)
                 rankList.push(rankData);
 
             }
-            if(rankType === "Level")
+            if(rankType === "level")
             {
                 rankList.sort(function(a, b){
                     return b.levelHighLv - a.levelHighLv;
                 });
             }
-            else if(rankType === "Chassic")
+            else if(rankType === "classic")
             {
                 rankList.sort(function(a, b){
                     return b.classicHighScore - a.classicHighScore;

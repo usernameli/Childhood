@@ -25,6 +25,10 @@ cc.Class({
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();
 
+        let randomColor = this.setRandomColor(this._labelNum);
+        this.node.color = new cc.Color(randomColor.r,randomColor.g,randomColor.b);
+
+
     },
     objsBreak()
     {
@@ -42,6 +46,8 @@ cc.Class({
         let randNum = Math.floor(Math.random() * this._labelNum+1);
         this._labelNum = randNum;
         this.labelText.string = this._labelNum.toString();
+        let randomColor = this.setRandomColor(this._labelNum);
+        this.node.color = new cc.Color(randomColor.r,randomColor.g,randomColor.b);
 
     },
     eliminateRowColumn()
@@ -52,6 +58,10 @@ cc.Class({
     {
         this.splashNode.active = true;
         cc.wwx.AudioManager.playBrick();
+
+        let randomColor = this.setRandomColor(this._labelNum);
+        this.node.color = new cc.Color(randomColor.r,randomColor.g,randomColor.b);
+
 
         if (this._labelNum > 1)
         {

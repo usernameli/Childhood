@@ -33,6 +33,12 @@ cc.Class({
             };
 
             let sdkPath = cc.wwx.SystemInfo.loginUrl;
+
+            if(cc.wwx.SystemInfo.debug)
+            {
+                sdkPath = cc.wwx.SystemInfo.loginUrlDev
+            }
+
             let completeUrl = sdkPath + 'open/v6/user/loginBySnsIdNoVerify' + '?' + cc.wwx.Util.dataToUrlStr(dataObj);
             // let token = null;
             let token = cc.wwx.Storage.getItem(this.SESSION_KEY);
@@ -228,6 +234,11 @@ cc.Class({
             let local_uuid = cc.wwx.SystemInfo.uuid;
             cc.wwx.OutPut.log("local_uuid:", local_uuid);
             let sdkPath = cc.wwx.SystemInfo.loginUrl;
+            if(cc.wwx.SystemInfo.debug)
+            {
+                sdkPath = cc.wwx.SystemInfo.loginUrlDev
+            }
+
             let dataObj = {
                 appId: cc.wwx.SystemInfo.appId,
                 wxAppId: cc.wwx.SystemInfo.wxAppId,
@@ -250,6 +261,7 @@ cc.Class({
             }
 
             cc.wwx.OutPut.log("SDKLogin", " *-*-*-*-*-  dataobj:  " + JSON.stringify(dataObj));
+            cc.wwx.OutPut.log("sdkPath", " *-*-*-*-*-  sdkPath:  " +sdkPath + 'open/v6/user/loginBySnsIdNoVerify');
 
             // cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeLoginSDKStart, [code, local_uuid, userInfo.nickName]);
             let that = this;
@@ -337,7 +349,13 @@ cc.Class({
                 let ip = loginResult.tcpsrv.ip;
                 let port = loginResult.tcpsrv.wsport || loginResult.tcpsrv.port; //优先使用wsport
                 let webSocketUrl;
-                if (cc.wwx.SystemInfo.loginUrl.indexOf("https://") > -1) {
+                let loginUrl = cc.wwx.SystemInfo.loginUrl;
+                if(cc.wwx.SystemInfo.debug)
+                {
+                    loginUrl = cc.wwx.SystemInfo.loginUrlDev;
+                }
+
+                if (loginUrl.indexOf("https://") > -1) {
                     webSocketUrl = 'wss://' + ip + ':' + port.toString() + '/';
                 }
                 else {

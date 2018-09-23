@@ -17,7 +17,6 @@ cc.Class({
     },
     demolitionEndCallBack()
     {
-        cc.wwx.OutPut.log(this._tag,"demolitionEndCallBack ");
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB_END);
     },
     demolitionBomb()

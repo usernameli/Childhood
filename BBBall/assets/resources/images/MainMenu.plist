@@ -7,7 +7,7 @@
             <key>Ball_BG.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{507,844},{50,50}}</string>
+                <string>{{912,824},{50,50}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>Ball_Common_BG.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{337,493},{50,50}}</string>
+                <string>{{507,844},{50,50}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -901,6 +901,19 @@
                 <key>sourceSize</key>
                 <string>{104,96}</string>
             </dict>
+            <key>Ball_Shop__Ball_Shop_Green_BTN.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{367,457},{20,72}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{20,72}}</string>
+                <key>sourceSize</key>
+                <string>{20,72}</string>
+            </dict>
             <key>Ball_Shop__Ball_Shop__Select.png</key>
             <dict>
                 <key>frame</key>
@@ -1366,7 +1379,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:8cfa7465b086a358c98cc9960538c85b:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:37ddad95d534d8278d97065b6df2ce74:1/1$</string>
             <key>textureFileName</key>
             <string>MainMenu.png</string>
         </dict>

@@ -28,7 +28,7 @@ cc.Class({
 
         },
         checkPointData:[],
-        checkPointID:1,
+        checkPointID:0,
         bagData: {
             m_normalItemList:[], //背包数据
             'diamondInfo': {},
@@ -68,6 +68,10 @@ cc.Class({
         {
             this.gdata = params['gdata'];
             this.mIssue = "mIssue";
+            if(cc.wwx.SystemInfo.debug)
+            {
+                return;
+            }
             cc.wwx.WeChat.uploadRank(function(status, params)
             {
                 if (status) {

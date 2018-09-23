@@ -17,7 +17,6 @@ cc.Class({
     },
     guideCallBack()
     {
-        cc.wwx.OutPut.log(this._tag,"demolitionEndCallBack ");
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GUIDE_ANIMATION_END);
     },
     guideAnimation()

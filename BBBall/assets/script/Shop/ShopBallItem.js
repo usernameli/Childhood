@@ -33,6 +33,10 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        taiJiNode:{
+            default:null,
+            type:cc.Node
+        },
         _tag:"ShopBallItem",
         itemID:0,
     },
@@ -76,6 +80,8 @@ cc.Class({
             this.isOwn.active = false;
             this.isUsed.active = false;
 
+            this.taiJiNode.active = false;
+
             if(itemInfo)
             {
                 this.isUnOwnBTN.active = false;
@@ -101,6 +107,13 @@ cc.Class({
             {
                 this.isUnOwnBTN.active = true;
                 this.isUsedOwnBTN.active = false;
+
+                if(list["id"] === "PD101_BALL_15_TAIJI")
+                {
+                    this.taiJiNode.active = true;
+                    this.isUnOwnBTN.active = false;
+
+                }
             }
         }
         else
@@ -108,6 +121,11 @@ cc.Class({
             this.node.active = false;
         }
 
+
+    },
+    taiJiShareCallBack()
+    {
+        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupBall);
 
     },
     exchangeCallBack()

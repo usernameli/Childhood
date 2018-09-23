@@ -26,6 +26,8 @@ cc.Class({
         this.lastContentPosY = 0;
         // 设定缓冲矩形的大小为实际创建项的高度累加，当某项超出缓冲矩形时，则更新该项的显示内容
         this.bufferZone = this.spawnCount * (this.itemTemplate.height + this.spacing) / 2;
+
+        this.scrollToFixedPosition();
     },
     // 列表初始化
     initialize: function () {
@@ -42,12 +44,54 @@ cc.Class({
     },
     scrollToFixedPosition: function () {
         // 在2秒内完成
-        this.scrollView.scrollToOffset(cc.v2(0, 500), 2);
+        let checkPointID = parseInt(cc.wwx.UserInfo.checkPointID / 4) - 1;
+        this.scrollView.scrollToOffset(cc.v2(0,140 * checkPointID), 2);
     },
-    scrollEvent()
-    {
+    scrollEvent: function(sender, event) {
+
+
+        switch(event) {
+            case 12:
+                this.lblScrollEvent = "Scroll began";
+                cc.wwx.SystemInfo.isScrollFlg = true;
+                break;
+            case 0:
+                this.lblScrollEvent = "Scroll to Top";
+                break;
+            case 1:
+                this.lblScrollEvent = "Scroll to Bottom";
+                break;
+            case 2:
+                this.lblScrollEvent = "Scroll to Left";
+                break;
+            case 3:
+                this.lblScrollEvent = "Scroll to Right";
+                break;
+            case 4:
+                this.lblScrollEvent = "Scrolling";
+                break;
+            case 5:
+                this.lblScrollEvent = "Bounce Top";
+                break;
+            case 6:
+                this.lblScrollEvent = "Bounce bottom";
+                break;
+            case 7:
+                this.lblScrollEvent = "Bounce left";
+                break;
+            case 8:
+                this.lblScrollEvent = "Bounce right";
+                break;
+            case 9:
+                this.lblScrollEvent = "Auto scroll ended";
+                cc.wwx.SystemInfo.isScrollFlg = false;
+
+                break;
+        }
+
 
     },
+
     // 返回item在ScrollView空间的坐标值
     getPositionInView: function (item) {
         let worldPos = item.parent.convertToWorldSpaceAR(item.position);

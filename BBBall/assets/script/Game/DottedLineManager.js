@@ -26,6 +26,7 @@ cc.Class({
         _colliderPoint:0,
         _userBallId:0,
         _isUseBallChange:false,
+        _dottleLineNo:false,
         ballOnWallNum:0, //回到地面的球的数量
     },
 
@@ -120,6 +121,7 @@ cc.Class({
         this.isBallSporting = false;
         this.isFirstBallCome = false;
         this._isUseBallChange = false;
+        this._dottleLineNo = false;
         cc.wwx.OutPut.log('onLoad:', 'width', this.node.width);
         cc.wwx.OutPut.log('onLoad:', 'height', this.node.height);
         this._userBallId = cc.wwx.UserInfo.findBagUseBall();
@@ -210,7 +212,7 @@ cc.Class({
     },
     _touchEndCallBack:function(event)
     {
-        if(this.isBallSporting)
+        if(this.isBallSporting || this._dottleLineNo)
         {
             return;
         }
@@ -247,21 +249,26 @@ cc.Class({
     _drawDottleLine: function (touchP) {
 
 
+        this._ctx.clear();
+
         let touchPoint = cc.v2(touchP);
         cc.wwx.OutPut.log("_drawDottleLine touchPoint : ",JSON.stringify(touchPoint));
         cc.wwx.OutPut.log("_drawDottleLine this.center : ",JSON.stringify(this.center));
 
         if(touchPoint.y <= this.center.y + 10)
         {
+            this._dottleLineNo = true;
             return;
         }
+
+        this._dottleLineNo = false;
+
         touchPoint.subSelf(this.center);
 
         let p1 = this.center;
         touchPoint.mulSelf(100);
 
 
-        this._ctx.clear();
 
         this._rayCast(p1, touchPoint);
     },
@@ -409,7 +416,7 @@ cc.Class({
 
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_RECOVERY_BALL);
         // this.isBallSporting = false;
-        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:this.center});
+        // cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:this.center});
     },
     // called every frame
     update: function (dt) {

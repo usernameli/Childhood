@@ -78,11 +78,13 @@ cc.Class({
         _tag: "ObjManager",
         _gameOver: true,
         _gameOverState: false,
+        _waitUserInfo:false,
         _pointCheckList: null,//关卡数据
     },
     onLoad() {
 
         this._gameOverState = false;
+        this._waitUserInfo = false;
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY, this.ballStopAction, this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE, this.haveEliminate, this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_THIRD_LINE_OF_EXPLOSIONS, this.thirdLineOfExplosions, this);
@@ -109,7 +111,7 @@ cc.Class({
         cc.wwx.UserInfo.currentSocre = 0;
         cc.wwx.UserInfo.currentStar = 0;
         this._gameOverState = false;
-
+        this._waitUserInfo = false;
         this._emptyGrid = [];
         if (cc.wwx.UserInfo.playMode === "level") {
             //关卡模式
@@ -252,11 +254,34 @@ cc.Class({
 
     },
     _createOneRowObjs() {
-        let objsList = [1, 2, 17, 3, 4, 14, 5, 15, 6, 21, 7, 12, 13];
+        // 1 2 17 11 3 4 5 6
+        let addPusF = true;
+        let objsList = [14,7,-1,-1, 5,5,5,-1, 15, -1,6,1, 2,-1, 17,1,2,17,11,-1,11,3,4,-1,-1,-1,1,2,17,11,3,4,5,6,4,5,6];
         for (let k = 0; k < 11; k++) {
             let objsID = Math.floor(Math.random() * objsList.length + 1);
+            cc.wwx.OutPut.log("_createOneRowObjs 1 : ",objsID);
+
+            objsID = Math.floor(Math.random() * objsList.length + 1);
+            cc.wwx.OutPut.log("_createOneRowObjs 2 : ",objsID);
+
+            objsID = Math.floor(Math.random() * objsList.length + 1);
+            cc.wwx.OutPut.log("_createOneRowObjs 3 : ",objsID);
+            cc.wwx.OutPut.log("_createOneRowObjs 4 : ",objsList[objsID]);
+
+
+
             if (objsList[objsID]) {
-                this._createObjBlock(objsList[objsID], this._showRowNum, k, 1, 0);
+                if(objsList[objsID] === -1 && addPusF)
+                {
+                    addPusF = false;
+                    this._createObjBlock(21, this._showRowNum, k, 1, 0);
+
+                }
+                else
+                {
+                    this._createObjBlock(objsList[objsID], this._showRowNum, k, 1, 0);
+
+                }
             }
 
 
@@ -353,6 +378,29 @@ cc.Class({
 
         return posY;
     },
+    checkGameOver(checkPos)
+    {
+        let check = false;
+        for (var i = 0; i < this.node.childrenCount; ++i) {
+            var name = this.node.children[i].name;
+            if (name === "Ball_Block_Square" ||
+                name === "Ball_Block_Triangle_3" ||
+                name === "Ball_Block_Triangle_5" ||
+                name === "Ball_Block_Triangle_6" ||
+                name === "Ball_Block_Triangle_4") {
+
+                if(this.node.children[i].y <= checkPos)
+                {
+                    check = true;
+                    break;
+                }
+
+            }
+
+        }
+
+        return check;
+    },
     findLastRowPosY() {
         let posY = 0;
         for (var i = 0; i < this.node.childrenCount; ++i) {
@@ -410,6 +458,26 @@ cc.Class({
 
         return posY;
     },
+    checkGameSuccess()
+    {
+        let gameOver = true;
+        for (var i = 0; i < this.node.childrenCount; ++i) {
+            var name = this.node.children[i].name;
+            if (name === "Ball_Block_Square" ||
+                name === "Ball_Block_Triangle_3" ||
+                name === "Ball_Block_Triangle_5" ||
+                name === "Ball_Block_Triangle_6" ||
+                name === "Ball_Block_Triangle_4") {
+                gameOver = false;
+                break;
+            }
+
+
+        }
+
+        return gameOver;
+
+    },
     thirdLineOfExplosions()
     {
         let posY1 = this.findLastRowPosY();
@@ -447,6 +515,7 @@ cc.Class({
     },
     _createObjBlock:function(dataValueObj,dataValueLabel,column,showRowNum,haveShowRow)
     {
+
         let objsPrefab = null;
         let objsComponent = null;
         if(parseInt(dataValueObj) === 1 ||
@@ -522,7 +591,6 @@ cc.Class({
             let posY = -1 * (84 + (showRowNum - haveShowRow - 1) * (this._objHeight + this._space) + this._objHeight / 2);
             let posX =  this._boundary + this._objWidth / 2 + column * (this._objWidth + this._space);
 
-            cc.wwx.OutPut.log("objsPrefab posX: ",posX);
             cc.wwx.OutPut.log("objsPrefab posY: ",posY);
             let ObjBlockSquare = objPrefab.getComponent(objsComponent);
             if(objsComponent === "ObjBlockPlus")
@@ -546,9 +614,12 @@ cc.Class({
     ballStopAction:function(argument)
     {
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,{space:this._space});
+
+
         if(cc.wwx.UserInfo.playMode === "classic")
         {
             this._createOneRowObjs();
+
             return;
         }
         else if(cc.wwx.UserInfo.playMode === "100ball")
@@ -583,38 +654,39 @@ cc.Class({
             this._currentRowJ -= 1;
 
         }
-        else
-        {
-            cc.wwx.OutPut.log(this._tag,"this.node.childrenCount: ",this.node.childrenCount);
-            for (var i = 0; i < this.node.childrenCount; ++i)
-            {
-                var name = this.node.children[i].name;
-                cc.wwx.OutPut.log(this._tag,"this.node.childrenCount name: ",name);
 
-            }
-        }
+
+
+
+
 
 
     },
     gameUserInfo()
     {
-        if(this._gameOverState)
+
+        if(this._waitUserInfo)
         {
-            cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:true});
+            if(this._gameOverState)
+            {
+                cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:true});
 
+            }
+            else
+            {
+
+                cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow","ResultFirstWindow");
+
+            }
         }
-        else
-        {
-            // cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:false});
 
-            cc.wwx.PopWindowManager.popWindow("prefab/ResultFirstWindow","ResultFirstWindow");
-
-        }
     },
     _gameIsSucess()
     {
         //上报分数
         this._gameOverState = true;
+        this._waitUserInfo  = true;
+        cc.wwx.PopWindowManager.removeAllWindow();
 
         cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
@@ -635,7 +707,11 @@ cc.Class({
     {
         //上报分数
         this._gameOverState = false;
+        this._waitUserInfo  = true;
+
         cc.wwx.UserInfo.currentStar = 0;
+        cc.wwx.PopWindowManager.removeAllWindow();
+
         cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
             cc.wwx.UserInfo.currentSocre,
@@ -665,21 +741,21 @@ cc.Class({
             return;
         }
 
-        if(this.node.childrenCount === 3)
+        if(this.checkGameSuccess())
         {
             this._gameOver = true;
             this._gameIsSucess();
         }
-        let posY = this.findLastRowPosY();
-        if(posY === -818)
-        {
-            this.showWarningAnim();
-        }
-        else if(posY === -882)
+
+        if(this.checkGameOver(-882))
         {
             this._gameOver = true;
             this._gameIsOver();
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_TOUCHBOTTOM)
+        }
+        else if(this.checkGameOver(-818))
+        {
+            this.showWarningAnim();
         }
         else
         {

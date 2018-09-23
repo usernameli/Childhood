@@ -185,8 +185,14 @@ cc.Class({
                 if(this.dottedLineManager.ballMaxNum == this.dottedLineManager.ballOnWallNum)
                 {
                     //最后一个球回到地面
-                    this.dottedLineManager.isBallSporting = false;
-                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:this.dottedLineManager.center});
+                    let self = this;
+                    setTimeout(function () {
+                        self.dottedLineManager.isBallSporting = false;
+
+                    },500);
+
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:self.dottedLineManager.center});
+
 
                 }
                 this.dottedLineManager.setBallNumTextPosition(this.dottedLineManager.ballOnWallNum);

@@ -68,7 +68,7 @@ cc.Class({
                 this._windowList.splice(windowIndex, 1);
             }
         },
-        popWindow(windowName,componentName,params)
+        popWindow(windowName,componentName,params,zIndex)
         {
             if(this.findWindowByName(windowName))
             {
@@ -95,6 +95,10 @@ cc.Class({
                             component.setWindowParams(params);
                         }
                         baseScene.addChild(window);
+                        if(zIndex)
+                        {
+                            window.zIndex = zIndex
+                        }
                         self._windowList.push({windowName:windowName,windowNode:window});
                     }
             });

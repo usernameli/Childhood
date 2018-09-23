@@ -13,7 +13,7 @@ cc.Class({
         spawnCount: 0, // 实际创建的项数量
         totalCount: 0, // 在列表中显示的项数量
         spacing: 0, // 项之间的间隔大小
-        _rankType:'world',//默认世界排行榜
+        _rankType:'friend',//默认世界排行榜
         _shareTicket:null,
     },
     onLoad()
@@ -23,6 +23,8 @@ cc.Class({
         this.updateInterval = 0.2;
         // 使用这个变量来判断滚动操作是向上还是向下
         this.lastContentPosY = 0;
+        this._rankType = 'friend';
+        this.items = [];
         this.itemTemplateName = "RankTemplate";
 
         // 设定缓冲矩形的大小为实际创建项的高度累加，当某项超出缓冲矩形时，则更新该项的显示内容
@@ -34,7 +36,7 @@ cc.Class({
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS, this.onMsgShareSuccess, this);
 
-        this.initialize();
+        // this.initialize();
 
     },
     onDestroy()
@@ -54,7 +56,7 @@ cc.Class({
                 this._shareTicket = params.shareTicket;
                 this._rankType = "group";
                 this._createDisplay();
-                cc.wwx.WeChat.drawFriendGroupRank(cc.size(580, 90 * 20), 20,"Level",params.shareTicket);
+                cc.wwx.WeChat.drawFriendGroupRank(cc.size(580, 90 * 20), 20,"level",params.shareTicket);
             }
         }
     },
@@ -104,6 +106,8 @@ cc.Class({
     start()
     {
         this.tex = new cc.Texture2D();
+        this._createDisplay();
+        cc.wwx.WeChat.drawFrienRank(cc.size(580, 90 * 20), 20,"level");
     },
     _rankLevel()
     {
@@ -112,14 +116,14 @@ cc.Class({
             delete this.display;
             this._createDisplay();
 
-            cc.wwx.WeChat.drawFrienRank(cc.size(580 , 90 * 20), 20,"Level");
+            cc.wwx.WeChat.drawFrienRank(cc.size(580 , 90 * 20), 20,"level");
         }
         else if(this._rankType === "group")
         {
             delete this.display;
             this._createDisplay();
 
-            cc.wwx.WeChat.drawFriendGroupRank(cc.size(580 , 90 * 20), 20,"Level",this._shareTicket);
+            cc.wwx.WeChat.drawFriendGroupRank(cc.size(580 , 90 * 60), 60,"level",this._shareTicket);
         }
         else
         {
@@ -139,7 +143,7 @@ cc.Class({
             delete this.display;
             this._createDisplay();
 
-            cc.wwx.WeChat.drawFriendGroupRank(cc.size(580 , 90 * 20), 20,"Ball100",this._shareTicket);
+            cc.wwx.WeChat.drawFriendGroupRank(cc.size(580 , 90 * 20), 60,"Ball100",this._shareTicket);
         }
         else
         {
@@ -148,18 +152,19 @@ cc.Class({
     },
     _rankChassic()
     {
+        cc.wwx.OutPut.log("_rankChassic: ",this._rankType);
         if(this._rankType === "friend")
         {
             delete this.display;
             this._createDisplay();
-            cc.wwx.WeChat.drawFrienRank(cc.size(580, 90 * 20), 20,"Chassic");
+            cc.wwx.WeChat.drawFrienRank(cc.size(580, 90 * 20), 20,"classic");
         }
         else if(this._rankType === "group")
         {
             delete this.display;
             this._createDisplay();
 
-            cc.wwx.WeChat.drawFriendGroupRank(cc.size(580 , 90 * 20), 20,"Chassic",this._shareTicket);
+            cc.wwx.WeChat.drawFriendGroupRank(cc.size(580 , 90 * 60), 60,"classic",this._shareTicket);
         }
         else
         {
@@ -182,9 +187,11 @@ cc.Class({
         if((this._rankType === "world" || this._rankType === "group") && CC_WECHATGAME)
         {
             this._rankType = "friend";
+            delete this.display;
+
             this._createDisplay();
 
-            cc.wwx.WeChat.drawFrienRank(cc.size(580, 90 * 20), 20,"Level");
+            cc.wwx.WeChat.drawFrienRank(cc.size(580, 90 * 20), 20,"level");
         }
 
     },
