@@ -39,10 +39,17 @@ cc.Class({
             this.register(cc.wwx.EventType.MSG_CUSTOM_RANK, this._onRankListInfo);
             this.register(cc.wwx.EventType.ACTION_GET_REWARD, this._onGetReward);
             this.register(cc.wwx.EventType.ACTION_LEVEL_GIFT_CONF, this._onLevelGiftConf);
+            this.register(cc.wwx.EventType.ACTION_CLIENT_CONF, this._onGameClientConf);
 
 
 
 
+        },
+        _onGameClientConf(params)
+        {
+            cc.wwx.OutPut.log("_onGameClientConf:",JSON.stringify(params));
+
+            cc.wwx.ClientConf.ParseClientConf(params["result"])
         },
         _onLevelGiftConf(params)
         {
@@ -91,7 +98,7 @@ cc.Class({
             let action = params["result"]["action"];
             if(action === "invite_conf")
             {
-                cc.wwx.Invite.parseInvite2(params["result"]["inviteConf"]["rewards"]);
+                cc.wwx.Invite.parseInvite2(params["result"]["inviteConf"]);
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_INVITE_CONF,params);
 
             }
@@ -266,6 +273,7 @@ cc.Class({
             cc.wwx.TCPMSG.getBagInfo();
             cc.wwx.TCPMSG.getLevelGiftConf();
             cc.wwx.TCPMSG.fetchPaymentList();
+            cc.wwx.TCPMSG.getClientConf();
 
             // 分享发奖
             cc.wwx.Share.getShareRewards();
@@ -310,6 +318,8 @@ cc.Class({
         },
         _onMsgServerMessage(params)
         {
+
+            cc.wwx.PopWindowManager.hideWifiView();
 
             params = params || {};
             var cmd = params.cmd;

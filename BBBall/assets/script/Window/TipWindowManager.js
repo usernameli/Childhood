@@ -20,7 +20,7 @@ cc.Class({
                 if (!scene) return null;
                 var cv = scene.getChildByName('Canvas');
                 cc.assert(cv && cv instanceof cc.Node, 'Please check scene has Canvas!');
-                cv.addChild(node);
+                cv.addChild(node,2000);
 
             });
         }

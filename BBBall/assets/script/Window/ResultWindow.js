@@ -204,9 +204,16 @@ cc.Class({
             //下一关
             if(this._gameResult)
             {
-                cc.wwx.UserInfo.checkPointID += 1;
-                cc.wwx.MapCheckPoint.getMapCheckPointData(cc.wwx.UserInfo.checkPointID ,function (checkPointData) {
+                let nextPoint = cc.wwx.UserInfo.gdata["levelHighLv"]
+                let haveBaoxiang = cc.wwx.Util.checkGiftShow(nextPoint);
+                if(haveBaoxiang && !cc.wwx.Gift.OpendLevels.contains(nextPoint))
+                {
+                    cc.wwx.PopWindowManager.popWindow("prefab/GameBoxWindow","GameBoxWindow",{level:true},100);
+                    return;
+                }
+                cc.wwx.MapCheckPoint.getMapCheckPointData(nextPoint ,function (checkPointData) {
                     cc.wwx.UserInfo.checkPointData = checkPointData;
+                    cc.wwx.UserInfo.checkPointID = nextPoint;
                     cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_RESTART);
                     self.closeWindow();
 

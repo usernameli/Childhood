@@ -101,26 +101,24 @@ cc.Class({
         // 蓝色 【RGB】0, 0, 255 【CMYK】100, 100, 0, 0
         // 紫色 【RGB】139, 0, 255 【CMYK】45, 100, 0, 0
         let randomColor = [
-            {r:255, g:0,   b:0},
-            {r:255, g:165, b:0},
-            {r:255, g:255, b:0},
-            {r:0,   g:255, b:0},
-            {r:0,   g:127, b:255},
-            {r:0,   g:0,   b:255},
-            {r:139, g:0,   b:255},
+            {r:255, g:190,   b:121},
+            {r:112, g:199, b:255},
+            {r:240, g:165, b:104},
+            {r:120,   g:184, b:255},
+            {r:237,   g:137, b:102},
+            {r:79,   g:155,   b:231},
+            {r:235, g:116,   b:102},
+            {r:67, g:112,   b:214},
+            {r:228, g:72,   b:85},
+            {r:54, g:112,   b:239},
         ];
         let randColor = randomColor[0];
         let num = randNum % 10;
 
-        if(num >= 7)
-        {
-            randColor = randomColor[randomColor.length - 1];
-        }
-        else
-        {
-            randColor = randomColor[num];
 
-        }
+        randColor = randomColor[num];
+
+
 
 
         cc.wwx.OutPut.log("setRandomColor randNum: ", randNum);

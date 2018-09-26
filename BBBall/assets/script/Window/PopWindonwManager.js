@@ -130,6 +130,7 @@ cc.Class({
                     wifiView.position = cc.v2(0, 0);
                     baseScene.addChild(wifiView);
                     self._windowList.push({windowName:windowName,windowNode:wifiView});
+                    self.isConnecting = true;
                 }
             });
 

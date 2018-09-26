@@ -60,9 +60,11 @@ cc.Class({
     onBeginContact(contact, self, other) {
         this.splashNode.active = true;
 
+        // cc.wwx.AudioManager.playBlockClick(this._labelNum % 10);
         cc.wwx.AudioManager.playBrick();
 
         let randomColor = this.setRandomColor(this._labelNum);
+
         this.node.color = new cc.Color(randomColor.r,randomColor.g,randomColor.b);
 
         if(this._labelNum > 1)

@@ -54,6 +54,12 @@ cc.Class({
                 cc.wwx.UserInfo.currentSocre,
                 cc.wwx.UserInfo.checkPointID,0,cc.wwx.UserInfo.currentStar);
         }
+        else if(cc.wwx.UserInfo.playMode === "level")
+        {
+            cc.wwx.SceneManager.switchScene("CheckPoint");
+            return;
+        }
+
 
         cc.wwx.SceneManager.switchScene("GameHall");
     },
@@ -77,6 +83,8 @@ cc.Class({
         cc.wwx.AudioManager.trunAudioSound(0);
 
         cc.wwx.AudioManager.playAudioButton();
+        this._closeWindow();
+
 
     },
     musicOffCallBack()
@@ -86,6 +94,8 @@ cc.Class({
         cc.wwx.AudioManager.trunAudioSound(1);
 
         cc.wwx.AudioManager.playMusicGame();
+        this._closeWindow();
+
 
     }
 })

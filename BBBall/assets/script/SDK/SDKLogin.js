@@ -40,8 +40,8 @@ cc.Class({
             }
 
             let completeUrl = sdkPath + 'open/v6/user/loginBySnsIdNoVerify' + '?' + cc.wwx.Util.dataToUrlStr(dataObj);
-            // let token = null;
-            let token = cc.wwx.Storage.getItem(this.SESSION_KEY);
+            let token = null;
+            // let token = cc.wwx.Storage.getItem(this.SESSION_KEY);
             // let token = "7cc8c4d6-cd3a-4b36-ae2f-ae59a812473c";
             if (token && token !== '') {
                 dataObj = {

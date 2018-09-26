@@ -51,11 +51,22 @@ cc.Class({
     updateItem: function(itemId) {
         cc.wwx.OutPut.log('Invate Item ',itemId);
         this.itemID = itemId;
-        let list = cc.wwx.Invite.mInviteList2[itemId - 1];
+        let list = cc.wwx.Invite.mInviteList2["rewards"][itemId - 1];
+        let inviteCount = cc.wwx.Invite.mInviteList2["inviteCount"];
         if(list)
         {
             this.node.active = true;
-            this.invateLabel.string = "邀请好友("+itemId + "/" + itemId + ")";
+            if(inviteCount <= itemId)
+            {
+                this.invateLabel.string = "邀请好友("+inviteCount + "/" + itemId + ")";
+
+            }
+            else
+            {
+                this.invateLabel.string = "邀请好友("+itemId + "/" + itemId + ")";
+
+            }
+
             this.itemRewordLabel1.string = "奖励        +" + list["count"];
 
             this.rewardHeadIcon.getComponent(cc.Sprite).spriteFrame = this.rewardHeadSprite;

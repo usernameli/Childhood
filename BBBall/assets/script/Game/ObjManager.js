@@ -256,7 +256,7 @@ cc.Class({
     _createOneRowObjs() {
         // 1 2 17 11 3 4 5 6
         let addPusF = true;
-        let objsList = [14,7,-1,-1, 5,5,5,-1, 15, -1,6,1, 2,-1, 17,1,2,17,11,-1,11,3,4,-1,-1,-1,1,2,17,11,3,4,5,6,4,5,6];
+        let objsList = [14,7,-1,-1, 5,-1,-1,5,-1,-1,5,-1, 15, -1,6,1, 2,-1, 17,-1,-1,1,-1,2,-1,17,-1,11,-1,11,3,4,-1,-1,-1,1,2,-1,-1,17,-1,11,-1,3,-1,4,-1,5,-1,6,-1,4,-1,5,6,-1];
         for (let k = 0; k < 11; k++) {
             let objsID = Math.floor(Math.random() * objsList.length + 1);
             cc.wwx.OutPut.log("_createOneRowObjs 1 : ",objsID);

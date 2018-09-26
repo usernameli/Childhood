@@ -88,37 +88,6 @@ cc.Class({
         });
     },            //
 
-
-    checkGiftShow(itemID)
-    {
-        //[{"level":[1,100],"step":30},{"level":[100,200],"step":15},{"level":[200,300],"step":10},{"level":[300,-1],"step":5}]
-        let show = false;
-        if(cc.wwx.Gift.GiftLevelList.length > 0)
-        {
-            for(let i = 0; i < cc.wwx.Gift.GiftLevelList.length;i++)
-            {
-                let list = cc.wwx.Gift.GiftLevelList[i];
-                if(itemID <= list["level"][1])
-                {
-                    if((itemID - list["level"][0]) % list["step"] === 0)
-                    {
-                        if(!cc.wwx.Gift.OpendLevels.contains(itemID))
-                        {
-                            show = true;
-
-                        }
-                    }
-
-                    break;
-                }
-
-            }
-        }
-
-        return show;
-
-    },
-
     updateItem(itemID)
     {
         cc.wwx.OutPut.log("updateItem itemID: ",itemID);
@@ -138,7 +107,7 @@ cc.Class({
         this.pointStar1.spriteFrame  =  this.starBlackSpriteFrame;
         this.pointStar2.spriteFrame  =  this.starBlackSpriteFrame;
         this.pointStar3.spriteFrame  =  this.starBlackSpriteFrame;
-        this.giftBox.active = this.checkGiftShow(itemID);
+        this.giftBox.active = cc.wwx.Util.checkGiftShow(itemID);
         if(itemID === this._gameData["levelHighLv"])
         {
 

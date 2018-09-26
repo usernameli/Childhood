@@ -49,7 +49,16 @@ cc.Class({
         cc.wwx.OutPut.log("GameBoxWindow wxShareSuccess",JSON.stringify(argument));
         if(!argument["isShareGroupId"] && argument["burialId"] === cc.wwx.BurialShareType.DailyInviteGroupBox)
         {
-            cc.wwx.TCPMSG.openGameBox(cc.wwx.UserInfo.playMode);
+            if(cc.wwx.UserInfo.playMode === "level")
+            {
+                cc.wwx.TCPMSG.openGameBox(cc.wwx.UserInfo.playMode,cc.wwx.UserInfo.checkPointID);
+
+            }
+            else
+            {
+                cc.wwx.TCPMSG.openGameBox(cc.wwx.UserInfo.playMode,-1);
+
+            }
             this.closeWindow();
 
 

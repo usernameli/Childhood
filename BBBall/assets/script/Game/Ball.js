@@ -56,6 +56,7 @@ cc.Class({
     _ballStartLinearVelocity:function(argument)
     {
 
+
         this._noShut = false;
         let linearVelocity = argument["linearVelocity"].clone();
         linearVelocity.mulSelf(this._speed);
@@ -79,12 +80,12 @@ cc.Class({
             cc.wwx.OutPut.log('_isOnWall:', self._isOnWall);
             cc.wwx.OutPut.log('_isSports:', self._isSports);
             cc.wwx.OutPut.log('self._noShut:', self._noShut);
+            self.dottedLineManager.isBallSporting = true;
 
 
             if(self._index === 1)
             {
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_SPORTS);
-                self.dottedLineManager.isBallSporting = true;
                 self.dottedLineManager.isFirstBallCome = false;
                 self.dottedLineManager.ballOnWallNum = 0;
                 self.dottedLineManager.ballNumText.active = false;

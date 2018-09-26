@@ -223,6 +223,7 @@ cc.Class({
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_START_LINEARVELOCITY,{linearVelocity:linearVelocity});
 
         this._ctx.clear();
+        // cc.wwx.AudioManager.playBallShut();
 
     },
     _touchMoveCallBack:function(event)

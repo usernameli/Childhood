@@ -5,8 +5,8 @@ cc.Class({
         clientId: 'H5_1.21_weixin.weixin.0-hall101.weixin.test',
         intClientId: 23832,
         cloudId:28,
-        version:2.25,
-        debug:true,
+        version:9.25,
+        debug:false,
         webSocketUrl: 'ws://192.168.10.88/',
         loginUrl : "https://xol.mstar.xianleqipai.com/",      //线上服线上
         loginUrlDev : "https://xdev.mstar.xianleqipai.com/",      //测试服线上

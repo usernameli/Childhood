@@ -232,6 +232,8 @@ window.initMgr = function() {
     cc.wwx.IOSSDK.init();
 
     cc.wwx.Invite = require('../Model/Invite');
+    cc.wwx.ClientConf = require("../Model/ClientConf");
+
 
 };
 

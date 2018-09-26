@@ -131,7 +131,7 @@ cc.Class({
         ACTION_GET_REWARD:'get_reward',
         ACTION_SHARE_REWARD:'share_reward',
         ACTION_LEVEL_GIFT_CONF:'level_gift_conf',
-
+        ACTION_CLIENT_CONF:'client_conf',
         //排行榜
         ACTION_RANK_FRINED:'ball_rank_friend',
         ACTION_RANK_WORLD:'ball_rank_world',

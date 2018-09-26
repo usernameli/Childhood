@@ -134,8 +134,8 @@ cc.Class({
         if(this._ballItemList["price_diamond"] > diamondNum)
         {
             //砖石不够
-            cc.wwx.TipManager.showMsg('您的宝石不足', 3);
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_CHANGE_TAB_SHOP,{index:1});
+            cc.wwx.TipManager.showMsg('宝石不足,分享和邀请好友可以获得更多宝石', 3);
+            // cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_CHANGE_TAB_SHOP,{index:1});
         }
         else
         {

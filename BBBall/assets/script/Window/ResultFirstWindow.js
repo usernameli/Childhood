@@ -15,6 +15,14 @@ cc.Class({
             default:null,
             type:cc.Sprite
         },
+        userDiamondBtn:{
+            default:null,
+            type:cc.Node
+        },
+        shareLiveBtn:{
+            default:null,
+            type:cc.Node
+        }
     },
     onLoad()
     {
@@ -25,6 +33,15 @@ cc.Class({
         this.timerNum = 10;
         self.timerLabel.string = "10";
         self.timerProgressRed.fillRange = 1;
+
+        if(cc.wwx.ClientConf.ClientConfList["hiddenNodes"])
+        {
+            if(cc.wwx.ClientConf.ClientConfList["hiddenNodes"].contains("shareReviveBtn"))
+            {
+                this.userDiamondBtn.position = cc.v2(0,-220);
+                this.shareLiveBtn.active = false;
+            }
+        }
         cc.wwx.Timer.setTimer(this,this._timerCallBack,1,9,0);
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS,this.wxShareSuccess,this);
@@ -77,7 +94,17 @@ cc.Class({
     },
     consumeDiamondCallBack()
     {
-        cc.wwx.TCPMSG.consumeItem(1011,1);
+        let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
+        if(diamondNum >= 200)
+        {
+            cc.wwx.TCPMSG.consumeItem(1011,200);
+
+        }
+        else
+        {
+            cc.wwx.TipManager.showMsg('宝石不足,邀请好友或分享可以获得更多宝石', 3);
+
+        }
 
     },
     skipCallBack()

@@ -36,7 +36,7 @@ cc.Class({
         }
         else if(this.itemTemplateName === "InvateTemplate")
         {
-            this.totalCount = cc.wwx.Invite.mInviteList2.length;
+            this.totalCount = cc.wwx.Invite.mInviteList2["rewards"].length;
         }
         cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
 

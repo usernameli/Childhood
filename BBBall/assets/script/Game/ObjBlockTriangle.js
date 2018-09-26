@@ -58,6 +58,7 @@ cc.Class({
     {
         this.splashNode.active = true;
         cc.wwx.AudioManager.playBrick();
+        // cc.wwx.AudioManager.playBlockClick(this._labelNum % 10);
 
         let randomColor = this.setRandomColor(this._labelNum);
         this.node.color = new cc.Color(randomColor.r,randomColor.g,randomColor.b);

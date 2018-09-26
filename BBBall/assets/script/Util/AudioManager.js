@@ -61,7 +61,8 @@ cc.Class({
         brickSound:{
             default:null,
             type:cc.AudioClip
-        }
+        },
+
 
     },
     ctor: function () {
@@ -221,6 +222,7 @@ cc.Class({
     },
     playMusic : function(key, callback, loop) {
 
+        return;
         loop = typeof loop == 'undefined'  || loop ? true : false;
 
         this.stopMusic();
@@ -230,12 +232,14 @@ cc.Class({
      * 游戏背景音乐
      */
     playMusicGame () {
+        return;
         this.playMusic(this.audioGameBgm0);
     },
     /**
      * 停止背景音乐播放
      */
     stopMusic () {
+        return;
         var context = this.mAudioMap[this.mMusicKey];
 
         if (typeof(context) != 'undefined') {
@@ -299,6 +303,7 @@ cc.Class({
         return this.play(this.audioWarning,false);
 
     },
+
     /*
      * 方块碰撞的声音
      */

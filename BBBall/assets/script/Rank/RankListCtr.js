@@ -66,7 +66,7 @@ cc.Class({
         // 获取整个列表的高度
 
 
-        this.totalCount = 30;
+        this.totalCount = 60;
         cc.wwx.OutPut.log("this.totalCount: ",this.totalCount);
 
         this.bufferZone = this.spawnCount * (this.itemTemplate.height + this.spacing) / 2;

@@ -67,6 +67,7 @@ cc.Class({
         parseGdata:function(params)
         {
             this.gdata = params['gdata'];
+            this.checkPointID = this.gdata["levelHighLv"];
             this.mIssue = "mIssue";
             if(cc.wwx.SystemInfo.debug)
             {

@@ -66,6 +66,7 @@ cc.Class({
             type:cc.Node
         },
         _openCheckIn:false,
+        _clickShare:false,
         _tag:"GameHall"
 
     },
@@ -189,7 +190,9 @@ cc.Class({
     wxShareSuccess(argument)
     {
         cc.wwx.OutPut.log("InvateRewardWindow wxShareSuccess",JSON.stringify(argument));
-        if(!argument["isShareGroupId"] && argument["burialId"] === cc.wwx.BurialShareType.DailyInviteGroup)
+        let find = cc.wwx.PopWindowManager.findWindowByName("prefab/invate/Invate");
+
+        if(!find && !argument["isShareGroupId"] && argument["burialId"] === cc.wwx.BurialShareType.DailyInviteGroup)
         {
             cc.wwx.TCPMSG.getShareReward("group");
 

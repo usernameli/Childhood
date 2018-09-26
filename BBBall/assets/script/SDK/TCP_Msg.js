@@ -47,6 +47,19 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+        //获取提审配置
+        getClientConf:function()
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'action': 'client_conf'
+                }
+            };
+            this._sendCmd(params);
+
+        },
         //获取关卡礼包
         getLevelGiftConf:function()
         {
@@ -168,7 +181,7 @@ cc.Class({
         /*
          * 开启宝箱
          */
-        openGameBox(playMode)
+        openGameBox(playMode,level)
         {
             var params = {
                 'cmd': cc.wwx.EventType.CMD_GAME,
@@ -176,6 +189,7 @@ cc.Class({
                     'gameId': cc.wwx.SystemInfo.gameId,
                     'action': cc.wwx.EventType.ACTION_OPEN_BOX,
                     'playMode': playMode,
+                    'level':level
                 }
             };
             this._sendCmd(params);

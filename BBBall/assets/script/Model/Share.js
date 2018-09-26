@@ -168,7 +168,8 @@ cc.Class({
                 var pid = rewardGetList[i]['pointId'];
                 var that = this;
 
-                if (res) {
+                if (res)
+                {
                     //通过分享票据获取分享群ID
                     wx.getShareInfo({
                         shareTicket: res,
@@ -207,11 +208,18 @@ cc.Class({
                             // });
                         }
                     });
-                } else {
+                }
+                else
+                {
                     //好友分享
                     // cc.wwx.TCPMSG.getShare3Reward(pid, cc.wwx.ShareWhereReward.Friend);
                     // cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS, rewardGetList[i]);
-                    cc.wwx.TipManager.showMsg('分享好友成功,赶快提醒好友加入游戏吧');
+                    cc.wwx.OutPut.log("getShareRewards bid ",bid);
+                    if(bid === cc.wwx.BurialShareType.DailyInviteFriend);
+                    {
+                        cc.wwx.TipManager.showMsg('分享好友成功,赶快提醒好友加入游戏吧');
+
+                    }
 
                 }
             }
