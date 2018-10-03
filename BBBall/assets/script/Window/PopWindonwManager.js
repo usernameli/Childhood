@@ -38,7 +38,7 @@ cc.Class({
         },
         removeAllWindow()
         {
-            for(let window = 0; window < this._windowList;window++)
+            for(let window = 0; window < this._windowList.length;window++)
             {
                 this._windowList[window]["windowNode"].destroy();
 
@@ -70,10 +70,12 @@ cc.Class({
         },
         popWindow(windowName,componentName,params,zIndex)
         {
+
             if(this.findWindowByName(windowName))
             {
                 return;
             }
+
 
             var baseScene = this.getScene();
             let self = this;
@@ -86,7 +88,14 @@ cc.Class({
 
                     if(!error)
                     {
+
+                        if(self.findWindowByName(windowName))
+                        {
+                            return;
+                        }
                         let window = cc.instantiate(prefab);
+                        self._windowList.push({windowName:windowName,windowNode:window});
+
                         window.position = cc.v2(0, 0);
                         let component = window.getComponent(componentName);
                         component.setWindowName(windowName);
@@ -99,7 +108,7 @@ cc.Class({
                         {
                             window.zIndex = zIndex
                         }
-                        self._windowList.push({windowName:windowName,windowNode:window});
+
                     }
             });
         },

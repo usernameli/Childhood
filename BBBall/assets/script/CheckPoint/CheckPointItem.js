@@ -67,7 +67,6 @@ cc.Class({
         }
         if(this.giftBox.active && !cc.wwx.Gift.OpendLevels.contains(this._checkPointItem))
         {
-            // cc.wwx.TCPMSG.openGiftBox(this._checkPointItem);
             cc.wwx.UserInfo.checkPointID = this._checkPointItem;
             cc.wwx.PopWindowManager.popWindow("prefab/GameBoxWindow","GameBoxWindow",{level:true},100);
 

@@ -33,7 +33,7 @@ cc.Class({
         this.timerNum = 10;
         self.timerLabel.string = "10";
         self.timerProgressRed.fillRange = 1;
-
+        self.scoreNum.string = cc.wwx.UserInfo.currentSocre;
         if(cc.wwx.ClientConf.ClientConfList["hiddenNodes"])
         {
             if(cc.wwx.ClientConf.ClientConfList["hiddenNodes"].contains("shareReviveBtn"))

@@ -51,12 +51,14 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        _btnClick:false,
         _gameResult:false,
 
     },
     onLoad()
     {
         this._super();
+        this._btnClick = false;
         let gameResult = this._params['GameResult'];
         this.resultScore.string = cc.wwx.UserInfo.currentSocre;
         let gameData = cc.wwx.UserInfo.gdata;
@@ -194,8 +196,22 @@ cc.Class({
         cc.wwx.SceneManager.switchScene("GameHall");
 
     },
+
+    timerBtnClick()
+    {
+        cc.wwx.OutPut.log("timerBtnClick.....");
+        this._btnClick = false;
+    },
     continueBtnCallBack()
     {
+
+        if(this._btnClick === true)
+        {
+            return;
+
+        }
+        cc.wwx.Timer.setTimer(this,this.timerBtnClick,2,0,0);
+        this._btnClick = true;
 
         if(cc.wwx.UserInfo.playMode === "level")
         {
@@ -251,5 +267,11 @@ cc.Class({
         }
 
 
-    }
+    },
+    closeWindow()
+    {
+        cc.wwx.Timer.cancelTimer(this,this.timerBtnClick);
+        cc.wwx.AudioManager.playAudioButton();
+        cc.wwx.PopWindowManager.remvoeWindowByName(this._windowName);
+    },
 })

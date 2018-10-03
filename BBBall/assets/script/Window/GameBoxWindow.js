@@ -32,7 +32,6 @@ cc.Class({
     {
         if(this._params["level"])
         {
-            // cc.wwx.TCPMSG.openGameBox(cc.wwx.UserInfo.playMode);
             cc.wwx.TCPMSG.openGiftBox(cc.wwx.UserInfo.checkPointID);
             this.closeWindow();
 

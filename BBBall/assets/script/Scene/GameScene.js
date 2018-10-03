@@ -61,7 +61,7 @@ cc.Class({
         },
 
         _tag:"gameScene",
-        _score:0,
+        _score:10,
         _sumScore:0,
         _ballSporting:false,
     },
@@ -87,7 +87,7 @@ cc.Class({
     },
     init()
     {
-        this._score = 0;
+        this._score = 10;
         this._sumScore = 0;
         this._ballSporting = false;
         cc.wwx.AudioManager.playGameStart();
@@ -219,6 +219,7 @@ cc.Class({
         cc.wwx.OutPut.log(this._tag,"ballBomb",JSON.stringify(argument));
         //有方块碎了
         let score = this._score;
+
         let bombPosition = argument["objPosition"];
         this._sumScore += score;
 
@@ -276,8 +277,6 @@ cc.Class({
     {
 
         this.userItem("1012");
-
-
     },
     item2Click()
     {
@@ -306,7 +305,7 @@ cc.Class({
         let itemNum = cc.wwx.UserInfo.getBagItemNum(itemID);
 
         let diamondNum = parseInt(cc.wwx.UserInfo.bagData.diamondCount);
-        if(itemNum && 100 > diamondNum) {
+        if(itemNum === 0 && 100 > diamondNum) {
             //砖石不够
             cc.wwx.TipManager.showMsg('您的宝石不足,邀请好友可以获得宝石奖励', 1);
             return;

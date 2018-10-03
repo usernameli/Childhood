@@ -47,6 +47,7 @@ cc.Class({
 
         MSG_UPDATE_DIAMOND: 'msg_update_diamond',       // 宝石信息更新
         MSG_WX_SHARE_SUCCESS:'msg_wx_share_success',        //分享成功
+        MSG_WX_SHARE_FAILED:'msg_wx_share_failed',        //分享失败
 
         GET_USER_FEATURE_SUCCESS: 'GET_USER_FEATURE_SUCCESS',
         GET_USER_FEATURE_FAIL: 'GET_USER_FEATURE_FAIL',
@@ -107,6 +108,8 @@ cc.Class({
         RANDOM_PLACEMENT_4_ELIMINATE:'random_placement_4_eliminate', //随机放置4个射线
         ACTION_RECOVERY_BALL:'action_recovery_ball', //收回球球
         ACTION_BALL_GAME_RESTART:'action_ball_game_restart',//游戏重新开始
+        ACTION_BALL_GAME_START:'action_ball_game_start',//游戏开始
+        ACTION_BALL_GAME_OVER:'action_ball_game_over',//游戏结束
 
         ACTION_BALL_DAILY_CHECKIN_STATUS:'action_ball_daily_checkin_status', //签到数据事件
         ACTION_BALL_DAILY_CHECKIN:'action_ball_daily_checkin', //签到成功数据事件
@@ -140,5 +143,8 @@ cc.Class({
         ACTION_RANK_100BALL:'ball_rank_100ball',
         ACTION_RANK_POP:'ball_rank_pop',
         GETSWITCH_RESULT: "GETSWITCH_RESULT", //获取分享开关
+
+        ACTION_WARNING_SHOW:'ball_warning_show', //显示警告
+        ACTION_WARNING_HIDE:'ball_warning_hide', //隐藏警告
     }
 });

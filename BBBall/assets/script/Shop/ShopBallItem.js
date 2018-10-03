@@ -98,7 +98,7 @@ cc.Class({
                 }
                 else
                 {
-                    this.isUsedOwnLabel.string = "未使用";
+                    this.isUsedOwnLabel.string = "使用";
 
                 }
 

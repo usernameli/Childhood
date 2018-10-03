@@ -27,6 +27,7 @@ cc.Class({
         _userBallId:0,
         _isUseBallChange:false,
         _dottleLineNo:false,
+        _gameOver:false,
         ballOnWallNum:0, //回到地面的球的数量
     },
 
@@ -43,7 +44,8 @@ cc.Class({
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_START,this.gameStart,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_OVER,this.gameOver,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_USE_BALL_ITEM,this.useBallItem,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
 
@@ -69,8 +71,9 @@ cc.Class({
         this._createBall(this.ballMaxNum,0);
 
     },
-    gameRestart()
+    gameStart()
     {
+        this._gameOver = false;
         for(var i = 0; i < this._ballList.length;i++)
         {
             this._ballList[i].destroy();
@@ -78,6 +81,13 @@ cc.Class({
         this._ballList = [];
         this.gameInit();
         this._createBall(this.ballMaxNum,0);
+        this._gameOver = false;
+
+
+    },
+    gameOver()
+    {
+        this._gameOver = true;
 
     },
     gameBagData()
@@ -154,8 +164,10 @@ cc.Class({
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
 
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_START,this.gameStart,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_OVER,this.gameOver,this);
+
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_USE_BALL_ITEM,this.useBallItem,this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ITEM_ADD_BALL,this.itemAddBallsCallBack,this);
     },
@@ -180,9 +192,17 @@ cc.Class({
     plusBallsCallBack(argument)
     {
         cc.wwx.OutPut.log(this._tag, 'plusBallsCallBack argument: ', JSON.stringify(argument));
+
+        //球球大于120个 就不能加球了
+        if(cc.wwx.UserInfo.playMode === "classic" && this.ballMaxNum > 120)
+        {
+            return;
+        }
         let plusNum = argument["plusNum"];
         let oldMaxNum = this.ballMaxNum;
         this.ballMaxNum += plusNum;
+
+
         this._createBall(plusNum,oldMaxNum);
 
 
@@ -212,7 +232,10 @@ cc.Class({
     },
     _touchEndCallBack:function(event)
     {
-        if(this.isBallSporting || this._dottleLineNo)
+        cc.wwx.OutPut.log("_touchEndCallBack: ",this._gameOver);
+        cc.wwx.OutPut.log("_touchEndCallBack: ",this.isBallSporting);
+        cc.wwx.OutPut.log("_touchEndCallBack: ",this._dottleLineNo);
+        if(this._gameOver || this.isBallSporting || this._dottleLineNo)
         {
             return;
         }
@@ -228,7 +251,7 @@ cc.Class({
     },
     _touchMoveCallBack:function(event)
     {
-        if(this.isBallSporting)
+        if(this._gameOver || this.isBallSporting)
         {
             return;
         }
@@ -238,7 +261,7 @@ cc.Class({
     },
     _touchStartCallBack:function(event)
     {
-        if(this.isBallSporting)
+        if(this._gameOver || this.isBallSporting)
         {
             return;
         }

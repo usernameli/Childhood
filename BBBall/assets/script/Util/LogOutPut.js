@@ -5,6 +5,10 @@ cc.Class({
         maxCount: 100,
         index: 0,
         log: function (){
+            if(!cc.wwx.SystemInfo.debug)
+            {
+                 return;
+            }
             if (CC_WECHATGAME) {
                 var strLog = this.getDateString() + cc.js.formatStr.apply(cc,arguments);
                 this.addLog(strLog);
@@ -22,6 +26,10 @@ cc.Class({
         },
 
         info: function () {
+            if(!cc.wwx.SystemInfo.debug)
+            {
+                return;
+            }
             if (CC_WECHATGAME) {
                 var strLog = this.getDateString() + cc.js.formatStr.apply(cc,arguments);
                 this.addLog(strLog);
@@ -39,6 +47,10 @@ cc.Class({
         },
 
         warn: function(){
+            if(!cc.wwx.SystemInfo.debug)
+            {
+                return;
+            }
             if (CC_WECHATGAME) {
                 return;
                 var strLog = this.getDateString() + cc.js.formatStr.apply(cc,arguments);
@@ -57,6 +69,10 @@ cc.Class({
         },
 
         err: function(){
+            if(!cc.wwx.SystemInfo.debug)
+            {
+                return;
+            }
             if (CC_WECHATGAME) {
                 var strLog = this.getDateString() + cc.js.formatStr.apply(cc,arguments);
                 this.addLog(strLog);

@@ -133,6 +133,9 @@ cc.Class({
         this.findEmptyGridPosition();
 
         this._gameOver = false;
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_START)
+
+
 
     },
     start() {
@@ -208,6 +211,7 @@ cc.Class({
     },
     showWarningAnim() {
         if (this.warningNode.active === false) {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_WARNING_SHOW);
             cc.wwx.AudioManager.playWarning();
 
             let anim = this.warningNode.getComponent(cc.Animation);
@@ -215,11 +219,31 @@ cc.Class({
             animState.wrapMode = cc.WrapMode.Loop;
             this.warningNode.active = true;
 
+            let share = true;
+            if(cc.wwx.ClientConf.ClientConfList["hiddenNodes"])
+            {
+                if(cc.wwx.ClientConf.ClientConfList["hiddenNodes"].contains("shareReviveBtn"))
+                {
+                    share = false;
+                }
+            }
+
+            cc.wwx.Storage.getItem(cc.wwx.Storage.Key_Help_Tip_Show,function (vaule) {
+                    if(share && vaule === 0)
+                    {
+                        cc.wwx.Storage.setItem(cc.wwx.Storage.Key_Help_Tip_Show,1);
+                        cc.wwx.PopWindowManager.popWindow("prefab/HelpTipWindow","HelpTipWindow",)
+                    }
+
+            },0);
+
 
         }
     },
     hideWarningAnim() {
         if (this.warningNode.active) {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_WARNING_HIDE);
+
             let anim = this.warningNode.getComponent(cc.Animation);
             anim.stop();
             this.warningNode.active = false;
@@ -257,6 +281,20 @@ cc.Class({
         // 1 2 17 11 3 4 5 6
         let addPusF = true;
         let objsList = [14,7,-1,-1, 5,-1,-1,5,-1,-1,5,-1, 15, -1,6,1, 2,-1, 17,-1,-1,1,-1,2,-1,17,-1,11,-1,11,3,4,-1,-1,-1,1,2,-1,-1,17,-1,11,-1,3,-1,4,-1,5,-1,6,-1,4,-1,5,6,-1];
+
+        if(cc.wwx.UserInfo.currentSocre < 10000)
+        {
+
+        }
+        else if(cc.wwx.UserInfo.currentSocre < 20000)
+        {
+            objsList = [14,7,-1, 5,-1,5,-1,5,-1, 15, -1,6,1, 2, 17,-1,1,-1,2,-1,17,-1,11,11,3,4,-1,-1,1,2,-1,17,-1,11,-1,3,-1,4,-1,5,-1,6,4,-1,5,6,-1];
+        }
+        else if(cc.wwx.UserInfo.currentSocre < 30000)
+        {
+            objsList = [14,7,-1, 5,-1,5,-1,5,-1, 15, -1,6,1, 2,1,-1,2,-1,17,-1,11,3,4,-1,1,2,-1,17,-1,11,-1,3,-1,4,5,-1,6,6,-1];
+
+        }
         for (let k = 0; k < 11; k++) {
             let objsID = Math.floor(Math.random() * objsList.length + 1);
             cc.wwx.OutPut.log("_createOneRowObjs 1 : ",objsID);
@@ -460,6 +498,10 @@ cc.Class({
     },
     checkGameSuccess()
     {
+        if(cc.wwx.UserInfo.playMode === "classic")
+        {
+            return false;
+        }
         let gameOver = true;
         for (var i = 0; i < this.node.childrenCount; ++i) {
             var name = this.node.children[i].name;
@@ -591,7 +633,6 @@ cc.Class({
             let posY = -1 * (84 + (showRowNum - haveShowRow - 1) * (this._objHeight + this._space) + this._objHeight / 2);
             let posX =  this._boundary + this._objWidth / 2 + column * (this._objWidth + this._space);
 
-            cc.wwx.OutPut.log("objsPrefab posY: ",posY);
             let ObjBlockSquare = objPrefab.getComponent(objsComponent);
             if(objsComponent === "ObjBlockPlus")
             {
@@ -624,6 +665,10 @@ cc.Class({
         }
         else if(cc.wwx.UserInfo.playMode === "100ball")
         {
+            if(this._gameOver)
+            {
+                return;
+            }
             this._gameIsSucess();
             this._gameOver = true;
             return;
@@ -667,6 +712,7 @@ cc.Class({
 
         if(this._waitUserInfo)
         {
+            this._waitUserInfo = false;
             if(this._gameOverState)
             {
                 cc.wwx.PopWindowManager.popWindow("prefab/ResultWindow","ResultWindow",{GameResult:true});
@@ -687,6 +733,7 @@ cc.Class({
         this._gameOverState = true;
         this._waitUserInfo  = true;
         cc.wwx.PopWindowManager.removeAllWindow();
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_OVER);
 
         cc.wwx.TCPMSG.updateUpLoadGameScore(cc.wwx.SystemInfo.gameId,
             cc.wwx.UserInfo.playMode,
@@ -708,7 +755,7 @@ cc.Class({
         //上报分数
         this._gameOverState = false;
         this._waitUserInfo  = true;
-
+        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_GAME_OVER);
         cc.wwx.UserInfo.currentStar = 0;
         cc.wwx.PopWindowManager.removeAllWindow();
 

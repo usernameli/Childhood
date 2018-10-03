@@ -76,10 +76,6 @@ cc.Class({
             self._isSports = true;
             self.body.enabledContactListener = true;
 
-            cc.wwx.OutPut.log('_recoverFg:', self._recoverFg);
-            cc.wwx.OutPut.log('_isOnWall:', self._isOnWall);
-            cc.wwx.OutPut.log('_isSports:', self._isSports);
-            cc.wwx.OutPut.log('self._noShut:', self._noShut);
             self.dottedLineManager.isBallSporting = true;
 
 
@@ -187,10 +183,14 @@ cc.Class({
                 {
                     //最后一个球回到地面
                     let self = this;
-                    setTimeout(function () {
-                        self.dottedLineManager.isBallSporting = false;
+                    if(this.dottedLineManager._gameOver === false)
+                    {
+                        setTimeout(function () {
+                            self.dottedLineManager.isBallSporting = false;
 
-                    },500);
+                        },500);
+                    }
+
 
                     cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:self.dottedLineManager.center});
 

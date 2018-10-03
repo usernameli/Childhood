@@ -15,12 +15,12 @@ cc.Class({
             }
             else if(level <= 109)
             {
-                let num = Math.floor(objNum * ballNum / 100  + 4);
+                let num = Math.floor(objNum * ballNum / 100  + 14);
                 return 5 * (num / 2 + 1) * num / 2
             }
             else
             {
-                let num = Math.floor(objNum * ballNum / 200  + 2);
+                let num = Math.floor(objNum * ballNum / 100  + 20);
                 return 5 * (num / 2 + 1) * num / 2
             }
         }

@@ -200,7 +200,7 @@ cc.Class({
                         fail: function () {
                             cc.wwx.OutPut.log("getShareInfo fail!!!!!!");
                             // cc.wwx.TCPMSG.getShare3Reward(pid, cc.wwx.ShareWhereReward.Group);
-                            // cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS, {
+                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_WX_SHARE_FAILED);
                             //     burialId: bid,
                             //     result: null,
                             //     shareTicket: res,
