@@ -87,6 +87,9 @@ cc.Class({
                     if (res.model.indexOf('iPhone X') >= 0) {
                         cc.wwx.SystemInfo.SYS.phoneType = 1;
                     }
+                    else if (res.model.indexOf('iPad') >= 0) {
+                        cc.wwx.SystemInfo.SYS.phoneType = 2;
+                    }
 
                     if (res.brand.indexOf('Apple')>=0 || res.model.indexOf('iPhone')>=0 || res.system.indexOf('iOS')>=0){
                         cc.wwx.SystemInfo.SYS.os = "iOS";
@@ -104,13 +107,19 @@ cc.Class({
                     cc.wwx.SystemInfo.windowWidth = res.windowWidth;
                     cc.wwx.SystemInfo.windowHeight = res.windowHeight;
 
-                    if (typeof cc.wwx.SystemInfo.SYS.benchmarkLevel != 'undefined') {
-                        if (cc.wwx.SystemInfo.SYS.benchmarkLevel == -2 || cc.wwx.SystemInfo.SYS.benchmarkLevel == 0) {
+                    if (typeof cc.wwx.SystemInfo.SYS.benchmarkLevel != 'undefined')
+                    {
+                        if (cc.wwx.SystemInfo.SYS.benchmarkLevel == -2 || cc.wwx.SystemInfo.SYS.benchmarkLevel == 0)
+                        {
                             wx.setPreferredFramesPerSecond(20);
-                        } else if (cc.wwx.SystemInfo.SYS.benchmarkLevel >= 1) {
+                        }
+                        else if (cc.wwx.SystemInfo.SYS.benchmarkLevel >= 1)
+                        {
                             var value = Math.floor(0.8 * cc.wwx.SystemInfo.SYS.benchmarkLevel + 20);
                             wx.setPreferredFramesPerSecond(Math.min(60, value));
-                        } else {
+                        }
+                        else
+                        {
                             wx.setPreferredFramesPerSecond(30);
                         }
                     } else {
@@ -124,13 +133,13 @@ cc.Class({
                             }
                         }
                         if (!isNewiPhone) {
-                            wx.setPreferredFramesPerSecond(42);
+                            wx.setPreferredFramesPerSecond(40);
                         }
                     }
 
                     //上报顺序为微信版本 基础库版本 平台 操作系统版本
-                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeSubmitVersionInfo,
-                        [res.version, res.SDKVersion, res.platform, res.system, res.brand, res.model]);
+                    // cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeSubmitVersionInfo,
+                    //     [res.version, res.SDKVersion, res.platform, res.system, res.brand, res.model]);
                 },
                 fail:function(res) {
                     cc.wwx.OutPut.err('wx.getSystemInfo fail:', JSON.stringify(res));

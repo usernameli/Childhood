@@ -47,8 +47,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.985351142465036,
-      "y": 0.985351142465036,
+      "x": 0.2,
+      "y": 0.2,
       "z": 1
     },
     "_quat": {
@@ -91,10 +91,10 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 120
+        "__id__": 121
       },
       {
-        "__id__": 121
+        "__id__": 122
       }
     ],
     "_prefab": null,
@@ -301,9 +301,9 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "0e350896-5468-49b8-9e78-18bf3f0b89a5"
+      "__uuid__": "1bc27c47-c9f6-45e0-9846-28800c54fd85"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -315,7 +315,9 @@
     "_fillRange": 0,
     "_isTrimmedMode": false,
     "_state": 0,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "7b560594-8eb8-428f-87e2-f97db7f302c0"
+    },
     "_id": "5fO4tc1RZNsKXtq5MtZJWr"
   },
   {
@@ -377,8 +379,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 76,
-      "height": 90
+      "width": 70,
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -531,9 +533,9 @@
     "alignMode": 0,
     "_target": null,
     "_alignFlags": 9,
-    "_left": 30,
+    "_left": 33,
     "_right": 0,
-    "_top": 30,
+    "_top": 40,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -5150,6 +5152,9 @@
     "_components": [
       {
         "__id__": 119
+      },
+      {
+        "__id__": 120
       }
     ],
     "_prefab": null,
@@ -5173,8 +5178,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 210,
-      "y": 500,
+      "x": 211,
+      "y": 501.5,
       "z": 0
     },
     "_scale": {
@@ -5313,6 +5318,33 @@
       "__uuid__": "7b560594-8eb8-428f-87e2-f97db7f302c0"
     },
     "_id": "e5tfDDeDVAUqR9iIeeklNS"
+  },
+  {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 116
+    },
+    "_enabled": true,
+    "alignMode": 1,
+    "_target": null,
+    "_alignFlags": 33,
+    "_left": 0,
+    "_right": 130,
+    "_top": 120,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0,
+    "_id": "b5DjNJKmRM15DELVfdL9LC"
   },
   {
     "__type__": "cc.Canvas",

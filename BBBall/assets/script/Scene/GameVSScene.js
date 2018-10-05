@@ -1,0 +1,71 @@
+cc.Class({
+    extends:cc.Component,
+    properties:{
+        adNode:{
+            default:null,
+            type:cc.Node,
+        },
+        mySelfTipNode:{
+            default:null,
+            type:cc.Node
+        },
+        opponentTipNode:{
+            default:null,
+            type:cc.Node
+        },
+        mySelfOperationAnimteNode:{
+            default:null,
+            type:cc.Node
+        },
+        opponentOperationAnimteNode:{
+            default:null,
+            type:cc.Node
+        },
+        mySelfProgressBar:{
+            default:null,
+            type:cc.ProgressBar
+        },
+        opponentProgressBar:{
+            default:null,
+            type:cc.ProgressBar
+        },
+        opponentNickName:{
+            default:null,
+            type:cc.Label
+        },
+        opponentSegment:{
+            default:null,
+            type:cc.Label
+        },
+        opponentHeadIcon:{
+            default:null,
+            type:cc.Node
+        },
+        mySelfNickName:{
+            default:null,
+            type:cc.Label
+        },
+        mySelfSegment:{
+            default:null,
+            type:cc.Label
+        },
+        mySelfHeadIcon:{
+            default:null,
+            type:cc.Node
+        },
+        centerGameNode:{
+            default:null,
+            type:cc.Node
+        }
+
+    },
+    onLoad()
+    {
+        cc.wwx.Util.adaptIpad();
+
+        initMgr();
+
+    },
+
+
+});

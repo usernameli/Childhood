@@ -14,6 +14,10 @@ cc.Class({
             default:null,
             type:cc.Prefab
         },
+        dottedLine:{
+            default:null,
+            type:cc.Node
+        },
         _usePrefabBall:null,
         _tag:"DattleLineManager",
         _ctx:null,//Graphics
@@ -55,15 +59,23 @@ cc.Class({
         //     cc.PhysicsManager.DrawBits.e_jointBit |
         //     cc.PhysicsManager.DrawBits.e_shapeBit
         // ;
-        let width   =  this.node.width;
-        let height  =  this.node.height;
+        let width   =  cc.winSize.width;
+        let height  =  cc.winSize.height - 250;
+        cc.wwx.OutPut.log("cc.winSize onLoad width: ",width);
+        cc.wwx.OutPut.log("cc.winSize onLoad height: ",height);
         let node = new cc.Node();
         node.group = "wall";
         let body = node.addComponent(cc.RigidBody);
         body.type = cc.RigidBodyType.Static;
 
-        this._addBound(node, width/2, height, width, 10,1);//上面
-        this._addBound(node, width/2, 108, width, 10,2);//下面
+        let iphoneX = 0;
+        if(cc.wwx.SystemInfo.SYS.phoneType === 1)
+        {
+            iphoneX = 138
+        }
+
+        this._addBound(node, width/2, height - iphoneX, width, 10,1);//上面
+        this._addBound(node, width/2, 108 - iphoneX, width, 10,2);//下面
         this._addBound(node, 0, height / 2, 10, height,3);//左面
         this._addBound(node, width, height / 2, 10, height,4);//右面
 
@@ -132,8 +144,6 @@ cc.Class({
         this.isFirstBallCome = false;
         this._isUseBallChange = false;
         this._dottleLineNo = false;
-        cc.wwx.OutPut.log('onLoad:', 'width', this.node.width);
-        cc.wwx.OutPut.log('onLoad:', 'height', this.node.height);
         this._userBallId = cc.wwx.UserInfo.findBagUseBall();
         if(this._userBallId <= 1021)
         {
@@ -216,7 +226,16 @@ cc.Class({
             this.node.addChild(ballPrefab);
             let component = ballPrefab.getComponent('Ball');
             component._index = index + i + 1;
-            ballPrefab.setPosition(this.center);
+            if(cc.wwx.SystemInfo.SYS.phoneType === 1)
+            {
+                ballPrefab.setPosition(cc.v2(this.center.x,this.center.y - 138));
+
+            }
+            else
+            {
+                ballPrefab.setPosition(this.center);
+
+            }
             ballPrefab.getComponent('Ball').dottedLineManager = this;
             ballPrefab.getComponent('Ball').setBallID(this._userBallId);
 
@@ -292,8 +311,6 @@ cc.Class({
         let p1 = this.center;
         touchPoint.mulSelf(100);
 
-
-
         this._rayCast(p1, touchPoint);
     },
     _filterCollider(tag)
@@ -313,9 +330,6 @@ cc.Class({
         let result = null;
         for (let i = 0; i < results.length; i++) {
             var collider = results[i].collider;
-            cc.wwx.OutPut.log("p2: ",collider.tag);
-            cc.wwx.OutPut.log("p2: ",collider.tag);
-
             if(collider.tag > 0 && collider.tag !== 2)
             {
                 result = results[i];

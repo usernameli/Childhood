@@ -29,6 +29,8 @@ cc.Class({
     },
     clickGoHome()
     {
+        cc.wwx.AudioManager.playAudioButton();
+
         cc.wwx.SceneManager.switchScene("GameHall");
 
 

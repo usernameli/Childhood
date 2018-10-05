@@ -68,6 +68,7 @@ cc.Class({
     onLoad()
     {
 
+        cc.wwx.Util.adaptIpad();
 
         this.init();
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB_END,this.demolitionBombEnd,this);

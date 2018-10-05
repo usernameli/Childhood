@@ -41,10 +41,6 @@ cc.Class({
         },
 
         // 按钮点击
-        audioBg:{
-            default:null,
-            type:cc.AudioClip
-        },
         headBG:{
             default:null,
             type:cc.Node
@@ -65,6 +61,14 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        topNode:{
+            default:null,
+            type:cc.Node
+        },
+        btnListNode:{
+            default:null,
+            type:cc.Node
+        },
         _openCheckIn:false,
         _clickShare:false,
         _tag:"GameHall"
@@ -73,8 +77,10 @@ cc.Class({
     onLoad()
     {
 
+        cc.wwx.Util.adaptIpad();
+        this.adaptIphoneX();
         this.loginSuccessCallBack();
-        cc.wwx.AudioManager.playMusic(this.audioBg);
+        // cc.wwx.AudioManager.playMusic(this.audioBg);
         this._openCheckIn = false;
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
 
@@ -89,6 +95,18 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_USER_INFO, this.gameUserInfo, this);
 
         this.shopList();
+
+    },
+    adaptIphoneX()
+    {
+        if(cc.wwx.SystemInfo.SYS.phoneType === 1)
+        {
+            var widget = this.topNode.getComponent(cc.Widget);
+            widget.top = 100;
+
+            var widget = this.btnListNode.getComponent(cc.Widget);
+            widget.top = 255;
+        }
 
     },
     shopList()
@@ -305,6 +323,12 @@ cc.Class({
         cc.wwx.UserInfo.playMode = "classic";
         cc.wwx.UserInfo.ballInfo.ballNum = 1;
         cc.wwx.SceneManager.switchScene("GameScene");
+
+    },
+    gameDoubleVSCallBack()
+    {
+        cc.wwx.AudioManager.playAudioButton();
+        cc.wwx.SceneManager.switchScene("GameVSRoom");
 
     },
     ball100Mode()

@@ -128,6 +128,11 @@ window.initMgr = function() {
         clickStatEventTypeUserFrom : 99990001,//用户来源
         clickStatEventTypeShare : 99990002,//用户分享
 
+        clickStatEventTypeClickAdBtn : 99990007,//点击分流icon
+        clickStatEventTypeClickAdVideo : 99990020,// 视频广告
+        clickStatEventTypeVideoAD : 67890029, // 视频广告
+        clickStatEventTypeBannerAD : 67890030, // banner广告
+        clickStatEventTypeBannerAD2 : 67890033, // banner广告干预
 
         clickStatEventTypeSubmitVersionInfo : 9999, //上报微信版本及基础库信息
 
@@ -234,6 +239,12 @@ window.initMgr = function() {
     cc.wwx.Invite = require('../Model/Invite');
     cc.wwx.ClientConf = require("../Model/ClientConf");
 
+    cc.wwx.BannerAD = require("../Ads/Banner_ad");
+    cc.wwx.BannerAD.init();
+
+    cc.wwx.VideoAD = require("../Ads/Video_ad");
+    cc.wwx.VideoAD.init();
+
 
 };
 
@@ -249,6 +260,10 @@ cc.Class({
             default:null,
             type:cc.ProgressBar
         },
+        canvas:{
+            default:null,
+            type:cc.Canvas
+        },
         _userInfoButton:null,
     },
 
@@ -256,6 +271,8 @@ cc.Class({
     {
 
         this.initComponent();
+        cc.wwx.Util.adaptIpad();
+
         this._userInfoButton = null;
         cc.game.addPersistRootNode(this.globalNode);
         cc.wwx.AudioManager = cc.wwx.AudioManager || this.globalNode.getChildByName('AudioManager').getComponent('AudioManager');
@@ -275,7 +292,7 @@ cc.Class({
                 left: btnwidth / 2 - 100,
                 top: btnheight/2 + 100,
                 width: 200,
-                height: 70,
+                height: 45,
                 lineHeight: 40,
                 backgroundColor: '#ff0000',
                 color: '#ffffff',

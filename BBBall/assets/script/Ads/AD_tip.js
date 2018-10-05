@@ -1,6 +1,6 @@
 /**
  * Created by Aaron on 21/06/2018.
- * Copyright 2013 sml Games. All Rights Reserved.
+ * Copyright 2013 TuYoo Games. All Rights Reserved.
  */
 
 cc.Class({
@@ -8,15 +8,17 @@ cc.Class({
 
     properties: {
     },
-
-    onLoad()
-    {
-
-
-    },
-
-    onDestroy() {
-        cc.wwx.NotificationCenter.ignoreScope(this);
-    }
+    //
+    // push () {
+    //     ddz.Core.Scene.pushAdView(this.node);
+    // },
+    //
+    // pop () {
+    //     ddz.Core.Scene.popAdView();
+    // },
+    //
+    // onDestroy() {
+    //     ty.Notify.ignoreScope(this);
+    // }
 
 });

@@ -828,6 +828,136 @@ cc.Class({
             }
 
         },
+        rayCast: function (ctx,node,p1, p2) {
+            let manager = cc.director.getPhysicsManager();
+            let results = manager.rayCast(p1, p2,cc.RayCastType.All);
+            let result = null;
+            for (let i = 0; i < results.length; i++) {
+                var collider = results[i].collider;
+                if(collider.tag > 0)
+                {
+                    result = results[i];
+                    break;
+                }
+
+            }
+
+            if (result) {
+                cc.wwx.OutPut.log("rayCast result.point: ", JSON.stringify(result.point));
+
+                p2 = node.convertToNodeSpaceAR(result.point);
+                cc.wwx.OutPut.log("rayCast touchPos: ", JSON.stringify(p2));
+
+                ctx.circle(p2.x, p2.y, 10);
+
+                ctx.fillColor = cc.Color.RED;
+                ctx.fill();
+            }
+            else
+            {
+                return;
+            }
+
+
+            this.drawLine(ctx,p1,p2,true);
+
+
+            let normal = result.normal;
+            if(normal.y === 0)
+            {
+                let newP = cc.v2(p1.x,2 * p2.y - p1.y);
+
+                if(p1.y > p2.y)
+                {
+                    newP = cc.v2(p1.x,p1.y - p2.y * 2);
+                }
+                p1 = p2;
+                p2 = newP;
+            }
+            else
+            {
+                let newP = cc.v2(p1.x + 2 * (p2.x - p1.x),p1.y);
+                p1 = p2;
+                p2 = newP;
+            }
+
+            this.drawLine(ctx,p1,p2,false);
+
+        },
+        drawLine:function(ctx,start,end,fg)
+        {
+            //获得组件
+            // this.ctx=this.node.getComponent(cc.Graphics)
+            //获得从start到end的向量
+            var line=end.sub(start)
+            //获得这个向量的长度
+            var lineLength=line.mag()
+
+            if(fg === false)
+            {
+                lineLength= 300
+            }
+
+            //设置虚线中每条线段的长度
+            var length=10
+            //根据每条线段的长度获得一个增量向量
+            var increment=line.normalize().mul(length)
+            //确定现在是画线还是留空的bool
+            var drawingLine=true
+            //临时变量
+            var pos=start.clone();
+            //只要线段长度还大于每条线段的长度
+            for(;lineLength>length;lineLength-=length)
+            {
+                //画线
+                if(drawingLine)
+                {
+
+                    ctx.circle(pos.x, pos.y, 3);
+                    ctx.fillColor = cc.Color.YELLOW;
+                    ctx.fill();
+                    pos.addSelf(increment)
+                }
+                //留空
+                else
+                {
+                    pos.addSelf(increment)
+                }
+                //取反
+                drawingLine=!drawingLine
+            }
+            //最后一段
+            if(drawingLine)
+            {
+
+                ctx.circle(pos.x, pos.y, 3);
+                ctx.fillColor = cc.Color.GRAY;
+                ctx.fill();
+            }
+
+        },
+        adaptIpad()
+        {
+            if(cc.wwx.SystemInfo.SYS.os === "Android")
+            {
+                return;
+            }
+            cc.wwx.OutPut.log("adaptIpad: ",cc.wwx.SystemInfo.SYS.phoneType);
+            if(cc.wwx.SystemInfo.SYS.phoneType === 2)
+            {
+                let  scene = cc.director.getScene();
+                if (!scene) return null;
+                let cv = scene.getChildByName('Canvas');
+                if(cv)
+                {
+                    let canvas = cv.getComponent(cc.Canvas);
+                    canvas.fitHeight = true;
+                    canvas.fitWidth = true;
+                    canvas.alignWithScreen();
+                }
+            }
+
+        }
 
     }
 });
