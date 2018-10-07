@@ -63,6 +63,17 @@ cc.Class({
             type:cc.AudioClip
         },
 
+        //随机匹配的声音
+        randomMatchSound:{
+            default:null,
+            type:cc.AudioClip
+        },
+        //找到对手
+        matchFoundSound:{
+            default:null,
+            type:cc.AudioClip
+        },
+
 
     },
     ctor: function () {
@@ -92,8 +103,6 @@ cc.Class({
             }.bind(this));
         }
         this.mAudioMap[audioSource] = context;
-        cc.wwx.OutPut.log('play audio effect : ' + audioSource);
-
         return audioSource;
         // } else {
         //     var context = wx.createInnerAudioContext();
@@ -222,7 +231,6 @@ cc.Class({
     },
     playMusic : function(key, callback, loop) {
 
-        return;
         loop = typeof loop == 'undefined'  || loop ? true : false;
 
         this.stopMusic();
@@ -239,7 +247,8 @@ cc.Class({
      * 停止背景音乐播放
      */
     stopMusic () {
-        return;
+        cc.wwx.OutPut.log('play audio effect : ' + this.mMusicKey);
+
         var context = this.mAudioMap[this.mMusicKey];
 
         if (typeof(context) != 'undefined') {
@@ -318,5 +327,13 @@ cc.Class({
         return this.play(this.audioButtonClick, false);
     },
 
-
+    playRandomMatch()
+    {
+        this.playMusic(this.randomMatchSound);
+    },
+    playMatchFoundSound()
+    {
+        this.stopMusic();
+        return this.play(this.matchFoundSound, false);
+    }
 });

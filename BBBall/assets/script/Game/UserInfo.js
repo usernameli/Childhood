@@ -3,6 +3,7 @@ cc.Class({
     statics:{
         wxAuthor:false,
         userId: 10001,
+        seatId:0,
         userName: undefined,
         userPic: '',
         authorCode: '',
@@ -36,6 +37,13 @@ cc.Class({
         },
         ballInfo:{
             speed:1500,
+            ballType:"ballID",
+            ballNum:30,
+            ballPosY:15 + 108,
+        },
+        otherBallInfo:{
+            speed:1500,
+            ballId:"",
             ballType:"ballID",
             ballNum:30,
             ballPosY:15 + 108,

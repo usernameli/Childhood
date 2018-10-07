@@ -47,6 +47,102 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+        enterPkQueneRoom(roomID)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_ROOM,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_QUEUE_ENTER,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        randomMatchPkQueueRoom(roomID)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_ROOM,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_QUEUE_RANDOM_MATCH,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        inviteFriendPkQueueRoom(roomID)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_ROOM,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_QUEUE_INVITE,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        _updateCoordinate(roomID,tableID,startPosition,endPosition)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_UPDATE_COORDINATE,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+                    'startPos':startPosition,
+                    'endPos':endPosition,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        gameLevelTable(roomID,tableID)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_TABLE_LEAVE,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        levelPkQueueRoom(roomID)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_ROOM,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_QUEUE_LEAVE,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        getPkQueueRoom()
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_QUEUE_ROOM,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+
+                }
+            };
+            this._sendCmd(params);
+        },
         //获取提审配置
         getClientConf:function()
         {

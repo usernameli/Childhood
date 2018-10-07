@@ -71,6 +71,7 @@ cc.Class({
         popWindow(windowName,componentName,params,zIndex)
         {
 
+            cc.wwx.OutPut.log("popWindow: ",windowName);
             if(this.findWindowByName(windowName))
             {
                 return;
@@ -85,6 +86,7 @@ cc.Class({
                     {
                         return;
                     }
+                cc.wwx.OutPut.log("popWindow error:  ",error);
 
                     if(!error)
                     {

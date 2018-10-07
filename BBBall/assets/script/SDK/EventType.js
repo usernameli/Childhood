@@ -2,6 +2,15 @@ cc.Class({
     extends:cc.Component,
     statics:{
         CMD_GAME: 'game',
+        CMD_ROOM: 'room',
+        CMD_TABLE: 'table',
+        MSG_TABLE: 'table',
+        MSG_TABLE_INFO:'table_info',
+        CMD_TABLE_CALL:'table_call',
+        MSG_TABLE_CALL:'table_call',
+        CMD_TABLE_LEAVE:'leave',
+        MSG_TABLE_LEAVE:'leave',
+
         CMD_BIND_USER: 'bind_user',
         CMD_BIND_GAME: 'bind_game',
         CMD_USER_INFO: 'user_info',
@@ -34,6 +43,28 @@ cc.Class({
         ACTION_PAYMENT_LIST_UPDATE : 'update',
         CMD_DAILY_CHECKIN_STATUS : 'daily_checkin_status', //获取签到信息
         CMD_DAILY_CHECKIN : 'daily_checkin',
+
+        CMD_PK_QUEUE_ROOM: 'pk_queue_room',
+        MSG_PK_QUEUE_ROOM: 'pk_queue_room',
+
+        CMD_PK_QUEUE_ENTER: 'pk_queue_enter',
+        MSG_PK_QUEUE_ENTER: 'pk_queue_enter',
+
+        CMD_PK_QUEUE_LEAVE: 'pk_queue_leave',
+        MSG_PK_QUEUE_LEAVE: 'pk_queue_leave',
+
+        CMD_PK_QUEUE_INVITE: 'pk_queue_invite',
+        MSG_PK_QUEUE_INVITE: 'pk_queue_invite',
+
+
+        CMD_PK_QUEUE_RANDOM_MATCH: 'pk_queue_random_match',
+        MSG_PK_QUEUE_RANDOM_MATCH: 'pk_queue_random_match',
+
+        // CMD_PK_QUEUE_RANDOM_MATCH: 'pk_queue_random_match',
+        // MSG_PK_QUEUE_RANDOM_MATCH: 'pk_queue_random_match',
+
+        CMD_PK_UPDATE_COORDINATE:  'pk_update_coordinate',
+        MSG_PK_UPDATE_COORDINATE:  'pk_update_coordinate',
 
         MSG_DAILY_CHECKIN_STATUS : 'ball_daily_checkin_status',//签到数据返回
         MSG_BALL_DAILY_CHECKIN : 'ball_daily_checkin', //签到返回
@@ -146,5 +177,11 @@ cc.Class({
 
         ACTION_WARNING_SHOW:'ball_warning_show', //显示警告
         ACTION_WARNING_HIDE:'ball_warning_hide', //隐藏警告
+
+        ACTION_WARNING_NEED:'ball_warning_need', //需要显示警告
+        ACTION_WARNING_NO_NEED:'ball_warning_no_need', //不需要显示警告
+
+
+
     }
 });

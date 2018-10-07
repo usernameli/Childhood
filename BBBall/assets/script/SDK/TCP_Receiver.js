@@ -41,9 +41,94 @@ cc.Class({
             this.register(cc.wwx.EventType.ACTION_LEVEL_GIFT_CONF, this._onLevelGiftConf);
             this.register(cc.wwx.EventType.ACTION_CLIENT_CONF, this._onGameClientConf);
 
+            //二人对战协议
+            this.register(cc.wwx.EventType.CMD_GAME, this._onGameInfo);
+            this.register(cc.wwx.EventType.CMD_ROOM, this._onGameRoomInfo);
+            this.register(cc.wwx.EventType.CMD_TABLE, this._onGameTableInfo);
+            this.register(cc.wwx.EventType.CMD_TABLE_CALL, this._onGameTableCall);
 
 
 
+        },
+        _onGameTableCall(params)
+        {
+            if(params["cmd"] === "table_call")
+            {
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TABLE_CALL,params["result"]);
+            }
+        },
+        _onGameTableInfo(params)
+        {
+            if(params['result']["action"] === "info")
+            {
+                cc.wwx.VS.parseTableInfo(params);
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TABLE_INFO);
+            }
+            else if(params['result']["action"] === "leave")
+            {
+                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TABLE);
+
+            }
+        },
+        _onGameRoomInfo(params)
+        {
+            if(params["cmd"] === cc.wwx.EventType.CMD_ROOM)
+            {
+                let result = params["result"];
+                if(result["action"] === cc.wwx.EventType.CMD_PK_QUEUE_ENTER)
+                {
+                    if(result["success"] === 0)
+                    {
+                        cc.wwx.VS.RoomID = result["roomId"];
+                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_PK_QUEUE_ENTER)
+
+                    }
+                    else
+                    {
+                        cc.wwx.TipManager.showMsg(result["reason"],2);
+                    }
+                }
+                else if(result["action"] === cc.wwx.EventType.CMD_PK_QUEUE_LEAVE)
+                {
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_PK_QUEUE_LEAVE,result)
+
+                }
+                else if(result["action"] === cc.wwx.EventType.CMD_PK_QUEUE_INVITE)
+                {
+                    if(result["inviteConf"])
+                    {
+                        let argument = {
+                            "result":{
+                                "action:":cc.wwx.BurialShareType.DailyInviteFriend,
+                                "conf":result["inviteConf"]
+                            }
+                        };
+
+
+                        argument["result"]["conf"]["roomId"] = result["roomId"];
+                        argument["result"]["conf"]["tableId"] = result["tableId"];
+                        cc.wwx.Share.parse(argument);
+
+                    }
+                }
+                else if(result["action"] === cc.wwx.EventType.CMD_PK_QUEUE_RANDOM_MATCH)
+                {
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_PK_QUEUE_RANDOM_MATCH,result)
+
+                }
+            }
+        },
+        _onGameInfo(params)
+        {
+            if(params["cmd"] === cc.wwx.EventType.CMD_GAME)
+            {
+                let result = params["result"];
+                if(result["action"] === cc.wwx.EventType.CMD_PK_QUEUE_ROOM)
+                {
+                    cc.wwx.VS.parseRoomList(params);
+
+                }
+            }
         },
         _onGameClientConf(params)
         {
@@ -274,6 +359,7 @@ cc.Class({
             cc.wwx.TCPMSG.getLevelGiftConf();
             cc.wwx.TCPMSG.fetchPaymentList();
             cc.wwx.TCPMSG.getClientConf();
+            cc.wwx.TCPMSG.getPkQueueRoom();
 
             // 分享发奖
             cc.wwx.Share.getShareRewards();
@@ -287,7 +373,10 @@ cc.Class({
                     // 给邀请我的人发奖
                     if(cc.wwx.UserInfo.query.inviteCode) {
                         cc.wwx.TCPMSG.bindInviteCode(cc.wwx.UserInfo.query.inviteCode);
-
+                        if(cc.wwx.UserInfo.query.tableID)
+                        {
+                            //进入房间
+                        }
                     }
 
                 cc.wwx.UserInfo.query = {}

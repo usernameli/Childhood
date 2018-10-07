@@ -128,11 +128,12 @@ cc.Class({
         }
         ,
         parse: function (param) {
+            cc.wwx.OutPut.log("[cc.wwx.Share parse] " + JSON.stringify(param));
+
             var result = param['result'];
-            let action = result["action"];
 
             var share = new cc.wwx.ShareData();
-            share.parseBurial(result['conf']);
+            // share.parseBurial(result['conf']);
             share.burialId = result['action'];
             if(share.burialId === cc.wwx.BurialShareType.DailyInviteFriend)
             {

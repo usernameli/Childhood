@@ -237,10 +237,14 @@ cc.Class({
         },
 
         shareWXMsg:function(title, imageUrl, queryJson, pointId, successCallback, failCallback, completeCallback) {
-            if (!CC_WECHATGAME) { return; }
+
             queryJson = queryJson || {};
             queryJson['inviteCode'] = cc.wwx.UserInfo.userId;
             queryJson['pointId'] = queryJson['pointId'] || 'xxxxxx';
+            cc.wwx.OutPut.log('shareWXMsg:', title, imageUrl, this.jsonToQuery(queryJson),pointId);
+
+            if (!CC_WECHATGAME) { return; }
+
             wx.shareAppMessage({
                 'title': title,
                 'imageUrl': imageUrl,

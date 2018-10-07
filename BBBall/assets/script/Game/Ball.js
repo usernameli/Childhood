@@ -19,6 +19,7 @@ cc.Class({
         _isOnWall:false,
         _isSports:false,
         _noShut:false,
+        _belongUserID:0,
 
     },
 
@@ -33,6 +34,10 @@ cc.Class({
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_START_LINEARVELOCITY, this._ballStartLinearVelocity, this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_RECOVERY_BALL, this._ballRecoverNow, this);
+    },
+    setBelongTo(userID)
+    {
+        this._belongUserID = userID;
     },
     setBallID(id)
     {
@@ -142,7 +147,6 @@ cc.Class({
 
             return;
         }
-        cc.wwx.OutPut.log('onBeginContact other.tag:', other.tag);
 
         switch (other.tag) {
             case 1://上面

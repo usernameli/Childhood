@@ -50,7 +50,8 @@ cc.Class({
         _space: 4,//方块与方块边界
         _emptyGrid: [],
         _boundary: 12,//方块与边界的距离
-        _showRowNum: 0,//先显示7行
+        _showSelfRowNum: 0,//先显示7行
+        _showOtherRowNum: 0,//先显示7行
         _showCocumn: 11,//11列
         _objWidth: 60,
         _objHeight: 60,
@@ -59,96 +60,46 @@ cc.Class({
     },
     onLoad()
     {
-        this._showRowNum = 1;
+        this._showSelfRowNum = 1;
+        this._showOtherRowNum = 1;
 
+        if(cc.wwx.VS.FirsHand === cc.wwx.UserInfo.userId)
+        {
+            this._createSelfOneRowObjs();
+        }
+        else
+        {
+            this._createOtherOneRowObjs1();
 
-        this._createOneRowObjs();
-        this._createOneRowObjs1();
+        }
 
 
     },
-    _createOneRowObjs1()
+    _createOtherOneRowObjs1()
     {
 
-
-        let addPusF = true;
-        let objsList = [14,7,-1,-1, 5,-1,-1,5,-1,-1,5,-1, 15, -1,6,1, 2,-1, 17,-1,-1,1,-1,2,-1,17,-1,11,-1,11,3,4,-1,-1,-1,1,2,-1,-1,17,-1,11,-1,3,-1,4,-1,5,-1,6,-1,4,-1,5,6,-1];
-
-        cc.wwx.OutPut.log("this._showRowNum : ",this._showRowNum);
-
-        for (let k = 0; k < 11; k++)
+        cc.wwx.OutPut.log("this._showOtherRowNum : ",this._showOtherRowNum);
+        for (let k = 0; k < cc.wwx.VS.NewBlocks.length; k++)
         {
-            let objsID = Math.floor(Math.random() * objsList.length + 1);
-
-            objsID = Math.floor(Math.random() * objsList.length + 1);
-
-            objsID = Math.floor(Math.random() * objsList.length + 1);
-
-
-
-            if (objsList[objsID]) {
-
-                let posY = ((1 - 0 - 1) * (this._objHeight + this._space) + this._objHeight / 2);
-                let posX =  this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space);
-
-                if(objsList[objsID] === -1 && addPusF)
-                {
-                    addPusF = false;
-                    this._createObjBlock(21, this._showRowNum, k, 1, 0,posX,posY);
-
-                }
-                else
-                {
-                    this._createObjBlock(objsList[objsID], this._showRowNum, k, 1, 0,posX,posY);
-
-                }
-            }
-
-
+            let posY =  ((1 - 0 - 1) * (this._objHeight + this._space) + this._objHeight / 2);
+            let posX =  this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space);
+            this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showOtherRowNum, k, 1, 0,posX,posY);
         }
-        this._showRowNum += 1;
+        this._showOtherRowNum += 1;
 
     },
-    _createOneRowObjs()
+    _createSelfOneRowObjs()
     {
 
-
-        let addPusF = true;
-        let objsList = [14,7,-1,-1, 5,-1,-1,5,-1,-1,5,-1, 15, -1,6,1, 2,-1, 17,-1,-1,1,-1,2,-1,17,-1,11,-1,11,3,4,-1,-1,-1,1,2,-1,-1,17,-1,11,-1,3,-1,4,-1,5,-1,6,-1,4,-1,5,6,-1];
-
-        cc.wwx.OutPut.log("this._showRowNum : ",this._showRowNum);
-
-        for (let k = 0; k < 11; k++)
+        cc.wwx.OutPut.log("this._showSelfRowNum : ",this._showSelfRowNum);
+        for (let k = 0; k < cc.wwx.VS.NewBlocks.length; k++)
         {
-            let objsID = Math.floor(Math.random() * objsList.length + 1);
-
-            objsID = Math.floor(Math.random() * objsList.length + 1);
-
-            objsID = Math.floor(Math.random() * objsList.length + 1);
-
-
-
-            if (objsList[objsID]) {
-
-                let posY =  -1 * ((1 - 0 - 1) * (this._objHeight + this._space) + this._objHeight / 2);
-                let posX =  this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space);
-
-                if(objsList[objsID] === -1 && addPusF)
-                {
-                    addPusF = false;
-                    this._createObjBlock(21, this._showRowNum, k, 1, 0,posX,posY);
-
-                }
-                else
-                {
-                    this._createObjBlock(objsList[objsID], this._showRowNum, k, 1, 0,posX,posY);
-
-                }
-            }
-
+            let posY =  -1 * ((1 - 0 - 1) * (this._objHeight + this._space) + this._objHeight / 2);
+            let posX =  this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space);
+            this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showSelfRowNum, k, 1, 0,posX,posY);
 
         }
-        this._showRowNum += 1;
+        this._showSelfRowNum += 1;
 
     },
     _createObjBlock:function(dataValueObj,dataValueLabel,column,showRowNum,haveShowRow,posX,posY)

@@ -1,6 +1,10 @@
 cc.Class({
     extends:cc.Component,
     properties:{
+        roomName:{
+            default:null,
+            type:cc.Sprite
+        },
         adNode:{
             default:null,
             type:cc.Node,
@@ -62,10 +66,46 @@ cc.Class({
     onLoad()
     {
         cc.wwx.Util.adaptIpad();
+        let userInfo = cc.wwx.VS.TableInfo["result"]["userInfo"];
 
-        initMgr();
+        for(let i = 0; i < userInfo.length;i++)
+        {
+            if(userInfo[i]["userId"] === cc.wwx.UserInfo.userId)
+            {
+                this.mySelfNickName.string = userInfo[i]["userName"];
+                this.mySelfSegment.string = userInfo[i]["segmentStar"];
+
+                cc.wwx.Loader.loadImg(userInfo[i]["purl"], this.mySelfHeadIcon);
+
+            }
+            else
+            {
+                this.opponentNickName.string = userInfo[i]["userName"];
+                this.opponentSegment.string = userInfo[i]["segmentStar"];
+                cc.wwx.Loader.loadImg(userInfo[i]["purl"], this.opponentHeadIcon);
+
+            }
+        }
+
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE,this._tableCallBack,this);
 
     },
+    onDestroy()
+    {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE,this._tableCallBack,this);
 
+    },
+    _tableCallBack(params)
+    {
+        if(params["action"] === "leave")
+        {
+
+
+        }
+    },
+    goBackCallBack()
+    {
+        cc.wwx.TCPMSG.gameLevelTable(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID);
+    },
 
 });

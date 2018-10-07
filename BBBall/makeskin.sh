@@ -51,9 +51,7 @@ publish_img()
 
 	cp -rf $IMG_TPS/../font/* 		$IMG_OUTPUT/font/ 
 	cp -rf $IMG_TPS/../nopack/* 	$IMG_OUTPUT/nopack/
-	cp -rf $IMG_TPS/../common/* 	$IMG_OUTPUT/common/ 
 	cp -rf $IMG_TPS/../map/* 	    $IMG_OUTPUT/../map/
-	cp -rf $IMG_TPS/../public/* 	$IMG_OUTPUT/public/ 
 	cp -rf $IMG_TPS/../share/* 	    $IMG_OUTPUT/share/
     cp -rf $IMG_TPS/../loading/*    $IMG_OUTPUT/loading/
 

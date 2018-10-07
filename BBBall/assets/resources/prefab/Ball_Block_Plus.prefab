@@ -108,7 +108,7 @@
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
     },
-    "_id": "58yHd4VlZA6bNPHpu3XIFJ"
+    "_id": ""
   },
   {
     "__type__": "cc.RigidBody",
@@ -132,7 +132,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "f89NSl7GFCpYvv3LCH/Mip"
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -154,7 +154,7 @@
       "y": 0
     },
     "_radius": 16,
-    "_id": "2fIT7pT5BA2YhmVOL+FlCD"
+    "_id": ""
   },
   {
     "__type__": "38d13wY24hKnK/nmwuaLzho",
@@ -186,7 +186,7 @@
       "x": 0,
       "y": 0
     },
-    "_id": "bbSA6ExvRIorE1ZH/4SSa+"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

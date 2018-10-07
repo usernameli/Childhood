@@ -92,6 +92,8 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE, this.randomPlacement4Eliminate, this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART, this.gameRestart, this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_USER_INFO, this.gameUserInfo, this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_WARNING_NEED, this.warningNeedCallBack , this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_WARNING_NO_NEED, this.warningNoNeedCallBack , this);
 
     },
 
@@ -104,6 +106,9 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.RANDOM_PLACEMENT_4_ELIMINATE, this.randomPlacement4Eliminate, this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_GAME_RESTART, this.gameRestart, this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_USER_INFO, this.gameUserInfo, this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_WARNING_NEED, this.warningNeedCallBack , this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_WARNING_NO_NEED, this.warningNoNeedCallBack , this);
+
 
     },
 
@@ -419,6 +424,7 @@ cc.Class({
     checkGameOver(checkPos)
     {
         let check = false;
+
         for (var i = 0; i < this.node.childrenCount; ++i) {
             var name = this.node.children[i].name;
             if (name === "Ball_Block_Square" ||
@@ -426,7 +432,7 @@ cc.Class({
                 name === "Ball_Block_Triangle_5" ||
                 name === "Ball_Block_Triangle_6" ||
                 name === "Ball_Block_Triangle_4") {
-
+                // cc.wwx.OutPut.log("checkGameOver: this.node.children[i].y",this.node.children[i].y);
                 if(this.node.children[i].y <= checkPos)
                 {
                     check = true;
@@ -779,6 +785,15 @@ cc.Class({
             }
         }
         return isFg;
+    },
+    warningNeedCallBack()
+    {
+        this.showWarningAnim();
+    },
+    warningNoNeedCallBack()
+    {
+        this.hideWarningAnim();
+
     },
     update()
     {

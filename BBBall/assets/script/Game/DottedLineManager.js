@@ -55,10 +55,10 @@ cc.Class({
 
         let physicsManager = cc.director.getPhysicsManager();
         physicsManager.enabled = true;
-        // physicsManager.debugDrawFlags =
-        //     cc.PhysicsManager.DrawBits.e_jointBit |
-        //     cc.PhysicsManager.DrawBits.e_shapeBit
-        // ;
+        physicsManager.debugDrawFlags =
+            cc.PhysicsManager.DrawBits.e_jointBit |
+            cc.PhysicsManager.DrawBits.e_shapeBit
+        ;
         let width   =  cc.winSize.width;
         let height  =  cc.winSize.height - 250;
         cc.wwx.OutPut.log("cc.winSize onLoad width: ",width);

@@ -141,8 +141,6 @@ cc.Class({
         if(this._moveDrop)
         {
 
-            cc.wwx.OutPut.log( this._tag,"update" ,this._height);
-            cc.wwx.OutPut.log( this._tag,"update" ,this._space);
 
             let posY = this.node.y;
             let posX = this.node.x;

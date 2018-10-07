@@ -3,22 +3,153 @@
   "_name": "loading",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 1.9833333333333334,
-  "sample": 60,
+  "_duration": 1.3333333333333333,
+  "sample": 45,
   "speed": 1,
   "wrapMode": "2",
   "curveData": {
     "paths": {
-      "New Sprite": {
+      "BallNode/Ball": {
         "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -60,
+                0
+              ]
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": [
+                0.8,
+                59.9
+              ]
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": [
+                58.4,
+                1.4
+              ]
+            },
+            {
+              "frame": 1,
+              "value": [
+                0,
+                -60.5
+              ]
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": [
+                -60,
+                0
+              ]
+            }
+          ],
           "rotation": [
             {
               "frame": 0,
               "value": 0
             },
             {
-              "frame": 1.9833333333333334,
-              "value": 360
+              "frame": 1.3333333333333333,
+              "value": 1800
+            }
+          ]
+        }
+      },
+      "BallNode/Obj3": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 255
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "BallNode/Obj1": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": true
+            }
+          ]
+        }
+      },
+      "BallNode/Obj4": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 255
+            },
+            {
+              "frame": 1,
+              "value": 0
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": true
+            }
+          ]
+        }
+      },
+      "BallNode/Obj2": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1,
+              "value": 255
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 0
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 1,
+              "value": true
             }
           ]
         }

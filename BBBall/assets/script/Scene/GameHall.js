@@ -80,8 +80,12 @@ cc.Class({
         cc.wwx.Util.adaptIpad();
         this.adaptIphoneX();
         this.loginSuccessCallBack();
+        cc.wwx.TCPMSG.levelPkQueueRoom("101603");
+        cc.wwx.TCPMSG.levelPkQueueRoom("101601");
+        cc.wwx.TCPMSG.levelPkQueueRoom("101602");
+        cc.wwx.TCPMSG.levelPkQueueRoom("101604");
+
         // cc.wwx.AudioManager.playMusic(this.audioBg);
-        this._openCheckIn = false;
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_LOGIN_SUCCESS, this.loginSuccessCallBack, this);
@@ -328,7 +332,17 @@ cc.Class({
     gameDoubleVSCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
-        cc.wwx.SceneManager.switchScene("GameVSRoom");
+        if(cc.wwx.VS.RoomList.length > 0)
+        {
+            cc.wwx.UserInfo.playMode = "GameVS";
+            cc.wwx.SceneManager.switchScene("GameVSRoom");
+
+        }
+        else
+        {
+            cc.wwx.TCPMSG.getPkQueueRoom();
+
+        }
 
     },
     ball100Mode()
@@ -372,6 +386,12 @@ cc.Class({
 
 
     },
+    diamondPlusCallBack()
+    {
+        cc.wwx.AudioManager.playAudioButton();
+        cc.wwx.TipManager.showMsg("邀请好友或分享可以获得更多宝石")
+    },
+
     shop()
     {
         cc.wwx.AudioManager.playAudioButton();

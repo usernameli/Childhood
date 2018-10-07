@@ -245,6 +245,7 @@ window.initMgr = function() {
     cc.wwx.VideoAD = require("../Ads/Video_ad");
     cc.wwx.VideoAD.init();
 
+    cc.wwx.VS = require("../Model/VS");
 
 };
 

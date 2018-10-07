@@ -843,10 +843,8 @@ cc.Class({
             }
 
             if (result) {
-                cc.wwx.OutPut.log("rayCast result.point: ", JSON.stringify(result.point));
 
                 p2 = node.convertToNodeSpaceAR(result.point);
-                cc.wwx.OutPut.log("rayCast touchPos: ", JSON.stringify(p2));
 
                 ctx.circle(p2.x, p2.y, 10);
 
@@ -936,6 +934,41 @@ cc.Class({
             }
 
         },
+        getDiamondAnim(parentNode,startPisition,endPosition)
+        {
+            for(let i = 0; i < 50;i++)
+            {
+                let node = new cc.Node();
+                let spr = node.addComponent(cc.Sprite);
+                spr.spriteFrame = new cc.SpriteFrame();
+
+                cc.wwx.Util.loadResAtlas("images/MainMenu",function (err,atlas) {
+                    spr.spriteFrame = atlas.getSpriteFrame("Ball_Diamonds");
+                    node.position = startPisition;
+                    node.parent = parentNode;
+                    node.scale = 0.5;
+                    let random = Math.random();
+                    let filterX = 1;
+                    if(random > 0.5)
+                    {
+                        filterX = -1;
+                    }
+                    random = Math.random();
+                    let filterY = 1;
+                    if(random < 0.5)
+                    {
+                        filterY = -1;
+                    }
+                    var moveTo1 = cc.moveBy(0.1 * Math.random() * 10, cc.v2(Math.random() * 100 * filterX,Math.random() * 100 * filterY));
+                    var moveTo2 = cc.moveTo(0.5,endPosition);
+                    node.runAction(cc.sequence(moveTo1,cc.delayTime(1),moveTo2,cc.callFunc(function () {
+                        node.destroy();
+
+                    })));
+                });
+
+            }
+        },
         adaptIpad()
         {
             if(cc.wwx.SystemInfo.SYS.os === "Android")
@@ -956,6 +989,68 @@ cc.Class({
                     canvas.alignWithScreen();
                 }
             }
+
+        },
+        adaptIphoneX(node)
+        {
+            if(cc.wwx.SystemInfo.SYS.phoneType === 1)
+            {
+                var widget = node.getComponent(cc.Widget);
+                widget.top = 50;
+
+            }
+
+        },
+        segmentLevel(starNum)
+        {
+            if(starNum === 0)
+            {
+                return starNum;
+            }
+            let segmentIndex = Math.floor(starNum / 9);
+            if(segmentIndex > 5)
+            {
+                segmentIndex = 5;
+            }
+            if(starNum % 9  === 0)
+            {
+                segmentIndex -= 1;
+            }
+
+            return segmentIndex;
+        },
+        segmentStarCalculation(starNum)
+        {
+            let segmentLevel = ["初级","中级","高级"];
+            let segment = ["青铜","白银","黄金","铂金","钻石","王者","荣耀王者","至尊王者","传奇王者"];
+            if(starNum === 0)
+            {
+                return segment[0] + segmentLevel[0];
+
+            }
+
+            let segmentIndex = Math.floor(starNum / 9);
+            let levelIndex = Math.floor((starNum % 9) / 3);
+            if(segmentIndex > 8)
+            {
+                segmentIndex = 8;
+                levelIndex = 2;
+            }
+            else
+            {
+                if(starNum % 9  === 0)
+                {
+                    segmentIndex -= 1;
+                    levelIndex = 2;
+                }
+                if(starNum % 9 !== 0 && starNum % 3  === 0)
+                {
+                    levelIndex -= 1;
+                }
+            }
+
+
+            return segment[segmentIndex] + segmentLevel[levelIndex];
 
         }
 

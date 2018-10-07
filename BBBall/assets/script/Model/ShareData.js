@@ -24,6 +24,8 @@ cc.Class({
 
         /*绘图相关*/
         paintConfig: null,
+        roomId:0,
+        tableId:0,
     },
     parseBurial (param) {
         this.dLevel = 1;
@@ -56,14 +58,21 @@ cc.Class({
 
             /*绘图相关*/
             paintConfig: this.paintConfig,
+
+            roomId:this.roomId,
+            tableId:this.tableId,
         }
     },
     parseShare (param,customData){
         this.dLevel = 2;
         this.pointId = param['pointId'] || 0;
+        this.roomId = param['roomId'] || 0;
+        this.tableId = param['tableId'] || 0;
         this.shareId = param.shareId || 0;
         this.title = param['title'] || null;
         this.pic = param['pic'] || null;
+
+
         // this.whereToReward = param['whereToReward'] || cc.wwx.ShareWhereReward.All;
 
         this.remRewardCount = param['remRewardCount']||0;
@@ -78,6 +87,11 @@ cc.Class({
             customData['whereToReward'] && (this.whereToReward = customData['whereToReward']);
             customData['queryJson'] && (this.queryJson = customData['queryJson']);
             customData['paintConfig'] && (this.paintConfig = customData['paintConfig']);
+        }
+
+        if(this.tableId !== 0)
+        {
+            this.queryJson = {tableID:this.tableId,roomID:this.roomId}
         }
     },
 
