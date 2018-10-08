@@ -193,6 +193,7 @@
     "_isOnWall": false,
     "_isSports": false,
     "_noShut": false,
+    "_belongUserID": 0,
     "_id": ""
   },
   {

@@ -6,6 +6,7 @@ cc.Class({
         _width:0,
         _height:0,
         _space:4,
+        _belongUserID:0,
         _tag:"ObjBlock"
     },
 
@@ -37,6 +38,10 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_REMOVE_OBJ_BLOCKS,this.removeObjBlock,this);
 
     },
+    setBelong(userID)
+    {
+        this._belongUserID = userID;
+    },
     removeObjBlock()
     {
         this.node.destroy();
@@ -49,6 +54,15 @@ cc.Class({
     },
     haveEliminate(argument)
     {
+        if(cc.wwx.UserInfo.playMode === "GameVS")
+        {
+            if(this._belongUserID !== argument["belongUserID"])
+            {
+                return;
+            }
+        }
+
+
         if(argument["direction"] === "horizontal")
         {
             //水平消除
@@ -104,7 +118,7 @@ cc.Class({
             {r:255, g:190,   b:121},
             {r:112, g:199, b:255},
             {r:240, g:165, b:104},
-            {r:120,   g:184, b:255},
+            {r:120,   g:184, b:255}, //#78B8FF
             {r:237,   g:137, b:102},
             {r:79,   g:155,   b:231},
             {r:235, g:116,   b:102},
@@ -112,11 +126,37 @@ cc.Class({
             {r:228, g:72,   b:85},
             {r:54, g:112,   b:239},
         ];
+        // "#FFBE79"
+        // "#70C7FF"
+        // "#F0A568"
+        // "#78B8FF"
+        // "#ED8966"
+        // "#4F9BE7"
+        // "#EB7466"
+        // "#437066"
+        // "#E44855"
+        // "#3670EF"
         let randColor = randomColor[0];
-        let num = randNum % 10;
+
+        if(cc.wwx.UserInfo.playMode === "GameVS")
+        {
+            if (this._belongUserID === cc.wwx.UserInfo.userId)
+            {
+                randColor = randomColor[8];
+            }
+            else
+            {
+                randColor = randomColor[9];
+            }
+        }
+        else
+        {
+            let num = randNum % 10;
+            randColor = randomColor[num];
+
+        }
 
 
-        randColor = randomColor[num];
 
 
 

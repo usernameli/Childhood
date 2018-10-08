@@ -73,7 +73,7 @@ cc.Class({
             if(userInfo[i]["userId"] === cc.wwx.UserInfo.userId)
             {
                 this.mySelfNickName.string = userInfo[i]["userName"];
-                this.mySelfSegment.string = userInfo[i]["segmentStar"];
+                this.mySelfSegment.string = userInfo[i]["pkTotalStar"];
 
                 cc.wwx.Loader.loadImg(userInfo[i]["purl"], this.mySelfHeadIcon);
 
@@ -81,19 +81,41 @@ cc.Class({
             else
             {
                 this.opponentNickName.string = userInfo[i]["userName"];
-                this.opponentSegment.string = userInfo[i]["segmentStar"];
+                this.opponentSegment.string = userInfo[i]["pkTotalStar"];
                 cc.wwx.Loader.loadImg(userInfo[i]["purl"], this.opponentHeadIcon);
 
             }
         }
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE,this._tableCallBack,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE_CALL,this._tableCallCallBack,this);
 
     },
     onDestroy()
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE,this._tableCallBack,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE_CALL,this._tableCallCallBack,this);
 
+    },
+    _tableCallCallBack(params)
+    {
+        if(params["action"] === "gameOver")
+        {
+            let winLoseInfo = params["winLoseInfo"];
+
+            if(cc.wwx.UserInfo.userId === params["winUserId"])
+            {
+                let pkTotalStar = winLoseInfo[params["winUserId"].toString()]["pkTotalStar"];
+                cc.wwx.PopWindowManager.popWindow("prefab/GameVSResultWindow","GameVSResultWindow",{starNum:pkTotalStar,updownF:true});
+            }
+            else if(cc.wwx.UserInfo.userId === params["loseUserId"])
+            {
+                let pkTotalStar = winLoseInfo[params["loseUserId"].toString()]["pkTotalStar"];
+                cc.wwx.PopWindowManager.popWindow("prefab/GameVSResultWindow","GameVSResultWindow",{starNum:pkTotalStar,updownF:false});
+
+            }
+
+        }
     },
     _tableCallBack(params)
     {

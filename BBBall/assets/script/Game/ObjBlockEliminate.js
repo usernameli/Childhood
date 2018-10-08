@@ -35,6 +35,7 @@ cc.Class({
         {
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ELIMINATE,{
                 objPosition:this.node.position,
+                belongUserID:this._belongUserID,
                 direction:"vertical"});
 
         }
@@ -42,6 +43,7 @@ cc.Class({
         {
             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_ELIMINATE,{
                 objPosition:this.node.position,
+                belongUserID:this._belongUserID,
                 direction:"horizontal"});
         }
     },

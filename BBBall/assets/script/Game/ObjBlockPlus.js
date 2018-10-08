@@ -76,22 +76,56 @@ cc.Class({
     onBeginContact(contact, self, other)
     {
 
-        if(other.tag === 2)
+        if(cc.wwx.UserInfo.playMode === "GameVS")
         {
-            this._isOnWall = true;
-            // this.body.active = false;
-            this.body.linearVelocity = cc.v2(0,0);
+            if(other.tag === 2  || other.tag === 1)
+            {
+                this._isOnWall = true;
+                // this.body.active = false;
+                this.body.linearVelocity = cc.v2(0,0);
 
 
+            }
+            else if(other.tag === 0)
+            {
+                //碰的小球
+                let componentBall = other.node.getComponent("Ball");
+                let ballUserId = componentBall.getBelongTo();
+                if(ballUserId === cc.wwx.UserInfo.userId)
+                {
+                    this.body.linearVelocity = cc.v2(0,-2000);
+
+                }
+                else
+                {
+                    this.body.linearVelocity = cc.v2(0,2000);
+
+                }
+                // this.body.gravityScale = 100.0;
+
+
+            }
         }
-        else if(other.tag === 0)
+        else
         {
-            //碰的小球
-            // this.body.gravityScale = 100.0;
-            this.body.linearVelocity = cc.v2(0,-2000);
+            if(other.tag === 2)
+            {
+                this._isOnWall = true;
+                // this.body.active = false;
+                this.body.linearVelocity = cc.v2(0,0);
 
 
+            }
+            else if(other.tag === 0)
+            {
+                //碰的小球
+                // this.body.gravityScale = 100.0;
+                this.body.linearVelocity = cc.v2(0,-2000);
+
+
+            }
         }
+
     },
     update()
     {

@@ -42,12 +42,12 @@
     "_prefab": {
       "__id__": 12
     },
-    "_opacity": 255,
+    "_opacity": 214,
     "_color": {
       "__type__": "cc.Color",
-      "r": 200,
-      "g": 0,
-      "b": 0,
+      "r": 54,
+      "g": 112,
+      "b": 239,
       "a": 255
     },
     "_contentSize": {
@@ -382,6 +382,7 @@
     "_width": 0,
     "_height": 0,
     "_space": 4,
+    "_belongUserID": 0,
     "_tag": "ObjBlock",
     "labelText": {
       "__id__": 6

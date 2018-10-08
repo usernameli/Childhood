@@ -89,6 +89,13 @@ cc.Class({
                 let component = jiangxing.getComponent("JiangXing");
                 component.playAnimation();
             }
+            else
+            {
+                let jiangxing = cc.instantiate(this.jiangxingPrefab);
+                this.starList[0].node.addChild(jiangxing);
+                let component = jiangxing.getComponent("JiangXing");
+                component.playAnimation();
+            }
 
 
         }

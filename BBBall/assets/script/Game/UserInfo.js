@@ -14,6 +14,7 @@ cc.Class({
         system: "iOS 10.0.1",
         loc: '',
         wxEnterInfo:'',
+        pkTotalStar:0,
         query:'',
         scene_id : "",
         scene_param : "",
@@ -77,6 +78,7 @@ cc.Class({
             this.gdata = params['gdata'];
             this.checkPointID = this.gdata["levelHighLv"];
             this.mIssue = "mIssue";
+            this.pkTotalStar = this.gdata["pkTotalStar"];
             if(cc.wwx.SystemInfo.debug)
             {
                 return;

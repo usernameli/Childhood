@@ -58,10 +58,33 @@ cc.Class({
         this.onBeginContact();
     },
     onBeginContact(contact, self, other) {
+
         this.splashNode.active = true;
+        cc.wwx.AudioManager.playBrick();
+
+        if(cc.wwx.UserInfo.playMode === "GameVS")
+        {
+            if(this._belongUserID === cc.wwx.UserInfo.userId)
+            {
+                if(this._labelNum > 1)
+                {
+                    this._labelNum -= 1;
+                    this.labelText.string = this._labelNum.toString();
+
+                }
+                else
+                {
+
+                    this.objsBreak();
+
+                }
+            }
+
+            return;
+        }
+
 
         // cc.wwx.AudioManager.playBlockClick(this._labelNum % 10);
-        cc.wwx.AudioManager.playBrick();
 
         let randomColor = this.setRandomColor(this._labelNum);
 

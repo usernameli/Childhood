@@ -83,7 +83,7 @@ cc.Class({
         {
             let posY =  ((1 - 0 - 1) * (this._objHeight + this._space) + this._objHeight / 2);
             let posX =  this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space);
-            this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showOtherRowNum, k, 1, 0,posX,posY);
+            this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showOtherRowNum, k, 1, 0,posX,posY,cc.wwx.VS.OtherUserID);
         }
         this._showOtherRowNum += 1;
 
@@ -96,13 +96,13 @@ cc.Class({
         {
             let posY =  -1 * ((1 - 0 - 1) * (this._objHeight + this._space) + this._objHeight / 2);
             let posX =  this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space);
-            this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showSelfRowNum, k, 1, 0,posX,posY);
+            this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showSelfRowNum, k, 1, 0,posX,posY,cc.wwx.UserInfo.userId);
 
         }
         this._showSelfRowNum += 1;
 
     },
-    _createObjBlock:function(dataValueObj,dataValueLabel,column,showRowNum,haveShowRow,posX,posY)
+    _createObjBlock:function(dataValueObj,dataValueLabel,column,showRowNum,haveShowRow,posX,posY,belongUserID)
     {
 
         let objsPrefab = null;
@@ -180,6 +180,7 @@ cc.Class({
 
 
             let ObjBlockSquare = objPrefab.getComponent(objsComponent);
+            ObjBlockSquare.setBelong(belongUserID);
             if(objsComponent === "ObjBlockPlus")
             {
                 ObjBlockSquare.initLabelNum(parseInt(dataValueObj) - 20);

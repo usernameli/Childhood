@@ -1561,7 +1561,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "2e75e47d-2d78-4d0c-887b-17bd0695f977"
+      "__uuid__": "bd8c4a78-e171-4a18-8804-0cb6ddf653a7"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -3497,6 +3497,7 @@
     "sumDiamondSum": {
       "__id__": 45
     },
+    "_gameStart": false,
     "_id": "66Y3OU8UJPWpa9XRlvKvFu"
   }
 ]
