@@ -65,6 +65,13 @@ cc.Class({
     _ballStartLinearVelocity:function(argument)
     {
 
+        if(cc.wwx.UserInfo.playMode === "GameVS")
+        {
+            if(this._belongUserID !== cc.wwx.VS.RoundUserID)
+            {
+                return;
+            }
+        }
 
         this._noShut = false;
         let linearVelocity = argument["linearVelocity"].clone();
@@ -227,7 +234,7 @@ cc.Class({
                 cc.wwx.OutPut.log("this.dottedLineManager.ballOnWallNum: " ,this.dottedLineManager.ballOnWallNum)
                 cc.wwx.OutPut.log("this.dottedLineManager.ballMaxNum: " ,this.dottedLineManager.ballMaxNum)
 
-                if(this.dottedLineManager.ballMaxNum == this.dottedLineManager.ballOnWallNum)
+                if(this.dottedLineManager.ballMaxNum === this.dottedLineManager.ballOnWallNum)
                 {
                     //最后一个球回到地面
                     let self = this;
@@ -244,6 +251,7 @@ cc.Class({
                         if(self._belongUserID === cc.wwx.UserInfo.userId)
                         {
                             cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:self.dottedLineManager.center});
+                            cc.wwx.TCPMSG.shutBallOnWall(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center);
 
                         }
                         else
@@ -262,7 +270,6 @@ cc.Class({
 
                 }
                 this.dottedLineManager.setBallNumTextPosition(this.dottedLineManager.ballOnWallNum);
-
                 break;
             case 3://左面
                 break;

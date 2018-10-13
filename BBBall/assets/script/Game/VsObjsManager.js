@@ -63,7 +63,7 @@ cc.Class({
         this._showSelfRowNum = 1;
         this._showOtherRowNum = 1;
 
-        if(cc.wwx.VS.FirsHand === cc.wwx.UserInfo.userId)
+        if(cc.wwx.VS.FirstHand === cc.wwx.UserInfo.userId)
         {
             this._createSelfOneRowObjs();
         }
@@ -82,7 +82,7 @@ cc.Class({
         for (let k = 0; k < cc.wwx.VS.NewBlocks.length; k++)
         {
             let posY =  ((1 - 0 - 1) * (this._objHeight + this._space) + this._objHeight / 2);
-            let posX =  this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space);
+            let posX =  this.node.width - (this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space));
             this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showOtherRowNum, k, 1, 0,posX,posY,cc.wwx.VS.OtherUserID);
         }
         this._showOtherRowNum += 1;
@@ -175,9 +175,13 @@ cc.Class({
         }
         if(objsPrefab)
         {
+
             let objPrefab = cc.instantiate(objsPrefab);
             this.node.addChild(objPrefab);
-
+            if(belongUserID !== cc.wwx.UserInfo.userId)
+            {
+                objPrefab.scale = -1;
+            }
 
             let ObjBlockSquare = objPrefab.getComponent(objsComponent);
             ObjBlockSquare.setBelong(belongUserID);

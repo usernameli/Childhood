@@ -13,7 +13,6 @@ cc.Class({
                 'prefab/PopBoxWindow',
                 'prefab/Invate',
                 'prefab/SignIn',
-                'prefab/node',
                 'prefab/Shop',
             ];
 

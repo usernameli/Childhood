@@ -830,17 +830,17 @@ cc.Class({
         },
         rayCast: function (ctx,node,p1, p2) {
             let manager = cc.director.getPhysicsManager();
-            let results = manager.rayCast(p1, p2,cc.RayCastType.All);
-            let result = null;
-            for (let i = 0; i < results.length; i++) {
-                var collider = results[i].collider;
-                if(collider.tag > 0)
-                {
-                    result = results[i];
-                    break;
-                }
-
-            }
+            let result = manager.rayCast(p1, p2)[0];
+            // let result = null;
+            // for (let i = 0; i < results.length; i++) {
+            //     var collider = results[i].collider;
+            //     if(collider.tag > 0)
+            //     {
+            //         result = results[i];
+            //         break;
+            //     }
+            //
+            // }
 
             if (result) {
 
@@ -865,10 +865,10 @@ cc.Class({
             {
                 let newP = cc.v2(p1.x,2 * p2.y - p1.y);
 
-                if(p1.y > p2.y)
-                {
-                    newP = cc.v2(p1.x,p1.y - p2.y * 2);
-                }
+                // if(p1.y > p2.y)
+                // {
+                //     newP = cc.v2(p1.x,p1.y - p2.y * 2);
+                // }
                 p1 = p2;
                 p2 = newP;
             }

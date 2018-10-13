@@ -394,6 +394,7 @@
     "_width": 0,
     "_height": 0,
     "_space": 4,
+    "_belongUserID": 0,
     "_tag": "ObjBlock",
     "labelText": {
       "__id__": 6

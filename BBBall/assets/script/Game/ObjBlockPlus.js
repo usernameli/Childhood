@@ -39,11 +39,9 @@ cc.Class({
     },
     ballStopAction(argument)
     {
-        this._centerPos = argument["center"];
         if(this._isOnWall)
         {
-            this._canMove = true;
-
+            this._centerPos = argument["center"];
         }
 
     },
@@ -139,9 +137,10 @@ cc.Class({
             this.body.active = false;
             this.body.enabledContactListener = false;//关闭碰撞
 
-            if(this._canMove)
+            if(this._centerPos.x !== 0 && this._centerPos.y !== 0)
             {
-                this._canMove = false;
+                this._centerPos = cc.v2(0,0);
+
 
                 let moveTo = cc.moveTo(0.4, cc.v2(this._centerPos.x,(parent.height - this.node.height/2 - 1) * -1));
                 let spawn = cc.spawn(moveTo, cc.scaleTo(0.4,0.001));

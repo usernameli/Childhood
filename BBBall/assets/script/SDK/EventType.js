@@ -66,6 +66,12 @@ cc.Class({
         CMD_PK_UPDATE_COORDINATE:  'pk_update_coordinate',
         MSG_PK_UPDATE_COORDINATE:  'pk_update_coordinate',
 
+        CMD_PK_SHUT_BALL:  'pk_shut_ball',
+        MSG_PK_SHUT_BALL:  'pk_shut_ball',
+
+        CMD_PK_SHUT_BALL_COMEWALL: 'pk_shut_ball_comeOnwall',
+        MSG_PK_SHUT_BALL_COMEWALL: 'pk_shut_ball_comeOnwall',
+
         MSG_DAILY_CHECKIN_STATUS : 'ball_daily_checkin_status',//签到数据返回
         MSG_BALL_DAILY_CHECKIN : 'ball_daily_checkin', //签到返回
 

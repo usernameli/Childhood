@@ -9,10 +9,11 @@ cc.Class({
         GameRoomID:0,
         FirstBlock:[],
         NewBlocks:[],
-        FirsHand:[],
+        FirstHand:0,
         OtherUserID:0,
         OtherSeatID:0,
         VSUserInfo:null,
+        RoundUserID:0,
         parseRoomList(argument)
         {
             this.RoomList = argument["result"]["roomList"];

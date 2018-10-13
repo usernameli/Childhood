@@ -85,6 +85,74 @@ cc.Class({
 
         this._createBallOther(this.ballOtherMaxNum,0);
 
+
+
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE_CALL,this._tableCallCallBack,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
+
+    },
+
+    onDestroy()
+    {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE_CALL,this._tableCallCallBack,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_ADD_BALLS,this.plusBallsCallBack,this);
+
+    },
+    plusBallsCallBack(argument)
+    {
+        cc.wwx.OutPut.log(this._tag, 'plusBallsCallBack argument: ', JSON.stringify(argument));
+
+        let plusNum = argument["plusNum"];
+        let oldMaxNum = this.ballMaxNum;
+        this.ballMaxNum += plusNum;
+        this._createBall(plusNum,oldMaxNum);
+
+        cc.wwx.TCPMSG.updateCoordinate(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center,cc.v2(0,0));
+
+    },
+    _tableCallCallBack(argument)
+    {
+        if(argument["action"] === cc.wwx.EventType.MSG_PK_UPDATE_COORDINATE)
+        {
+            if(cc.wwx.UserInfo.userId === argument["posUserId"])
+            {
+                return;
+            }
+            let startPos = argument["startPos"];
+            let endPos = argument["endPos"];
+            if(endPos.x === 0 && endPos.y === 0)
+            {
+                this._ctx.clear();
+
+            }
+            else
+            {
+                this._drawDottleLineOther(cc.v2(this.node.width - startPos.x,cc.wwx.UserInfo.otherBallInfo.ballPosY),
+                    cc.v2(this.node.width - endPos.x,this.node.height - (endPos.y - 102)));
+
+            }
+
+
+        }
+        else if(argument["action"] === cc.wwx.EventType.MSG_PK_SHUT_BALL)
+        {
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_START_LINEARVELOCITY,{linearVelocity:argument["linearVelocity"]});
+
+        }
+        else if(argument["action"] === cc.wwx.EventType.MSG_PK_SHUT_BALL_COMEWALL)
+        {
+            //弹球结束
+        }
+    },
+    _drawDottleLineOther: function (center,touchP) {
+        this._ctx.clear();
+        let touchPoint = cc.v2(touchP);
+
+        touchPoint.subSelf(center);
+        let p1 = center;
+        touchPoint.mulSelf(100);
+
+        cc.wwx.Util.rayCast(this._ctx,this.node, p1, touchPoint);
     },
     _createBallOther:function(ballNum,index)
     {
@@ -153,20 +221,34 @@ cc.Class({
     },
     _touchCancelCallBack:function()
     {
+        if(cc.wwx.VS.RoundUserID !== cc.wwx.UserInfo.userId)
+        {
+            return;
+        }
         this._ctx.clear();
         this._pk_update_coordinate = false;
         cc.wwx.Timer.cancelTimer(this,this._updateCoordinate);
+        cc.wwx.TCPMSG.updateCoordinate(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center,cc.v2(0,0));
 
     },
     _touchEndCallBack:function(event)
     {
 
+        if(cc.wwx.VS.RoundUserID !== cc.wwx.UserInfo.userId)
+        {
+            return;
+        }
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
+        touchPos = cc.v2(parseInt(touchPos.x), parseInt(touchPos.y));
         let touchPoint = cc.v2(touchPos);
         this._touchPos = touchPos;
+        cc.wwx.TCPMSG.updateCoordinate(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center,cc.v2(0,0));
 
         let linearVelocity = touchPoint.sub(this.center);
         linearVelocity.normalizeSelf();
+
+        cc.wwx.TCPMSG.shutBall(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,linearVelocity);
+
         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_START_LINEARVELOCITY,{linearVelocity:linearVelocity});
 
         this._ctx.clear();
@@ -177,29 +259,48 @@ cc.Class({
     },
     _touchMoveCallBack:function(event)
     {
+        if(cc.wwx.VS.RoundUserID !== cc.wwx.UserInfo.userId)
+        {
+            return;
+        }
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
+        touchPos = cc.v2(parseInt(touchPos.x), parseInt(touchPos.y));
+
         this._drawDottleLine(touchPos);
         this._touchPos = touchPos;
+
         if(this._pk_update_coordinate === false)
         {
             this._pk_update_coordinate = true;
-            cc.wwx.Timer.setTimer(this,this._updateCoordinate,1,cc.macro.REPEAT_FOREVER,0);
+            cc.wwx.TCPMSG.updateCoordinate(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center,this._touchPos);
+
+            cc.wwx.Timer.setTimer(this,this._updateCoordinate,0.3,cc.macro.REPEAT_FOREVER,0);
 
         }
 
     },
     _updateCoordinate()
     {
-        cc.wwx.TCPMSG._updateCoordinate(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center,this._touchPos);
+        cc.wwx.TCPMSG.updateCoordinate(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center,this._touchPos);
 
     },
     _touchStartCallBack:function(event)
     {
+
+        if(cc.wwx.VS.RoundUserID !== cc.wwx.UserInfo.userId)
+        {
+            return;
+        }
         var touchPos = this.node.convertToNodeSpaceAR(event.getLocation());
+        this._touchPos = touchPos;
+        touchPos = cc.v2(parseInt(touchPos.x), parseInt(touchPos.y));
+
         cc.wwx.OutPut.log("_touchStartCallBack: ",JSON.stringify(touchPos));
         this._drawDottleLine(touchPos);
         this._pk_update_coordinate = false;
         cc.wwx.Timer.cancelTimer(this,this._updateCoordinate);
+        cc.wwx.TCPMSG.updateCoordinate(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center,this._touchPos);
+
 
     },
 

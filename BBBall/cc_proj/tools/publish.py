@@ -290,8 +290,8 @@ if __name__ == '__main__':
     compress_project_json()
     remove_unnessary_assets()
 
-    # if options.release:
-        # confuse()
+    if options.release:
+        confuse()
 
     #if options.tiny:
     #    compress_png()

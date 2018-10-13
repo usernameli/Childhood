@@ -86,7 +86,55 @@ cc.Class({
             };
             this._sendCmd(params);
         },
-        _updateCoordinate(roomID,tableID,startPosition,endPosition)
+        shutBallOnWall(roomID,tableID,centerPos)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_SHUT_BALL_COMEWALL,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+                    'centerPos':centerPos,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        shutBall(roomID,tableID,linearVelocity)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_SHUT_BALL,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+                    'linearVelocity':linearVelocity,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        updatePlusBall(roomID,tableID,ballNum)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_UPDATE_COORDINATE,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+                    'ballNum':ballNum,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        updateCoordinate(roomID,tableID,startPosition,endPosition)
         {
             var params = {
                 'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
@@ -435,4 +483,4 @@ cc.Class({
         }
 
     }
-})
+});

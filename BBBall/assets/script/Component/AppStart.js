@@ -206,6 +206,7 @@ window.initMgr = function() {
 
     cc.wwx.Loader = require("../Util/Loader");
     cc.wwx.PopWindowManager = require("../Window/PopWindonwManager");
+    cc.wwx.PopWindowManager.preload();
     cc.wwx.TipManager = require("../Window/TipWindowManager");
 
     cc.wwx.PayModel = require("../Model/PayModel");

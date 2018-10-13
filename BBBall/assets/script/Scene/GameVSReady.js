@@ -83,7 +83,7 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_PK_QUEUE_RANDOM_MATCH,this.randomMatchRoomCallBack,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE_INFO,this._tableInfoCallBack,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE_CALL,this._tableCallCallBack,this);
-
+        cc.wwx.Timer.setTimer(this,this.showBtnCallBack,0.5,0,0);
     },
     onDestroy()
     {
@@ -92,16 +92,26 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_PK_QUEUE_RANDOM_MATCH,this.randomMatchRoomCallBack,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE_INFO,this._tableInfoCallBack,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE_CALL,this._tableCallCallBack,this);
+        cc.wwx.Timer.cancelTimer(this,this.showBtnCallBack);
+
+    },
+    showBtnCallBack()
+    {
+        this.invateBtn.runAction(cc.fadeIn(0.5));
+        this.matchBtn.runAction(cc.fadeIn(0.5));
+
 
     },
     _tableCallCallBack(params)
     {
         if(params["action"] === "game_start")
         {
-            cc.wwx.VS.FirsHand = params["firsHand"];
+            cc.wwx.VS.FirstHand = params["firsHand"];
             cc.wwx.VS.FirstBlock = params["firstBlock"];
             cc.wwx.VS.NewBlocks = params["firstBlock"];
+            cc.wwx.VS.RoundUserID = cc.wwx.VS.FirstHand;
             this._gameStart = true;
+
 
         }
     },
