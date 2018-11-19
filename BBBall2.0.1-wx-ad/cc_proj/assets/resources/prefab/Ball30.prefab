@@ -1,0 +1,236 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Ball1022",
+    "_objFlags": 0,
+    "_parent": null,
+    "_children": [],
+    "_active": true,
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 2
+      },
+      {
+        "__id__": 3
+      },
+      {
+        "__id__": 4
+      },
+      {
+        "__id__": 5
+      }
+    ],
+    "_prefab": {
+      "__id__": 6
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 30,
+      "height": 30
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": -1,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "groupIndex": 2,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "6fa44ce1-8630-4ca6-9d1c-baa243cf54d3"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": {
+      "__uuid__": "1c46d690-b02e-4878-9da3-da799eb4a2ab"
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.RigidBody",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_type": 2,
+    "_allowSleep": true,
+    "_gravityScale": 0,
+    "_linearDamping": 0,
+    "_angularDamping": 0,
+    "_linearVelocity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_angularVelocity": 0,
+    "_fixedRotation": false,
+    "enabledContactListener": true,
+    "bullet": false,
+    "_id": ""
+  },
+  {
+    "__type__": "306ecyCZk1D46G2L7CjWJU8",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "ballSpriteFrame": [
+      {
+        "__uuid__": "6fa44ce1-8630-4ca6-9d1c-baa243cf54d3"
+      },
+      {
+        "__uuid__": "dbe7c246-9a7d-4c1a-b248-ca07918a4725"
+      },
+      {
+        "__uuid__": "b460f97f-29b8-40e6-850b-4d302afbb36a"
+      },
+      {
+        "__uuid__": "78190903-8492-48f6-b6a0-d5e0ac5da8ab"
+      },
+      {
+        "__uuid__": "2cb60955-7b1c-4c09-ba85-9e2f68a61f49"
+      },
+      {
+        "__uuid__": "596f27c4-f733-44e7-99a6-bd0c062ca30a"
+      },
+      {
+        "__uuid__": "6770a738-0184-4f55-a82c-2ab8eb4af64c"
+      },
+      {
+        "__uuid__": "6e5263e4-f071-461b-84a2-3672fa317d80"
+      },
+      {
+        "__uuid__": "7e2f6fbd-49a8-4df2-819e-608d6e1874c5"
+      },
+      {
+        "__uuid__": "24dd079d-518e-4a11-89d9-fce61f59a53f"
+      },
+      {
+        "__uuid__": "86abe2a1-5a36-41ca-874c-65091bda951e"
+      },
+      {
+        "__uuid__": "7177f03e-5a0b-48e5-aaa0-aa454b46c714"
+      },
+      {
+        "__uuid__": "e37d152c-09b6-453d-af37-bdc5f5694510"
+      },
+      {
+        "__uuid__": "0c8e63f9-6c8e-4b06-ae05-f4d7752b9cab"
+      },
+      {
+        "__uuid__": "45490a92-1ad5-41b0-8096-12048c7022c4"
+      }
+    ],
+    "_ballId": 0,
+    "_speed": 0,
+    "_isStop": true,
+    "_index": 0,
+    "_tag": "Ball",
+    "_recoverFg": false,
+    "_isOnWall": false,
+    "_isSports": false,
+    "_noShut": false,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PhysicsCircleCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_density": 1,
+    "_sensor": false,
+    "_friction": 0,
+    "_restitution": 1,
+    "body": null,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 1,
+      "y": 0
+    },
+    "_radius": 15,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "dbcb2e73-9c08-4769-932c-6f0e0d78780b"
+    },
+    "fileId": "cbZFLJiblEIbm5U7CBc1vN",
+    "sync": false
+  }
+]
