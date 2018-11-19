@@ -381,8 +381,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66,
-      "height": 66
+      "width": 58,
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -391,8 +391,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 285,
-      "y": 494.7,
+      "x": 285.6,
+      "y": 488.8,
       "z": 0
     },
     "_scale": {
@@ -9849,7 +9849,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 30,
+      "y": 20,
       "z": 0
     },
     "_scale": {
@@ -10846,8 +10846,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "分 享",
-    "_N$string": "分 享",
+    "_string": "获 取",
+    "_N$string": "获 取",
     "_fontSize": 34,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -11612,7 +11612,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 30,
+      "y": 20,
       "z": 0
     },
     "_scale": {
@@ -12609,8 +12609,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "分 享",
-    "_N$string": "分 享",
+    "_string": "获 取",
+    "_N$string": "获 取",
     "_fontSize": 34,
     "_lineHeight": 40,
     "_enableWrapText": false,

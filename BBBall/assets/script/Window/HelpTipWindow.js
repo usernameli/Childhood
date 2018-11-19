@@ -28,7 +28,28 @@ cc.Class({
     },
     shareGroupCallBack()
     {
-        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupAlive);
+        if(CC_WECHATGAME && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
+        {
+            let that = this;
+            cc.wwx.VideoAD.showVideoAd(function (end) {
+
+                if(end)
+                {
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_THIRD_LINE_OF_EXPLOSIONS);
+                    that.closeWindow();
+
+                }
+            },function () {
+
+                cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupAlive);
+
+            })
+        }
+        else
+        {
+            cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupAlive);
+
+        }
 
     }
 });

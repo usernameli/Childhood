@@ -65,7 +65,27 @@ cc.Class({
     shareGroupCallBack()
     {
         this._shareGroupClick = true;
-        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupAlive);
+
+        if(CC_WECHATGAME && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
+        {
+            cc.wwx.VideoAD.showVideoAd(function (end) {
+
+                if(end)
+                {
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_THIRD_LINE_OF_EXPLOSIONS);
+
+                }
+            },function () {
+
+                cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupAlive);
+
+            })
+        }
+        else
+        {
+            cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupAlive);
+
+        }
 
     },
     _init()

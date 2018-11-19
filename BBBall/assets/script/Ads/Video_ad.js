@@ -36,10 +36,10 @@ cc.Class({
                 cc.wwx.OutPut.info('video ad onClose',this.adUnitId,JSON.stringify(res));
                 let ended = (!res || (res && res.isEnded));
                 if (ended){
-                    cc.wwx.BiLog.clickStat(cc.wwx.BiLog.clickStatEventType.clickStatEventTypeVideoAD, ['finish']);
-                    cc.wwx.BiLog.clickStat(cc.wwx.BiLog.clickStatEventType.clickStatEventTypeClickAdVideo, [2]);
+                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeVideoAD, ['finish']);
+                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [2]);
                 } else {
-                    cc.wwx.BiLog.clickStat(cc.wwx.BiLog.clickStatEventType.clickStatEventTypeClickAdVideo, [3]);
+                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [3]);
                 }
                 if (typeof this.closeCb == 'function') {
                     this.closeCb(ended);
@@ -55,7 +55,7 @@ cc.Class({
                 }
                 this.cleanupCbs();
 
-                cc.wwx.BiLog.clickStat(cc.wwx.BiLog.clickStatEventType.clickStatEventTypeClickAdVideo, [4]);
+                cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [4]);
             });
 
             videoAd.load().then(() => {videoAd.isLoaded = true});
@@ -73,11 +73,13 @@ cc.Class({
         },
         showVideoAd: function(closeCb, errorCb) {
             if (!wx.createRewardedVideoAd) {
+                errorCb();
                 // cc.wwx.PopWindowManager.popWindow("ListPrefab/public_popWindows", "public_popWindow", {content: "微信版本过低，请升级微信"})
             }
 
             let video = this.videoAds[0];
             if (!video) {
+                errorCb();
                 return;
             }
             this.closeCb = closeCb;
@@ -90,6 +92,8 @@ cc.Class({
                 // cc.wwx.PopWindowManager.popWindow("ListPrefab/public_popWindows", "public_popWindow", {content: "视频未准备好"})
 
                 cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [4]);
+                this.cleanupCbs();
+
                 return;
             }
 

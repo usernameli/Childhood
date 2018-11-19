@@ -126,6 +126,10 @@ window.initMgr = function() {
 
     cc.wwx.clickStatEventType = {
 
+        clickStatEventTypeVideoAD : 20173201,//视频播放完成
+        clickStatEventTypeClickAdVideo : 20173202,//视频播放为完成
+        clickStatEventTypeBannerAD : 20173203,//banner播放为完成
+
         clickStatEventTypeUserFrom : 99990001,//用户来源
         clickStatEventTypeShare : 99990002,//用户分享
 

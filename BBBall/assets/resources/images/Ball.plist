@@ -433,7 +433,7 @@
                 <key>sourceSize</key>
                 <string>{60,60}</string>
             </dict>
-            <key>SHOP_PD101_BALL_17_CHQ.png</key>
+            <key>SHOP_PD101_BALL_17_RAINBOW.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,200},{60,60}}</string>
@@ -446,7 +446,7 @@
                 <key>sourceSize</key>
                 <string>{60,60}</string>
             </dict>
-            <key>SHOP_PD101_BALL_18_FSQ.png</key>
+            <key>SHOP_PD101_BALL_18_RADIATION.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{158,164},{60,60}}</string>
@@ -459,7 +459,7 @@
                 <key>sourceSize</key>
                 <string>{60,60}</string>
             </dict>
-            <key>SHOP_PD101_BALL_19_TGQ.png</key>
+            <key>SHOP_PD101_BALL_19_CANDY.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{64,138},{60,60}}</string>
@@ -485,7 +485,7 @@
                 <key>sourceSize</key>
                 <string>{30,30}</string>
             </dict>
-            <key>SHOP_PD101_BALL_20_XPQ.png</key>
+            <key>SHOP_PD101_BALL_20_RUBBERBALL.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,138},{60,60}}</string>
@@ -498,7 +498,7 @@
                 <key>sourceSize</key>
                 <string>{60,60}</string>
             </dict>
-            <key>SHOP_PD101_BALL_21_ZQQ.png</key>
+            <key>SHOP_PD101_BALL_21_FOOTBALL.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{64,76},{60,60}}</string>
@@ -625,7 +625,7 @@
             <key>size</key>
             <string>{256,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:db0628c4a220093576d3d3bdec8a8f28:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:eef4fef5e90c8ba87bf211b208c60140:1/1$</string>
             <key>textureFileName</key>
             <string>Ball.png</string>
         </dict>

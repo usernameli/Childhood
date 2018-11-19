@@ -125,7 +125,26 @@ cc.Class({
     },
     taiJiShareCallBack()
     {
-        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupBall);
+        if(CC_WECHATGAME && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
+        {
+            cc.wwx.VideoAD.showVideoAd(function (end) {
+
+                if(end)
+                {
+                    cc.wwx.TCPMSG.getShareReward("taiji_ball");
+
+                }
+            },function () {
+
+                cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupBall);
+
+            })
+        }
+        else
+        {
+            cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupBall);
+
+        }
 
     },
     exchangeCallBack()

@@ -28,6 +28,11 @@ cc.Class({
             this.windowsNode.runAction(cc.scaleTo(0.5, 1).easing(cc.easeBackOut()));
         }
 
+        if(cc.wwx.SystemInfo.SYS.phoneType === 1)
+        {
+            this.node.scale = 0.9;
+        }
+
     },
     start()
     {

@@ -5,10 +5,10 @@ cc.Class({
         maxCount: 100,
         index: 0,
         log: function (){
-            // if(!cc.wwx.SystemInfo.debug)
-            // {
-            //      return;
-            // }
+            if(!cc.wwx.SystemInfo.debug)
+            {
+                 return;
+            }
             if (CC_WECHATGAME) {
                 var strLog = this.getDateString() + cc.js.formatStr.apply(cc,arguments);
                 this.addLog(strLog);

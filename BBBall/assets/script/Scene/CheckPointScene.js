@@ -10,10 +10,9 @@ cc.Class({
     },
     onLoad()
     {
-        if(!cc.wwx)
-        {
-            initMgr();
-        }
+
+        cc.wwx.Util.adaptIpad();
+
         let levelHighStar = cc.wwx.UserInfo.gdata["levelHighStar"];
         let sumStar = 0;
         for(let i = 0; i < levelHighStar.length;i++)
@@ -27,12 +26,17 @@ cc.Class({
             cc.log("Next GameScene scene preloaded");
         });
 
+        this.onResizeBind = this.onResizeBind || this.onResize.bind(this);
+        this.onLoadBind = this.onLoadBind || this.onBannerLoad.bind(this);
+        this.onErrorBind = this.onErrorBind || this.onError.bind(this);
 
+        this.createrAD();
+    },
+
+    createrAD()
+    {
         if(CC_WECHATGAME && wx.createBannerAd && wx.getSystemInfoSync)
         {
-            this.onResizeBind = this.onResizeBind || this.onResize.bind(this);
-            this.onLoadBind = this.onLoadBind || this.onBannerLoad.bind(this);
-            this.onErrorBind = this.onErrorBind || this.onError.bind(this);
 
             if(this.bannerAd){
                 console.log('old bannerAD destroies!');
@@ -48,7 +52,7 @@ cc.Class({
                 style: {
                     left:0,
                     top:0,
-                    width: 320,
+                    width: 300,
                 }
             });
 
@@ -63,19 +67,28 @@ cc.Class({
         if(this.bannerAd) {
             console.log('屏幕高度是！！！', cc.wwx.SystemInfo.screenHeight);
             this.bannerAd.style.left = (cc.wwx.SystemInfo.screenWidth - res.width) / 2 + 0.1;
-            if(cc.wwx.SystemInfo.SYS.phoneType == 1) {
-                if (res.height > 100) {
-                    this.bannerAd.style.top = cc.wwx.SystemInfo.screenHeight - res.height - 1 + 0.1;//-5
-                } else {
-                    this.bannerAd.style.top = cc.wwx.SystemInfo.screenHeight - res.height - 1 + 0.1;//-10
+
+            if(res.height > 100)
+            {
+                if(this.bannerAd){
+                    console.log('old bannerAD destroies!');
+                    this.bannerAd.offResize(this.onResizeBind);
+                    this.bannerAd.offLoad(this.onLoadBind);
+                    this.bannerAd.offError(this.onErrorBind);
+                    this.bannerAd.destroy();
+                    this.bannerAd = null;
                 }
-            } else {
-                if(res.height > 100) {
-                    this.bannerAd.style.top = cc.wwx.SystemInfo.screenHeight - res.height;
+            }
+            else
+            {
+                if(cc.wwx.SystemInfo.SYS.phoneType == 1) {
+                    this.bannerAd.style.top = cc.wwx.SystemInfo.screenHeight - res.height - 1 + 0.1 ;//-10
                 } else {
                     this.bannerAd.style.top = cc.wwx.SystemInfo.screenHeight - res.height;
                 }
             }
+
+
         }
     },
     onShow(){
@@ -87,7 +100,7 @@ cc.Class({
         console.log('bannerAd showOnResult');
         this.bannerAd.show().then(() => {
             console.log('bannerAd show1 success');
-            cc.wwx.BiLog.clickStat(cc.wwx.BiLog.clickStatEventType.clickStatEventTypeBannerAD, ['show']);
+            cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeBannerAD, ['show']);
         }).catch(err => console.log(err));
     },
     onBannerLoad(){

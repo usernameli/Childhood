@@ -352,7 +352,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 103,
+    "tag": 0,
     "_density": 1,
     "_sensor": false,
     "_friction": 0,
@@ -394,7 +394,6 @@
     "_width": 0,
     "_height": 0,
     "_space": 4,
-    "_belongUserID": 0,
     "_tag": "ObjBlock",
     "labelText": {
       "__id__": 6

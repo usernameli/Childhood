@@ -128,12 +128,11 @@ cc.Class({
         }
         ,
         parse: function (param) {
-            cc.wwx.OutPut.log("[cc.wwx.Share parse] " + JSON.stringify(param));
-
             var result = param['result'];
+            let action = result["action"];
 
             var share = new cc.wwx.ShareData();
-            // share.parseBurial(result['conf']);
+            share.parseBurial(result['conf']);
             share.burialId = result['action'];
             if(share.burialId === cc.wwx.BurialShareType.DailyInviteFriend)
             {
@@ -160,55 +159,63 @@ cc.Class({
 
         getShareRewards: function () {
             var rewardGetList = this.rewardGetList;
-            if (!rewardGetList || rewardGetList.length == 0) return;
+            if (!rewardGetList || rewardGetList.length === 0) return;
             this.rewardGetList = [];
+            this.shareData = null;
             //连发消息会不会有问题?通常来说rewardGetList只会有一个数据
             for (var i = 0; i < rewardGetList.length; i++) {
                 var bid = rewardGetList[i]['burialId'];
                 var res = rewardGetList[i]['result'];
                 var pid = rewardGetList[i]['pointId'];
-                var that = this;
+                // var that = this;
 
                 if (res)
                 {
                     //通过分享票据获取分享群ID
-                    wx.getShareInfo({
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS, {
+                        burialId: bid,
                         shareTicket: res,
-                        success: function (obj) {
-                            var encryptedData = obj.encryptedData;
-                            that.print("encryptedData :" + encryptedData);
-
-                            var decryptedData = cc.wwx.Util.wxDecrypt(cc.wwx.UserInfo.wxgame_session_key, obj.iv, obj.encryptedData);
-                            that.print("decryptedData :" + decryptedData);
-                            decryptedData = JSON.parse(decryptedData);
-                            var groupId = decryptedData.openGId;
-                            var isShareGroupId = false;
-                            if (!that.checkShareTodayVaild(bid, groupId)) {
-
-                                cc.wwx.TipManager.showMsg('今天已经分享过这个微信群咯');
-                                isShareGroupId = true;
-                            }
-
-                            that.setLocalShareRecord(bid, groupId);
-                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS, {
-                                burialId: bid,
-                                result: groupId,
-                                shareTicket: res,
-                                isShareGroupId:isShareGroupId,
-                                pointId: pid
-                            });
-                        },
-                        fail: function () {
-                            cc.wwx.OutPut.log("getShareInfo fail!!!!!!");
-                            // cc.wwx.TCPMSG.getShare3Reward(pid, cc.wwx.ShareWhereReward.Group);
-                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_WX_SHARE_FAILED);
-                            //     burialId: bid,
-                            //     result: null,
-                            //     shareTicket: res,
-                            //     pointId: pid
-                            // });
-                        }
+                        isShareGroupId:false,
+                        pointId: pid
                     });
+
+                    // wx.getShareInfo({
+                    //     shareTicket: res,
+                    //     success: function (obj) {
+                    //         var encryptedData = obj.encryptedData;
+                    //         that.print("encryptedData :" + encryptedData);
+                    //
+                    //         var decryptedData = cc.wwx.Util.wxDecrypt(cc.wwx.UserInfo.wxgame_session_key, obj.iv, obj.encryptedData);
+                    //         that.print("decryptedData :" + decryptedData);
+                    //         decryptedData = JSON.parse(decryptedData);
+                    //         var groupId = decryptedData.openGId;
+                    //         var isShareGroupId = false;
+                    //         if (!that.checkShareTodayVaild(bid, groupId)) {
+                    //
+                    //             cc.wwx.TipManager.showMsg('今天已经分享过这个微信群咯');
+                    //             isShareGroupId = true;
+                    //         }
+                    //
+                    //         that.setLocalShareRecord(bid, groupId);
+                    //         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS, {
+                    //             burialId: bid,
+                    //             result: groupId,
+                    //             shareTicket: res,
+                    //             isShareGroupId:isShareGroupId,
+                    //             pointId: pid
+                    //         });
+                    //     },
+                    //     fail: function () {
+                    //         cc.wwx.OutPut.log("getShareInfo fail!!!!!!");
+                    //         // cc.wwx.TCPMSG.getShare3Reward(pid, cc.wwx.ShareWhereReward.Group);
+                    //         cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_WX_SHARE_FAILED);
+                    //         //     burialId: bid,
+                    //         //     result: null,
+                    //         //     shareTicket: res,
+                    //         //     pointId: pid
+                    //         // });
+                    //     }
+                    // });
                 }
                 else
                 {
@@ -218,7 +225,7 @@ cc.Class({
                     cc.wwx.OutPut.log("getShareRewards bid ",bid);
                     if(bid === cc.wwx.BurialShareType.DailyInviteFriend);
                     {
-                        cc.wwx.TipManager.showMsg('分享好友成功,赶快提醒好友加入游戏吧');
+                        // cc.wwx.TipManager.showMsg('分享好友成功,赶快提醒好友加入游戏吧');
 
                     }
 
@@ -239,6 +246,8 @@ cc.Class({
             cc.wwx.OutPut.log("runShare: ",JSON.stringify(shareData));
             this.print('ready share');
             var that = this;
+            that.rewardGetList.push({pointId:shareData["pointId"],result:true,burialId:shareData['burialId']});
+
             var success = function (res) {
 
                 var result = res.shareTickets ? cc.wwx.ShareWhereReward.Group : cc.wwx.ShareWhereReward.Friend;
@@ -260,7 +269,7 @@ cc.Class({
             };
 
             var fail = function (res) {
-                cc.wwx.TipManager.showMsg('分享失败');
+                // cc.wwx.TipManager.showMsg('分享失败');
             };
 
             var complete = function (res) {

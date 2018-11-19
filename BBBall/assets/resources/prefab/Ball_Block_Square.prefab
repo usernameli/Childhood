@@ -42,12 +42,12 @@
     "_prefab": {
       "__id__": 12
     },
-    "_opacity": 214,
+    "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 54,
-      "g": 112,
-      "b": 239,
+      "r": 200,
+      "g": 0,
+      "b": 0,
       "a": 255
     },
     "_contentSize": {
@@ -352,7 +352,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 100,
+    "tag": 0,
     "_density": 1,
     "_sensor": false,
     "_friction": 0,
@@ -382,7 +382,6 @@
     "_width": 0,
     "_height": 0,
     "_space": 4,
-    "_belongUserID": 0,
     "_tag": "ObjBlock",
     "labelText": {
       "__id__": 6

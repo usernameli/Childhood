@@ -16,8 +16,8 @@
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
+    "_tag": -1,
     "_active": true,
-    "_level": 1,
     "_components": [
       {
         "__id__": 2
@@ -35,6 +35,7 @@
     "_prefab": {
       "__id__": 6
     },
+    "_id": "",
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
@@ -43,42 +44,32 @@
       "b": 255,
       "a": 255
     },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 32,
-      "height": 32
-    },
+    "_cascadeOpacityEnabled": true,
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
       "y": 0.5
     },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 32,
+      "height": 32
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_quat": {
-      "__type__": "cc.Quat",
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
+      "y": 0
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
-    "groupIndex": 3,
-    "_id": ""
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 3
   },
   {
     "__type__": "cc.Sprite",
@@ -88,8 +79,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "_spriteFrame": {
       "__uuid__": "fc7b8a6e-6c86-42be-8e66-445bfdfdd009"
     },
@@ -104,11 +93,11 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_state": 0,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_atlas": {
       "__uuid__": "67af818a-d0e3-43d9-87cf-67eb14b2e231"
-    },
-    "_id": ""
+    }
   },
   {
     "__type__": "cc.RigidBody",
@@ -131,8 +120,7 @@
     "_angularVelocity": 0,
     "_fixedRotation": false,
     "enabledContactListener": true,
-    "bullet": false,
-    "_id": ""
+    "bullet": false
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -153,8 +141,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 16,
-    "_id": ""
+    "_radius": 16
   },
   {
     "__type__": "973a280znNIILRFvoPMjRvK",
@@ -173,8 +160,7 @@
       "__uuid__": "50acf28d-cb96-4960-b5ed-282bcc841b64"
     },
     "_labelNum": 0,
-    "_isContactF": false,
-    "_id": ""
+    "_isContactF": false
   },
   {
     "__type__": "cc.PrefabInfo",

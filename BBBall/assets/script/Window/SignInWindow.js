@@ -152,8 +152,26 @@ cc.Class({
     signShareCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
-        cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupReward);
+        if(CC_WECHATGAME && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
+        {
+            cc.wwx.VideoAD.showVideoAd(function (end) {
 
+                if(end)
+                {
+                    cc.wwx.TCPMSG.getShareReward("sign");
+
+                }
+            },function () {
+
+                cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupReward);
+
+            })
+        }
+        else
+        {
+            cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupReward);
+
+        }
 
     },
     wxShareSuccess(argument)

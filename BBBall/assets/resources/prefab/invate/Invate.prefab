@@ -366,8 +366,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66,
-      "height": 66
+      "width": 58,
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -376,8 +376,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 284,
-      "y": 495,
+      "x": 284.5,
+      "y": 486.2,
       "z": 0
     },
     "_scale": {
@@ -727,7 +727,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 491.6,
+      "width": 337.57,
       "height": 40
     },
     "_anchorPoint": {
@@ -770,7 +770,7 @@
       "__id__": 18
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 1,
     "_components": [
       {
@@ -800,7 +800,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 138.4,
+      "x": 159.4,
       "y": 0.8,
       "z": 0
     },
@@ -877,8 +877,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "每天分享不同的群(/3)，奖励       20宝石",
-    "_N$string": "每天分享不同的群(/3)，奖励       20宝石",
+    "_string": "每天获取免费领取宝石(0/3)",
+    "_N$string": "每天获取免费领取宝石(0/3)",
     "_fontSize": 28,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1258,8 +1258,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "分享到群",
-    "_N$string": "分享到群",
+    "_string": "领取宝石",
+    "_N$string": "领取宝石",
     "_fontSize": 40,
     "_lineHeight": 50,
     "_enableWrapText": true,

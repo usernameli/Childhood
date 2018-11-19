@@ -38,7 +38,30 @@ cc.Class({
         }
         else
         {
-            cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupBox);
+            if(CC_WECHATGAME && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
+            {
+                let that = this;
+                cc.wwx.VideoAD.showVideoAd(function (end) {
+
+                    if(end)
+                    {
+                        cc.wwx.TCPMSG.openGameBox(cc.wwx.UserInfo.playMode,-1);
+                        that.closeWindow();
+
+
+                    }
+                },function () {
+
+                    cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupBox);
+
+                })
+            }
+            else
+            {
+                cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroupBox);
+
+            }
+
         }
 
 

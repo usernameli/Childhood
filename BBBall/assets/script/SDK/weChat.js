@@ -44,7 +44,33 @@ cc.Class({
                 }
                 cc.wwx.AudioManager && cc.wwx.AudioManager.onShow();
 
+
+
                 var curTime = Math.floor((new Date()).valueOf() / 1000);
+
+                if (lastHideTime && curTime - lastHideTime < 3.5)
+                {
+                    if(cc.wwx.Share.shareData)
+                    {
+                        if(wx.showModal)
+                        {
+                            wx.showModal({
+                                title: '分享失败',
+                                content: '请分享到不同的群',
+                                showCancel: false,
+                                success: function (res) {
+
+                                }
+                            });
+                        }
+
+                        // cc.wxg.PopWindowManager.popWindow("ListPrefab/public_popWindows","public_popWindow",{content:"请分享到不同的群"})
+                        cc.wwx.Share.shareData = null;
+                        cc.wwx.Share.rewardGetList = [];
+                    }
+                }
+
+
                 if (lastHideTime && curTime - lastHideTime > 60 * 60 * 5) {
                     cc.wwx.SystemInfo.reLogin = true;
                     cc.wwx.SDKLogin.login();
@@ -84,7 +110,12 @@ cc.Class({
                 success:function(res) {
                     cc.wwx.OutPut.info('wx.getSystemInfo success:', JSON.stringify(res));
                     cc.wwx.SystemInfo.SysInfo = res;
-                    if (res.model.indexOf('iPhone X') >= 0) {
+                    if (res.model.indexOf('iPhone X') >= 0 ||
+                        res.model.indexOf('iPhone11,2') >= 0 ||
+                        res.model.indexOf('COL-AL10') >= 0 ||
+                        res.model.indexOf('iPhone11,6') >= 0 ||
+                        res.model.indexOf('iPhone11,8') >= 0 ||
+                        res.model.indexOf('iPhone11,4') >= 0) {
                         cc.wwx.SystemInfo.SYS.phoneType = 1;
                     }
                     else if (res.model.indexOf('iPad') >= 0) {
@@ -107,19 +138,13 @@ cc.Class({
                     cc.wwx.SystemInfo.windowWidth = res.windowWidth;
                     cc.wwx.SystemInfo.windowHeight = res.windowHeight;
 
-                    if (typeof cc.wwx.SystemInfo.SYS.benchmarkLevel != 'undefined')
-                    {
-                        if (cc.wwx.SystemInfo.SYS.benchmarkLevel == -2 || cc.wwx.SystemInfo.SYS.benchmarkLevel == 0)
-                        {
+                    if (typeof cc.wwx.SystemInfo.SYS.benchmarkLevel != 'undefined') {
+                        if (cc.wwx.SystemInfo.SYS.benchmarkLevel == -2 || cc.wwx.SystemInfo.SYS.benchmarkLevel == 0) {
                             wx.setPreferredFramesPerSecond(20);
-                        }
-                        else if (cc.wwx.SystemInfo.SYS.benchmarkLevel >= 1)
-                        {
+                        } else if (cc.wwx.SystemInfo.SYS.benchmarkLevel >= 1) {
                             var value = Math.floor(0.8 * cc.wwx.SystemInfo.SYS.benchmarkLevel + 20);
                             wx.setPreferredFramesPerSecond(Math.min(60, value));
-                        }
-                        else
-                        {
+                        } else {
                             wx.setPreferredFramesPerSecond(30);
                         }
                     } else {
@@ -133,13 +158,13 @@ cc.Class({
                             }
                         }
                         if (!isNewiPhone) {
-                            wx.setPreferredFramesPerSecond(40);
+                            wx.setPreferredFramesPerSecond(42);
                         }
                     }
 
                     //上报顺序为微信版本 基础库版本 平台 操作系统版本
-                    // cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeSubmitVersionInfo,
-                    //     [res.version, res.SDKVersion, res.platform, res.system, res.brand, res.model]);
+                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeSubmitVersionInfo,
+                        [res.version, res.SDKVersion, res.platform, res.system, res.brand, res.model]);
                 },
                 fail:function(res) {
                     cc.wwx.OutPut.err('wx.getSystemInfo fail:', JSON.stringify(res));
@@ -237,14 +262,10 @@ cc.Class({
         },
 
         shareWXMsg:function(title, imageUrl, queryJson, pointId, successCallback, failCallback, completeCallback) {
-
+            if (!CC_WECHATGAME) { return; }
             queryJson = queryJson || {};
             queryJson['inviteCode'] = cc.wwx.UserInfo.userId;
             queryJson['pointId'] = queryJson['pointId'] || 'xxxxxx';
-            cc.wwx.OutPut.log('shareWXMsg:', title, imageUrl, this.jsonToQuery(queryJson),pointId);
-
-            if (!CC_WECHATGAME) { return; }
-
             wx.shareAppMessage({
                 'title': title,
                 'imageUrl': imageUrl,

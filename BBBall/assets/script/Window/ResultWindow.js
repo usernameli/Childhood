@@ -210,7 +210,7 @@ cc.Class({
             return;
 
         }
-        cc.wwx.Timer.setTimer(this,this.timerBtnClick,2,0,0);
+        cc.wwx.Timer.setTimer(this,this.timerBtnClick,3,0,0);
         this._btnClick = true;
 
         if(cc.wwx.UserInfo.playMode === "level")

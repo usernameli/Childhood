@@ -78,7 +78,8 @@ cc.Class({
     {
 
         cc.wwx.Util.adaptIpad();
-        this.adaptIphoneX();
+        // this.adaptIphoneX();
+
         this.loginSuccessCallBack();
         cc.wwx.TCPMSG.levelPkQueueRoom("101603");
         cc.wwx.TCPMSG.levelPkQueueRoom("101601");
@@ -100,18 +101,75 @@ cc.Class({
 
         this.shopList();
 
-    },
-    adaptIphoneX()
-    {
-        if(cc.wwx.SystemInfo.SYS.phoneType === 1)
-        {
-            var widget = this.topNode.getComponent(cc.Widget);
-            widget.top = 100;
 
-            var widget = this.btnListNode.getComponent(cc.Widget);
-            widget.top = 255;
+        if(CC_WECHATGAME && wx.createBannerAd && wx.getSystemInfoSync)
+        {
+            this.onResizeBind = this.onResizeBind || this.onResize.bind(this);
+            this.onLoadBind = this.onLoadBind || this.onBannerLoad.bind(this);
+            this.onErrorBind = this.onErrorBind || this.onError.bind(this);
+
+            if(this.bannerAd){
+                console.log('old bannerAD destroies!');
+                this.bannerAd.offResize(this.onResizeBind);
+                this.bannerAd.offLoad(this.onLoadBind);
+                this.bannerAd.offError(this.onErrorBind);
+                this.bannerAd.destroy();
+                this.bannerAd = null;
+            }
+
+            this.bannerAd = wx.createBannerAd({
+                adUnitId: "adunit-fec03eabd3aea554",
+                style: {
+                    left:0,
+                    top:0,
+                    width: 300,
+                }
+            });
+
+            this.bannerAd.onResize(this.onResizeBind);
+            this.bannerAd.onLoad(this.onLoadBind);
+            this.bannerAd.onError(this.onErrorBind);
         }
 
+    },
+    onResize: function(res) {
+        console.log('图片宽高为：', res.width, res.height);
+        if(this.bannerAd) {
+            console.log('屏幕高度是！！！', cc.wwx.SystemInfo.screenHeight);
+            this.bannerAd.style.left = (cc.wwx.SystemInfo.screenWidth - res.width) / 2 + 0.1;
+            if(cc.wwx.SystemInfo.SYS.phoneType == 1) {
+                if (res.height > 100) {
+                    this.bannerAd.style.top = cc.wwx.SystemInfo.screenHeight - res.height - 1 + 0.1 ;//-5
+                } else {
+                    this.bannerAd.style.top = cc.wwx.SystemInfo.screenHeight - res.height - 1 + 0.1 ;//-10
+                }
+            } else {
+                if(res.height > 100) {
+                    this.bannerAd.style.top = cc.wwx.SystemInfo.screenHeight - res.height;
+                } else {
+                    this.bannerAd.style.top = cc.wwx.SystemInfo.screenHeight - res.height;
+                }
+            }
+        }
+    },
+    onShow(){
+        if(this.bannerAd){
+            this.showOnResult();
+        }
+    },
+    showOnResult(){
+        console.log('bannerAd showOnResult');
+        this.bannerAd.show().then(() => {
+            console.log('bannerAd show1 success');
+            cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeBannerAD, ['show']);
+        }).catch(err => console.log(err));
+    },
+    onBannerLoad(){
+        console.log('bannerAd onLoad');
+        this.onShow();
+    },
+    onError(err){
+        console.log('bannerAd onError');
     },
     shopList()
     {
@@ -153,18 +211,25 @@ cc.Class({
 
             // 低版本兼容处理,微信wx.getUserInfo()方法已经不弹授权了,度需要用微信授权按钮
             cc.wwx.SDKLogin.wxUserInfo1();
+        }
 
-            // let button = wx.createGameClubButton({
-            //     icon: 'green',
-            //     style: {
-            //         left: 10,
-            //         top: 76,
-            //         width: 40,
-            //         height: 40
-            //     }
-            // })
+        if(CC_WECHATGAME && wx.createGameClubButton && !cc.wwx.UserInfo.gameClub)
+        {
+            var info = wx.getSystemInfoSync();
+            var btnwidth = info['windowWidth'];
+            var btnheight = info['windowHeight'];
+            let button = wx.createGameClubButton({
+                icon: 'green',
+                style: {
+                    left: 13,
+                    top: btnheight / 2,
+                    width: 40,
+                    height: 40
+                },
+            });
 
-
+            cc.wwx.UserInfo.gameClub = button;
+            button.show();
         }
 
 
@@ -231,6 +296,20 @@ cc.Class({
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS,this.wxShareSuccess,this);
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_USER_INFO, this.gameUserInfo, this);
 
+        if(this.bannerAd){
+            this.bannerAd.offLoad(this.onLoadBind);
+            this.bannerAd.offError(this.onErrorBind);
+            this.bannerAd.offResize(this.onResizeBind);
+
+            this.bannerAd.hide();
+            this.bannerAd.destroy();
+            this.bannerAd = null;
+        }
+        if(cc.wwx.UserInfo.gameClub)
+        {
+            cc.wwx.UserInfo.gameClub.destroy();
+            cc.wwx.UserInfo.gameClub = null;
+        }
     },
     invate_conf_status(params)
     {
