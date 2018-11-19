@@ -28,10 +28,10 @@ cc.Class({
         let randomColor = this.setRandomColor(this._labelNum);
         this.node.color = new cc.Color(randomColor.r,randomColor.g,randomColor.b);
 
-        if(this._belongUserID !== cc.wwx.UserInfo.userId)
-        {
-            this.labelText.node.scale = -1;
-        }
+        // if(this._belongUserID !== cc.wwx.UserInfo.userId)
+        // {
+        //     this.labelText.node.scale = -1;
+        // }
     },
     objsBreak()
     {
@@ -64,7 +64,8 @@ cc.Class({
 
         if(cc.wwx.UserInfo.playMode === "GameVS")
         {
-            if(this._belongUserID === cc.wwx.UserInfo.userId)
+            let ballComponent = other.node.getComponent("Ball");
+            if(this._belongUserID === ballComponent.getBelongTo())
             {
                 if(this._labelNum > 1)
                 {

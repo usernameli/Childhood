@@ -14,6 +14,9 @@ cc.Class({
         OtherSeatID:0,
         VSUserInfo:null,
         RoundUserID:0,
+        GameResultWin:false,
+        GameOver:false,
+        JoinFriendRoom:false,
         parseRoomList(argument)
         {
             this.RoomList = argument["result"]["roomList"];

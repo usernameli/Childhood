@@ -1,8 +1,8 @@
 
+
 cc.Class({
     extends:cc.Component,
     statics:{
-        // adUnitIds : ['adunit-664b8e736700fc51','adunit-cf2ffd798091a013'],
         adUnitIds : ['adunit-d29ae21b46cccf16'],
         videoAds: [],
         _initialized: false,
@@ -10,7 +10,6 @@ cc.Class({
         closeCb:null,
         errorCb:null,
         noAdvertisement: false,  // 没有广告
-
         init: function () {
             if (!CC_WECHATGAME || !wx.createRewardedVideoAd || !CC_WECHATGAME) {
                 return;
@@ -37,10 +36,10 @@ cc.Class({
                 cc.wwx.OutPut.info('video ad onClose',this.adUnitId,JSON.stringify(res));
                 let ended = (!res || (res && res.isEnded));
                 if (ended){
-                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeVideoAD, ['finish', this.clickType]);
-                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [this.clickType, 2]);
+                    cc.wwx.BiLog.clickStat(cc.wwx.BiLog.clickStatEventType.clickStatEventTypeVideoAD, ['finish']);
+                    cc.wwx.BiLog.clickStat(cc.wwx.BiLog.clickStatEventType.clickStatEventTypeClickAdVideo, [2]);
                 } else {
-                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [this.clickType, 3]);
+                    cc.wwx.BiLog.clickStat(cc.wwx.BiLog.clickStatEventType.clickStatEventTypeClickAdVideo, [3]);
                 }
                 if (typeof this.closeCb == 'function') {
                     this.closeCb(ended);
@@ -50,64 +49,71 @@ cc.Class({
 
             videoAd.onError(err => {
                 cc.wwx.OutPut.warn('videoAd.onError', err.errMsg);
-                this.noAdvertisement = true;
                 cc.wwx.AudioManager.onShow();
                 if (typeof this.errorCb == 'function') {
                     this.errorCb();
                 }
                 this.cleanupCbs();
 
-                cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [this.clickType, 4]);
+                cc.wwx.BiLog.clickStat(cc.wwx.BiLog.clickStatEventType.clickStatEventTypeClickAdVideo, [4]);
             });
 
             videoAd.load().then(() => {videoAd.isLoaded = true});
 
             return videoAd;
         },
-
-        showVideoAd: function(idx,type,closeCb, errorCb) {
-            if(!wx.createRewardedVideoAd){
-                cc.wwx.TipManager.showMsg('微信版本过低，请升级微信');
+        getShowVideoAdIsLoaded()
+        {
+            let video = this.videoAds[0];
+            if(!video.isLoaded)
+            {
+                video.load().then(() => {video.isLoaded = true});
+            }
+            return video.isLoaded;
+        },
+        showVideoAd: function(closeCb, errorCb) {
+            if (!wx.createRewardedVideoAd) {
+                // cc.wwx.PopWindowManager.popWindow("ListPrefab/public_popWindows", "public_popWindow", {content: "微信版本过低，请升级微信"})
             }
 
-            let video = this.videoAds[idx];
+            let video = this.videoAds[0];
             if (!video) {
-                return;
-            }
-            if (!video.isLoaded) {
-                video.load().then(() => { video.isLoaded = true});
-                cc.wwx.TipManager.showMsg('视频未准备好。');
-                cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [this.clickType, 4]);
                 return;
             }
             this.closeCb = closeCb;
             this.errorCb = errorCb;
-            this.clickType = 0;
+
+            if (!video.isLoaded) {
+                video.load().then(() => {
+                    video.isLoaded = true
+                });
+                // cc.wwx.PopWindowManager.popWindow("ListPrefab/public_popWindows", "public_popWindow", {content: "视频未准备好"})
+
+                cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [4]);
+                return;
+            }
+
             cc.wwx.AudioManager.onHide();
             video.show()
                 .then(() => {
                     console.log('视频广告显示ing...');
-                    this.adUnitId = this.adUnitIds[idx];
-                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeVideoAD, ['show',this.clickType]);
-                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [this.clickType, 1]);
+                    this.adUnitId = this.adUnitIds[0];
+                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeVideoAD, ['show']);
+                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeClickAdVideo, [1]);
+                })
+                .catch(err => {
+                    cc.wwx.OutPut.err('video.show.err', JSON.stringify(err));
+                    cc.wwx.PopWindowManager.removeAllWindow();
+                    // cc.wwx.PopWindowManager.popWindow("ListPrefab/public_popWindows", "public_popWindow", {content: "视频没有准备好"});
+                    video.isLoaded = false;
+                    this.cleanupCbs();
                 });
-            cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeVideoAD, ['click',this.clickType]);
-        },
+            cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeVideoAD, ['click']);
 
+        },
         cleanupCbs: function () {
             delete this.closeCb;
             delete this.errorCb;
         },
-
-        createAdIcon(success){
-            cc.loader.loadRes('prefabs/ads/ad_video_btn', cc.Prefab, null, function(error, prefab) {
-                cc.wwx.OutPut.log('load video_ad_btn:' + ddz.GlobalFuncs.obj2String1(error));
-                let node = cc.instantiate(prefab);
-                // let script = node.getComponent('video_ad_btn');
-                // script.init(title);
-                // node.parent = parent;
-                return success(node);
-            }.bind(this));
-        }
     }
-})
+});

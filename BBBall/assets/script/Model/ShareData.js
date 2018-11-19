@@ -67,7 +67,7 @@ cc.Class({
         this.dLevel = 2;
         this.pointId = param['pointId'] || 0;
         this.roomId = param['roomId'] || 0;
-        this.tableId = param['tableId'] || 0;
+        this.hostId = param['hostId'] || cc.wwx.UserInfo.userId;
         this.shareId = param.shareId || 0;
         this.title = param['title'] || null;
         this.pic = param['pic'] || null;
@@ -89,9 +89,9 @@ cc.Class({
             customData['paintConfig'] && (this.paintConfig = customData['paintConfig']);
         }
 
-        if(this.tableId !== 0)
+        if(this.hostId !== 0)
         {
-            this.queryJson = {tableID:this.tableId,roomID:this.roomId}
+            this.queryJson = {hostId:this.hostId,roomID:this.roomId}
         }
     },
 

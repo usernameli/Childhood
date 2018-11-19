@@ -34,7 +34,8 @@ cc.Class({
         jiangxingPrefab:{
             default:null,
             type:cc.Prefab
-        }
+        },
+        gameResultWin:false,
 
     },
     onLoad()
@@ -42,6 +43,7 @@ cc.Class({
         this._super();
         let starNum = this._params["starNum"];
         let updownF    = this._params["updownF"];
+        this.gameResultWin = false;
         let segment = cc.wwx.Util.segmentStarCalculation(starNum);
         let segmentLevel = cc.wwx.Util.segmentLevel(starNum);
         this.segment.string = segment;
@@ -61,6 +63,7 @@ cc.Class({
         if(updownF)
         {
             //升星
+            this.gameResultWin = true;
             this.nopack_icon_title_segment_15.spriteFrame = this.segmentPicList[segmentLevel];
             this.nopack_icon_title_segment_15tx.spriteFrame = this.segmentPicList[segmentLevel];
             for(let i = 0; i < oldStarNum - 1;i++)
@@ -97,13 +100,22 @@ cc.Class({
                 component.playAnimation();
             }
 
+            this.gameResultWin = false;
+
 
         }
         // for(let i = 0; i < 100;i++)
         // {
         //     cc.wwx.OutPut.log("GameVSResultWindow: star num:  " + i + " 段位: " + segment);
         // }
+        cc.wwx.VS.GameResultWin = this.gameResultWin;
+        cc.wwx.VS.GameOver = true;
 
 
+
+        this.scheduleOnce(function(){
+            cc.wwx.SceneManager.switchScene("GameVSReady");
+
+        },3);
     }
 });

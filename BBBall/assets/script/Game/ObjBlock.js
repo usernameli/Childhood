@@ -101,8 +101,20 @@ cc.Class({
     {
         cc.wwx.OutPut.log( this._tag,"ballMoveDrop");
 
-        this._space = argument['space'];
-        this._moveDrop = true;
+        if(cc.wwx.UserInfo.playMode === "GameVS")
+        {
+            if(this._belongUserID === cc.wwx.VS.RoundUserID)
+            {
+                this._space = argument['space'];
+                this._moveDrop = true;
+            }
+        }
+        else
+        {
+            this._space = argument['space'];
+            this._moveDrop = true;
+        }
+
 
     },
     setRandomColor(randNum)

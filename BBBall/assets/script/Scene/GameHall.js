@@ -332,6 +332,8 @@ cc.Class({
     gameDoubleVSCallBack()
     {
         cc.wwx.AudioManager.playAudioButton();
+        // cc.wwx.SceneManager.switchScene("GameMatchVSRoom");
+
         if(cc.wwx.VS.RoomList.length > 0)
         {
             cc.wwx.UserInfo.playMode = "GameVS";
@@ -438,6 +440,28 @@ cc.Class({
         cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroup);
 
         //皮肤
+    },
+    showVideoCallBack()
+    {
+        let self = this;
+        if(CC_WECHATGAME)
+        {
+            cc.wwx.VideoAD.showVideoAd(function (end) {
+
+                if(end)
+                {
+                    // if(!cc.wwx.UserInfo.isShare){
+                    //     cc.wwx.TCPMSG.checkShareBurial(self._params.result["pointId"], cc.wxg.ShareClass.ShareInfo.whereToReward);
+                    //     cc.wwx.SystemInfo.shareDate = null;
+                    // }
+                }
+            },function () {
+
+                // cc.wxg.ShareClass.parseShareInfo(self._params.result);
+
+            })
+        }
+
     },
 
 });

@@ -86,6 +86,35 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+        jointFriendPkQueueRoom(roomID,hostId)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_ROOM,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_QUEUE_JOIN,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'hostId':hostId,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        shutGameOver(roomID,tableID)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_SHUT_GAME_OVER,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+                    'roomId':roomID,
+
+                }
+            };
+            this._sendCmd(params);
+        },
         shutBallOnWall(roomID,tableID,centerPos)
         {
             var params = {
@@ -102,7 +131,7 @@ cc.Class({
             };
             this._sendCmd(params);
         },
-        shutBall(roomID,tableID,linearVelocity)
+        shutBall(roomID,tableID,linearVelocity,index)
         {
             var params = {
                 'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
@@ -113,6 +142,7 @@ cc.Class({
                     'seatId':cc.wwx.UserInfo.seatId,
                     'tableId':tableID,
                     'linearVelocity':linearVelocity,
+                    'ballIndex':index,
 
                 }
             };
@@ -154,9 +184,39 @@ cc.Class({
         gameLevelTable(roomID,tableID)
         {
             var params = {
-                'cmd': cc.wwx.EventType.CMD_TABLE,
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
                 'params': {
                     'action': cc.wwx.EventType.CMD_TABLE_LEAVE,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        gamePlayerExit(roomID,tableID)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_ROOM,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PLAYER_LEAVE,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        gamePlayerReady(roomID,tableID)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PLAYER_READY,
                     'gameId': cc.wwx.SystemInfo.gameId,
                     'roomId':roomID,
                     'seatId':cc.wwx.UserInfo.seatId,
@@ -179,6 +239,7 @@ cc.Class({
             };
             this._sendCmd(params);
         },
+
         getPkQueueRoom()
         {
             var params = {

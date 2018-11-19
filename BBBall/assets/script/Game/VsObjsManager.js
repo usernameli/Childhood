@@ -47,6 +47,12 @@ cc.Class({
             displayName: "消除行或者列"
 
         },
+        roundTins:{
+            default:null,
+            type:cc.Prefab
+        },
+        selfObjNode:cc.Node,
+        otherObjNode:cc.Node,
         _space: 4,//方块与方块边界
         _emptyGrid: [],
         _boundary: 12,//方块与边界的距离
@@ -63,17 +69,53 @@ cc.Class({
         this._showSelfRowNum = 1;
         this._showOtherRowNum = 1;
 
-        if(cc.wwx.VS.FirstHand === cc.wwx.UserInfo.userId)
+
+        this._createSelfOneRowObjs(cc.wwx.VS.OtherUserID);
+        this._createSelfOneRowObjs(cc.wwx.UserInfo.userId);
+        this._showSelfRowNum += 1;
+
+        cc.wwx.TCPMSG.shutGameOver(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID);
+        // this._createSelfOneRowObjs();
+
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE,this._tableCallCallBack,this);
+
+
+
+    },
+    onDestroy()
+    {
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE,this._tableCallCallBack,this);
+
+    },
+    _tableCallCallBack(argument)
+    {
+        if(argument["action"] === cc.wwx.EventType.MSG_PK_NEW_BLOCK)
         {
-            this._createSelfOneRowObjs();
-        }
-        else
-        {
-            this._createOtherOneRowObjs1();
+            //弹球结束
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_MOVE_DROP,{space:4});
+
+            cc.wwx.VS.RoundUserID = argument["nextUserId"];
+            cc.wwx.VS.NewBlocks = argument["nextBlock"];
+            let roundTips = cc.instantiate(this.roundTins);
+            roundTips.parent = cc.director.getScene();
+            let roundTipsComponent = roundTips.getComponent("RoundTints");
+            roundTipsComponent.setShowNode(cc.wwx.VS.RoundUserID === cc.wwx.UserInfo.userId);
+
+            if(cc.wwx.VS.RoundUserID !== cc.wwx.UserInfo.userId)
+            {
+                this._createSelfOneRowObjs(cc.wwx.UserInfo.userId);
+
+            }
+            else
+            {
+                this._createSelfOneRowObjs(cc.wwx.VS.OtherUserID);
+
+            }
+
+            this._showSelfRowNum += 1;
+
 
         }
-
-
     },
     _createOtherOneRowObjs1()
     {
@@ -88,7 +130,7 @@ cc.Class({
         this._showOtherRowNum += 1;
 
     },
-    _createSelfOneRowObjs()
+    _createSelfOneRowObjs(userID)
     {
 
         cc.wwx.OutPut.log("this._showSelfRowNum : ",this._showSelfRowNum);
@@ -96,10 +138,9 @@ cc.Class({
         {
             let posY =  -1 * ((1 - 0 - 1) * (this._objHeight + this._space) + this._objHeight / 2);
             let posX =  this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space);
-            this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showSelfRowNum, k, 1, 0,posX,posY,cc.wwx.UserInfo.userId);
+            this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showSelfRowNum, k, 1, 0,posX,posY,userID);
 
         }
-        this._showSelfRowNum += 1;
 
     },
     _createObjBlock:function(dataValueObj,dataValueLabel,column,showRowNum,haveShowRow,posX,posY,belongUserID)
@@ -177,10 +218,15 @@ cc.Class({
         {
 
             let objPrefab = cc.instantiate(objsPrefab);
-            this.node.addChild(objPrefab);
             if(belongUserID !== cc.wwx.UserInfo.userId)
             {
-                objPrefab.scale = -1;
+                this.otherObjNode.addChild(objPrefab);
+
+            }
+            else
+            {
+                this.selfObjNode.addChild(objPrefab);
+
             }
 
             let ObjBlockSquare = objPrefab.getComponent(objsComponent);

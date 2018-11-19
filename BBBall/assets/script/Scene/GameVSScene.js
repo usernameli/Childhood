@@ -9,14 +9,6 @@ cc.Class({
             default:null,
             type:cc.Node,
         },
-        mySelfTipNode:{
-            default:null,
-            type:cc.Node
-        },
-        opponentTipNode:{
-            default:null,
-            type:cc.Node
-        },
         mySelfOperationAnimteNode:{
             default:null,
             type:cc.Node
@@ -57,15 +49,27 @@ cc.Class({
             default:null,
             type:cc.Node
         },
-        centerGameNode:{
+        tableTypeList:{
+            default:[],
+            type:cc.SpriteFrame
+        },
+        tablePlayMode:{
             default:null,
-            type:cc.Node
+            type:cc.Sprite
         }
 
     },
     onLoad()
     {
         cc.wwx.Util.adaptIpad();
+
+        let physicsManager = cc.director.getPhysicsManager();
+        physicsManager.enabled = true;
+        // physicsManager.debugDrawFlags =
+        //     cc.PhysicsManager.DrawBits.e_jointBit |
+        //     cc.PhysicsManager.DrawBits.e_shapeBit
+        // ;
+
         let userInfo = cc.wwx.VS.TableInfo["result"]["userInfo"];
 
         for(let i = 0; i < userInfo.length;i++)
@@ -88,18 +92,21 @@ cc.Class({
         }
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE,this._tableCallBack,this);
-        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE_CALL,this._tableCallCallBack,this);
 
     },
     onDestroy()
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE,this._tableCallBack,this);
-        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE_CALL,this._tableCallCallBack,this);
 
     },
-    _tableCallCallBack(params)
+    _tableCallBack(params)
     {
-        if(params["action"] === "gameOver")
+        if(params["action"] === "leave")
+        {
+
+
+        }
+        else if(params["action"] === "gameOver")
         {
             let winLoseInfo = params["winLoseInfo"];
 
@@ -117,17 +124,12 @@ cc.Class({
 
         }
     },
-    _tableCallBack(params)
-    {
-        if(params["action"] === "leave")
-        {
-
-
-        }
-    },
     goBackCallBack()
     {
-        cc.wwx.TCPMSG.gameLevelTable(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID);
+        // cc.wwx.TCPMSG.levelPkQueueRoom(cc.wwx.VS.RoomID);
+        cc.wwx.TCPMSG.shutGameOver(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID);
+
+        // cc.wwx.TCPMSG.gameLevelTable(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID);
     },
 
 });

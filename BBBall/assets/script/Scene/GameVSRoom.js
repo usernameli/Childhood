@@ -1,3 +1,4 @@
+
 cc.Class({
     extends:cc.Component,
     properties:{
@@ -19,12 +20,15 @@ cc.Class({
         cc.wwx.Util.adaptIpad();
         cc.wwx.Util.adaptIphoneX(this.topNode);
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
+
         for(let i = 0; i < 4;i++)
         {
             this.roomNeedDiamondsNum[i].string = cc.wwx.VS.RoomList[i]["consumeItemCount"];
         }
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_PK_QUEUE_ENTER,this.pkQueueEnter,this);
     },
+
+
     onDestroy()
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_PK_QUEUE_ENTER,this.pkQueueEnter,this);
@@ -32,6 +36,7 @@ cc.Class({
     },
     pkQueueEnter()
     {
+        cc.wwx.VS.JoinFriendRoom = false;
         cc.wwx.SceneManager.switchScene("GameVSReady");
     },
     goBackHallCallBack()

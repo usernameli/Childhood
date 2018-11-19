@@ -828,6 +828,14 @@ cc.Class({
             }
 
         },
+        rayCast2: function (ctx,node,p1, p2) {
+
+
+            this.drawLine(ctx,p1,p2,false);
+
+        },
+
+
         rayCast: function (ctx,node,p1, p2) {
             let manager = cc.director.getPhysicsManager();
             let result = manager.rayCast(p1, p2)[0];
@@ -893,7 +901,7 @@ cc.Class({
 
             if(fg === false)
             {
-                lineLength= 300
+                lineLength= 600
             }
 
             //设置虚线中每条线段的长度

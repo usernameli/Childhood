@@ -54,7 +54,7 @@ cc.Class({
         {
             if(params["cmd"] === "table_call")
             {
-                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TABLE_CALL,params["result"]);
+                // cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TABLE_CALL,params["result"]);
             }
         },
         _onGameTableInfo(params)
@@ -62,13 +62,22 @@ cc.Class({
             if(params['result']["action"] === "info")
             {
                 cc.wwx.VS.parseTableInfo(params);
-                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TABLE_INFO);
-            }
-            else if(params['result']["action"] === "leave")
-            {
-                cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TABLE);
 
+                if(cc.wwx.VS.JoinFriendRoom)
+                {
+                    cc.wwx.SceneManager.switchScene("GameVSReady");
+                }
+                else
+                {
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TABLE_INFO);
+
+                }
+                return;
             }
+
+
+            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_TABLE,params["result"]);
+
         },
         _onGameRoomInfo(params)
         {
@@ -99,14 +108,13 @@ cc.Class({
                     {
                         let argument = {
                             "result":{
-                                "action:":cc.wwx.BurialShareType.DailyInviteFriend,
+                                "action:":cc.wwx.BurialShareType.DailyInviteRoomJoin,
                                 "conf":result["inviteConf"]
                             }
                         };
 
-
                         argument["result"]["conf"]["roomId"] = result["roomId"];
-                        argument["result"]["conf"]["tableId"] = result["tableId"];
+                        argument["result"]["conf"]["hostId"] = cc.wwx.UserInfo.userId;
                         cc.wwx.Share.parse(argument);
 
                     }
@@ -115,6 +123,18 @@ cc.Class({
                 {
                     cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_PK_QUEUE_RANDOM_MATCH,result)
 
+                }
+                else if(result["action"] === cc.wwx.EventType.MSG_PK_QUEUE_JOIN)
+                {
+                    if(result["success"] === 1)
+                    {
+                        cc.wwx.VS.JoinFriendRoom = true;
+                    }
+                    else
+                    {
+                        cc.wwx.VS.JoinFriendRoom = false;
+
+                    }
                 }
             }
         },
@@ -365,19 +385,24 @@ cc.Class({
             cc.wwx.Share.getShareRewards();
 
             // cc.wwx.TCPMSG.bindInviteCode(20004);
+            // cc.wwx.TCPMSG.jointFriendPkQueueRoom(101601,20013);
 
             // ty.UserInfo.query = {'burialId':'treasureChestHelp','inviteCode':10802};
-            if (cc.wwx.UserInfo.query){
+            if (cc.wwx.UserInfo.query)
+            {
                 // 给邀请我的人宝箱加速
 
-                    // 给邀请我的人发奖
-                    if(cc.wwx.UserInfo.query.inviteCode) {
-                        cc.wwx.TCPMSG.bindInviteCode(cc.wwx.UserInfo.query.inviteCode);
-                        if(cc.wwx.UserInfo.query.tableID)
-                        {
-                            //进入房间
-                        }
-                    }
+                // 给邀请我的人发奖
+                if(cc.wwx.UserInfo.query.inviteCode)
+                {
+                    cc.wwx.TCPMSG.bindInviteCode(cc.wwx.UserInfo.query.inviteCode);
+                }
+
+                if(cc.wwx.UserInfo.query.hostId)
+                {
+                    //进入房间
+                    cc.wwx.TCPMSG.jointFriendPkQueueRoom(cc.wwx.UserInfo.query.roomID,cc.wwx.UserInfo.query.hostId);
+                }
 
                 cc.wwx.UserInfo.query = {}
 

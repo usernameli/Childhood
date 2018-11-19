@@ -38,6 +38,13 @@ cc.Class({
     setBelongTo(userID)
     {
         this._belongUserID = userID;
+
+        if(this._belongUserID === cc.wwx.VS.OtherUserID)
+        {
+            this.body.active = false;
+            // this.body.sensor = true;
+            // this.body.enabledContactListener = false;
+        }
     },
     getBelongTo()
     {
@@ -67,8 +74,15 @@ cc.Class({
 
         if(cc.wwx.UserInfo.playMode === "GameVS")
         {
-            if(this._belongUserID !== cc.wwx.VS.RoundUserID)
+            if(this._belongUserID !== argument["ballUserId"])
             {
+                return;
+            }
+
+            if(this._belongUserID === cc.wwx.VS.OtherUserID)
+            {
+
+                this.node.position = cc.v2(argument["linearVelocity"]);
                 return;
             }
         }
@@ -100,7 +114,25 @@ cc.Class({
                 cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_SPORTS);
                 self.dottedLineManager.isFirstBallCome = false;
                 self.dottedLineManager.ballOnWallNum = 0;
-                self.dottedLineManager.ballNumText.active = false;
+
+                if(cc.wwx.UserInfo.playMode === "GameVS")
+                {
+                    if(self._belongUserID === cc.wwx.UserInfo.userId)
+                    {
+                        self.dottedLineManager.ballNumText.active = false;
+
+                    }
+                    else
+                    {
+                        self.dottedLineManager.ballNumTextOther.active = false;
+
+                    }
+                }
+                else
+                {
+                    self.dottedLineManager.ballNumText.active = false;
+
+                }
 
             }
 
@@ -159,12 +191,24 @@ cc.Class({
             return;
         }
 
+        let tag = other.tag;
+        let caseNum = 2;
+        if(cc.wwx.UserInfo.playMode === "GameVS")
+        {
+            if(this._belongUserID === cc.wwx.UserInfo.userId)
+            {
+                caseNum = 2;
+            }
+            else
+            {
+                caseNum = 1;
+
+            }
+        }
+
         switch (other.tag) {
-            case 1://上面
-                break;
-            case 2://地面
 
-
+            case caseNum://地面
                 if(this._isOnWall)
                 {
                     return;
@@ -175,58 +219,21 @@ cc.Class({
 
                 if(this.dottedLineManager.isFirstBallCome === false)
                 {
-                    if(cc.wwx.UserInfo.playMode === "GameVS")
-                    {
-                        if(this._belongUserID === cc.wwx.UserInfo.userId)
-                        {
-                            let posX = this.dottedLineManager.center.x;
-                            if(artificial)
-                            {
-                                posX = this.dottedLineManager.center.x;
-                            }
-                            else
-                            {
-                                var worldManifold = contact.getWorldManifold();
-                                var points = worldManifold.points;
-                                posX =  Math.ceil(points[0].x);
-                            }
-                            this.dottedLineManager.isFirstBallCome = true;
-                            this.dottedLineManager.center = cc.v2(posX,cc.wwx.UserInfo.ballInfo.ballPosY);
-                        }
-                        else
-                        {
-                            let posX = this.dottedLineManager.centerOther.x;
-                            if(artificial)
-                            {
-                                posX = this.dottedLineManager.centerOther.x;
-                            }
-                            else
-                            {
-                                var worldManifold = contact.getWorldManifold();
-                                var points = worldManifold.points;
-                                posX =  Math.ceil(points[0].x);
-                            }
-                            this.dottedLineManager.isFirstBallCome = true;
-                            this.dottedLineManager.centerOther = cc.v2(posX,cc.wwx.UserInfo.otherBallInfo.ballPosY);
-                        }
 
+                    let posX = this.dottedLineManager.center.x;
+                    if(artificial)
+                    {
+                        posX = this.dottedLineManager.center.x;
                     }
                     else
                     {
-                        let posX = this.dottedLineManager.center.x;
-                        if(artificial)
-                        {
-                            posX = this.dottedLineManager.center.x;
-                        }
-                        else
-                        {
-                            var worldManifold = contact.getWorldManifold();
-                            var points = worldManifold.points;
-                            posX =  Math.ceil(points[0].x);
-                        }
-                        this.dottedLineManager.isFirstBallCome = true;
-                        this.dottedLineManager.center = cc.v2(posX,cc.wwx.UserInfo.ballInfo.ballPosY);
+                        var worldManifold = contact.getWorldManifold();
+                        var points = worldManifold.points;
+                        posX =  Math.ceil(points[0].x);
                     }
+                    this.dottedLineManager.isFirstBallCome = true;
+                    this.dottedLineManager.center = cc.v2(posX,cc.wwx.UserInfo.ballInfo.ballPosY);
+
 
 
                 }
@@ -248,28 +255,16 @@ cc.Class({
 
                     if(cc.wwx.UserInfo.playMode === "GameVS")
                     {
-                        if(self._belongUserID === cc.wwx.UserInfo.userId)
-                        {
-                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:self.dottedLineManager.center});
-                            cc.wwx.TCPMSG.shutBallOnWall(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center);
-
-                        }
-                        else
-                        {
-                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:self.dottedLineManager.centerOther});
-
-                        }
-                    }
-                    else
-                    {
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:self.dottedLineManager.center});
+                        cc.wwx.TCPMSG.shutBallOnWall(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.center);
 
                     }
 
-
+                    cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,{center:self.dottedLineManager.center});
+                    this.dottedLineManager.setBallNumTextPosition(this.dottedLineManager.ballOnWallNum);
 
                 }
-                this.dottedLineManager.setBallNumTextPosition(this.dottedLineManager.ballOnWallNum);
+                break;
+            case 1://上面
                 break;
             case 3://左面
                 break;
@@ -279,13 +274,6 @@ cc.Class({
     },
     update(dt)
     {
-
-        if(this._isOnWall)
-        {
-
-            this.body.active = false;
-
-        }
 
         if(this._isSports)
         {
@@ -297,18 +285,32 @@ cc.Class({
                 nowLinearLength.mulSelf(this._speed);
                 this.body.linearVelocity = nowLinearLength;
             }
+
+            cc.wwx.TCPMSG.shutBall(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.node.position,this._index);
+
         }
 
 
         if(this._isOnWall)
         {
+            this.body.active = false;
             this.body.enabledContactListener = false;
-
             if(this._recoverFg === false)
             {
-                this.node.y = cc.wwx.UserInfo.ballInfo.ballPosY;
-                var moveTo = cc.moveTo(0.4, this.dottedLineManager.center);
-                this.node.runAction(moveTo);
+                if(this._belongUserID === cc.wwx.UserInfo.userId)
+                {
+                    this.node.y = cc.wwx.UserInfo.ballInfo.ballPosY;
+                    var moveTo = cc.moveTo(0.4, this.dottedLineManager.center);
+                    this.node.runAction(moveTo);
+                }
+                else
+                {
+                    this.node.y = cc.wwx.UserInfo.otherBallInfo.ballPosY;
+                    var moveTo = cc.moveTo(0.4, this.dottedLineManager.centerOther);
+                    this.node.runAction(moveTo);
+                }
+                cc.wwx.TCPMSG.shutBall(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this.node.position,this._index);
+
                 this._recoverFg = true;
                 this._isSports = false;
                 this._isOnWall = false;

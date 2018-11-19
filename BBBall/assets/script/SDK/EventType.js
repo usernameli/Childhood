@@ -11,6 +11,12 @@ cc.Class({
         CMD_TABLE_LEAVE:'leave',
         MSG_TABLE_LEAVE:'leave',
 
+        CMD_PLAYER_LEAVE:'pk_table_leave',
+        MSG_PLAYER_LEAVE:'pk_table_leave',
+
+        CMD_PLAYER_READY:'ready',
+        MSG_PLAYER_READY:'ready',
+
         CMD_BIND_USER: 'bind_user',
         CMD_BIND_GAME: 'bind_game',
         CMD_USER_INFO: 'user_info',
@@ -56,6 +62,8 @@ cc.Class({
         CMD_PK_QUEUE_INVITE: 'pk_queue_invite',
         MSG_PK_QUEUE_INVITE: 'pk_queue_invite',
 
+        CMD_PK_QUEUE_JOIN:   'pk_queue_join',
+        MSG_PK_QUEUE_JOIN:   'pk_queue_join',
 
         CMD_PK_QUEUE_RANDOM_MATCH: 'pk_queue_random_match',
         MSG_PK_QUEUE_RANDOM_MATCH: 'pk_queue_random_match',
@@ -71,6 +79,12 @@ cc.Class({
 
         CMD_PK_SHUT_BALL_COMEWALL: 'pk_shut_ball_comeOnwall',
         MSG_PK_SHUT_BALL_COMEWALL: 'pk_shut_ball_comeOnwall',
+
+        CMD_PK_SHUT_GAME_OVER: 'pk_shut_game_over',
+        MSG_PK_SHUT_GAME_OVER: 'pk_shut_game_over',
+
+        CMD_PK_NEW_BLOCK: 'new_block',
+        MSG_PK_NEW_BLOCK: 'new_block',
 
         MSG_DAILY_CHECKIN_STATUS : 'ball_daily_checkin_status',//签到数据返回
         MSG_BALL_DAILY_CHECKIN : 'ball_daily_checkin', //签到返回
@@ -187,6 +201,9 @@ cc.Class({
         ACTION_WARNING_NEED:'ball_warning_need', //需要显示警告
         ACTION_WARNING_NO_NEED:'ball_warning_no_need', //不需要显示警告
 
+
+
+        ACTION_LINE_TEST:'line_test',
 
 
     }

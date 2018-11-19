@@ -26,6 +26,7 @@ window.initMgr = function() {
         Default : "default",        //默认分享类型,分享到群
         Invite : "invite",          // 邀请好友
 
+        DailyInviteRoomJoin:'invite_join_room', //邀请好友加入
         DailyInviteFriend : 'invite_friend', // 日常邀请好友
         DailyInviteGroup : 'invate_group', // 日常分享群
         DailyInviteGroupAlive: 'invate_alive', //日常分享群复活
@@ -240,8 +241,6 @@ window.initMgr = function() {
     cc.wwx.Invite = require('../Model/Invite');
     cc.wwx.ClientConf = require("../Model/ClientConf");
 
-    cc.wwx.BannerAD = require("../Ads/Banner_ad");
-    cc.wwx.BannerAD.init();
 
     cc.wwx.VideoAD = require("../Ads/Video_ad");
     cc.wwx.VideoAD.init();
