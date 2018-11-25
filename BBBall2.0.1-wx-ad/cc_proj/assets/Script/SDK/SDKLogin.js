@@ -310,7 +310,7 @@ cc.Class({
                 },
 
                 fail: function (params) {
-                    cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeLoginSDKFailed, [code, local_uuid, userInfo.nickName]);
+                    // cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeLoginSDKFailed, [code, local_uuid, userInfo.nickName]);
                     cc.wwx.OutPut.log(null, 'ball login fail, params:' + JSON.stringify(params));
                     cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.SDK_LOGIN_FAIL);
                 },

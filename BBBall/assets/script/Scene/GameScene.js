@@ -78,88 +78,15 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_GAME_RESTART,this.gameRestart,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_CONSUME_ITEM,this.consumeItemCallBack,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_BAG,this.gameBagData,this);
-        this.onResizeBind = this.onResizeBind || this.onResize.bind(this);
-        this.onLoadBind = this.onLoadBind || this.onBannerLoad.bind(this);
-        this.onErrorBind = this.onErrorBind || this.onError.bind(this);
 
-        // this.creatorAd();
+
 
     },
-    creatorAd()
-    {
-        if(CC_WECHATGAME && wx.createBannerAd && wx.getSystemInfoSync)
-        {
 
-            if(this.bannerAd){
-                console.log('old bannerAD destroies!');
-                this.bannerAd.offResize(this.onResizeBind);
-                this.bannerAd.offLoad(this.onLoadBind);
-                this.bannerAd.offError(this.onErrorBind);
-                this.bannerAd.destroy();
-                this.bannerAd = null;
-            }
-
-            this.bannerAd = wx.createBannerAd({
-                adUnitId: "adunit-fec03eabd3aea554",
-                style: {
-                    left:0,
-                    top:0,
-                    width: 280,
-                }
-            });
-
-            this.bannerAd.onResize(this.onResizeBind);
-            this.bannerAd.onLoad(this.onLoadBind);
-            this.bannerAd.onError(this.onErrorBind);
-        }
-    },
-    onResize: function(res) {
-        console.log('图片宽高为：', res.width, res.height);
-        if(this.bannerAd) {
-            console.log('屏幕高度是！！！', cc.wwx.SystemInfo.screenHeight);
-            this.bannerAd.style.left = (cc.wwx.SystemInfo.screenWidth - res.width) / 2 + 0.1;
-            if (res.height > 100)
-            {
-                this.bannerAd.offResize(this.onResizeBind);
-                this.bannerAd.offLoad(this.onLoadBind);
-                this.bannerAd.offError(this.onErrorBind);
-                this.bannerAd.destroy();
-                this.bannerAd = null;
-            }
-            else {
-                if(cc.wwx.SystemInfo.SYS.phoneType == 1)
-                {
-                    this.bannerAd.style.top = 50;
-
-                }
-            }
-
-        }
-    },
-    onShow(){
-        if(this.bannerAd){
-            this.showOnResult();
-        }
-    },
-    showOnResult(){
-        console.log('bannerAd showOnResult');
-        this.bannerAd.show().then(() => {
-            console.log('bannerAd show1 success');
-            cc.wwx.BiLog.clickStat(cc.wwx.clickStatEventType.clickStatEventTypeBannerAD, ['show']);
-        }).catch(err => console.log(err));
-    },
-    onBannerLoad(){
-        console.log('bannerAd onLoad');
-        this.onShow();
-    },
-    onError(err){
-        console.log('bannerAd onError');
-    },
     gameRestart()
     {
 
         this.init();
-        // this.creatorAd();
     },
     init()
     {
@@ -335,11 +262,15 @@ cc.Class({
         this.recoveryBTN.active = true;
         this._ballSporting = true;
     },
-    ballStopAction()
+    ballStopAction(argument)
     {
-        this.itemNode.active = true;
-        this.recoveryBTN.active = false;
-        this._ballSporting = false;
+        if(argument["belongID"] === cc.wwx.UserInfo.userId)
+        {
+            this.itemNode.active = true;
+            this.recoveryBTN.active = false;
+            this._ballSporting = false;
+
+        }
 
 
     },

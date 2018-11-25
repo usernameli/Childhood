@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.22421875,
-      "y": 0.22421875,
+      "x": 0.43617495298019654,
+      "y": 0.43617495298019654,
       "z": 1
     },
     "_quat": {
@@ -3405,10 +3405,10 @@
     "_enabled": true,
     "alignMode": 0,
     "_target": null,
-    "_alignFlags": 34,
+    "_alignFlags": 33,
     "_left": 0,
     "_right": 20,
-    "_top": 0,
+    "_top": 144,
     "_bottom": 0,
     "_verticalCenter": 450,
     "_horizontalCenter": 0,
@@ -4141,9 +4141,6 @@
     },
     "soundOffSpriteFrame": {
       "__uuid__": "ea13542a-afc0-490a-a7d8-799dfc617a94"
-    },
-    "audioBg": {
-      "__uuid__": "37d160c3-fb2a-47b8-bdd4-fdf18672662e"
     },
     "headBG": {
       "__id__": 11

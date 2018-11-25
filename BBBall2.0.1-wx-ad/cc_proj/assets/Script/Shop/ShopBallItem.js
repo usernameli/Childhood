@@ -125,7 +125,9 @@ cc.Class({
     },
     taiJiShareCallBack()
     {
-        if(CC_WECHATGAME && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
+        let dayShareGroupRewardCount = cc.wwx.UserInfo.gdata["dayShareLeftCount"];
+
+        if(CC_WECHATGAME && dayShareGroupRewardCount === 0 && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
         {
             cc.wwx.VideoAD.showVideoAd(function (end) {
 

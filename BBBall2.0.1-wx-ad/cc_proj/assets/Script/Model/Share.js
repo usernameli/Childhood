@@ -159,8 +159,9 @@ cc.Class({
 
         getShareRewards: function () {
             var rewardGetList = this.rewardGetList;
-            if (!rewardGetList || rewardGetList.length == 0) return;
+            if (!rewardGetList || rewardGetList.length === 0) return;
             this.rewardGetList = [];
+            this.shareData = null;
             //连发消息会不会有问题?通常来说rewardGetList只会有一个数据
             for (var i = 0; i < rewardGetList.length; i++) {
                 var bid = rewardGetList[i]['burialId'];
@@ -174,7 +175,7 @@ cc.Class({
                     cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_WX_SHARE_SUCCESS, {
                         burialId: bid,
                         shareTicket: res,
-                        isShareGroupId:true,
+                        isShareGroupId:false,
                         pointId: pid
                     });
 

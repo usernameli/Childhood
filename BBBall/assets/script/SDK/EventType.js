@@ -56,6 +56,9 @@ cc.Class({
         CMD_PK_QUEUE_ENTER: 'pk_queue_enter',
         MSG_PK_QUEUE_ENTER: 'pk_queue_enter',
 
+        CMD_PK_QUICK_START: 'quick_start',
+        MSG_PK_QUICK_START: 'quick_start',
+
         CMD_PK_QUEUE_LEAVE: 'pk_queue_leave',
         MSG_PK_QUEUE_LEAVE: 'pk_queue_leave',
 
@@ -77,8 +80,17 @@ cc.Class({
         CMD_PK_SHUT_BALL:  'pk_shut_ball',
         MSG_PK_SHUT_BALL:  'pk_shut_ball',
 
+        CMD_PK_SQUARE_NUM:  'pk_square_num',
+        MSG_PK_SQUARE_NUM:  'pk_square_num',
+
+        CMD_PK_PLUS_SYNC:  'pk_plus_sync',
+        MSG_PK_PLUS_SYNC:  'pk_plus_sync',
+
         CMD_PK_SHUT_BALL_COMEWALL: 'pk_shut_ball_comeOnwall',
         MSG_PK_SHUT_BALL_COMEWALL: 'pk_shut_ball_comeOnwall',
+
+        CMD_PK_SYNC_TABLE_CARD_STATUS: 'pk_sync_table_card_status',
+        MSG_PK_SYNC_TABLE_CARD_STATUS: 'pk_sync_table_card_status',
 
         CMD_PK_SHUT_GAME_OVER: 'pk_shut_game_over',
         MSG_PK_SHUT_GAME_OVER: 'pk_shut_game_over',

@@ -28,6 +28,7 @@ cc.Class({
         this._tag ="ObjBlockPlus";
         this._isOnWall = false;
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE,this._tableCallBack,this);
 
 
     },
@@ -35,18 +36,31 @@ cc.Class({
     {
         this._super();
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.ACTION_BALL_STOP_LINEARVELOCITY,this.ballStopAction,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE,this._tableCallBack,this);
 
+    },
+    _tableCallBack(argument)
+    {
+        if(argument["action"] === cc.wwx.EventType.MSG_PK_PLUS_SYNC)
+        {
+            if(argument["number"] === this._number && argument["actionUserId"] === this._belongUserID)
+            {
+                this.body.linearVelocity = cc.v2(0,2000);
+
+            }
+        }
     },
     ballStopAction(argument)
     {
-        if(this._isOnWall)
+        if(this._isOnWall && argument["belongID"] === this._belongUserID)
         {
             this._centerPos = argument["center"];
         }
 
     },
-    initLabelNum(plusNum)
+    initLabelNum(plusNum,number)
     {
+        this._number = number;
         if(plusNum === 1)
         {
             //加一个球
@@ -74,55 +88,23 @@ cc.Class({
     onBeginContact(contact, self, other)
     {
 
-        if(cc.wwx.UserInfo.playMode === "GameVS")
+
+        if(other.tag === 2)
         {
-            if(other.tag === 2  || other.tag === 1)
-            {
-                this._isOnWall = true;
-                // this.body.active = false;
-                this.body.linearVelocity = cc.v2(0,0);
+            this._isOnWall = true;
+            // this.body.active = false;
+            this.body.linearVelocity = cc.v2(0,0);
 
 
-            }
-            else if(other.tag === 0)
-            {
-                //碰的小球
-                let componentBall = other.node.getComponent("Ball");
-                let ballUserId = componentBall.getBelongTo();
-                if(ballUserId === cc.wwx.UserInfo.userId)
-                {
-                    this.body.linearVelocity = cc.v2(0,-2000);
-
-                }
-                else
-                {
-                    this.body.linearVelocity = cc.v2(0,2000);
-
-                }
-                // this.body.gravityScale = 100.0;
-
-
-            }
         }
-        else
+        else if(other.tag === 0)
         {
-            if(other.tag === 2)
-            {
-                this._isOnWall = true;
-                // this.body.active = false;
-                this.body.linearVelocity = cc.v2(0,0);
+            //碰的小球
+            this.body.linearVelocity = cc.v2(0,-2000);
+            cc.wwx.TCPMSG.syncPlus(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,this._number);
 
-
-            }
-            else if(other.tag === 0)
-            {
-                //碰的小球
-                // this.body.gravityScale = 100.0;
-                this.body.linearVelocity = cc.v2(0,-2000);
-
-
-            }
         }
+
 
     },
     update()

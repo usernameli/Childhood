@@ -26,7 +26,7 @@ cc.Class({
         }
 
         let haveNum = 3 - dayShareGroupRewardCount;
-        this.invateTipLabel.string = "每天分享不同的群("  + haveNum.toString() +  "/3)，奖励       20宝石"
+        this.invateTipLabel.string = "每天获取免费领取宝石("  + haveNum.toString() +  "/3)";
 
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_USER_INFO, this.gameUserInfo, this);
@@ -46,7 +46,8 @@ cc.Class({
         }
 
         let haveNum = 3 - dayShareGroupRewardCount;
-        this.invateTipLabel.string = "每天分享不同的群("  + haveNum.toString() +  "/3)，奖励       20宝石"
+        // this.invateTipLabel.string = "每天分享不同的群("  + haveNum.toString() +  "/3)，奖励       20宝石"
+        this.invateTipLabel.string = "每天获取免费领取宝石("  + haveNum.toString() +  "/3)";
 
     },
     onDestroy()
@@ -73,7 +74,10 @@ cc.Class({
     {
         cc.wwx.AudioManager.playAudioButton();
         // cc.wwx.TCPMSG.getShare3BurialInfo(cc.wwx.BurialShareType.DailyInviteGroup);
-        if(CC_WECHATGAME && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
+        // return;
+
+        let dayShareGroupRewardCount = cc.wwx.UserInfo.gdata["dayShareLeftCount"];
+        if(CC_WECHATGAME && dayShareGroupRewardCount === 0 && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
         {
             cc.wwx.VideoAD.showVideoAd(function (end) {
 

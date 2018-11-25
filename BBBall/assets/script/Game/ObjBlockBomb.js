@@ -29,7 +29,8 @@ cc.Class({
 
 
     },
-    initLabelNum:function (num) {
+    initLabelNum:function (num,number) {
+        this._number = number;
 
         this._labelNum = parseInt(num);
         this.labelText.string = this._labelNum.toString();

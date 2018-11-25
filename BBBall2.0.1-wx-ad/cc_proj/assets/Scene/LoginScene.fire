@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.22421875,
-      "y": 0.22421875,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_quat": {
@@ -1005,9 +1005,7 @@
       "__id__": 23
     },
     "_enabled": true,
-    "audioGameBgm0": {
-      "__uuid__": "37d160c3-fb2a-47b8-bdd4-fdf18672662e"
-    },
+    "audioGameBgm0": null,
     "audioButtonClick": {
       "__uuid__": "1dd75ba5-d1e5-4306-9524-053faabe62f2"
     },

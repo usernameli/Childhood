@@ -77,6 +77,14 @@ cc.Class({
             default:null,
             type:cc.Label
         },
+        gameTip:{
+            default:null,
+            type:cc.Node
+        },
+        gameTipLabel:{
+            default:null,
+            type:cc.Label
+        },
         _gameStart:false,
         _clickGoBack:false,
     },
@@ -190,8 +198,44 @@ cc.Class({
             else
             {
                 //别人离桌
+                this.gameTip.active = true;
+                this.gameTipLabel.string = "我现在不能继续玩了";
+                let action = cc.blink(5, 3);
+                this.gameTip.runAction(action);
+                let self = this;
+                this.scheduleOnce(function () {
+                    self.gameReStart.active = false;
+                    self.invateBtn.active = true;
+                    self.matchBtn.active = true ;
+                    self.vsNode.active = false;
+                    self.otherInfoNode.active = false;
+                    self.sumDiamondNode.active = false;
+                    cc.wwx.Timer.setTimer(self,self.showBtnCallBack,0.5,0,0);
+                },5)
+
 
             }
+        }
+        else if(params["action"] === "ready")
+        {
+            for(let i = 0; i < params["readyUserIds"].length;i++)
+            {
+                if(params["readyUserIds"][i] === cc.wwx.VS.OtherUserID)
+                {
+                    this.gameTip.active = true;
+                    this.gameTipLabel.string = "亲!再玩一局,如何";
+                    let action = cc.blink(10, 5);
+                    this.gameTip.runAction(action);
+                }
+                else
+                {
+                    this.invateBtn.active = false;
+                    this.matchBtn.active = false;
+                    this.gameReStart.active = false;
+
+                }
+            }
+
         }
     },
     _tableInfoCallBack()

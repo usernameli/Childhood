@@ -63,28 +63,93 @@ cc.Class({
         _objHeight: 60,
         _currentRowI: -1,//当前显示第几行了
         _currentRowJ: -1,
+        _objBlockNumber:0,
     },
     onLoad()
     {
         this._showSelfRowNum = 1;
-        this._showOtherRowNum = 1;
+
+        this._objBlockNumber = this._showSelfRowNum * 100;
+        if(cc.wwx.VS.RoundUserID  === cc.wwx.VS.OtherUserID)
+        {
+            this._createSelfOneRowObjs(cc.wwx.VS.OtherUserID);
+            this._createSelfOneRowObjs(cc.wwx.UserInfo.userId);
+        }
+        else
+        {
+            this._createSelfOneRowObjs(cc.wwx.UserInfo.userId);
+            this._createSelfOneRowObjs(cc.wwx.VS.OtherUserID);
+        }
 
 
-        this._createSelfOneRowObjs(cc.wwx.VS.OtherUserID);
-        this._createSelfOneRowObjs(cc.wwx.UserInfo.userId);
         this._showSelfRowNum += 1;
+        this._objBlockNumber = this._showSelfRowNum * 100;
 
-        cc.wwx.TCPMSG.shutGameOver(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID);
+        //游戏结束协议
+        // cc.wwx.TCPMSG.shutGameOver(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID);
         // this._createSelfOneRowObjs();
 
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_TABLE,this._tableCallCallBack,this);
+        cc.wwx.NotificationCenter.listen(cc.wwx.EventType.MSG_PK_SYNC_TABLE_CARD_STATUS,this._syncTableCardStatus,this);
 
 
 
     },
+    _syncTableCardStatus()
+    {
+
+        let above = this.getObjBlockInfo(this.otherObjNode);
+        let below = this.getObjBlockInfo(this.selfObjNode);
+        cc.wwx.TCPMSG.syncCardTableStatus(cc.wwx.VS.GameRoomID,cc.wwx.VS.TableID,
+            {
+                otherUserID:cc.wwx.VS.OtherUserID,
+                otherSeatID:cc.wwx.VS.OtherSeatID,
+                aboveArea:above,
+                below:below
+            });
+
+    },
+    getObjBlockInfo(objNode)
+    {
+        let list = [];
+        for (var i = 0; i < objNode.childrenCount; ++i)
+        {
+            let node = objNode.children[i];
+            var name = node.name;
+            if (name === "Ball_Block_Square")
+            {
+                let scriptComponet = node.getComponent("ObjBlockSquare");
+                let squareNumber = scriptComponet.getNumber();
+                list.push({objBlock:"square",number:squareNumber,objPosition:node.position})
+            }
+            else if(name === "Ball_Block_Triangle_3" ||
+                name === "Ball_Block_Triangle_5" ||
+                name === "Ball_Block_Triangle_6" ||
+                name === "Ball_Block_Triangle_4") {
+                let scriptComponet = node.getComponent("ObjBlockTriangle");
+                let triangleNumber = scriptComponet.getNumber();
+
+                list.push({objBlock:"triangle",number:triangleNumber,objPosition:node.position})
+
+            }
+            else if( name === "Ball_Block_Plus")
+            {
+                let scriptComponet = node.getComponent("ObjBlockPlus");
+                let plusNumber = scriptComponet.getNumber();
+
+                list.push({objBlock:"plus",number:plusNumber,objPosition:node.position})
+            }
+
+        }
+
+        return list;
+
+    },
+
     onDestroy()
     {
         cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_TABLE,this._tableCallCallBack,this);
+        cc.wwx.NotificationCenter.ignore(cc.wwx.EventType.MSG_PK_SYNC_TABLE_CARD_STATUS,this._syncTableCardStatus,this);
 
     },
     _tableCallCallBack(argument)
@@ -113,23 +178,12 @@ cc.Class({
             }
 
             this._showSelfRowNum += 1;
+            this._objBlockNumber = this._showSelfRowNum * 100;
 
 
         }
     },
-    _createOtherOneRowObjs1()
-    {
 
-        cc.wwx.OutPut.log("this._showOtherRowNum : ",this._showOtherRowNum);
-        for (let k = 0; k < cc.wwx.VS.NewBlocks.length; k++)
-        {
-            let posY =  ((1 - 0 - 1) * (this._objHeight + this._space) + this._objHeight / 2);
-            let posX =  this.node.width - (this._boundary + this._objWidth / 2 + k * (this._objWidth + this._space));
-            this._createObjBlock(cc.wwx.VS.NewBlocks[k], this._showOtherRowNum, k, 1, 0,posX,posY,cc.wwx.VS.OtherUserID);
-        }
-        this._showOtherRowNum += 1;
-
-    },
     _createSelfOneRowObjs(userID)
     {
 
@@ -231,18 +285,19 @@ cc.Class({
 
             let ObjBlockSquare = objPrefab.getComponent(objsComponent);
             ObjBlockSquare.setBelong(belongUserID);
+            this._objBlockNumber += 1;
             if(objsComponent === "ObjBlockPlus")
             {
-                ObjBlockSquare.initLabelNum(parseInt(dataValueObj) - 20);
+                ObjBlockSquare.initLabelNum(parseInt(dataValueObj) - 20,this._objBlockNumber);
 
             }
             else if(objsComponent === "ObjBlockEliminate")
             {
-                ObjBlockSquare.initLabelNum(parseInt(dataValueObj));
+                ObjBlockSquare.initLabelNum(parseInt(dataValueObj),this._objBlockNumber);
             }
             else
             {
-                ObjBlockSquare.initLabelNum(dataValueLabel);
+                ObjBlockSquare.initLabelNum(dataValueLabel,this._objBlockNumber);
 
             }
             objPrefab.setPosition(cc.v2(parseInt(posX) , parseInt(posY)));

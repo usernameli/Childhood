@@ -15,11 +15,15 @@ cc.Class({
         },
         _pk_update_coordinate:false,
         _touchPos:cc.v2(0,0),
+        isFirstBallCome:false,//第一个球回到地面
+        ballOnWallNum:0, //回到地面的球的数量
+
     },
     onLoad()
     {
         // this.ballMaxNum = cc.wwx.UserInfo.ballInfo.ballNum;
         this.ballMaxNum = 1;
+        this.isFirstBallCome = false;
         this._pk_update_coordinate = false;
         this._ctx = this.getComponent(cc.Graphics);
 
@@ -94,7 +98,7 @@ cc.Class({
     },
     setBallNumTextPosition(ballNum)
     {
-        this.ballNumText.postion = cc.v2(this.center.x ,this.center.y + 20);
+        this.ballNumText.position = cc.v2(this.center.x ,this.center.y + 20);
         cc.wwx.OutPut.log("setBallNumTextPosition: ",JSON.stringify(this.ballNumText.postion));
 
         this.ballNumText.active = true;

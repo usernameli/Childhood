@@ -27,7 +27,7 @@ origin_assets_to_build = [
     'resources/images/share'
 ]
 origin_assets_to_backup = [
-    'resources/sounds'
+    #'resources/sounds'
 ]
 
 cdn_url = "https://cdn.mstar.xianleqipai.com/ball"

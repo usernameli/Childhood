@@ -11,13 +11,19 @@ cc.Class({
         },
         _pk_update_coordinate:false,
         _touchPos:cc.v2(0,0),
+        isFirstBallCome:false,//第一个球回到地面
+        ballOnWallNum:0, //回到地面的球的数量
+
     },
     onLoad()
     {
         this._ctx = this.getComponent(cc.Graphics);
         this._ballList = [];
+        this.isFirstBallCome = false;
+
         // this.ballOtherMaxNum  = cc.wwx.UserInfo.otherBallInfo.ballNum;
         this.ballOtherMaxNum  = 1;
+        this.ballOnWallNum = 0;
         this._userOtherBallId =  cc.wwx.UserInfo.otherBallInfo.ballId;
         if(this._userOtherBallId <= 1021)
         {
@@ -68,12 +74,7 @@ cc.Class({
 
 
         }
-        else if(argument["action"] === cc.wwx.EventType.MSG_PK_SHUT_BALL)
-        {
-            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.ACTION_BALL_START_LINEARVELOCITY,{
-                linearVelocity: argument["linearVelocity"],ballUserId:argument['actionUserId']});
 
-        }
 
     },
 

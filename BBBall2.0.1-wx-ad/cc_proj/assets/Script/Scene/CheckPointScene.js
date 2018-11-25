@@ -68,7 +68,7 @@ cc.Class({
             console.log('屏幕高度是！！！', cc.wwx.SystemInfo.screenHeight);
             this.bannerAd.style.left = (cc.wwx.SystemInfo.screenWidth - res.width) / 2 + 0.1;
 
-            if(res.height > 100)
+            if(false && res.height > 100)
             {
                 if(this.bannerAd){
                     console.log('old bannerAD destroies!');

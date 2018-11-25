@@ -89,7 +89,9 @@ cc.Class({
     },
     shareWeixCallBack()
     {
-        if(CC_WECHATGAME && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
+        let dayShareGroupRewardCount = cc.wwx.UserInfo.gdata["dayShareLeftCount"];
+
+        if(CC_WECHATGAME && dayShareGroupRewardCount === 0 && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
         {
             let that = this;
             cc.wwx.VideoAD.showVideoAd(function (end) {

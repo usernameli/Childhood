@@ -2,10 +2,6 @@ cc.Class({
     extends: cc.Component,
     properties:{
         //背景音乐
-        audioGameBgm0:{
-            default:null,
-            type:cc.AudioClip
-        },
         // 按钮点击
         audioButtonClick:{
             default:null,
@@ -141,20 +137,20 @@ cc.Class({
     preload : function() {
         if (!CC_WECHATGAME) { return; }
 
-        var musics = [
-            this.audioGameBgm0,
-        ];
-        musics.forEach(function(path) {
-            var musicPath = wxDownloader.REMOTE_SERVER_ROOT + path;
-            if (musicPath != wxDownloader.REMOTE_SERVER_ROOT && musicPath.endsWith('.mp3')) {
-                cc.loader.load(musicPath, function(err, remoteUrl) {
-                    if (err) {
-                        cc.error(err.message || err);
-                        return;
-                    }
-                });
-            }
-        })
+        // var musics = [
+        //     this.audioGameBgm0,
+        // ];
+        // musics.forEach(function(path) {
+        //     var musicPath = wxDownloader.REMOTE_SERVER_ROOT + path;
+        //     if (musicPath != wxDownloader.REMOTE_SERVER_ROOT && musicPath.endsWith('.mp3')) {
+        //         cc.loader.load(musicPath, function(err, remoteUrl) {
+        //             if (err) {
+        //                 cc.error(err.message || err);
+        //                 return;
+        //             }
+        //         });
+        //     }
+        // })
     },
 
     getAudioMusicSwitch()
@@ -233,7 +229,7 @@ cc.Class({
      */
     playMusicGame () {
         return;
-        this.playMusic(this.audioGameBgm0);
+        // this.playMusic(this.audioGameBgm0);
     },
     /**
      * 停止背景音乐播放

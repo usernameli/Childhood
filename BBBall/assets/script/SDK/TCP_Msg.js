@@ -37,6 +37,20 @@ cc.Class({
             this._sendCmd(params);
 
         },
+        gameQuickStart:function(roomId,tableId,gameId)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_GAME,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_QUICK_START,
+                    'roomId':roomId,
+                    'tableId':tableId,
+                    'gameId':gameId,
+
+                }
+            };
+            this._sendCmd(params);
+        },
         //获取背包信息
         getBagInfo: function() {
             var params = {
@@ -131,7 +145,56 @@ cc.Class({
             };
             this._sendCmd(params);
         },
-        shutBall(roomID,tableID,linearVelocity,index)
+        syncCardTableStatus(roomID,tableID,tableCardInfo)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_SYNC_TABLE_CARD_STATUS,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+                    'tableCardInfo':tableCardInfo,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        syncPlus(roomID,tableID,number)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_PLUS_SYNC,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+                    'number':number,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        syncSquare(roomID,tableID,squareNum,number)
+        {
+            var params = {
+                'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
+                'params': {
+                    'action': cc.wwx.EventType.CMD_PK_SQUARE_NUM,
+                    'gameId': cc.wwx.SystemInfo.gameId,
+                    'roomId':roomID,
+                    'seatId':cc.wwx.UserInfo.seatId,
+                    'tableId':tableID,
+                    'squareNum':squareNum,
+                    'number':number,
+
+                }
+            };
+            this._sendCmd(params);
+        },
+        shutBall(roomID,tableID,linearVelocity,index,isOnWall)
         {
             var params = {
                 'cmd': cc.wwx.EventType.CMD_TABLE_CALL,
@@ -143,6 +206,7 @@ cc.Class({
                     'tableId':tableID,
                     'linearVelocity':linearVelocity,
                     'ballIndex':index,
+                    'isOnWall':isOnWall,
 
                 }
             };

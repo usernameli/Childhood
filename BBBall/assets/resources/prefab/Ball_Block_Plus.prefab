@@ -168,6 +168,8 @@
     "_width": 0,
     "_height": 0,
     "_space": 4,
+    "_belongUserID": 0,
+    "_number": -1,
     "_tag": "ObjBlock",
     "plusOneSpriteFrame": {
       "__uuid__": "aa8b4ad2-558d-4d80-b3ea-2f57a3a9b05e"

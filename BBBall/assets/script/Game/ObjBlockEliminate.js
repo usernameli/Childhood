@@ -11,8 +11,9 @@ cc.Class({
         _isContactF:false,
 
     },
-    initLabelNum(num)
+    initLabelNum(num,number)
     {
+        this._number = number;
         if(num === 8)
         {
             this.node.getComponent(cc.Sprite).spriteFrame = this.eliminatepriteFrame;

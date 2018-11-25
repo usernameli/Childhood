@@ -12,7 +12,7 @@ cc.Class({
         wxEnterInfo: null,//微信打开小程序的场景信息
         model: "未知设备",
         system: "iOS 10.0.1",
-        loc: '',
+        loc: null,
         wxEnterInfo:'',
         pkTotalStar:0,
         query:'',

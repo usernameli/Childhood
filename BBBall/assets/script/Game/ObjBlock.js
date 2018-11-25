@@ -7,6 +7,7 @@ cc.Class({
         _height:0,
         _space:4,
         _belongUserID:0,
+        _number:-1,
         _tag:"ObjBlock"
     },
 
@@ -23,6 +24,10 @@ cc.Class({
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_ELIMINATE,this.haveEliminate,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_BALL_DEMOLITION_BOMB,this.randomElimination,this);
         cc.wwx.NotificationCenter.listen(cc.wwx.EventType.ACTION_REMOVE_OBJ_BLOCKS,this.removeObjBlock,this);
+    },
+    getNumber()
+    {
+        return this._number;
     },
     start()
     {
@@ -165,13 +170,7 @@ cc.Class({
         {
             let num = randNum % 10;
             randColor = randomColor[num];
-
         }
-
-
-
-
-
 
         cc.wwx.OutPut.log("setRandomColor randNum: ", randNum);
         cc.wwx.OutPut.log("setRandomColor randColor: ",JSON.stringify(randColor));

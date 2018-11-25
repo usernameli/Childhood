@@ -89,7 +89,18 @@ cc.Class({
                     if(result["success"] === 0)
                     {
                         cc.wwx.VS.RoomID = result["roomId"];
-                        cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_PK_QUEUE_ENTER)
+
+                        if(result["isReconnect"])
+                        {
+                            cc.wwx.SceneManager.switchScene("GameVSReady");
+
+
+                        }
+                        else
+                        {
+                            cc.wwx.NotificationCenter.trigger(cc.wwx.EventType.MSG_PK_QUEUE_ENTER)
+
+                        }
 
                     }
                     else
@@ -302,7 +313,23 @@ cc.Class({
                 cc.wwx.UserInfo.parseGdata(result);
                 if(cc.wwx.SystemInfo.reLogin)
                 {
-                    cc.wwx.SceneManager.switchScene("GameHall");
+                    if(false && cc.wwx.UserInfo.loc)
+                    {
+                        let locInof = cc.wwx.UserInfo.loc.split('.');
+                        cc.wwx.TCPMSG.gameQuickStart(parseInt(locInof[1]),parseInt(locInof[2]),parseInt(locInof[0]));
+                        if(parseInt(locInof[0]) === 0)
+                        {
+                            cc.wwx.SceneManager.switchScene("GameHall");
+
+                        }
+                        cc.wwx.UserInfo.loc = null;
+                    }
+                    else
+                    {
+                        cc.wwx.SceneManager.switchScene("GameHall");
+
+                    }
+
 
                 }
 
@@ -353,6 +380,7 @@ cc.Class({
             cc.wwx.UserInfo.parseUdata(result);
 
             if (parseInt(result.gameId) === cc.wwx.SystemInfo.appId) {
+                cc.wwx.UserInfo.loc = result.loc;
                 this.finishLogin();
             }
             else

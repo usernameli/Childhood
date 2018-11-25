@@ -65,8 +65,9 @@ cc.Class({
     shareGroupCallBack()
     {
         this._shareGroupClick = true;
+        let dayShareGroupRewardCount = cc.wwx.UserInfo.gdata["dayShareLeftCount"];
 
-        if(CC_WECHATGAME && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
+        if(CC_WECHATGAME && dayShareGroupRewardCount === 0 && cc.wwx.VideoAD.getShowVideoAdIsLoaded())
         {
             cc.wwx.VideoAD.showVideoAd(function (end) {
 

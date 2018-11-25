@@ -69,12 +69,7 @@ cc.Class({
                         cc.wwx.Share.rewardGetList = [];
                     }
                 }
-                else
-                {
-                    cc.wwx.Share.shareData = null;
-                    cc.wwx.Share.rewardGetList = [];
 
-                }
 
                 if (lastHideTime && curTime - lastHideTime > 60 * 60 * 5) {
                     cc.wwx.SystemInfo.reLogin = true;

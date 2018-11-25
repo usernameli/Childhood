@@ -40,11 +40,6 @@ cc.Class({
             type:cc.SpriteFrame
         },
 
-        // 按钮点击
-        audioBg:{
-            default:null,
-            type:cc.AudioClip
-        },
         headBG:{
             default:null,
             type:cc.Node
@@ -75,9 +70,13 @@ cc.Class({
 
         cc.wwx.Util.adaptIpad();
         // this.adaptIphoneX();
+        if(cc.wwx.SystemInfo.SYS.phoneType == 1)
+        {
+            let widget = this.headBG.getComponent(cc.Widget);
+            widget.top = 60;
+        }
 
         this.loginSuccessCallBack();
-        cc.wwx.AudioManager.playMusic(this.audioBg);
         this._openCheckIn = false;
         this.diamondsNum.string = cc.wwx.UserInfo.bagData.diamondCount;
 
@@ -211,7 +210,7 @@ cc.Class({
             let button = wx.createGameClubButton({
                 icon: 'green',
                 style: {
-                    left: 13,
+                    right: 13,
                     top: btnheight / 2,
                     width: 40,
                     height: 40
